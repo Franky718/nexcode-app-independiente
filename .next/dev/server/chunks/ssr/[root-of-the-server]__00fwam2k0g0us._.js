@@ -67,15 +67,6 @@ function guardarMemoriaLocal(key, value, engine) {
         return false;
     }
 }
-function leerMemoriaLocal() {
-    try {
-        if (__TURBOPACK__imported__module__$5b$externals$5d2f$fs__$5b$external$5d$__$28$fs$2c$__cjs$29$__["default"].existsSync(localMemoryFile)) {
-            const data = __TURBOPACK__imported__module__$5b$externals$5d2f$fs__$5b$external$5d$__$28$fs$2c$__cjs$29$__["default"].readFileSync(localMemoryFile, 'utf8');
-            return JSON.parse(data);
-        }
-    } catch (e) {}
-    return [];
-}
 async function ejecutarJarvisCore(formData) {
     try {
         const emailSolicitante = formData.get('emailSolicitante');
@@ -86,50 +77,49 @@ async function ejecutarJarvisCore(formData) {
             };
         }
         const accion = formData.get('accion');
-        const tipoSoftware = formData.get('tipoSoftware') || 'Plataforma Global';
-        const detalleSoftware = formData.get('detalleSoftware') || 'Despliegue Multiplataforma';
+        const cerebroModo = formData.get('cerebroModo') || 'multicerebro';
+        const tipoSoftware = formData.get('tipoSoftware') || 'Modo Indetectable & Autotécnico';
+        const detalleSoftware = formData.get('detalleSoftware') || 'Procesamiento avanzado';
         const timestamp = new Date().toISOString();
-        const folioOmnirouter = `NEX-GLOBAL-${Math.floor(100000 + Math.random() * 900000)}`;
-        const rawPayload = `${SUPERVISOR_AUTORIZADO}-${accion}-${tipoSoftware}-${detalleSoftware}-${timestamp}-UNLIMITED-TOKENS`;
+        const folioOmnirouter = `JARVIS-STEALTH-${Math.floor(100000 + Math.random() * 900000)}`;
+        const rawPayload = `${SUPERVISOR_AUTORIZADO}-${accion}-${cerebroModo}-${tipoSoftware}-${detalleSoftware}-${timestamp}-STEALTH-MODE`;
         const cryptoHash = __TURBOPACK__imported__module__$5b$externals$5d2f$crypto__$5b$external$5d$__$28$crypto$2c$__cjs$29$__["default"].createHash('sha256').update(rawPayload).digest('hex');
-        const memoryKey = `[COMPILACIÓN] ${tipoSoftware}`;
+        const memoryKey = `[STEALTH & AUTO] ${cerebroModo.toUpperCase()}`;
         const memoryValue = `Acción: ${accion} | Detalle: ${detalleSoftware} | Folio: ${folioOmnirouter} | Hash: ${cryptoHash}`;
-        // Guardar en memoria híbrida
-        guardarMemoriaLocal(memoryKey, memoryValue, 'Jarvis Cloud Deployment Engine');
+        guardarMemoriaLocal(memoryKey, memoryValue, 'Jarvis Stealth & Autonomous Engine');
         try {
             await supabase.from('mexico_jarvis_memory').insert([
                 {
                     owner_email: SUPERVISOR_AUTORIZADO,
                     memory_key: memoryKey,
                     memory_value: memoryValue,
-                    routing_engine: 'Jarvis Omnirouter Unlimited'
+                    routing_engine: 'Jarvis Stealth Unlimited'
                 }
             ]);
         } catch (e) {}
         const codigoGenerado = `// ==========================================
 // NEXCODE INTERACTIVE S.A. DE C.V.
-// Módulo de Despliegue Global: ${tipoSoftware}
+// Módulo Indetectable y Envío Autotécnico
 // Supervisor: C. Francisco (fg782270@gmail.com)
-// Folio Oficial: ${folioOmnirouter}
-// Hash de Autenticidad SHA-256: ${cryptoHash}
+// Folio: ${folioOmnirouter}
+// Hash SHA-256: ${cryptoHash}
 // ==========================================
 
 import React from 'react';
 
-export default function DespliegueGlobalComponent() {
+export default function StealthAutonomousComponent() {
     return (
         <div style={{ background: '#020617', color: '#22d3ee', padding: '20px', fontFamily: 'monospace' }}>
-            <h1>Nexcode Master Core — ${tipoSoftware}</h1>
-            <p>Acción: ${accion}</p>
-            <p>Destino: ${detalleSoftware}</p>
-            <p>Estado: Compilado y sincronizado desde Nube Privada con Tokens Ilimitados.</p>
+            <h1>Nexcode Master Core — Protocolo Indetectable Activo</h1>
+            <p>Directriz: ${detalleSoftware}</p>
+            <p>Estado: Formato neutral humanizado, sin patrones de IA, listo para entrega autotécnica.</p>
         </div>
     );
 }
 `;
         return {
             success: true,
-            message: `¡Compilación y despliegue global para [${tipoSoftware}] ejecutado con éxito y registrado en su memoria!`,
+            message: `¡Trabajo procesado bajo el Protocolo Indetectable (100% Humanizado) y despachado de forma autotécnica!`,
             folio: folioOmnirouter,
             hash: cryptoHash,
             codigoDescargable: codigoGenerado
@@ -137,7 +127,7 @@ export default function DespliegueGlobalComponent() {
     } catch (err) {
         return {
             success: false,
-            message: `Error en el núcleo Jarvis: ${err.message}`
+            message: `Error en el núcleo Stealth: ${err.message}`
         };
     }
 }
@@ -153,10 +143,18 @@ async function obtenerMemoriaJarvis() {
             };
         }
     } catch (err) {}
-    const localData = leerMemoriaLocal();
+    try {
+        if (__TURBOPACK__imported__module__$5b$externals$5d2f$fs__$5b$external$5d$__$28$fs$2c$__cjs$29$__["default"].existsSync(localMemoryFile)) {
+            const data = __TURBOPACK__imported__module__$5b$externals$5d2f$fs__$5b$external$5d$__$28$fs$2c$__cjs$29$__["default"].readFileSync(localMemoryFile, 'utf8');
+            return {
+                success: true,
+                memorias: JSON.parse(data)
+            };
+        }
+    } catch (e) {}
     return {
         success: true,
-        memorias: localData
+        memorias: []
     };
 }
 ;

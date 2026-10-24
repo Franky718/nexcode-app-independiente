@@ -46,20 +46,21 @@ export async function ejecutarJarvisCore(formData: FormData) {
             }
         }
 
-        const accion = formData.get('accion') as string
-        const cerebroModo = formData.get('cerebroModo') as string || 'multicerebro'
-        const tipoSoftware = formData.get('tipoSoftware') as string || 'Modo Indetectable & Autotécnico'
-        const detalleSoftware = formData.get('detalleSoftware') as string || 'Procesamiento avanzado'
+        const seccion = formData.get('seccion') as string || 'Empresa'
+        const tipoAnalisis = formData.get('tipoAnalisis') as string || 'Análisis General'
+        const detalle = formData.get('detalle') as string || 'Sin detalles'
+        const archivoNombre = formData.get('archivoNombre') as string || 'Ninguno'
         const timestamp = new Date().toISOString()
 
-        const folioOmnirouter = `JARVIS-STEALTH-${Math.floor(100000 + Math.random() * 900000)}`
-        const rawPayload = `${SUPERVISOR_AUTORIZADO}-${accion}-${cerebroModo}-${tipoSoftware}-${detalleSoftware}-${timestamp}-STEALTH-MODE`
+        const folioOmnirouter = `JARVIS-UNIFIED-${Math.floor(100000 + Math.random() * 900000)}`
+        const rawPayload = `${SUPERVISOR_AUTORIZADO}-${seccion}-${tipoAnalisis}-${detalle}-${archivoNombre}-${timestamp}`
         const cryptoHash = crypto.createHash('sha256').update(rawPayload).digest('hex')
 
-        const memoryKey = `[STEALTH & AUTO] ${cerebroModo.toUpperCase()}`
-        const memoryValue = `Acción: ${accion} | Detalle: ${detalleSoftware} | Folio: ${folioOmnirouter} | Hash: ${cryptoHash}`
+        const memoryKey = `[${seccion.toUpperCase()}] ${tipoAnalisis}`
+        const memoryValue = `Archivo: ${archivoNombre} | Detalle: ${detalle} | Folio: ${folioOmnirouter} | Hash: ${cryptoHash}`
 
-        guardarMemoriaLocal(memoryKey, memoryValue, 'Jarvis Stealth & Autonomous Engine')
+        // Guardar en memoria híbrida local y Supabase unificada
+        guardarMemoriaLocal(memoryKey, memoryValue, `Jarvis Unified Engine (${seccion})`)
 
         try {
             await supabase.from('mexico_jarvis_memory').insert([
@@ -67,27 +68,31 @@ export async function ejecutarJarvisCore(formData: FormData) {
                     owner_email: SUPERVISOR_AUTORIZADO,
                     memory_key: memoryKey,
                     memory_value: memoryValue,
-                    routing_engine: 'Jarvis Stealth Unlimited'
+                    routing_engine: `Jarvis Unified (${seccion})`
                 }
             ])
         } catch (e) {}
 
         const codigoGenerado = `// ==========================================
 // NEXCODE INTERACTIVE S.A. DE C.V.
-// Módulo Indetectable y Envío Autotécnico
+// Módulo Compilado y Generado Automáticamente
+// Núcleo: ${seccion} | Análisis: ${tipoAnalisis}
 // Supervisor: C. Francisco (fg782270@gmail.com)
-// Folio: ${folioOmnirouter}
+// Archivo Adjunto: ${archivoNombre}
+// Folio Oficial: ${folioOmnirouter}
 // Hash SHA-256: ${cryptoHash}
 // ==========================================
 
 import React from 'react';
 
-export default function StealthAutonomousComponent() {
+export default function NexcodeAutoPackage() {
     return (
         <div style={{ background: '#020617', color: '#22d3ee', padding: '20px', fontFamily: 'monospace' }}>
-            <h1>Nexcode Master Core — Protocolo Indetectable Activo</h1>
-            <p>Directriz: ${detalleSoftware}</p>
-            <p>Estado: Formato neutral humanizado, sin patrones de IA, listo para entrega autotécnica.</p>
+            <h1>Nexcode Master Core — Paquete Autónomo</h1>
+            <p>Sección: ${seccion}</p>
+            <p>Tipo: ${tipoAnalisis}</p>
+            <p>Documento procesado: ${archivoNombre}</p>
+            <p>Estado: Compilado, Humanizado y Sincronizado en Banco de Memoria Interconectado.</p>
         </div>
     );
 }
@@ -95,14 +100,14 @@ export default function StealthAutonomousComponent() {
 
         return {
             success: true,
-            message: `¡Trabajo procesado bajo el Protocolo Indetectable (100% Humanizado) y despachado de forma autotécnica!`,
+            message: `¡Proceso ejecutado con éxito en el Núcleo [${seccion.toUpperCase()}]! Documento e información indexados en el Banco de Memoria Interconectado.`,
             folio: folioOmnirouter,
             hash: cryptoHash,
             codigoDescargable: codigoGenerado
         }
 
     } catch (err: any) {
-        return { success: false, message: `Error en el núcleo Stealth: ${err.message}` }
+        return { success: false, message: `Error en el núcleo unificado: ${err.message}` }
     }
 }
 

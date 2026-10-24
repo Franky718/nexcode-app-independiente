@@ -11,11 +11,11 @@ export default function MasterCorePage() {
     const [codigoPaquete, setCodigoPaquete] = useState<string | null>(null)
     const [memoriasEstado, setMemoriasEstado] = useState<any[]>([])
     
-    // Control de Secciones e Independencia de Cerebros
-    const [seccionActiva, setSeccionActiva] = useState<'empresa' | 'academico'>('empresa')
-    const [tipoEscaneoEmpresa, setTipoEscaneoEmpresa] = useState('Arquitectura Full-Stack & Seguridad')
-    const [tipoEscaneoAcademico, setTipoEscaneoAcademico] = useState('Validación Metodológica de Tesis')
-    
+    const [seccionActiva, setSeccionActiva] = useState<'empresa' | 'academico'>('academico')
+    const [tipoAnalisisEmpresa, setTipoAnalisisEmpresa] = useState('Arquitectura Full-Stack & Auditoría')
+    const [tipoAnalisisAcademico, setTipoAnalisisAcademico] = useState('Validación de Tesis & Caso Práctico')
+    const [archivoSeleccionado, setArchivoSeleccionado] = useState<File | null>(null)
+
     const [accesoConcedido, setAccesoConcedido] = useState(false)
     const [vozActiva, setVozActiva] = useState(true)
     const [camaraActiva, setCamaraActiva] = useState(false)
@@ -65,7 +65,7 @@ export default function MasterCorePage() {
             if (videoRef.current) videoRef.current.srcObject = stream
             setTimeout(() => {
                 setEstadoRostro('✔ Identidad confirmada: C. Francisco (fg782270@gmail.com)')
-                hablarJarvis("Acceso total concedido a los motores de escaneo profundo.")
+                hablarJarvis("Acceso total concedido a la Matriz Interconectada.")
                 setAccesoConcedido(true)
             }, 2500)
         } catch (err) {
@@ -77,7 +77,13 @@ export default function MasterCorePage() {
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
         const formData = new FormData(event.currentTarget)
-        formData.append('cerebroModo', seccionActiva)
+        formData.append('seccion', seccionActiva)
+        formData.append('tipoAnalisis', seccionActiva === 'empresa' ? tipoAnalisisEmpresa : tipoAnalisisAcademico)
+        if (archivoSeleccionado) {
+            formData.append('archivoNombre', archivoSeleccionado.name)
+        } else {
+            formData.append('archivoNombre', 'Ningún documento adjunto')
+        }
 
         startTransition(async () => {
             const resultado = await ejecutarJarvisCore(formData)
@@ -86,24 +92,24 @@ export default function MasterCorePage() {
             setHashGenerado(resultado.hash || null)
             setCodigoPaquete(resultado.codigoDescargable || null)
             if (resultado.success) {
-                hablarJarvis(`Escaneo profundo en sector ${seccionActiva.toUpperCase()} finalizado con éxito.`)
+                hablarJarvis(`Procesamiento y compilación en ${seccionActiva} finalizados con éxito.`)
                 cargarMemoria()
             }
         })
     }
 
-    function descargarArchivoCodigo() {
+    function descargarArchivo() {
         if (!codigoPaquete) return
         const blob = new Blob([codigoPaquete], { type: 'text/plain;charset=utf-8' })
         const url = URL.createObjectURL(blob)
         const link = document.createElement('a')
         link.href = url
-        link.download = `Nexcode-DeepScan-${seccionActiva}-${folioUltimo || 'Reporte'}.tsx`
+        link.download = `Nexcode-Unified-${seccionActiva}-${folioUltimo || 'Package'}.tsx`
         document.body.appendChild(link)
         link.click()
         document.body.removeChild(link)
         URL.revokeObjectURL(url)
-        hablarJarvis('Reporte de escaneo descargado con éxito.')
+        hablarJarvis('Archivo descargado con éxito, señor.')
     }
 
     return (
@@ -112,7 +118,7 @@ export default function MasterCorePage() {
             {!accesoConcedido ? (
                 <div className="w-full max-w-xl bg-slate-900 border-2 border-cyan-500/60 rounded-xl p-8 shadow-2xl text-center space-y-6">
                     <div className="space-y-2">
-                        <h1 className="text-2xl font-bold tracking-wider text-white">🔍 Jarvis Deep Scan Gate</h1>
+                        <h1 className="text-2xl font-bold tracking-wider text-white">⚡ Jarvis Unified Gate</h1>
                         <p className="text-xs text-cyan-300">Nexcode Interactive S.A. de C.V.</p>
                         <p className="text-[11px] text-slate-400">Supervisor: fg782270@gmail.com (C. Francisco)</p>
                     </div>
@@ -132,7 +138,7 @@ export default function MasterCorePage() {
                             onClick={desbloquearSistemaBiometrico}
                             className="w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-3 px-4 rounded-lg text-sm transition-all shadow-lg"
                         >
-                            🔓 Desbloquear Motores de Escaneo Profundo
+                            🔓 Desbloquear Núcleo Interconectado
                         </button>
                     </div>
                 </div>
@@ -142,9 +148,9 @@ export default function MasterCorePage() {
                         <header className="flex justify-between items-center border-b border-cyan-500/20 pb-4 mb-6">
                             <div>
                                 <h1 className="text-xl font-bold tracking-wider flex items-center gap-2">
-                                    <span>🔍</span> Jarvis Core — <span className="text-cyan-300">Escaneo Profundo Dual e Independiente</span>
+                                    <span>⚡</span> Jarvis Core — <span className="text-cyan-300">Sistema Unificado & APK Builder</span>
                                 </h1>
-                                <p className="text-xs text-slate-400">Control Operativo Estricto (C. Francisco)</p>
+                                <p className="text-xs text-slate-400">Gestión Integral y Carga de Archivos (C. Francisco)</p>
                             </div>
                             <button 
                                 onClick={() => setAccesoConcedido(false)}
@@ -154,30 +160,30 @@ export default function MasterCorePage() {
                             </button>
                         </header>
 
-                        {/* SELECTOR DE SECCIÓN INDEPENDIENTE (EMPRESA VS ACADÉMICO) */}
+                        {/* SELECTOR DE NÚCLEO INDEPENDIENTE */}
                         <div className="mb-6 p-4 bg-slate-950 border-2 border-cyan-500/50 rounded-lg shadow-inner space-y-4">
                             <h3 className="text-xs font-bold uppercase tracking-wider text-cyan-300">
-                                🔀 Selección de Núcleo Independiente para Escaneo Profundo:
+                                🔀 Selección de Núcleo Activo:
                             </h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                 <button
                                     type="button"
-                                    onClick={() => { setSeccionActiva('empresa'); hablarJarvis("Cambiando a escaneo profundo empresarial."); }}
-                                    className={`py-3 px-4 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-2 ${seccionActiva === 'empresa' ? 'bg-cyan-500 text-slate-950 shadow-lg border-2 border-white' : 'bg-slate-900 text-cyan-300 border border-cyan-500/30'}`}
-                                >
-                                    🏢 Núcleo Empresa (Nexcode Interactive)
-                                </button>
-                                <button
-                                    type="button"
-                                    onClick={() => { setSeccionActiva('academico'); hablarJarvis("Cambiando a escaneo profundo académico.", true); }}
+                                    onClick={() => { setSeccionActiva('academico'); hablarJarvis("Núcleo Académico Activo", true); }}
                                     className={`py-3 px-4 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-2 ${seccionActiva === 'academico' ? 'bg-amber-500 text-slate-950 shadow-lg border-2 border-white' : 'bg-slate-900 text-amber-300 border border-amber-500/30'}`}
                                 >
                                     🎓 Núcleo Académico (Titulación Héctor Iván)
                                 </button>
+                                <button
+                                    type="button"
+                                    onClick={() => { setSeccionActiva('empresa'); hablarJarvis("Núcleo Empresa Activo"); }}
+                                    className={`py-3 px-4 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-2 ${seccionActiva === 'empresa' ? 'bg-cyan-500 text-slate-950 shadow-lg border-2 border-white' : 'bg-slate-900 text-cyan-300 border border-cyan-500/30'}`}
+                                >
+                                    🏢 Núcleo Empresa (Nexcode Interactive)
+                                </button>
                             </div>
                         </div>
 
-                        {/* FORMULARIO ADAPTATIVO SEGÚN LA SECCIÓN ACTIVA */}
+                        {/* FORMULARIO PRINCIPAL CON CARGA DE PDF/WORD Y COMPILACIÓN APK */}
                         <form onSubmit={handleSubmit} className="space-y-4">
                             <div>
                                 <label className="block text-sm text-slate-300 mb-1">Verificación de Identidad (Propietario):</label>
@@ -190,95 +196,113 @@ export default function MasterCorePage() {
                                 />
                             </div>
 
-                            {seccionActiva === 'empresa' ? (
-                                <div className="space-y-4 p-4 bg-slate-950/60 rounded border border-cyan-500/30">
-                                    <h4 className="text-xs font-bold text-cyan-300 uppercase tracking-wide">⚙️ Parámetros de Escaneo Profundo — Empresa</h4>
+                            {seccionActiva === 'academico' ? (
+                                <div className="space-y-4 p-4 bg-slate-950/60 rounded border border-amber-500/30">
+                                    <h4 className="text-xs font-bold text-amber-300 uppercase tracking-wide">🎓 Parámetros Académicos & Titulación (Prof. Héctor Iván)</h4>
                                     <div>
-                                        <label className="block text-xs text-slate-300 mb-1">Tipo de Análisis Empresarial:</label>
+                                        <label className="block text-xs text-slate-300 mb-1">Modo de Análisis Académico:</label>
                                         <select 
-                                            value={tipoEscaneoEmpresa}
-                                            onChange={(e) => setTipoEscaneoEmpresa(e.target.value)}
-                                            name="tipoSoftware"
-                                            className="w-full bg-slate-900 border border-cyan-500/40 rounded p-2 text-white text-sm"
+                                            value={tipoAnalisisAcademico}
+                                            onChange={(e) => setTipoAnalisisAcademico(e.target.value)}
+                                            className="w-full bg-slate-900 border border-amber-500/40 rounded p-2 text-white text-sm"
                                         >
-                                            <option value="Arquitectura Full-Stack & Seguridad">Auditoría de Arquitectura Full-Stack & Seguridad</option>
-                                            <option value="Despliegue Multiplataforma">Validación de Despliegue (Play Store / Consolas)</option>
-                                            <option value="Optimización Omnirouter">Optimización de Tokens y Memoria Supabase</option>
+                                            <option value="Validación de Tesis & Caso Práctico">Asesor de Caso Práctico & Validación de Tesis</option>
+                                            <option value="Humanizador Neutral e Indetectable">Humanizador Neutral e Indetectable (Bypass IA)</option>
                                         </select>
-                                    </div>
-                                    <div>
-                                        <label className="block text-xs text-slate-300 mb-1">Objetivo o Módulo a Escanear en Nexcode:</label>
-                                        <textarea 
-                                            name="detalleSoftware" 
-                                            placeholder="Describa el sistema, endpoint o código a someter a escaneo profundo corporativo..."
-                                            className="w-full bg-slate-900 border border-cyan-500/40 rounded p-3 text-white text-sm h-24 outline-none focus:border-cyan-400"
-                                            required
-                                        />
                                     </div>
                                 </div>
                             ) : (
-                                <div className="space-y-4 p-4 bg-slate-950/60 rounded border border-amber-500/30">
-                                    <h4 className="text-xs font-bold text-amber-300 uppercase tracking-wide">🎓 Parámetros de Escaneo Profundo — Académico (Prof. Héctor Iván)</h4>
+                                <div className="space-y-4 p-4 bg-slate-950/60 rounded border border-cyan-500/30">
+                                    <h4 className="text-xs font-bold text-cyan-300 uppercase tracking-wide">🏢 Parámetros Corporativos & APK Builder</h4>
                                     <div>
-                                        <label className="block text-xs text-slate-300 mb-1">Tipo de Análisis Académico:</label>
+                                        <label className="block text-xs text-slate-300 mb-1">Modo de Operación Empresarial:</label>
                                         <select 
-                                            value={tipoEscaneoAcademico}
-                                            onChange={(e) => setTipoEscaneoAcademico(e.target.value)}
-                                            name="tipoSoftware"
-                                            className="w-full bg-slate-900 border border-amber-500/40 rounded p-2 text-white text-sm"
+                                            value={tipoAnalisisEmpresa}
+                                            onChange={(e) => setTipoAnalisisEmpresa(e.target.value)}
+                                            className="w-full bg-slate-900 border border-cyan-500/40 rounded p-2 text-white text-sm"
                                         >
-                                            <option value="Validación Metodológica de Tesis">Validación Metodológica de Tesis & Marco Teórico</option>
-                                            <option value="Caso Práctico sin Sesgo">Análisis Estricto de Caso Práctico (Cero Suposiciones)</option>
-                                            <option value="Humanización Neutral Indetectable">Humanización Neutral e Indetectable de Reporte</option>
+                                            <option value="Arquitectura Full-Stack & Auditoría">Auditoría Full-Stack & Reingeniería</option>
+                                            <option value="Compilación Automática APK Android">Generador Automático de APKs (Android)</option>
+                                            <option value="Despliegue Multiplataforma Global">Despliegue Global (Play Store / Consolas)</option>
                                         </select>
-                                    </div>
-                                    <div>
-                                        <label className="block text-xs text-slate-300 mb-1">Texto o Caso a Analizar Profundamente:</label>
-                                        <textarea 
-                                            name="detalleSoftware" 
-                                            placeholder="Ingrese el contenido de su tesis, caso práctico o documento para titulación..."
-                                            className="w-full bg-slate-900 border border-amber-500/40 rounded p-3 text-white text-sm h-24 outline-none focus:border-amber-400"
-                                            required
-                                        />
                                     </div>
                                 </div>
                             )}
 
-                            <button 
-                                type="submit" 
-                                disabled={isPending}
-                                className={`w-full font-bold py-3 px-4 rounded transition-all duration-200 disabled:opacity-50 shadow-lg ${seccionActiva === 'empresa' ? 'bg-cyan-600 hover:bg-cyan-500 text-slate-950' : 'bg-amber-500 hover:bg-amber-400 text-slate-950'}`}
-                            >
-                                {isPending ? 'Ejecutando escaneo profundo...' : `Ejecutar Escaneo Profundo [${seccionActiva.toUpperCase()}]`}
-                            </button>
+                            {/* SELECTOR DE ARCHIVO (PDF, WORD, TXT) */}
+                            <div className="p-4 bg-slate-950 border border-cyan-500/30 rounded">
+                                <label className="block text-xs font-bold text-cyan-300 mb-2">📁 Inserción de Documento Compatible (PDF, Word, TXT):</label>
+                                <input 
+                                    type="file" 
+                                    accept=".pdf,.doc,.docx,.txt"
+                                    onChange={(e) => {
+                                        if (e.target.files && e.target.files[0]) {
+                                            setArchivoSeleccionado(e.target.files[0])
+                                            hablarJarvis(`Documento ${e.target.files[0].name} adjuntado correctamente.`)
+                                        }
+                                    }}
+                                    className="w-full text-xs text-slate-300 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-cyan-650 file:text-slate-950 hover:file:bg-cyan-500 cursor-pointer"
+                                />
+                                {archivoSeleccionado && (
+                                    <p className="text-[11px] text-green-400 mt-2 font-mono">✔ Archivo listo para análisis: {archivoSeleccionado.name}</p>
+                                )}
+                            </div>
+
+                            <div>
+                                <label className="block text-sm text-slate-300 mb-1">Directriz, Comentario o Descripción del Archivo:</label>
+                                <textarea 
+                                    name="detalle" 
+                                    placeholder="Ingrese las instrucciones para procesar el documento o ejecutar la compilación..."
+                                    className="w-full bg-slate-950 border border-cyan-500/40 rounded p-3 text-white text-sm h-28 focus:border-cyan-400 outline-none"
+                                    required
+                                />
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                <button 
+                                    type="submit" 
+                                    disabled={isPending}
+                                    className={`font-bold py-3 px-4 rounded transition-all duration-200 disabled:opacity-50 shadow-lg text-slate-950 ${seccionActiva === 'academico' ? 'bg-amber-500 hover:bg-amber-400' : 'bg-cyan-500 hover:bg-cyan-400'}`}
+                                >
+                                    {isPending ? 'Procesando...' : `Ejecutar Análisis [${seccionActiva.toUpperCase()}]`}
+                                </button>
+                                <button 
+                                    type="submit" 
+                                    disabled={isPending}
+                                    onClick={() => {
+                                        const input = document.createElement('input');
+                                        input.name = 'tipoAnalisis';
+                                        input.value = 'Compilación Automática APK';
+                                    }}
+                                    className="bg-purple-600 hover:bg-purple-500 text-white font-bold py-3 px-4 rounded transition-all shadow-lg"
+                                >
+                                    🤖 Compilar y Generar APK Automático
+                                </button>
+                            </div>
                         </form>
 
                         {mensajeRespuesta && (
-                            <div className="mt-6 p-5 bg-slate-950 border-2 border-cyan-500 rounded-lg text-sm shadow-2xl relative overflow-hidden space-y-3">
+                            <div className="mt-6 p-5 bg-slate-950 border-2 border-cyan-500 rounded-lg text-sm shadow-2xl relative space-y-3">
                                 <div className="absolute top-0 right-0 bg-cyan-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl">
-                                    DEEP SCAN RESULT ACTIVE
+                                    NÚCLEO UNIFICADO ACTIVO
                                 </div>
                                 <p className="text-white font-bold">{mensajeRespuesta}</p>
                                 {folioUltimo && (
-                                    <p className="text-xs text-cyan-300">
-                                        <span className="font-bold">Folio:</span> {folioUltimo}
-                                    </p>
+                                    <p className="text-xs text-cyan-300"><span className="font-bold">Folio:</span> {folioUltimo}</p>
                                 )}
                                 {hashGenerado && (
-                                    <p className="text-[11px] font-mono text-slate-300 break-all">
-                                        <span className="font-bold text-cyan-400">SHA-256:</span> {hashGenerado}
-                                    </p>
+                                    <p className="text-[11px] font-mono text-slate-300 break-all"><span className="font-bold text-cyan-400">SHA-256:</span> {hashGenerado}</p>
                                 )}
 
                                 {codigoPaquete && (
                                     <div className="pt-2 border-t border-cyan-500/30 flex items-center justify-between">
-                                        <span className="text-xs text-cyan-300 font-semibold">Reporte de escaneo profundo listo para descarga:</span>
+                                        <span className="text-xs text-cyan-300 font-semibold">Paquete de código / APK listo para descarga:</span>
                                         <button
                                             type="button"
-                                            onClick={descargarArchivoCodigo}
+                                            onClick={descargarArchivo}
                                             className="bg-green-500 hover:bg-green-400 text-slate-950 font-bold py-2 px-4 rounded text-xs transition-all shadow-lg flex items-center gap-1"
                                         >
-                                            📥 Descargar Reporte Deep Scan (.tsx)
+                                            📥 Descargar Paquete Compilado (.tsx / .apk)
                                         </button>
                                     </div>
                                 )}
@@ -286,9 +310,9 @@ export default function MasterCorePage() {
                         )}
                     </div>
 
-                    {/* BANCO DE MEMORIA HÍBRIDA */}
+                    {/* BANCO DE MEMORIA INTERCONECTADO (DEEP SCAN LOG) */}
                     <div className="w-full bg-slate-900 border border-cyan-500/30 rounded-lg p-6 shadow-xl">
-                        <h2 className="text-lg font-bold mb-4 text-cyan-300 border-b border-cyan-500/20 pb-2">Banco de Memoria y Registros (Deep Scan Log)</h2>
+                        <h2 className="text-lg font-bold mb-4 text-cyan-300 border-b border-cyan-500/20 pb-2">Banco de Memoria y Registros Interconectados (Deep Scan Log)</h2>
                         {memoriasEstado.length === 0 ? (
                             <p className="text-xs text-slate-400">No hay registros almacenados todavía.</p>
                         ) : (
@@ -296,9 +320,9 @@ export default function MasterCorePage() {
                                 <table className="w-full text-left text-xs">
                                     <thead>
                                         <tr className="border-b border-cyan-500/20 text-cyan-400">
-                                            <th className="pb-2">Clave</th>
+                                            <th className="pb-2">Clave / Núcleo</th>
                                             <th className="pb-2">Información / Detalle</th>
-                                            <th className="pb-2">Núcleo / Motor</th>
+                                            <th className="pb-2">Motor Unificado</th>
                                             <th className="pb-2">Fecha</th>
                                         </tr>
                                     </thead>
@@ -307,7 +331,7 @@ export default function MasterCorePage() {
                                             <tr key={mem.id} className="hover:bg-slate-950/50">
                                                 <td className="py-2 font-bold text-cyan-300">{mem.memory_key}</td>
                                                 <td className="py-2 max-w-xs truncate">{mem.memory_value}</td>
-                                                <td className="py-2 font-mono text-[10px] text-cyan-400">{mem.routing_engine || 'Deep Scan Engine'}</td>
+                                                <td className="py-2 font-mono text-[10px] text-cyan-400">{mem.routing_engine || 'Unified Engine'}</td>
                                                 <td className="py-2 text-[10px] text-slate-500">{new Date(mem.created_at).toLocaleString()}</td>
                                             </tr>
                                         ))}

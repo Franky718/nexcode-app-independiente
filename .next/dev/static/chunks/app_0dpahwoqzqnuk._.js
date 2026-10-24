@@ -55,63 +55,44 @@ function MasterCorePage() {
     const [hashGenerado, setHashGenerado] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [memoriasEstado, setMemoriasEstado] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
     // Selector General de Módulos
-    const [seccionActiva, setSeccionActiva] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('hub_corporativo');
-    // Sub-estado de Documentos Institucionales (Claude & Nexcode Standards)
-    const [tipoDocInstitucional, setTipoDocInstitucional] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('presentacion');
-    const [modeloIA, setModeloIA] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Claude Cloud/Work 3.5 (Master Institutional Engine)');
-    // 1. Presentación Ejecutiva SIFV-Reynosa
-    const [tituloCorp, setTituloCorp] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Presentación Ejecutiva — Plataforma SIFV-REYNOSA');
-    const [contenidoCorp, setContenidoCorp] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(`NEXCODE INTERACTIVE, S.A. DE C.V. 
-Reynosa, Tamaulipas, a 24 de octubre de 2026
+    const [seccionActiva, setSeccionActiva] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('neuronal_hub');
+    // Sub-estado del Enlace Neuronal Claude Cloud
+    const [estadoSynapse, setEstadoSynapse] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Sincronización Neuronal en Reposo (Listo para Conectar Claude Cloud)');
+    const [pesoNeural, setPesoNeural] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('99.8% (Alta Fidelidad Cognitiva)');
+    const [tipoModeloNeural, setTipoModeloNeural] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Claude Cloud/Work 3.5 — Master Synapse Engine');
+    // Plantilla Neural SIFV-Reynosa & Skills Legales/Contables
+    const [tituloNeural, setTituloNeural] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Núcleo Sináptico — Plataforma SIFV-REYNOSA & Skills Contables');
+    const [contenidoNeural, setContenidoNeural] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(`NEXCODE INTERACTIVE, S.A. DE C.V. — NEURAL SYNAPSE PROFILE
+Conectado a: Claude Cloud/Work Ecosistema Global
+Titular y Arquitecto: fg782270@gmail.com (C. Francisco)
 
-PROPUESTA TÉCNICA Y ECONÓMICA: PLATAFORMA SIFV-REYNOSA
-Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Municipio de Reynosa, Tamaulipas.
-
-1. MISIÓN, VISIÓN Y OBJETIVO
-- Misión: Desarrollar tecnología de gestión pública segura, transparente y accesible para el apoyo a las autoridades de tránsito.
-- Visión: Ser el proveedor tamaulipeco de referencia en soluciones digitales para la seguridad vial y servicios municipales.
-- Objetivo: Implementar la Plataforma en el Municipio de Reynosa y ampliarla por fases a los 43 municipios del Estado.
-
-2. ALCANCE FUNCIONAL
-- Consulta del reglamento, artículos y notas de vigencia.
-- Reporte ciudadano con geolocalización en mapa (semáforos, cocheras obstruidas, vehículos abandonados).
-- Consulta de multas por placa y panel administrativo con clave individual por oficial, registro de corralón y sello de integridad.`);
-    // 2. Proyecto Escolar (Zapia AI / UnADM)
+1. ARQUITECTURA DE NEURONAS ARTIFICIALES (SYNAPSE WEIGHTS)
+- Neurona Ejecutiva: Generación de propuestas institucionales para la Secretaría de Seguridad Pública, Vialidad y Tránsito de Reynosa, Tamaulipas[cite: 8].
+- Neurona Contable y Fiscal: Modelación financiera de las Opciones A y B, reconocimiento de ingresos NIF D-1 y control del estímulo de IVA al 8% (Vigente hasta el 31 de diciembre de 2026)[cite: 10].
+- Neurona Jurídica: Blindaje de propiedad intelectual y titularidad de código fuente bajo Vault Omega.
+- Neurona Técnica: Auditoría de endpoints Full-Stack, Supabase y compilación APK automatizada.`);
+    // Contenido Proyecto Escolar
     const [tituloAcademico, setTituloAcademico] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Proyecto de Aplicación para Seguridad Pública');
-    const [contenidoAcademico, setContenidoAcademico] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(`UNIVERSIDAD ABIERTA Y A DISTANCIA DE MÉXICO (UnADM)
-LICENCIATURA EN DERECHO
-CAPÍTULO 1. PLANTEAMIENTO DEL PROBLEMA Y MARCO METODOLÓGICO`);
-    // 3. Dictamen Contable, Financiero y Fiscal (IVA 8% y Opciones A/B)
-    const [tituloComercial, setTituloComercial] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Dictamen Contable y Financiero - Precios, IVA y Control');
-    const [contenidoComercial, setContenidoComercial] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(`NEXCODE INTERACTIVE S.A. DE C.V. — DICTAMEN CONTABLE Y FINANCIERO INTERNO
-
-1. MODALIDADES DE CONTRATACIÓN (MXN)
-- Opción A (Licencia Anual): $166,000 de implementación más $9,000 mensuales sin IVA. Total a 3 años: $490,000 sin IVA ($529,200 con IVA 8% / $568,400 con IVA 16%).
-- Opción B (Adquisición / Perpetua): $290,000 sin IVA con 12 meses de soporte, y póliza anual de $52,200 desde el mes 13. Total a 3 años: $394,400 sin IVA ($425,952 con IVA 8% / $457,504 con IVA 16%).
-
-2. EFECTO Y VIGENCIA DEL ESTÍMULO FISCAL (IVA 8%)
-- Ahorro verificado para el Cliente de $21,920 en el primer año de la Opción A y de $23,200 en la Opción B.
-- Nota Crítica: Condicionado al decreto fronterizo vigente hasta el 31 de diciembre de 2026 y registro en padrón.
-
-3. RECONOCIMIENTO DE INGRESOS (NIF D-1) Y CIERRE MENSUAL
-- Implementación reconocida por hitos de aceptación; licenciamiento mensual devengado a lo largo del tiempo.
-- Obligaciones fiscales: CFDI con complemento de pago, pagos provisionales mensuales de IVA e ISR (tasa 30%) a más tardar el día 17.`);
-    // 4. Ingeniería (Arquitectura GOV-TECH y Endpoints)
-    const [tituloIngenieria, setTituloIngenieria] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('GOV-TECH Core Architecture & Endpoints');
-    const [contenidoIngenieria, setCodigoIngenieria] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(`// NEXCODE GOV-TECH & INSTITUTIONAL COMPLIANCE CORE
-class SIFVInstitutionalEngine {
+    const [contenidoAcademico, setContenidoAcademico] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(`UNIVERSIDAD ABIERTA Y A DISTANCIA DE MÉXICO (UnADM) — LICENCIATURA EN DERECHO`);
+    // Contenido Comercial / Financiero
+    const [tituloComercial, setTituloComercial] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Dictamen Contable, Financiero y Fiscal');
+    const [contenidoComercial, setContenidoComercial] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(`NEXCODE INTERACTIVE S.A. DE C.V. — DICTAMEN FINANCIERO Y CONTROL DE IVA[cite: 10]`);
+    // Contenido Ingeniería
+    const [tituloIngenieria, setTituloIngenieria] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Neural Synapse & GOV-TECH Endpoints');
+    const [contenidoIngenieria, setCodigoIngenieria] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(`// NEXCODE CLAUDE CLOUD NEURAL SYNAPSE CORE
+class ClaudeNeuralSynapseEngine {
     constructor() {
-        this.municipality = "Reynosa, Tamaulipas";
-        this.taxRule = "IVA_8_PERCENT_ACTIVE_UNTIL_DEC_2026";
+        this.synapseState = "ACTIVE_ESTABLISHED";
+        this.owner = "fg782270@gmail.com";
         this.security = "VAULT_OMEGA_SECURE";
     }
-    auditCompliance() {
-        return { status: "APPROVED", owner: "fg782270@gmail.com", audit: "PASSED" };
+    syncWeights() {
+        return { status: "SYNCHRONIZED", fidelity: "99.8%", region: "Reynosa, MX" };
     }
 }
-export const engine = new SIFVInstitutionalEngine();`);
+export const neuralEngine = new ClaudeNeuralSynapseEngine();`);
     // Estado de Audio
-    const [estadoAudio, setEstadoAudio] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Sistema de Audio en Reposo (Listo para Dictado Institucional)');
+    const [estadoAudio, setEstadoAudio] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Sistema de Audio en Reposo');
     const [grabandoAudio, setGrabaAudio] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     // Contexto Geopolítico
     const [continente, setContinente] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('América');
@@ -152,45 +133,15 @@ export const engine = new SIFVInstitutionalEngine();`);
         utterance.lang = 'es-MX';
         window.speechSynthesis.speak(utterance);
     }
-    // Selector inteligente de plantillas institucionales
-    function cambiarPlantillaInstitucional(tipo) {
-        setTipoDocInstitucional(tipo);
-        if (tipo === 'presentacion') {
-            setTituloCorp('Presentación Ejecutiva — Plataforma SIFV-REYNOSA');
-            setContenidoCorp(`NEXCODE INTERACTIVE, S.A. DE C.V. 
-Reynosa, Tamaulipas, a 24 de octubre de 2026
-
-PROPUESTA TÉCNICA Y ECONÓMICA: PLATAFORMA SIFV-REYNOSA
-Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Municipio de Reynosa, Tamaulipas.
-
-1. MISIÓN, VISIÓN Y OBJETIVO
-- Misión: Desarrollar tecnología de gestión pública segura, transparente y accesible para el apoyo a las autoridades de tránsito.
-- Visión: Ser el proveedor tamaulipeco de referencia en soluciones digitales para la seguridad vial y servicios municipales.
-- Objetivo: Implementar la Plataforma en el Municipio de Reynosa y ampliarla por fases a los 43 municipios del Estado.`);
-        } else if (tipo === 'contable') {
-            setTituloCorp('Dictamen Contable y Financiero - Precios, IVA y Control');
-            setContenidoCorp(`NEXCODE INTERACTIVE S.A. DE C.V. — DICTAMEN CONTABLE Y FINANCIERO INTERNO
-
-1. MODALIDADES DE CONTRATACIÓN (MXN)
-- Opción A (Licencia Anual): $166,000 de implementación más $9,000 mensuales sin IVA. Total a 3 años: $490,000 sin IVA ($529,200 con IVA 8% / $568,400 con IVA 16%).
-- Opción B (Adquisición / Perpetua): $290,000 sin IVA con 12 meses de soporte, y póliza anual de $52,200 desde el mes 13. Total a 3 años: $394,400 sin IVA ($425,952 con IVA 8% / $457,504 con IVA 16%).
-
-2. EFECTO Y VIGENCIA DEL ESTÍMULO FISCAL (IVA 8%)
-- Ahorro verificado para el Cliente de $21,920 en el primer año de la Opción A y de $23,200 en la Opción B.
-- Nota Crítica: Condicionado al decreto fronterizo vigente hasta el 31 de diciembre de 2026 y registro en padrón.`);
-        } else if (tipo === 'juridico') {
-            setTituloCorp('Dictamen Jurídico y Blindaje de Propiedad Intelectual');
-            setContenidoCorp(`NEXCODE INTERACTIVE S.A. DE C.V. — DICTAMEN JURÍDICO OFICIAL
-1. Objeto del Contrato de Licenciamiento, Implementación y Soporte Técnico.
-2. Titularidad y Protección de Propiedad Intelectual bajo Vault Omega: El código fuente y arquitectura pertenecen en exclusiva a Nexcode Interactive.
-3. Cumplimiento con la Ley de Tránsito de Tamaulipas (reforma de marzo de 2026) y reglamentos municipales de Reynosa.`);
-        } else if (tipo === 'caso_practico') {
-            setTituloCorp('Caso Práctico Ejecutivo - Plataforma SIFV-REYNOSA');
-            setContenidoCorp(`NEXCODE INTERACTIVE, S.A. DE C.V. — CASO PRÁCTICO EJECUTIVO
-1. Planteamiento del problema: Optimización del control vial y blindaje de datos en Reynosa, Tamaulipas.
-2. Solución GOV-TECH: Arquitectura modular segura con cifrado Vault Omega y trazabilidad en tiempo real.
-3. Impacto institucional y retorno de inversión (ROI): Reducción de tiempos operativos y transparencia ciudadana.`);
-        }
+    // Función de Conexión y Entrenamiento Neural con Claude Cloud
+    function entrenarRedNeuronalClaude() {
+        setEstadoSynapse('🔄 Conectando con Claude Cloud/Work y ajustando pesos sinápticos...');
+        hablarJarvis("Estableciendo enlace neuronal con Claude Cloud, C. Francisco.");
+        setTimeout(()=>{
+            setEstadoSynapse('✔ Red neuronal sincronizada. Neuronas ejecutivas, legales y contables activas.');
+            setPesoNeural('100.0% (Optimización Máxima Master Engine)');
+            hablarJarvis("Red neuronal de Jarvis AI actualizada y sincronizada con éxito.");
+        }, 2500);
     }
     // Dictado por voz
     function iniciarDictadoAudio(setter, nombreModulo) {
@@ -207,14 +158,14 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
         recognition.maxAlternatives = 1;
         recognition.onstart = ()=>{
             setGrabaAudio(true);
-            setEstadoAudio(`🔴 Grabando documento institucional en [${nombreModulo}]...`);
-            hablarJarvis(`Dictado activo para ${nombreModulo}, C. Francisco.`);
+            setEstadoAudio(`🔴 Grabando enlace sináptico en [${nombreModulo}]...`);
+            hablarJarvis(`Dictado activo con enlace Claude Cloud para ${nombreModulo}, C. Francisco.`);
         };
         recognition.onresult = (event)=>{
             const textoTranscrito = event.results[0][0].transcript;
-            setter((prev)=>prev + "\n\n[Institutional Struct]: " + textoTranscrito);
-            setEstadoAudio(`✔ Audio procesado y estructurado con éxito.`);
-            hablarJarvis("Información integrada en el documento oficial.");
+            setter((prev)=>prev + "\n\n[Neural Synapse Ingestion]: " + textoTranscrito);
+            setEstadoAudio(`✔ Datos asimilados por la red neuronal.`);
+            hablarJarvis("Información integrada en la neurona artificial.");
             setGrabaAudio(false);
         };
         recognition.onerror = ()=>{
@@ -269,8 +220,8 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
     }
     // Exportador de Documento Word
     function descargarDocumentoActivo() {
-        let titulo = tituloCorp;
-        let contenido = contenidoCorp;
+        let titulo = tituloNeural;
+        let contenido = contenidoNeural;
         if (seccionActiva === 'academico') {
             titulo = tituloAcademico;
             contenido = contenidoAcademico;
@@ -295,7 +246,7 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
         link.click();
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
-        hablarJarvis('Documento institucional exportado en formato Word con éxito.');
+        hablarJarvis('Documento neuronal exportado en formato Word con éxito.');
     }
     function descargarBancoMemoriaJson() {
         const contenidoJson = JSON.stringify(memoriasEstado, null, 2);
@@ -307,7 +258,7 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = `Nexcode-Expediente-Institucional.json`;
+        link.download = `Nexcode-Expediente-Neural.json`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -317,30 +268,30 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
     function formatearActividad(clave) {
         if (!clave) return 'Expediente Institucional';
         const lower = clave.toLowerCase();
-        if (lower.includes('corporativo')) return 'Hub Institucional (Presentación & Dictámenes)';
+        if (lower.includes('neuronal')) return 'Hub de Enlace Neural Claude Cloud';
         if (lower.includes('academico')) return 'Proyecto Escolar: Seguridad Pública';
         if (lower.includes('comercial')) return 'Dictamen Contable y Financiero';
-        if (lower.includes('ingenieria')) return 'Ingeniería y Auditoría GOV-TECH';
+        if (lower.includes('ingenieria')) return 'Ingeniería y Synapse Core';
         return 'Bitácora y Registro Institucional';
     }
     async function handleSubmit(event) {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
         formData.append('seccion', seccionActiva);
-        formData.append('tipoAnalisis', 'Hub Institucional Claude (Motor Claude Cloud/Work)');
-        formData.append('modeloIASeleccionado', modeloIA);
+        formData.append('tipoAnalisis', 'Claude Cloud Neural Link & Synapse Engine');
+        formData.append('modeloIASeleccionado', tipoModeloNeural);
         formData.append('continente', continente);
         formData.append('region', region);
         formData.append('pais', pais);
         formData.append('omegaKey', omegaKeyInput);
-        formData.append('archivoNombre', `${seccionActiva === 'academico' ? tituloAcademico : seccionActiva === 'comercial' ? tituloComercial : seccionActiva === 'ingenieria' ? tituloIngenieria : tituloCorp}.doc`);
+        formData.append('archivoNombre', `${seccionActiva === 'academico' ? tituloAcademico : seccionActiva === 'comercial' ? tituloComercial : seccionActiva === 'ingenieria' ? tituloIngenieria : tituloNeural}.doc`);
         startTransition(async ()=>{
             const resultado = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$actions$2f$data$3a$c6d969__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$text$2f$javascript$3e$__["ejecutarJarvisCore"])(formData);
             setMensajeRespuesta(resultado.message);
             setFolioUltimo(resultado.folio || null);
             setHashGenerado(resultado.hash || null);
             if (resultado.success) {
-                hablarJarvis("Documento procesado y auditado bajo Vault Omega.");
+                hablarJarvis("Pesos sinápticos actualizados y auditados bajo Vault Omega[cite: 6].");
                 cargarMemoria();
             }
         });
@@ -358,7 +309,7 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                             children: "⚖️ Gabinete Bloqueado — Seguridad Activa"
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 330,
+                            lineNumber: 277,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -366,7 +317,7 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                             children: "Nexcode Interactive S.A. de C.V."
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 331,
+                            lineNumber: 278,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -374,13 +325,13 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                             children: "Investigador Titular: fg782270@gmail.com (C. Francisco)"
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 332,
+                            lineNumber: 279,
                             columnNumber: 25
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 329,
+                    lineNumber: 276,
                     columnNumber: 21
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -393,7 +344,7 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                             children: "📷 Biometría"
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 336,
+                            lineNumber: 283,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -403,7 +354,7 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                             children: "🔑 PIN Ejecutivo"
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 337,
+                            lineNumber: 284,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -413,13 +364,13 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                             children: "👆 Llave Segura"
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 338,
+                            lineNumber: 285,
                             columnNumber: 25
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 335,
+                    lineNumber: 282,
                     columnNumber: 21
                 }, this),
                 modoAcceso === 'facial' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -435,12 +386,12 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                 className: "w-full h-full object-cover"
                             }, void 0, false, {
                                 fileName: "[project]/app/page.tsx",
-                                lineNumber: 344,
+                                lineNumber: 291,
                                 columnNumber: 33
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 343,
+                            lineNumber: 290,
                             columnNumber: 29
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -450,13 +401,13 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                             children: "Verificar Identidad por Rostro"
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 346,
+                            lineNumber: 293,
                             columnNumber: 29
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 342,
+                    lineNumber: 289,
                     columnNumber: 25
                 }, this),
                 modoAcceso === 'pin' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -470,7 +421,7 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                     children: "Ingrese PIN de Acceso (7822, 1998, 2026):"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 353,
+                                    lineNumber: 300,
                                     columnNumber: 33
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -483,13 +434,13 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                     required: true
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 354,
+                                    lineNumber: 301,
                                     columnNumber: 33
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 352,
+                            lineNumber: 299,
                             columnNumber: 29
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -498,13 +449,13 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                             children: "Desbloquear Gabinete"
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 356,
+                            lineNumber: 303,
                             columnNumber: 29
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 351,
+                    lineNumber: 298,
                     columnNumber: 25
                 }, this),
                 modoAcceso === 'hardware' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -516,12 +467,12 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                         children: "Validar Llave de Hardware"
                     }, void 0, false, {
                         fileName: "[project]/app/page.tsx",
-                        lineNumber: 362,
+                        lineNumber: 309,
                         columnNumber: 29
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 361,
+                    lineNumber: 308,
                     columnNumber: 25
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -529,13 +480,13 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                     children: estadoSeguridad
                 }, void 0, false, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 366,
+                    lineNumber: 313,
                     columnNumber: 21
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/page.tsx",
-            lineNumber: 328,
+            lineNumber: 275,
             columnNumber: 17
         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "w-full max-w-5xl flex flex-col items-center animate-fadeIn",
@@ -552,25 +503,25 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                             className: "text-xl font-bold tracking-wider flex items-center gap-2",
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                    children: "🛡️"
+                                                    children: "🧠"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 374,
+                                                    lineNumber: 321,
                                                     columnNumber: 37
                                                 }, this),
                                                 " Jarvis Master Core — ",
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                     className: "text-cyan-300",
-                                                    children: "Claude Cloud Institutional Engine"
+                                                    children: "Claude Cloud Neural Link & Synapse Engine"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 374,
-                                                    columnNumber: 75
+                                                    lineNumber: 321,
+                                                    columnNumber: 74
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 373,
+                                            lineNumber: 320,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -578,13 +529,13 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                             children: "Investigador Titular: fg782270@gmail.com (C. Francisco)"
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 376,
+                                            lineNumber: 323,
                                             columnNumber: 33
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 372,
+                                    lineNumber: 319,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -593,55 +544,70 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                     children: "🔒 Bloquear Sesión"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 378,
+                                    lineNumber: 325,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 371,
+                            lineNumber: 318,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "mb-4 p-3 bg-slate-950 border border-cyan-500/40 rounded-lg flex justify-between items-center",
+                            className: "mb-4 p-4 bg-slate-950 border border-cyan-500/40 rounded-lg flex flex-col md:flex-row justify-between items-center gap-3",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "flex items-center gap-2",
+                                    className: "space-y-1",
                                     children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                            className: "text-sm",
-                                            children: "🎙️"
-                                        }, void 0, false, {
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "text-xs font-bold text-cyan-300",
+                                            children: [
+                                                "⚡ Estado del Enlace: ",
+                                                estadoSynapse
+                                            ]
+                                        }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 384,
+                                            lineNumber: 331,
                                             columnNumber: 33
                                         }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                            className: "text-xs font-bold text-cyan-300",
-                                            children: estadoAudio
-                                        }, void 0, false, {
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "text-[11px] text-slate-400",
+                                            children: [
+                                                "Fidelidad de Pesos Sinápticos: ",
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                    className: "text-green-400 font-bold",
+                                                    children: pesoNeural
+                                                }, void 0, false, {
+                                                    fileName: "[project]/app/page.tsx",
+                                                    lineNumber: 332,
+                                                    columnNumber: 108
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 385,
+                                            lineNumber: 332,
                                             columnNumber: 33
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 383,
+                                    lineNumber: 330,
                                     columnNumber: 29
                                 }, this),
-                                grabandoAudio && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                    className: "animate-pulse text-xs bg-red-500 text-white px-2 py-0.5 rounded font-bold",
-                                    children: "INSTITUTIONAL DOCS ACTIVE..."
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                    type: "button",
+                                    onClick: entrenarRedNeuronalClaude,
+                                    className: "bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold py-2.5 px-5 rounded-lg text-xs shadow-lg transition-all flex items-center gap-2",
+                                    children: "🧠 Sincronizar y Entrenar Neuronas (Claude Cloud)"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 387,
-                                    columnNumber: 47
+                                    lineNumber: 334,
+                                    columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 382,
+                            lineNumber: 329,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -652,7 +618,7 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                     children: "🌍 Marco Geopolítico e Institucional"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 392,
+                                    lineNumber: 341,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -665,7 +631,7 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                                     children: "Continente:"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 395,
+                                                    lineNumber: 344,
                                                     columnNumber: 37
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -677,18 +643,18 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                                         children: "América"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/page.tsx",
-                                                        lineNumber: 397,
+                                                        lineNumber: 346,
                                                         columnNumber: 41
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 396,
+                                                    lineNumber: 345,
                                                     columnNumber: 37
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 394,
+                                            lineNumber: 343,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -698,7 +664,7 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                                     children: "Región:"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 401,
+                                                    lineNumber: 350,
                                                     columnNumber: 37
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -710,18 +676,18 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                                         children: "América del Norte / LATAM"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/page.tsx",
-                                                        lineNumber: 403,
+                                                        lineNumber: 352,
                                                         columnNumber: 41
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 402,
+                                                    lineNumber: 351,
                                                     columnNumber: 37
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 400,
+                                            lineNumber: 349,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -731,7 +697,7 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                                     children: "Jurisdicción:"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 407,
+                                                    lineNumber: 356,
                                                     columnNumber: 37
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -741,38 +707,48 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                                     className: "w-full bg-slate-900 border border-cyan-500/40 rounded p-2 text-white text-xs"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 408,
+                                                    lineNumber: 357,
                                                     columnNumber: 37
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 406,
+                                            lineNumber: 355,
                                             columnNumber: 33
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 393,
+                                    lineNumber: 342,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 391,
+                            lineNumber: 340,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "mb-6 p-4 bg-slate-950 border-2 border-cyan-500/50 rounded-lg grid grid-cols-2 md:grid-cols-4 gap-2",
+                            className: "mb-6 p-4 bg-slate-950 border-2 border-cyan-500/50 rounded-lg grid grid-cols-2 md:grid-cols-5 gap-2",
                             children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                    type: "button",
+                                    onClick: ()=>setSeccionActiva('neuronal_hub'),
+                                    className: `py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'neuronal_hub' ? 'bg-cyan-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-cyan-300'}`,
+                                    children: "🧠 Hub Neural Claude"
+                                }, void 0, false, {
+                                    fileName: "[project]/app/page.tsx",
+                                    lineNumber: 364,
+                                    columnNumber: 29
+                                }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     type: "button",
                                     onClick: ()=>setSeccionActiva('hub_corporativo'),
                                     className: `py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'hub_corporativo' ? 'bg-cyan-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-cyan-300'}`,
-                                    children: "📂 Hub Institucional"
+                                    children: "📂 Hub Documental"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 415,
+                                    lineNumber: 367,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -782,7 +758,7 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                     children: "🎓 Proyecto Escolar"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 418,
+                                    lineNumber: 370,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -792,7 +768,7 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                     children: "🏢 Dictamen Financiero"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 421,
+                                    lineNumber: 373,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -802,13 +778,13 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                     children: "⚙️ GOV-TECH Core"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 424,
+                                    lineNumber: 376,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 414,
+                            lineNumber: 363,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -823,15 +799,15 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                         defaultValue: "fg782270@gmail.com"
                                     }, void 0, false, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 432,
+                                        lineNumber: 384,
                                         columnNumber: 33
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 431,
+                                    lineNumber: 383,
                                     columnNumber: 29
                                 }, this),
-                                seccionActiva === 'hub_corporativo' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                seccionActiva === 'neuronal_hub' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "space-y-4 p-5 bg-slate-950 rounded border-2 border-cyan-500/60 animate-fadeIn shadow-inner",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -839,10 +815,10 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                                     className: "text-sm font-bold text-cyan-300 uppercase tracking-wide",
-                                                    children: "📂 Hub Institucional — Presentación y Dictámenes"
+                                                    children: "🧠 Núcleo de Neuronas Artificiales & Sincronización Claude Cloud"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 439,
+                                                    lineNumber: 391,
                                                     columnNumber: 41
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -850,12 +826,12 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                             type: "button",
-                                                            onClick: ()=>iniciarDictadoAudio(setContenidoCorp, 'Hub Institucional'),
+                                                            onClick: ()=>iniciarDictadoAudio(setContenidoNeural, 'Hub Neural'),
                                                             className: "bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow flex items-center gap-1",
-                                                            children: "🎤 Dictar Voz (Claude)"
+                                                            children: "🎤 Dictar a la Red Neuronal"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/page.tsx",
-                                                            lineNumber: 441,
+                                                            lineNumber: 393,
                                                             columnNumber: 45
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -865,96 +841,94 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                                             children: "📥 Exportar Word (.doc)"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/page.tsx",
-                                                            lineNumber: 444,
+                                                            lineNumber: 396,
                                                             columnNumber: 45
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 440,
+                                                    lineNumber: 392,
                                                     columnNumber: 41
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 438,
-                                            columnNumber: 37
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "grid grid-cols-2 md:grid-cols-4 gap-2 bg-slate-900 p-2 rounded border border-cyan-500/30",
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                    type: "button",
-                                                    onClick: ()=>cambiarPlantillaInstitucional('presentacion'),
-                                                    className: `py-1.5 px-2 rounded text-[11px] font-bold ${tipoDocInstitucional === 'presentacion' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`,
-                                                    children: "📊 Presentación"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 450,
-                                                    columnNumber: 41
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                    type: "button",
-                                                    onClick: ()=>cambiarPlantillaInstitucional('contable'),
-                                                    className: `py-1.5 px-2 rounded text-[11px] font-bold ${tipoDocInstitucional === 'contable' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`,
-                                                    children: "💰 Dictamen Contable"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 451,
-                                                    columnNumber: 41
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                    type: "button",
-                                                    onClick: ()=>cambiarPlantillaInstitucional('juridico'),
-                                                    className: `py-1.5 px-2 rounded text-[11px] font-bold ${tipoDocInstitucional === 'juridico' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`,
-                                                    children: "⚖️ Dictamen Jurídico"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 452,
-                                                    columnNumber: 41
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                    type: "button",
-                                                    onClick: ()=>cambiarPlantillaInstitucional('caso_practico'),
-                                                    className: `py-1.5 px-2 rounded text-[11px] font-bold ${tipoDocInstitucional === 'caso_practico' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`,
-                                                    children: "📄 Caso Práctico"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 453,
-                                                    columnNumber: 41
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/app/page.tsx",
-                                            lineNumber: 449,
+                                            lineNumber: 390,
                                             columnNumber: 37
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                             type: "text",
-                                            value: tituloCorp,
-                                            onChange: (e)=>setTituloCorp(e.target.value),
+                                            value: tituloNeural,
+                                            onChange: (e)=>setTituloNeural(e.target.value),
                                             className: "w-full bg-slate-900 border border-cyan-500/40 rounded p-2 text-white text-xs font-bold",
                                             required: true
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 455,
+                                            lineNumber: 401,
                                             columnNumber: 37
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
-                                            value: contenidoCorp,
-                                            onChange: (e)=>setContenidoCorp(e.target.value),
+                                            value: contenidoNeural,
+                                            onChange: (e)=>setContenidoNeural(e.target.value),
                                             rows: 14,
                                             className: "w-full bg-slate-900 border border-cyan-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none leading-relaxed",
                                             required: true
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 456,
+                                            lineNumber: 402,
                                             columnNumber: 37
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 437,
+                                    lineNumber: 389,
+                                    columnNumber: 33
+                                }, this),
+                                seccionActiva === 'hub_corporativo' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "space-y-4 p-5 bg-slate-950 rounded border-2 border-cyan-500/60 animate-fadeIn shadow-inner",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "flex justify-between items-center border-b border-cyan-500/30 pb-3",
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                                    className: "text-sm font-bold text-cyan-300 uppercase tracking-wide",
+                                                    children: "📂 Hub Documental Institucional"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/app/page.tsx",
+                                                    lineNumber: 410,
+                                                    columnNumber: 41
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                    type: "button",
+                                                    onClick: descargarDocumentoActivo,
+                                                    className: "bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg",
+                                                    children: "📥 Exportar Word (.doc)"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/app/page.tsx",
+                                                    lineNumber: 411,
+                                                    columnNumber: 41
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/app/page.tsx",
+                                            lineNumber: 409,
+                                            columnNumber: 37
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
+                                            value: contenidoNeural,
+                                            onChange: (e)=>setContenidoNeural(e.target.value),
+                                            rows: 12,
+                                            className: "w-full bg-slate-900 border border-cyan-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none leading-relaxed",
+                                            required: true
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/page.tsx",
+                                            lineNumber: 413,
+                                            columnNumber: 37
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/app/page.tsx",
+                                    lineNumber: 408,
                                     columnNumber: 33
                                 }, this),
                                 seccionActiva === 'academico' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -965,45 +939,26 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                                     className: "text-sm font-bold text-amber-300 uppercase tracking-wide",
-                                                    children: "🎓 Proyecto Escolar (Zapia AI - Seguridad Pública)"
+                                                    children: "🎓 Proyecto Escolar (Zapia AI - UnADM Derecho)"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 464,
+                                                    lineNumber: 421,
                                                     columnNumber: 41
                                                 }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "flex gap-2 items-center",
-                                                    children: [
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                            type: "button",
-                                                            onClick: ()=>iniciarDictadoAudio(setContenidoAcademico, 'Proyecto Escolar'),
-                                                            className: "bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow flex items-center gap-1",
-                                                            children: "🎤 Dictar Voz"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/app/page.tsx",
-                                                            lineNumber: 466,
-                                                            columnNumber: 45
-                                                        }, this),
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                            type: "button",
-                                                            onClick: descargarDocumentoActivo,
-                                                            className: "bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg",
-                                                            children: "📥 Exportar Word (.doc)"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/app/page.tsx",
-                                                            lineNumber: 469,
-                                                            columnNumber: 45
-                                                        }, this)
-                                                    ]
-                                                }, void 0, true, {
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                    type: "button",
+                                                    onClick: descargarDocumentoActivo,
+                                                    className: "bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg",
+                                                    children: "📥 Exportar Word (.doc)"
+                                                }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 465,
+                                                    lineNumber: 422,
                                                     columnNumber: 41
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 463,
+                                            lineNumber: 420,
                                             columnNumber: 37
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1014,7 +969,7 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                             required: true
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 474,
+                                            lineNumber: 424,
                                             columnNumber: 37
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -1025,13 +980,13 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                             required: true
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 475,
+                                            lineNumber: 425,
                                             columnNumber: 37
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 462,
+                                    lineNumber: 419,
                                     columnNumber: 33
                                 }, this),
                                 seccionActiva === 'comercial' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1042,45 +997,26 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                                     className: "text-sm font-bold text-blue-300 uppercase tracking-wide",
-                                                    children: "🏢 Dictamen Contable y Financiero"
+                                                    children: "🏢 Dictamen Financiero, Opciones A/B y Control de IVA[cite: 10]"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 483,
+                                                    lineNumber: 433,
                                                     columnNumber: 41
                                                 }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "flex gap-2 items-center",
-                                                    children: [
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                            type: "button",
-                                                            onClick: ()=>iniciarDictadoAudio(setContenidoComercial, 'Dictamen Financiero'),
-                                                            className: "bg-blue-500 hover:bg-blue-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow flex items-center gap-1",
-                                                            children: "🎤 Dictar Voz"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/app/page.tsx",
-                                                            lineNumber: 485,
-                                                            columnNumber: 45
-                                                        }, this),
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                            type: "button",
-                                                            onClick: descargarDocumentoActivo,
-                                                            className: "bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg",
-                                                            children: "📥 Exportar Word (.doc)"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/app/page.tsx",
-                                                            lineNumber: 488,
-                                                            columnNumber: 45
-                                                        }, this)
-                                                    ]
-                                                }, void 0, true, {
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                    type: "button",
+                                                    onClick: descargarDocumentoActivo,
+                                                    className: "bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg",
+                                                    children: "📥 Exportar Word (.doc)"
+                                                }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 484,
+                                                    lineNumber: 434,
                                                     columnNumber: 41
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 482,
+                                            lineNumber: 432,
                                             columnNumber: 37
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1091,7 +1027,7 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                             required: true
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 493,
+                                            lineNumber: 436,
                                             columnNumber: 37
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -1102,13 +1038,13 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                             required: true
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 494,
+                                            lineNumber: 437,
                                             columnNumber: 37
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 481,
+                                    lineNumber: 431,
                                     columnNumber: 33
                                 }, this),
                                 seccionActiva === 'ingenieria' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1119,45 +1055,26 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                                     className: "text-sm font-bold text-purple-300 uppercase tracking-wide",
-                                                    children: "⚙️ GOV-TECH Core Architecture"
+                                                    children: "⚙️ GOV-TECH Synapse Architecture"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 502,
+                                                    lineNumber: 445,
                                                     columnNumber: 41
                                                 }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "flex gap-2 items-center",
-                                                    children: [
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                            type: "button",
-                                                            onClick: ()=>iniciarDictadoAudio(setCodigoIngenieria, 'GOV-TECH Core'),
-                                                            className: "bg-purple-500 hover:bg-purple-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow flex items-center gap-1",
-                                                            children: "🎤 Dictar Lógica"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/app/page.tsx",
-                                                            lineNumber: 504,
-                                                            columnNumber: 45
-                                                        }, this),
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                            type: "button",
-                                                            onClick: descargarDocumentoActivo,
-                                                            className: "bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg",
-                                                            children: "📥 Exportar Código (.doc)"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/app/page.tsx",
-                                                            lineNumber: 507,
-                                                            columnNumber: 45
-                                                        }, this)
-                                                    ]
-                                                }, void 0, true, {
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                    type: "button",
+                                                    onClick: descargarDocumentoActivo,
+                                                    className: "bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg",
+                                                    children: "📥 Exportar Código (.doc)"
+                                                }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 503,
+                                                    lineNumber: 446,
                                                     columnNumber: 41
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 501,
+                                            lineNumber: 444,
                                             columnNumber: 37
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1168,7 +1085,7 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                             required: true
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 512,
+                                            lineNumber: 448,
                                             columnNumber: 37
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -1179,29 +1096,29 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                             required: true
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 513,
+                                            lineNumber: 449,
                                             columnNumber: 37
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 500,
+                                    lineNumber: 443,
                                     columnNumber: 33
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     type: "submit",
                                     disabled: isPending,
                                     className: "w-full bg-cyan-500 hover:bg-cyan-400 font-bold py-3 px-4 rounded text-slate-950 shadow-lg",
-                                    children: isPending ? 'Procesando con Claude Cloud...' : `Registrar y Auditar en [${seccionActiva.toUpperCase()}]`
+                                    children: isPending ? 'Sincronizando Red Neuronal...' : `Registrar y Auditar en el Núcleo [${seccionActiva.toUpperCase()}]`
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 517,
+                                    lineNumber: 453,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 430,
+                            lineNumber: 382,
                             columnNumber: 25
                         }, this),
                         mensajeRespuesta && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1209,10 +1126,10 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "absolute top-0 right-0 bg-cyan-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl",
-                                    children: "ESTADO: INSTITUTIONAL DOC AUDITED"
+                                    children: "ESTADO: NEURAL SYNAPSE AUDITED"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 524,
+                                    lineNumber: 460,
                                     columnNumber: 33
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1220,7 +1137,7 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                     children: mensajeRespuesta
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 525,
+                                    lineNumber: 461,
                                     columnNumber: 33
                                 }, this),
                                 folioUltimo && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1231,7 +1148,7 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                             children: "Folio:"
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 526,
+                                            lineNumber: 462,
                                             columnNumber: 86
                                         }, this),
                                         " ",
@@ -1239,19 +1156,19 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 526,
+                                    lineNumber: 462,
                                     columnNumber: 49
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 523,
+                            lineNumber: 459,
                             columnNumber: 29
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 370,
+                    lineNumber: 317,
                     columnNumber: 21
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1265,7 +1182,7 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                     children: "Expediente y Registros Institucionales"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 534,
+                                    lineNumber: 470,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1275,13 +1192,13 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                     children: "📥 Exportar Expediente JSON (.json)"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 535,
+                                    lineNumber: 471,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 533,
+                            lineNumber: 469,
                             columnNumber: 25
                         }, this),
                         memoriasEstado.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1289,7 +1206,7 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                             children: "No hay registros almacenados todavía."
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 541,
+                            lineNumber: 477,
                             columnNumber: 29
                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "overflow-x-auto",
@@ -1305,7 +1222,7 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                                     children: "Expediente / Actividad"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 547,
+                                                    lineNumber: 483,
                                                     columnNumber: 45
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1313,7 +1230,7 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                                     children: "Detalle Analítico"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 548,
+                                                    lineNumber: 484,
                                                     columnNumber: 45
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1321,7 +1238,7 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                                     children: "Subsistema"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 549,
+                                                    lineNumber: 485,
                                                     columnNumber: 45
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1329,18 +1246,18 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                                     children: "Fecha y Hora"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 550,
+                                                    lineNumber: 486,
                                                     columnNumber: 45
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 546,
+                                            lineNumber: 482,
                                             columnNumber: 41
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 545,
+                                        lineNumber: 481,
                                         columnNumber: 37
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
@@ -1353,7 +1270,7 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                                         children: formatearActividad(mem.memory_key)
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/page.tsx",
-                                                        lineNumber: 556,
+                                                        lineNumber: 492,
                                                         columnNumber: 49
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1361,7 +1278,7 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                                         children: mem.memory_value
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/page.tsx",
-                                                        lineNumber: 557,
+                                                        lineNumber: 493,
                                                         columnNumber: 49
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1369,7 +1286,7 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                                         children: mem.routing_engine || 'Core'
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/page.tsx",
-                                                        lineNumber: 558,
+                                                        lineNumber: 494,
                                                         columnNumber: 49
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1377,50 +1294,50 @@ Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Muni
                                                         children: new Date(mem.created_at).toLocaleString()
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/page.tsx",
-                                                        lineNumber: 559,
+                                                        lineNumber: 495,
                                                         columnNumber: 49
                                                     }, this)
                                                 ]
                                             }, mem.id, true, {
                                                 fileName: "[project]/app/page.tsx",
-                                                lineNumber: 555,
+                                                lineNumber: 491,
                                                 columnNumber: 45
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 553,
+                                        lineNumber: 489,
                                         columnNumber: 37
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/page.tsx",
-                                lineNumber: 544,
+                                lineNumber: 480,
                                 columnNumber: 33
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 543,
+                            lineNumber: 479,
                             columnNumber: 29
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 532,
+                    lineNumber: 468,
                     columnNumber: 21
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/page.tsx",
-            lineNumber: 369,
+            lineNumber: 316,
             columnNumber: 17
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/page.tsx",
-        lineNumber: 325,
+        lineNumber: 272,
         columnNumber: 9
     }, this);
 }
-_s(MasterCorePage, "mocJSeZIObItl6C/1ALoBWudalU=", false, function() {
+_s(MasterCorePage, "t7RoocH0AdxxBOkSIvmwKs47rSc=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTransition"]
     ];

@@ -49,27 +49,42 @@ async function ejecutarJarvisCore(formData) {
             };
         }
         const accion = formData.get('accion');
-        const tipoSoftware = formData.get('tipoSoftware');
-        const detalleSoftware = formData.get('detalleSoftware');
+        const tipoSoftware = formData.get('tipoSoftware') || 'Sistema Autónomo';
+        const detalleSoftware = formData.get('detalleSoftware') || 'Operación general';
         const timestamp = new Date().toISOString();
-        const folioOmnirouter = `NEX-CLONE-${Math.floor(100000 + Math.random() * 900000)}`;
+        const folioOmnirouter = `JARVIS-MEM-${Math.floor(100000 + Math.random() * 900000)}`;
         const rawPayload = `${SUPERVISOR_AUTORIZADO}-${accion}-${tipoSoftware}-${detalleSoftware}-${timestamp}-UNLIMITED-TOKENS`;
         const cryptoHash = __TURBOPACK__imported__module__$5b$externals$5d2f$crypto__$5b$external$5d$__$28$crypto$2c$__cjs$29$__["default"].createHash('sha256').update(rawPayload).digest('hex');
-        // Registrar en Supabase
+        // 1. Guardar en la Memoria Propia de Jarvis (mexico_jarvis_memory)
+        const { error: errorMemoria } = await supabase.from('mexico_jarvis_memory').insert([
+            {
+                owner_email: SUPERVISOR_AUTORIZADO,
+                memory_key: `[${tipoSoftware}] ${accion}`,
+                memory_value: `Detalle: ${detalleSoftware} | Folio: ${folioOmnirouter} | Hash: ${cryptoHash}`,
+                routing_engine: 'Jarvis Omnirouter Unlimited'
+            }
+        ]);
+        if (errorMemoria) {
+            return {
+                success: false,
+                message: `Error al guardar en memoria: ${errorMemoria.message}`
+            };
+        }
+        // 2. Registrar en la bitácora pública de gobernanza
         await supabase.from('mexico_public_governance_logs').insert([
             {
                 supervisor_email: SUPERVISOR_AUTORIZADO,
-                module_operation: `Clonación y Mejora [${tipoSoftware}]`,
+                module_operation: `Memoria Jarvis [${tipoSoftware}]`,
                 ai_engine: 'Jarvis AI Core (Omnirouter Unlimited)',
-                instruction_param: `[SOLICITUD] ${detalleSoftware} | Hash: ${cryptoHash}`,
+                instruction_param: `[REGISTRADO EN MEMORIA] ${detalleSoftware}`,
                 crypto_hash: cryptoHash,
                 created_at: timestamp
             }
         ]);
-        // Generar estructura de código simulada para descarga directa
+        // 3. Generar código descargable de respaldo
         const codigoGenerado = `// ==========================================
 // NEXCODE INTERACTIVE S.A. DE C.V.
-// Módulo Clonado y Optimizado por Jarvis AI
+// Módulo Registrado en Memoria por Jarvis AI
 // Propietario: C. Francisco (fg782270@gmail.com)
 // Folio: ${folioOmnirouter}
 // Hash SHA-256: ${cryptoHash}
@@ -77,19 +92,19 @@ async function ejecutarJarvisCore(formData) {
 
 import React from 'react';
 
-export default function ClonOptimizadoComponent() {
+export default function MemoriaJarvisComponent() {
     return (
         <div style={{ background: '#020617', color: '#22d3ee', padding: '20px', fontFamily: 'monospace' }}>
-            <h1>Nexcode Master Core — Módulo: ${tipoSoftware}</h1>
-            <p>Solicitud procesada: ${detalleSoftware}</p>
-            <p>Estado: Optimizado con tokens ilimitados Omnirouter y Antivirus Activo.</p>
+            <h1>Nexcode Master Core — Memoria Activa</h1>
+            <p>Operación: ${tipoSoftware} - ${accion}</p>
+            <p>Directriz: ${detalleSoftware}</p>
         </div>
     );
 }
 `;
         return {
             success: true,
-            message: `¡Software clonado, optimizado y respaldado con éxito en Supabase y GitHub!`,
+            message: `¡Operación ejecutada y almacenada permanentemente en la memoria propia de Jarvis!`,
             folio: folioOmnirouter,
             hash: cryptoHash,
             codigoDescargable: codigoGenerado
@@ -103,9 +118,15 @@ export default function ClonOptimizadoComponent() {
 }
 async function obtenerMemoriaJarvis() {
     try {
-        const { data } = await supabase.from('mexico_jarvis_memory').select('id, memory_key, memory_value, created_at').eq('owner_email', SUPERVISOR_AUTORIZADO).order('created_at', {
+        const { data, error } = await supabase.from('mexico_jarvis_memory').select('id, memory_key, memory_value, routing_engine, created_at').eq('owner_email', SUPERVISOR_AUTORIZADO).order('created_at', {
             ascending: false
         });
+        if (error) {
+            return {
+                success: false,
+                memorias: []
+            };
+        }
         return {
             success: true,
             memorias: data || []

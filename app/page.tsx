@@ -110,17 +110,38 @@ export default function MasterCorePage() {
         }, 2000)
     }
 
-    // Modificado para leer y mostrar íntegramente el contenido real del documento
+    // Conversor inteligente: Traduce archivos JSON técnicos a un reporte en lenguaje natural
     function manejarArchivoAcademico(e: React.ChangeEvent<HTMLInputElement>) {
         if (e.target.files && e.target.files[0]) {
             const file = e.target.files[0]
             setArchivoAcademico(file)
-            hablarJarvis(`Documento ${file.name} cargado para lectura completa.`)
+            hablarJarvis(`Documento ${file.name} integrado y formateado en lenguaje natural.`)
             
             const reader = new FileReader()
             reader.onload = (event) => {
                 const contenido = event.target?.result as string || ''
-                setTextoEditado(contenido)
+                if (file.name.endsWith('.json')) {
+                    try {
+                        const parsed = JSON.parse(contenido)
+                        if (Array.isArray(parsed)) {
+                            const reporteHumano = parsed.map((item, idx) => 
+                                `DICTAMEN Y REVISIÓN ACADÉMICA NÚMERO #${idx + 1}\n` +
+                                `• Actividad Evaluada: ${item.memory_key || 'Evaluación General'}\n` +
+                                `• Observación / Detalle: ${item.memory_value || 'Sin observaciones'}\n` +
+                                `• Subsistema de Dictamen: ${item.routing_engine || 'Gabinete Central'}\n` +
+                                `• Fecha de Emisión: ${item.created_at ? new Date(item.created_at).toLocaleString() : 'Fecha no especificada'}\n` +
+                                `------------------------------------------------------------------------\n`
+                            ).join('\n')
+                            setTextoEditado(reporteHumano)
+                        } else {
+                            setTextoEditado(contenido)
+                        }
+                    } catch (err) {
+                        setTextoEditado(contenido)
+                    }
+                } else {
+                    setTextoEditado(contenido)
+                }
             }
             reader.readAsText(file)
         }
@@ -132,12 +153,12 @@ export default function MasterCorePage() {
         const url = URL.createObjectURL(blob)
         const link = document.createElement('a')
         link.href = url
-        link.download = archivoAcademico ? `Editado-${archivoAcademico.name}` : 'Documento-Institucional-Editado.txt'
+        link.download = archivoAcademico ? `Reporte-Ejecutivo-${archivoAcademico.name.replace('.json', '')}.txt` : 'Documento-Institucional.txt'
         document.body.appendChild(link)
         link.click()
         document.body.removeChild(link)
         URL.revokeObjectURL(url)
-        hablarJarvis('Documento exportado con éxito.')
+        hablarJarvis('Reporte institucional descargado con éxito.')
     }
 
     function escucharMic(setTextTarget: (val: string) => void, nombreModulo: string) {
@@ -245,7 +266,7 @@ export default function MasterCorePage() {
                         <header className="flex justify-between items-center border-b border-cyan-500/20 pb-4 mb-6">
                             <div>
                                 <h1 className="text-xl font-bold tracking-wider flex items-center gap-2">
-                                    <span>📚</span> Calificador Académico — <span className="text-cyan-300">Estilo Classroom (Lectura Íntegra)</span>
+                                    <span>📚</span> Calificador Académico — <span className="text-cyan-300">Estilo Classroom (Lectura Natural)</span>
                                 </h1>
                                 <p className="text-xs text-slate-400">Investigador Titular: fg782270@gmail.com (C. Francisco)</p>
                             </div>
@@ -269,7 +290,7 @@ export default function MasterCorePage() {
                                     ✍️ Panel de Calificación y Retroalimentación
                                 </button>
                                 <button type="button" onClick={() => setSubTabAcademico('editor')} className={`py-1.5 px-4 rounded text-xs font-bold transition-all ${subTabAcademico === 'editor' ? 'bg-amber-500 text-slate-950' : 'bg-slate-950 text-amber-300 border border-amber-500/30'}`}>
-                                    ✏️ Visor y Editor de Documento en Vivo
+                                    ✏️ Visor y Editor en Lenguaje Natural
                                 </button>
                             </div>
                         )}
@@ -285,7 +306,7 @@ export default function MasterCorePage() {
                                     <div className="p-3 bg-slate-900 border border-amber-500/30 rounded">
                                         <label className="block text-xs font-bold text-amber-300 mb-1">📁 Cargar Archivo del Alumno / Tesis (PDF, Word, TXT, JSON):</label>
                                         <input type="file" accept=".pdf,.doc,.docx,.txt,.json" onChange={manejarArchivoAcademico} className="w-full text-xs text-slate-300 file:mr-2 file:py-1 file:px-3 file:rounded file:border-0 file:bg-amber-500 file:text-slate-950 font-semibold cursor-pointer" />
-                                        {archivoAcademico && <p className="text-[11px] text-green-400 mt-2 font-mono">✔ Documento activo: {archivoAcademico.name} (Revise la pestaña "Visor y Editor" para ver el contenido completo)</p>}
+                                        {archivoAcademico && <p className="text-[11px] text-green-400 mt-2 font-mono">✔ Documento activo: {archivoAcademico.name} (Revise la pestaña "Visor y Editor" para leerlo en lenguaje natural)</p>}
                                     </div>
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -319,19 +340,19 @@ export default function MasterCorePage() {
                             {seccionActiva === 'academico' && subTabAcademico === 'editor' && (
                                 <div className="space-y-4 p-5 bg-slate-950 rounded border-2 border-amber-500/60 animate-fadeIn shadow-inner">
                                     <div className="flex justify-between items-center border-b border-amber-500/30 pb-3">
-                                        <h3 className="text-sm font-bold text-amber-300 uppercase tracking-wide">✏️ Visor y Editor Íntegro del Documento</h3>
+                                        <h3 className="text-sm font-bold text-amber-300 uppercase tracking-wide">✏️ Visor y Editor en Lenguaje Natural</h3>
                                         <div className="flex gap-2 items-center">
                                             <span className="text-xs font-mono text-slate-400">{archivoAcademico ? archivoAcademico.name : 'Documento en blanco'}</span>
                                             <button type="button" onClick={descargarDocumentoEditado} className="bg-green-500 hover:bg-green-400 text-slate-950 font-bold py-1 px-3 rounded text-xs shadow">
-                                                📥 Descargar Documento Editado
+                                                📥 Descargar Reporte en Texto (.txt)
                                             </button>
                                         </div>
                                     </div>
                                     <textarea 
                                         value={textoEditado} 
                                         onChange={(e) => setTextoEditado(e.target.value)}
-                                        placeholder="El contenido completo del archivo cargado aparecerá aquí para su lectura y edición total..." 
-                                        className="w-full h-80 bg-slate-900 border border-amber-500/40 rounded p-4 text-xs text-slate-100 font-mono outline-none focus:border-amber-400 leading-relaxed shadow-inner"
+                                        placeholder="El contenido del documento aparecerá aquí formateado de manera limpia, sin códigos ni corchetes técnicos..." 
+                                        className="w-full h-80 bg-slate-900 border border-amber-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none focus:border-amber-400 leading-relaxed shadow-inner"
                                     />
                                 </div>
                             )}

@@ -1,16 +1,5 @@
 {
-  "node": {
-    "7852bd564fa0c891f9736a2538d051ab7cfa34a293": {
-      "workers": {
-        "app/page": {
-          "moduleId": "[project]/.next-internal/server/app/page/actions.js { ACTIONS_MODULE0 => \"[project]/app/actions/master-actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
-          "async": false
-        }
-      },
-      "filename": "app/actions/master-actions.ts",
-      "exportedName": "executeMasterAction"
-    }
-  },
+  "node": {},
   "edge": {},
   "encryptionKey": "fpK1kQpW8v6f8sUGvgxVNlcTy2szpds1ThsqDdsqWxQ="
 }

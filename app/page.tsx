@@ -1,7 +1,7 @@
 ﻿'use client'
 
 import { useState, useTransition } from 'react'
-import { ejecutarYGuardarEnSupabase } from '@/app/actions/master-actions'
+import { ejecutarYGuardarEnSupabase } from '@/actions/master-actions'
 
 export default function MasterCorePage() {
     const [isPending, startTransition] = useTransition()

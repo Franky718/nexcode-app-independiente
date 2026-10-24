@@ -13,27 +13,37 @@ export default function MasterCorePage() {
     // Selector General de Módulos Independientes
     const [seccionActiva, setSeccionActiva] = useState<'hub_corporativo' | 'academico' | 'comercial' | 'ingenieria'>('hub_corporativo')
     
-    // Sub-estados
-    const [tipoDocCorporativo, setTipoDocCorporativo] = useState<'tecnico' | 'ejecutivo' | 'oficial'>('tecnico')
-    const [subTabIngenieria, setSubTabIngenieria] = useState<'finora' | 'sonica' | 'apk' | 'arquitectura'>('finora')
+    // Sub-estado del Hub Corporativo con Estructura de Caso Práctico
+    const [tipoDocCorporativo, setTipoDocCorporativo] = useState<'caso_practico' | 'sifv' | 'tecnico'>('caso_practico')
+    const [modeloIA, setModeloIA] = useState('Claude Cloud/Work 3.5 (Executive Case Engine)')
     
-    const [modeloIA, setModeloIA] = useState('Jarvis AI Autonomous Core (Universal Master Engine)')
-    
-    // 1. Contenido Hub Documental Corporativo
-    const [tituloCorp, setTituloCorp] = useState('Documentación Técnica y Arquitectura - Nexcode')
+    // Plantilla formal de la Estructura Ejecutiva del Caso Práctico (SIFV-REYNOSA)
+    const [tituloCorp, setTituloCorp] = useState('Caso Práctico Ejecutivo - Plataforma SIFV-REYNOSA')
     const [contenidoCorp, setContenidoCorp] = useState(
-`NEXCODE INTERACTIVE S.A. DE C.V. — EXPEDIENTE TÉCNICO OFICIAL
-INVESTIGADOR TITULAR: fg782270@gmail.com (C. Francisco)
+`NEXCODE INTERACTIVE, S.A. DE C.V. 
+Reynosa, Tamaulipas, a 24 de octubre de 2026
 
-1. ARQUITECTURA DE SOFTWARE Y ENDPOINTS
-- Desarrollo Full-Stack modular, seguro e independiente.
-- Integración con Supabase y bases de datos cifradas bajo Vault Omega.
-- Pipelines de despliegue automatizado para Google Play Store.
+CASO PRÁCTICO EJECUTIVO: IMPLEMENTACIÓN DE LA PLATAFORMA SIFV-REYNOSA
 
-2. ESPECIFICACIONES DE SEGURIDAD Y PRIVACIDAD
-- Autenticación multifactorial por biometría facial, PIN ejecutivo y llaves de hardware.`)
+Para: Secretaría de Seguridad Pública, Vialidad y Tránsito del Municipio de Reynosa, Tamaulipas
+Asunto: Presentación del Caso Práctico, Propuesta Técnica y Viabilidad Operativa
 
-    // 2. Contenido Proyecto Escolar (Zapia AI)
+1. RESUMEN EJECUTIVO Y PLANTEAMIENTO DEL PROBLEMA
+El presente caso práctico analiza la optimización de los procesos de supervisión vial, control de tránsito y blindaje de datos en el municipio de Reynosa, mediante la integración de la Plataforma SIFV-REYNOSA desarrollada por Nexcode Interactive.
+
+2. ARQUITECTURA TECNOLÓGICA Y GOV-TECH
+- Plataforma Full-Stack modular, segura y con cifrado de extremo a extremo bajo Vault Omega.
+- Trazabilidad en tiempo real, auditoría de accesos y sincronización con bases de datos relacionales.
+- Módulos de autenticación por biometría facial, PIN ejecutivo y llaves de hardware para los oficiales autorizados.
+
+3. ANÁLISIS DE IMPACTO INSTITUCIONAL Y RETORNO DE INVERSIÓN (ROI)
+- Reducción estimada del 45% en tiempos de captura y dictaminación operativa.
+- Transparencia total ante la ciudadanía mediante reportes automatizados y formato institucional descargable en Word y PDF.
+
+4. CONCLUSIONES Y PROPUESTA DE DESPLIEGUE
+La solución está lista para configurarse de manera inmediata en la infraestructura municipal, garantizando soberanía tecnológica y cumplimiento normativo absoluto.`)
+
+    // Contenido Proyecto Escolar (Zapia AI)
     const [tituloAcademico, setTituloAcademico] = useState('Proyecto de Aplicación para Seguridad Pública')
     const [contenidoAcademico, setContenidoAcademico] = useState(
 `UNIVERSIDAD ABIERTA Y A DISTANCIA DE MÉXICO (UnADM)
@@ -48,30 +58,28 @@ CAPÍTULO 1. PLANTEAMIENTO DEL PROBLEMA Y MARCO METODOLÓGICO
 1.6 Objetivos de la investigación
 1.7 Hipótesis (Propuestas por comprobar)`)
 
-    // 3. Contenido Comercial
-    const [tituloComercial, setTituloComercial] = useState('Carta de Presentación y Resumen Ejecutivo - Software')
+    // Contenido Comercial
+    const [tituloComercial, setTituloComercial] = useState('Dictamen Jurídico y Financiero - SIFV-REYNOSA')
     const [contenidoComercial, setContenidoComercial] = useState(
-`[CLIENTE INSTITUCIONAL / SECRETARÍA]
-ASUNTO: Presentación de Solución Tecnológica y Propuesta Comercial
+`NEXCODE INTERACTIVE S.A. DE C.V. — DICTAMEN DE CONTRATACIÓN
+1. Objeto del Contrato de Licenciamiento e Implementación.
+2. Desglose Financiero con IVA e Impuestos Locales en Reynosa, Tamaulipas.
+3. Garantía de Soporte y Mantenimiento 24/7.`)
 
-RESUMEN EJECUTIVO:
-Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializado para optimizar procesos y garantizar seguridad operativa.`)
-
-    // 4. Contenido Ingeniería de Software
-    const [tituloIngenieria, setTituloIngenieria] = useState('Nexcode-Software-Core-Architecture')
+    // Contenido Ingeniería
+    const [tituloIngenieria, setTituloIngenieria] = useState('GOV-TECH Core Architecture')
     const [contenidoIngenieria, setCodigoIngenieria] = useState(
-`// NEXCODE SOFTWARE ENGINEERING CORE - FINORA & SÓNICA ARCHITECTURE
-class NexcodeSoftwareEngine {
-    constructor(moduleName, version) {
-        this.moduleName = moduleName;
-        this.version = version;
-        this.status = "SECURE_ACTIVE";
+`// NEXCODE GOV-TECH & SIFV ARCHITECTURE CORE
+class SIFVReynosaEngine {
+    constructor() {
+        this.municipios = "Reynosa, Tamaulipas";
+        this.securityLevel = "OMEGA_VAULT_ACTIVE";
     }
-    compileDeploymentPipeline() {
-        return { success: true, timestamp: new Date().toISOString(), encryption: "SHA-256" };
+    auditEndpoints() {
+        return { status: "SECURE", protocol: "HTTPS/TLS 1.3", owner: "fg782270@gmail.com" };
     }
 }
-export const activeInstance = new NexcodeSoftwareEngine("Finora-Sónica-Core", "4.5.0");`)
+export const engine = new SIFVReynosaEngine();`)
 
     // Estado de Audio
     const [estadoAudio, setEstadoAudio] = useState('Sistema de Audio en Reposo (Listo para Dictado)')
@@ -118,7 +126,7 @@ export const activeInstance = new NexcodeSoftwareEngine("Finora-Sónica-Core", "
         window.speechSynthesis.speak(utterance)
     }
 
-    // Dictado de Audio Universal
+    // Dictado por voz
     function iniciarDictadoAudio(setter: (val: string | ((prev: string) => string)) => void, nombreModulo: string) {
         if (typeof window === 'undefined') return;
         const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
@@ -133,15 +141,15 @@ export const activeInstance = new NexcodeSoftwareEngine("Finora-Sónica-Core", "
         
         recognition.onstart = () => {
             setGrabaAudio(true);
-            setEstadoAudio(`🔴 Grabando audio en [${nombreModulo}]...`);
-            hablarJarvis(`Dictado activo para ${nombreModulo}, C. Francisco.`);
+            setEstadoAudio(`🔴 Claude Cloud grabando audio en [${nombreModulo}]...`);
+            hablarJarvis(`Dictado activo con motor Claude para ${nombreModulo}, C. Francisco.`);
         };
         
         recognition.onresult = (event: any) => {
             const textoTranscrito = event.results[0][0].transcript;
-            setter((prev: string) => prev + "\n\n[Dictado Master]: " + textoTranscrito);
-            setEstadoAudio(`✔ Audio procesado y almacenado correctamente.`);
-            hablarJarvis("Audio registrado en el documento.");
+            setter((prev: string) => prev + "\n\n[Claude Executive Struct]: " + textoTranscrito);
+            setEstadoAudio(`✔ Audio procesado y estructurado con éxito.`);
+            hablarJarvis("Audio estructurado e integrado en el documento ejecutivo.");
             setGrabaAudio(false);
         };
         
@@ -196,7 +204,7 @@ export const activeInstance = new NexcodeSoftwareEngine("Finora-Sónica-Core", "
         }, 2000)
     }
 
-    // Exportador Formateado Exclusivo para Documentos (Evita mezclar JSON)
+    // Exportador de Documento Word (Limpio y formateado)
     function descargarDocumentoActivo() {
         let titulo = tituloCorp
         let contenido = contenidoCorp
@@ -222,7 +230,7 @@ export const activeInstance = new NexcodeSoftwareEngine("Finora-Sónica-Core", "
         link.click()
         document.body.removeChild(link)
         URL.revokeObjectURL(url)
-        hablarJarvis('Documento formateado exportado en formato Word con éxito.')
+        hablarJarvis('Documento ejecutivo exportado en formato Word con éxito.')
     }
 
     function descargarBancoMemoriaJson() {
@@ -242,7 +250,7 @@ export const activeInstance = new NexcodeSoftwareEngine("Finora-Sónica-Core", "
     function formatearActividad(clave: string) {
         if (!clave) return 'Expediente Institucional'
         const lower = clave.toLowerCase()
-        if (lower.includes('corporativo')) return 'Hub Documental Corporativo'
+        if (lower.includes('corporativo')) return 'Caso Práctico Ejecutivo (SIFV-Reynosa)'
         if (lower.includes('academico')) return 'Proyecto Escolar: Seguridad Pública'
         if (lower.includes('comercial')) return 'Comercialización y Venta de Software'
         if (lower.includes('ingenieria')) return 'Ingeniería de Software & Calibre Nexcode'
@@ -253,13 +261,7 @@ export const activeInstance = new NexcodeSoftwareEngine("Finora-Sónica-Core", "
         event.preventDefault()
         const formData = new FormData(event.currentTarget)
         formData.append('seccion', seccionActiva)
-        
-        let nombreModuloActual = 'Hub Documental Corporativo'
-        if (seccionActiva === 'academico') nombreModuloActual = 'Proyecto Escolar (Zapia AI)'
-        if (seccionActiva === 'comercial') nombreModuloActual = 'Comercialización de Software'
-        if (seccionActiva === 'ingenieria') nombreModuloActual = 'Ingeniería de Software Nexcode'
-
-        formData.append('tipoAnalisis', nombreModuloActual)
+        formData.append('tipoAnalisis', 'Caso Práctico Ejecutivo (Motor Claude Cloud/Work)')
         formData.append('modeloIASeleccionado', modeloIA)
         formData.append('continente', continente)
         formData.append('region', region)
@@ -273,7 +275,7 @@ export const activeInstance = new NexcodeSoftwareEngine("Finora-Sónica-Core", "
             setFolioUltimo(resultado.folio || null)
             setHashGenerado(resultado.hash || null)
             if (resultado.success) {
-                hablarJarvis("Operación registrada y auditada bajo Vault Omega.")
+                hablarJarvis("Caso práctico ejecutivo registrado y auditado bajo Vault Omega.")
                 cargarMemoria()
             }
         })
@@ -329,7 +331,7 @@ export const activeInstance = new NexcodeSoftwareEngine("Finora-Sónica-Core", "
                         <header className="flex justify-between items-center border-b border-cyan-500/20 pb-4 mb-6">
                             <div>
                                 <h1 className="text-xl font-bold tracking-wider flex items-center gap-2">
-                                    <span>🛡️</span> Jarvis Master Core — <span className="text-cyan-300">Arquitectura Universal & Classroom</span>
+                                    <span>🛡️</span> Jarvis Master Core — <span className="text-cyan-300">Caso Práctico Ejecutivo (Claude Engine)</span>
                                 </h1>
                                 <p className="text-xs text-slate-400">Investigador Titular: fg782270@gmail.com (C. Francisco)</p>
                             </div>
@@ -342,7 +344,7 @@ export const activeInstance = new NexcodeSoftwareEngine("Finora-Sónica-Core", "
                                 <span className="text-sm">🎙️</span>
                                 <span className="text-xs font-bold text-cyan-300">{estadoAudio}</span>
                             </div>
-                            {grabandoAudio && <span className="animate-pulse text-xs bg-red-500 text-white px-2 py-0.5 rounded font-bold">GRABANDO...</span>}
+                            {grabandoAudio && <span className="animate-pulse text-xs bg-red-500 text-white px-2 py-0.5 rounded font-bold">CLAUDE CASE ACTIVE...</span>}
                         </div>
 
                         {/* SELECTOR GEOPOLÍTICO */}
@@ -371,7 +373,7 @@ export const activeInstance = new NexcodeSoftwareEngine("Finora-Sónica-Core", "
                         {/* SELECTOR PRINCIPAL DE MÓDULOS */}
                         <div className="mb-6 p-4 bg-slate-950 border-2 border-cyan-500/50 rounded-lg grid grid-cols-2 md:grid-cols-4 gap-2">
                             <button type="button" onClick={() => setSeccionActiva('hub_corporativo')} className={`py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'hub_corporativo' ? 'bg-cyan-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-cyan-300'}`}>
-                                📂 Hub Corporativo
+                                📂 Caso Práctico (SIFV)
                             </button>
                             <button type="button" onClick={() => setSeccionActiva('academico')} className={`py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'academico' ? 'bg-amber-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-amber-300'}`}>
                                 🎓 Proyecto Escolar
@@ -380,7 +382,7 @@ export const activeInstance = new NexcodeSoftwareEngine("Finora-Sónica-Core", "
                                 🏢 Comercialización
                             </button>
                             <button type="button" onClick={() => setSeccionActiva('ingenieria')} className={`py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'ingenieria' ? 'bg-purple-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-purple-300'}`}>
-                                ⚙️ Ingeniería Software
+                                ⚙️ GOV-TECH Core
                             </button>
                         </div>
 
@@ -390,14 +392,14 @@ export const activeInstance = new NexcodeSoftwareEngine("Finora-Sónica-Core", "
                                 <input type="email" name="emailSolicitante" defaultValue="fg782270@gmail.com" />
                             </div>
 
-                            {/* MÓDULO 1: HUB CORPORATIVO */}
+                            {/* MÓDULO 1: CASO PRÁCTICO EJECUTIVO (SIFV-REYNOSA) */}
                             {seccionActiva === 'hub_corporativo' && (
                                 <div className="space-y-4 p-5 bg-slate-950 rounded border-2 border-cyan-500/60 animate-fadeIn shadow-inner">
                                     <div className="flex justify-between items-center border-b border-cyan-500/30 pb-3">
-                                        <h3 className="text-sm font-bold text-cyan-300 uppercase tracking-wide">📂 Hub Documental Corporativo (Classroom)</h3>
+                                        <h3 className="text-sm font-bold text-cyan-300 uppercase tracking-wide">📂 Hub Documental — Caso Práctico Ejecutivo (SIFV-Reynosa)</h3>
                                         <div className="flex gap-2 items-center">
-                                            <button type="button" onClick={() => iniciarDictadoAudio(setContenidoCorp, 'Hub Corporativo')} className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow flex items-center gap-1">
-                                                🎤 Dictar Voz
+                                            <button type="button" onClick={() => iniciarDictadoAudio(setContenidoCorp, 'Caso Práctico Ejecutivo')} className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow flex items-center gap-1">
+                                                🎤 Dictar Voz (Claude)
                                             </button>
                                             <button type="button" onClick={descargarDocumentoActivo} className="bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg">
                                                 📥 Exportar Word (.doc)
@@ -405,12 +407,12 @@ export const activeInstance = new NexcodeSoftwareEngine("Finora-Sónica-Core", "
                                         </div>
                                     </div>
                                     <div className="grid grid-cols-3 gap-2 bg-slate-900 p-2 rounded border border-cyan-500/30">
-                                        <button type="button" onClick={() => { setTipoDocCorporativo('tecnico'); setTituloCorp('Documentación Técnica y Arquitectura'); }} className={`py-1.5 px-2 rounded text-xs font-bold ${tipoDocCorporativo === 'tecnico' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`}>📄 Técnico</button>
-                                        <button type="button" onClick={() => { setTipoDocCorporativo('ejecutivo'); setTituloCorp('Presentación Ejecutiva y Pitch Deck'); }} className={`py-1.5 px-2 rounded text-xs font-bold ${tipoDocCorporativo === 'ejecutivo' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`}>📊 Ejecutivo</button>
-                                        <button type="button" onClick={() => { setTipoDocCorporativo('oficial'); setTituloCorp('Documentos Oficiales y Contratos'); }} className={`py-1.5 px-2 rounded text-xs font-bold ${tipoDocCorporativo === 'oficial' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`}>📜 Oficial</button>
+                                        <button type="button" onClick={() => { setTipoDocCorporativo('caso_practico'); setTituloCorp('Caso Práctico Ejecutivo - Plataforma SIFV-REYNOSA'); }} className={`py-1.5 px-2 rounded text-xs font-bold ${tipoDocCorporativo === 'caso_practico' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`}>📊 Caso Práctico</button>
+                                        <button type="button" onClick={() => { setTipoDocCorporativo('sifv'); setTituloCorp('Carta de presentación y resumen ejecutivo - SIFV-REYNOSA'); }} className={`py-1.5 px-2 rounded text-xs font-bold ${tipoDocCorporativo === 'sifv' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`}>📄 Propuesta SIFV</button>
+                                        <button type="button" onClick={() => { setTipoDocCorporativo('tecnico'); setTituloCorp('Documentación Técnica GOV-TECH'); }} className={`py-1.5 px-2 rounded text-xs font-bold ${tipoDocCorporativo === 'tecnico' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`}>⚙️ GOV-TECH</button>
                                     </div>
                                     <input type="text" value={tituloCorp} onChange={(e) => setTituloCorp(e.target.value)} className="w-full bg-slate-900 border border-cyan-500/40 rounded p-2 text-white text-xs font-bold" required />
-                                    <textarea value={contenidoCorp} onChange={(e) => setContenidoCorp(e.target.value)} rows={12} className="w-full bg-slate-900 border border-cyan-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none leading-relaxed" required />
+                                    <textarea value={contenidoCorp} onChange={(e) => setContenidoCorp(e.target.value)} rows={14} className="w-full bg-slate-900 border border-cyan-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none leading-relaxed" required />
                                 </div>
                             )}
 
@@ -452,25 +454,19 @@ export const activeInstance = new NexcodeSoftwareEngine("Finora-Sónica-Core", "
                                 </div>
                             )}
 
-                            {/* MÓDULO 4: INGENIERÍA DE SOFTWARE */}
+                            {/* MÓDULO 4: INGENIERÍA GOV-TECH */}
                             {seccionActiva === 'ingenieria' && (
                                 <div className="space-y-4 p-5 bg-slate-950 rounded border-2 border-purple-500/60 animate-fadeIn shadow-inner">
                                     <div className="flex justify-between items-center border-b border-purple-500/30 pb-3">
-                                        <h3 className="text-sm font-bold text-purple-300 uppercase tracking-wide">⚙️ Ingeniería de Software (Finora / Sónica / APK)</h3>
+                                        <h3 className="text-sm font-bold text-purple-300 uppercase tracking-wide">⚙️ GOV-TECH Core & SIFV Architecture</h3>
                                         <div className="flex gap-2 items-center">
-                                            <button type="button" onClick={() => iniciarDictadoAudio(setCodigoIngenieria, 'Ingeniería Software')} className="bg-purple-500 hover:bg-purple-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow flex items-center gap-1">
+                                            <button type="button" onClick={() => iniciarDictadoAudio(setCodigoIngenieria, 'GOV-TECH Core')} className="bg-purple-500 hover:bg-purple-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow flex items-center gap-1">
                                                 🎤 Dictar Lógica
                                             </button>
                                             <button type="button" onClick={descargarDocumentoActivo} className="bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg">
-                                                📥 Exportar Código (.doc / .ts)
+                                                📥 Exportar Código (.doc)
                                             </button>
                                         </div>
-                                    </div>
-                                    <div className="grid grid-cols-4 gap-2 bg-slate-900 p-2 rounded border border-purple-500/30">
-                                        <button type="button" onClick={() => { setSubTabIngenieria('finora'); setTituloIngenieria('Finora-Core-Architecture'); }} className={`py-1.5 px-1 rounded text-[11px] font-bold ${subTabIngenieria === 'finora' ? 'bg-purple-500 text-slate-950' : 'text-purple-300'}`}>Finora</button>
-                                        <button type="button" onClick={() => { setSubTabIngenieria('sonica'); setTituloIngenieria('Sonica-Streaming-Backend'); }} className={`py-1.5 px-1 rounded text-[11px] font-bold ${subTabIngenieria === 'sonica' ? 'bg-purple-500 text-slate-950' : 'text-purple-300'}`}>Sónica</button>
-                                        <button type="button" onClick={() => { setSubTabIngenieria('apk'); setTituloIngenieria('APK-Builder-Pipeline'); }} className={`py-1.5 px-1 rounded text-[11px] font-bold ${subTabIngenieria === 'apk' ? 'bg-purple-500 text-slate-950' : 'text-purple-300'}`}>APK</button>
-                                        <button type="button" onClick={() => { setSubTabIngenieria('arquitectura'); setTituloIngenieria('Vault-Omega-Security'); }} className={`py-1.5 px-1 rounded text-[11px] font-bold ${subTabIngenieria === 'arquitectura' ? 'bg-purple-500 text-slate-950' : 'text-purple-300'}`}>Vault</button>
                                     </div>
                                     <input type="text" value={tituloIngenieria} onChange={(e) => setTituloIngenieria(e.target.value)} className="w-full bg-slate-900 border border-purple-500/40 rounded p-2 text-white text-xs font-bold" required />
                                     <textarea value={contenidoIngenieria} onChange={(e) => setCodigoIngenieria(e.target.value)} rows={12} className="w-full bg-slate-900 border border-purple-500/40 rounded p-4 text-xs text-purple-200 font-mono outline-none leading-relaxed" required />
@@ -478,20 +474,20 @@ export const activeInstance = new NexcodeSoftwareEngine("Finora-Sónica-Core", "
                             )}
 
                             <button type="submit" disabled={isPending} className="w-full bg-cyan-500 hover:bg-cyan-400 font-bold py-3 px-4 rounded text-slate-950 shadow-lg">
-                                {isPending ? 'Auditando...' : `Registrar y Auditar en [${seccionActiva.toUpperCase()}]`}
+                                {isPending ? 'Procesando Caso Práctico...' : `Registrar y Auditar en [${seccionActiva.toUpperCase()}]`}
                             </button>
                         </form>
 
                         {mensajeRespuesta && (
                             <div className="mt-6 p-5 bg-slate-950 border-2 border-cyan-500 rounded-lg text-sm shadow-2xl relative space-y-2">
-                                <div className="absolute top-0 right-0 bg-cyan-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl">ESTADO: AUDITADO OMEGA</div>
+                                <div className="absolute top-0 right-0 bg-cyan-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl">ESTADO: EXECUTIVE CASE AUDITED</div>
                                 <div className="text-white font-medium whitespace-pre-line leading-relaxed">{mensajeRespuesta}</div>
                                 {folioUltimo && <p className="text-xs text-cyan-300"><span className="font-bold">Folio:</span> {folioUltimo}</p>}
                             </div>
                         )}
                     </div>
 
-                    {/* BANCO DE MEMORIA Y REGISTROS OFICIALES CON BOTÓN SEPARADO DE JSON */}
+                    {/* BANCO DE MEMORIA Y REGISTROS JSON */}
                     <div className="w-full bg-slate-900 border border-cyan-500/30 rounded-lg p-6 shadow-xl space-y-4">
                         <div className="flex justify-between items-center border-b border-cyan-500/20 pb-2">
                             <h2 className="text-lg font-bold text-cyan-300">Expediente y Registros Institucionales</h2>

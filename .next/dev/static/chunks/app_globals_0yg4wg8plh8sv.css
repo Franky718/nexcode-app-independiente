@@ -5,6 +5,7 @@
       --tw-space-y-reverse: 0;
       --tw-divide-y-reverse: 0;
       --tw-border-style: solid;
+      --tw-leading: initial;
       --tw-font-weight: initial;
       --tw-tracking: initial;
       --tw-shadow: 0 0 #0000;
@@ -38,12 +39,13 @@
     --color-amber-300: #ffd236;
     --color-amber-400: #fcbb00;
     --color-amber-500: #f99c00;
+    --color-amber-950: #461901;
     --color-green-400: #05df72;
-    --color-green-500: #00c758;
     --color-cyan-300: #53eafd;
     --color-cyan-400: #00d2ef;
     --color-cyan-500: #00b7d7;
     --color-cyan-600: #0092b5;
+    --color-cyan-950: #053345;
     --color-slate-100: #f1f5f9;
     --color-slate-300: #cad5e2;
     --color-slate-400: #90a1b9;
@@ -72,6 +74,7 @@
     --tracking-wide: .025em;
     --tracking-wider: .05em;
     --tracking-widest: .1em;
+    --leading-relaxed: 1.625;
     --radius-lg: .5rem;
     --radius-xl: .75rem;
     --default-transition-duration: .15s;
@@ -87,12 +90,13 @@
       --color-amber-300: lab(86.4156% 6.13147 78.3961);
       --color-amber-400: lab(80.1641% 16.6016 99.2089);
       --color-amber-500: lab(72.7183% 31.8672 97.9407);
+      --color-amber-950: lab(15.8111% 20.9107 23.3752);
       --color-green-400: lab(78.503% -64.9265 39.7492);
-      --color-green-500: lab(70.5521% -66.5147 45.8072);
       --color-cyan-300: lab(85.3886% -36.7635 -21.5717);
       --color-cyan-400: lab(76.6045% -40.9406 -29.6231);
       --color-cyan-500: lab(67.805% -35.3952 -30.2018);
       --color-cyan-600: lab(55.1767% -26.7496 -30.5138);
+      --color-cyan-950: lab(19.1528% -9.68759 -15.5267);
       --color-slate-100: lab(96.286% -.852466 -2.46847);
       --color-slate-300: lab(84.7652% -1.94535 -7.93337);
       --color-slate-400: lab(65.5349% -2.25151 -14.5072);
@@ -373,8 +377,8 @@
     margin-inline: auto;
   }
 
-  .mt-2 {
-    margin-top: calc(var(--spacing) * 2);
+  .mt-1 {
+    margin-top: var(--spacing);
   }
 
   .mt-6 {
@@ -483,6 +487,10 @@
 
   .gap-3 {
     gap: calc(var(--spacing) * 3);
+  }
+
+  .gap-4 {
+    gap: calc(var(--spacing) * 4);
   }
 
   :where(.space-y-2 > :not(:last-child)) {
@@ -657,6 +665,16 @@
     background-color: var(--color-amber-500);
   }
 
+  .bg-amber-950\/20 {
+    background-color: #46190133;
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .bg-amber-950\/20 {
+      background-color: color-mix(in oklab, var(--color-amber-950) 20%, transparent);
+    }
+  }
+
   .bg-cyan-500 {
     background-color: var(--color-cyan-500);
   }
@@ -665,8 +683,14 @@
     background-color: var(--color-cyan-600);
   }
 
-  .bg-green-500 {
-    background-color: var(--color-green-500);
+  .bg-cyan-950\/20 {
+    background-color: #05334533;
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .bg-cyan-950\/20 {
+      background-color: color-mix(in oklab, var(--color-cyan-950) 20%, transparent);
+    }
   }
 
   .bg-red-600 {
@@ -681,26 +705,12 @@
     background-color: var(--color-slate-950);
   }
 
-  .bg-slate-950\/60 {
-    background-color: #02061899;
-  }
-
-  @supports (color: color-mix(in lab, red, red)) {
-    .bg-slate-950\/60 {
-      background-color: color-mix(in oklab, var(--color-slate-950) 60%, transparent);
-    }
-  }
-
   .object-cover {
     object-fit: cover;
   }
 
   .p-2 {
     padding: calc(var(--spacing) * 2);
-  }
-
-  .p-2\.5 {
-    padding: calc(var(--spacing) * 2.5);
   }
 
   .p-3 {
@@ -737,6 +747,10 @@
 
   .py-1 {
     padding-block: var(--spacing);
+  }
+
+  .py-1\.5 {
+    padding-block: calc(var(--spacing) * 1.5);
   }
 
   .py-2 {
@@ -808,6 +822,11 @@
     font-size: 11px;
   }
 
+  .leading-relaxed {
+    --tw-leading: var(--leading-relaxed);
+    line-height: var(--leading-relaxed);
+  }
+
   .font-bold {
     --tw-font-weight: var(--font-weight-bold);
     font-weight: var(--font-weight-bold);
@@ -840,6 +859,10 @@
 
   .break-all {
     word-break: break-all;
+  }
+
+  .whitespace-pre-line {
+    white-space: pre-line;
   }
 
   .text-amber-300 {
@@ -945,16 +968,20 @@
     border-width: 0;
   }
 
-  .file\:bg-cyan-600::file-selector-button {
-    background-color: var(--color-cyan-600);
+  .file\:bg-amber-500::file-selector-button {
+    background-color: var(--color-amber-500);
   }
 
-  .file\:px-4::file-selector-button {
-    padding-inline: calc(var(--spacing) * 4);
+  .file\:bg-cyan-500::file-selector-button {
+    background-color: var(--color-cyan-500);
   }
 
-  .file\:py-2::file-selector-button {
-    padding-block: calc(var(--spacing) * 2);
+  .file\:px-3::file-selector-button {
+    padding-inline: calc(var(--spacing) * 3);
+  }
+
+  .file\:py-1\.5::file-selector-button {
+    padding-block: calc(var(--spacing) * 1.5);
   }
 
   .file\:text-xs::file-selector-button {
@@ -1006,9 +1033,21 @@
       color: var(--color-white);
     }
 
-    .hover\:file\:bg-cyan-500:hover::file-selector-button {
-      background-color: var(--color-cyan-500);
+    .hover\:file\:bg-amber-400:hover::file-selector-button {
+      background-color: var(--color-amber-400);
     }
+
+    .hover\:file\:bg-cyan-400:hover::file-selector-button {
+      background-color: var(--color-cyan-400);
+    }
+  }
+
+  .focus\:border-amber-400:focus {
+    border-color: var(--color-amber-400);
+  }
+
+  .focus\:border-cyan-300:focus {
+    border-color: var(--color-cyan-300);
   }
 
   .focus\:border-cyan-400:focus {
@@ -1046,6 +1085,11 @@
   syntax: "*";
   inherits: false;
   initial-value: solid;
+}
+
+@property --tw-leading {
+  syntax: "*";
+  inherits: false
 }
 
 @property --tw-font-weight {

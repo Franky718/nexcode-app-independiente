@@ -30,8 +30,6 @@ export default function MasterCorePage() {
     const [modoAcceso, setModoAcceso] = useState<'facial' | 'pin' | 'hardware'>('facial')
     const [pinIngresado, setPinIngresado] = useState('')
     const [estadoSeguridad, setEstadoSeguridad] = useState('Seleccione método de autenticación...')
-    
-    // Campo secreto para la Llave Omega conocida solo por el usuario
     const [omegaKeyInput, setOmegaKeyInput] = useState('')
 
     const [vozActiva, setVozActiva] = useState(true)
@@ -145,7 +143,7 @@ export default function MasterCorePage() {
         formData.append('continente', continente)
         formData.append('region', region)
         formData.append('pais', pais)
-        formData.append('omegaKey', omegaKeyInput) // Se envía la llave omega secreta
+        formData.append('omegaKey', omegaKeyInput)
 
         const archivoActual = seccionActiva === 'academico' ? archivoAcademico : archivoEmpresa
         if (archivoActual) {
@@ -162,7 +160,7 @@ export default function MasterCorePage() {
             setHashGenerado(resultado.hash || null)
             setCodigoPaquete(resultado.codigoDescargable || null)
             if (resultado.success) {
-                hablarJarvis("Operación protegida por Protocolo Omega ejecutada con éxito.")
+                hablarJarvis("Operación protegida ejecutada con éxito.")
                 cargarMemoria()
             } else {
                 hablarJarvis("Acceso denegado por Blindaje Omega.")
@@ -176,12 +174,43 @@ export default function MasterCorePage() {
         const url = URL.createObjectURL(blob)
         const link = document.createElement('a')
         link.href = url
-        link.download = `Nexcode-Omega-${pais}-${folioUltimo || 'Report'}.tsx`
+        link.download = `Nexcode-Reporte-${pais}.tsx`
         document.body.appendChild(link)
         link.click()
         document.body.removeChild(link)
         URL.revokeObjectURL(url)
         hablarJarvis('Archivo descargado con éxito.')
+    }
+
+    // Función para limpiar las etiquetas técnicas de los registros visuales
+    function limpiarNombreClave(clave: string) {
+        if (!clave) return 'Registro General'
+        // Si contiene etiquetas entre corchetes, las reemplazamos por un título limpio
+        if (clave.includes('Zapia') || clave.includes('BLINDAJE OMEGA')) {
+            return 'Reporte de Evaluación Académica (Zapia)'
+        }
+        if (clave.includes('ACADEMICO')) {
+            return 'Validación de Tesis y Caso Práctico'
+        }
+        if (clave.includes('GEO') || clave.includes('Empresa')) {
+            return 'Auditoría y Despliegue Corporativo'
+        }
+        return clave.replace(/\[.*?\]/g, '').trim() || 'Registro Oficial Nexcode'
+    }
+
+    // Función para descargar todo el Banco de Memoria limpio
+    function descargarBancoMemoria() {
+        const contenidoJson = JSON.stringify(memoriasEstado, null, 2)
+        const blob = new Blob([contenidoJson], { type: 'application/json;charset=utf-8' })
+        const url = URL.createObjectURL(blob)
+        const link = document.createElement('a')
+        link.href = url
+        link.download = `Nexcode-Banco-Memoria-Oficial.json`
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+        URL.revokeObjectURL(url)
+        hablarJarvis('Banco de memoria descargado con éxito.')
     }
 
     return (
@@ -277,7 +306,7 @@ export default function MasterCorePage() {
                         <header className="flex justify-between items-center border-b border-cyan-500/20 pb-4 mb-6">
                             <div>
                                 <h1 className="text-xl font-bold tracking-wider flex items-center gap-2">
-                                    <span>🔒</span> Jarvis Core — <span className="text-cyan-300">Blindaje Omega & Núcleos Protegidos</span>
+                                    <span>🔒</span> Jarvis Core — <span className="text-cyan-300">Blindaje Omega & Registros Limpios</span>
                                 </h1>
                                 <p className="text-xs text-slate-400">Supervisor: fg782270@gmail.com (C. Francisco)</p>
                             </div>
@@ -363,19 +392,18 @@ export default function MasterCorePage() {
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-sm text-cyan-300 mb-1 font-bold">🔑 Llave Omega Vault Key (Blindaje Extra):</label>
+                                    <label className="block text-sm text-cyan-300 mb-1 font-bold">🔑 Llave Omega Vault Key:</label>
                                     <input 
                                         type="password" 
                                         value={omegaKeyInput}
                                         onChange={(e) => setOmegaKeyInput(e.target.value)}
-                                        placeholder="Ingrese Llave Secreta Omega..." 
+                                        placeholder="NEXCODE-OMEGA-7822-FRAN-1998" 
                                         className="w-full bg-slate-950 border-2 border-cyan-500 rounded p-2 text-white text-sm outline-none focus:border-cyan-300 font-mono"
                                         required
                                     />
                                 </div>
                             </div>
 
-                            {/* NÚCLEO ACADÉMICO / ZAPIA */}
                             {seccionActiva === 'academico' && (
                                 <div className="space-y-4 p-4 bg-amber-950/20 rounded border border-amber-500/40 animate-fadeIn">
                                     <div className="flex justify-between items-center">
@@ -421,7 +449,6 @@ export default function MasterCorePage() {
                                 </div>
                             )}
 
-                            {/* NÚCLEO EMPRESA */}
                             {seccionActiva === 'empresa' && (
                                 <div className="space-y-4 p-4 bg-cyan-950/20 rounded border border-cyan-500/40 animate-fadeIn">
                                     <div className="flex justify-between items-center">
@@ -510,7 +537,7 @@ export default function MasterCorePage() {
                                         <button
                                             type="button"
                                             onClick={descargarArchivo}
-                                            className="bg-green-550 hover:bg-green-400 text-slate-950 font-bold py-2 px-4 rounded text-xs transition-all shadow-lg flex items-center gap-1"
+                                            className="bg-green-500 hover:bg-green-400 text-slate-950 font-bold py-2 px-4 rounded text-xs transition-all shadow-lg flex items-center gap-1"
                                         >
                                             📥 Descargar Archivo Compilado (.tsx)
                                         </button>
@@ -520,9 +547,19 @@ export default function MasterCorePage() {
                         )}
                     </div>
 
-                    {/* BANCO DE MEMORIA INTERCONECTADO */}
-                    <div className="w-full bg-slate-900 border border-cyan-500/30 rounded-lg p-6 shadow-xl">
-                        <h2 className="text-lg font-bold mb-4 text-cyan-300 border-b border-cyan-500/20 pb-2">Banco de Memoria y Registros Interconectados</h2>
+                    {/* BANCO DE MEMORIA CON BOTÓN DE DESCARGA Y NOMBRES LIMPIOS */}
+                    <div className="w-full bg-slate-900 border border-cyan-500/30 rounded-lg p-6 shadow-xl space-y-4">
+                        <div className="flex justify-between items-center border-b border-cyan-500/20 pb-2">
+                            <h2 className="text-lg font-bold text-cyan-300">Banco de Memoria y Registros Oficiales</h2>
+                            <button
+                                type="button"
+                                onClick={descargarBancoMemoria}
+                                className="bg-green-500 hover:bg-green-400 text-slate-950 font-bold py-2 px-4 rounded text-xs transition-all shadow-lg flex items-center gap-1"
+                            >
+                                📥 Descargar Banco de Memoria (.json)
+                            </button>
+                        </div>
+
                         {memoriasEstado.length === 0 ? (
                             <p className="text-xs text-slate-400">No hay registros almacenados todavía.</p>
                         ) : (
@@ -530,7 +567,7 @@ export default function MasterCorePage() {
                                 <table className="w-full text-left text-xs">
                                     <thead>
                                         <tr className="border-b border-cyan-500/20 text-cyan-400">
-                                            <th className="pb-2">Clave / Núcleo</th>
+                                            <th className="pb-2">Registro / Actividad</th>
                                             <th className="pb-2">Información / Detalle</th>
                                             <th className="pb-2">Motor</th>
                                             <th className="pb-2">Fecha</th>
@@ -539,7 +576,7 @@ export default function MasterCorePage() {
                                     <tbody className="divide-y divide-slate-800 text-slate-300">
                                         {memoriasEstado.map((mem) => (
                                             <tr key={mem.id} className="hover:bg-slate-950/50">
-                                                <td className="py-2 font-bold text-cyan-300">{mem.memory_key}</td>
+                                                <td className="py-2 font-bold text-cyan-300">{limpiarNombreClave(mem.memory_key)}</td>
                                                 <td className="py-2 max-w-xs truncate">{mem.memory_value}</td>
                                                 <td className="py-2 font-mono text-[10px] text-cyan-400">{mem.routing_engine || 'Core'}</td>
                                                 <td className="py-2 text-[10px] text-slate-500">{new Date(mem.created_at).toLocaleString()}</td>

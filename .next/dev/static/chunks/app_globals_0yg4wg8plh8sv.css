@@ -45,7 +45,6 @@
     --color-cyan-400: #00d2ef;
     --color-cyan-500: #00b7d7;
     --color-cyan-600: #0092b5;
-    --color-cyan-950: #053345;
     --color-slate-100: #f1f5f9;
     --color-slate-300: #cad5e2;
     --color-slate-400: #90a1b9;
@@ -76,6 +75,7 @@
     --leading-relaxed: 1.625;
     --radius-lg: .5rem;
     --radius-xl: .75rem;
+    --animate-pulse: pulse 2s cubic-bezier(.4, 0, .6, 1) infinite;
     --default-transition-duration: .15s;
     --default-transition-timing-function: cubic-bezier(.4, 0, .2, 1);
     --default-font-family: var(--font-sans);
@@ -96,7 +96,6 @@
       --color-cyan-400: lab(76.6045% -40.9406 -29.6231);
       --color-cyan-500: lab(67.805% -35.3952 -30.2018);
       --color-cyan-600: lab(55.1767% -26.7496 -30.5138);
-      --color-cyan-950: lab(19.1528% -9.68759 -15.5267);
       --color-slate-100: lab(96.286% -.852466 -2.46847);
       --color-slate-300: lab(84.7652% -1.94535 -7.93337);
       --color-slate-400: lab(65.5349% -2.25151 -14.5072);
@@ -413,10 +412,6 @@
     display: none;
   }
 
-  .h-28 {
-    height: calc(var(--spacing) * 28);
-  }
-
   .h-36 {
     height: calc(var(--spacing) * 36);
   }
@@ -451,6 +446,10 @@
 
   .flex-1 {
     flex: 1;
+  }
+
+  .animate-pulse {
+    animation: var(--animate-pulse);
   }
 
   .grid-cols-1 {
@@ -670,22 +669,16 @@
     background-color: var(--color-cyan-600);
   }
 
-  .bg-cyan-950\/20 {
-    background-color: #05334533;
-  }
-
-  @supports (color: color-mix(in lab, red, red)) {
-    .bg-cyan-950\/20 {
-      background-color: color-mix(in oklab, var(--color-cyan-950) 20%, transparent);
-    }
-  }
-
   .bg-green-500 {
     background-color: var(--color-green-500);
   }
 
   .bg-green-600 {
     background-color: var(--color-green-600);
+  }
+
+  .bg-red-500 {
+    background-color: var(--color-red-500);
   }
 
   .bg-red-600 {
@@ -738,6 +731,10 @@
 
   .px-4 {
     padding-inline: calc(var(--spacing) * 4);
+  }
+
+  .py-0\.5 {
+    padding-block: calc(var(--spacing) * .5);
   }
 
   .py-1 {
@@ -1101,6 +1098,12 @@
   syntax: "*";
   inherits: false;
   initial-value: 0 0 #0000;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: .5;
+  }
 }
 
 /*# sourceMappingURL=app_globals_0yg4wg8plh8sv.css.map*/

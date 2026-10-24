@@ -10,16 +10,18 @@ export default function MasterCorePage() {
     const [hashGenerado, setHashGenerado] = useState<string | null>(null)
     const [memoriasEstado, setMemoriasEstado] = useState<any[]>([])
     
-    // Selección de Módulos Independientes
-    const [seccionActiva, setSeccionActiva] = useState<'academico' | 'empresa'>('academico')
-    const [subTabAcademico, setSubTabAcademico] = useState<'editor' | 'calificar'>('editor')
-    const [subTabEmpresa, setSubTabEmpresa] = useState<'ventas' | 'apk'>('ventas')
+    // Selección de Módulos Principales (Escolar, Comercial, Ingeniería de Software)
+    const [seccionActiva, setSeccionActiva] = useState<'academico' | 'comercial' | 'ingenieria'>('ingenieria')
+    
+    // Sub-estado para Ingeniería de Software
+    const [subTabIngenieria, setSubTabIngenieria] = useState<'finora' | 'sonica' | 'apk' | 'arquitectura'>('finora')
     
     const [tipoAnalisisAcademico, setTipoAnalisisAcademico] = useState('Proyecto Escolar: Seguridad Pública & Zapia AI')
-    const [tipoAnalisisEmpresa, setTipoAnalisisEmpresa] = useState('Comercialización y Venta de Software')
-    const [modeloIA, setModeloIA] = useState('Jarvis AI Autonomous Core (Master Audio Engine)')
+    const [tipoAnalisisComercial, setTipoAnalisisComercial] = useState('Comercialización y Venta de Software')
+    const [tipoAnalisisIngenieria, setTipoAnalisisIngenieria] = useState('Ingeniería de Software de Calibre Nexcode')
+    const [modeloIA, setModeloIA] = useState('Jarvis AI Autonomous Core (Full-Stack Engine)')
     
-    // Estados de Documentos Separados e Independientes
+    // Contenidos Independientes
     const [tituloDocumentoAcademico, setTituloDocumentoAcademico] = useState('Proyecto de Aplicación para Seguridad Pública')
     const [contenidoAcademico, setContenidoAcademico] = useState(
 `UNIVERSIDAD ABIERTA Y A DISTANCIA DE MÉXICO (UnADM)
@@ -41,6 +43,27 @@ ASUNTO: Presentación de Solución Tecnológica y Propuesta Comercial
 
 RESUMEN EJECUTIVO:
 Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializado para optimizar procesos y garantizar seguridad operativa.`)
+
+    // Contenido de Ingeniería de Software (Finora / Sónica / Arquitectura)
+    const [codigoIngenieria, setCodigoIngenieria] = useState(
+`// NEXCODE SOFTWARE ENGINEERING CORE - FINORA & SÓNICA ARCHITECTURE
+// Calibre Corporativo y Estándar de Calidad Internacional
+
+class NexcodeSoftwareEngine {
+    constructor(moduleName, version) {
+        this.moduleName = moduleName;
+        this.version = version;
+        this.status = "SECURE_ACTIVE";
+    }
+
+    compileDeploymentPipeline() {
+        console.log(\`Compilando \${this.moduleName} v\${this.version} bajo Protocolo Omega...\`);
+        return { success: true, timestamp: new Date().toISOString(), encryption: "SHA-256" };
+    }
+}
+
+export const activeInstance = new NexcodeSoftwareEngine("Finora-Sónica-Core", "4.5.0");
+`)
 
     // Estado del Módulo de Audio Independiente
     const [estadoAudio, setEstadoAudio] = useState('Sistema de Audio en Reposo (Listo para Dictado)')
@@ -87,7 +110,7 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
         window.speechSynthesis.speak(utterance)
     }
 
-    // Subsistema de Audio y Dictado Autónomo Interconectado
+    // Subsistema de Audio y Dictado Autónomo
     function iniciarDictadoAudio(setter: (val: string | ((prev: string) => string)) => void, nombreModulo: string) {
         if (typeof window === 'undefined') return;
         const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
@@ -102,28 +125,25 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
         
         recognition.onstart = () => {
             setGrabaAudio(true);
-            setEstadoAudio(`🔴 Grabando y transcriptando audio en [${nombreModulo}]...`);
+            setEstadoAudio(`🔴 Grabando audio en [${nombreModulo}]...`);
             hablarJarvis(`Iniciando captura de audio para ${nombreModulo}, C. Francisco.`);
         };
         
         recognition.onresult = (event: any) => {
             const textoTranscrito = event.results[0][0].transcript;
-            setter((prev: string) => prev + "\n\n[Dictado de Voz Master]: " + textoTranscrito);
-            setEstadoAudio(`✔ Audio procesado y almacenado con éxito en el documento.`);
-            hablarJarvis("Audio registrado y guardado en el documento de forma automática.");
+            setter((prev: string) => prev + "\n\n[Dictado Master]: " + textoTranscrito);
+            setEstadoAudio(`✔ Audio procesado y almacenado con éxito.`);
+            hablarJarvis("Audio registrado y guardado en el documento.");
             setGrabaAudio(false);
         };
         
         recognition.onerror = () => {
             setGrabaAudio(false);
-            setEstadoAudio("❌ Error en captura de audio. Verifique su micrófono.");
+            setEstadoAudio("❌ Error en captura de audio.");
             hablarJarvis("No se pudo capturar el audio correctamente.");
         };
 
-        recognition.onend = () => {
-            setGrabaAudio(false);
-        };
-        
+        recognition.onend = () => { setGrabaAudio(false); };
         recognition.start();
     }
 
@@ -168,15 +188,13 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
         }, 2000)
     }
 
-    function descargarDocumentoWord() {
-        const tituloActivo = seccionActiva === 'academico' ? tituloDocumentoAcademico : tituloComercial
-        const contenidoActivo = seccionActiva === 'academico' ? contenidoAcademico : contenidoComercial
-        const textoCompleto = `${tituloActivo.toUpperCase()}\n\n${contenidoActivo}`
+    function descargarDocumentoWord(titulo: string, contenido: string) {
+        const textoCompleto = `${titulo.toUpperCase()}\n\n${contenido}`
         const blob = new Blob([textoCompleto], { type: 'application/msword;charset=utf-8' })
         const url = URL.createObjectURL(blob)
         const link = document.createElement('a')
         link.href = url
-        link.download = `${tituloActivo.replace(/\s+/g, '-')}.doc`
+        link.download = `${titulo.replace(/\s+/g, '-')}.doc`
         document.body.appendChild(link)
         link.click()
         document.body.removeChild(link)
@@ -201,12 +219,9 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
     function formatearActividad(clave: string) {
         if (!clave) return 'Expediente Institucional'
         const lower = clave.toLowerCase()
-        if (lower.includes('academico') || lower.includes('zapia')) {
-            return 'Proyecto Escolar: Seguridad Pública & Audio'
-        }
-        if (lower.includes('empresa') || lower.includes('comercial')) {
-            return 'Comercialización y Venta de Software'
-        }
+        if (lower.includes('academico') || lower.includes('zapia')) return 'Proyecto Escolar: Seguridad Pública'
+        if (lower.includes('comercial')) return 'Comercialización y Venta de Software'
+        if (lower.includes('ingenieria') || lower.includes('finora') || lower.includes('sonica')) return 'Ingeniería de Software & Calibre Nexcode'
         return 'Bitácora y Registro Institucional'
     }
 
@@ -214,13 +229,13 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
         event.preventDefault()
         const formData = new FormData(event.currentTarget)
         formData.append('seccion', seccionActiva)
-        formData.append('tipoAnalisis', seccionActiva === 'empresa' ? tipoAnalisisEmpresa : tipoAnalisisAcademico)
+        formData.append('tipoAnalisis', seccionActiva === 'academico' ? tipoAnalisisAcademico : seccionActiva === 'comercial' ? tipoAnalisisComercial : tipoAnalisisIngenieria)
         formData.append('modeloIASeleccionado', modeloIA)
         formData.append('continente', continente)
         formData.append('region', region)
         formData.append('pais', pais)
         formData.append('omegaKey', omegaKeyInput)
-        formData.append('archivoNombre', seccionActiva === 'academico' ? `${tituloDocumentoAcademico}.doc` : `${tituloComercial}.doc`)
+        formData.append('archivoNombre', seccionActiva === 'academico' ? `${tituloDocumentoAcademico}.doc` : seccionActiva === 'comercial' ? `${tituloComercial}.doc` : 'Nexcode-Software-Core.ts')
 
         startTransition(async () => {
             const resultado = await ejecutarJarvisCore(formData)
@@ -228,7 +243,7 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
             setFolioUltimo(resultado.folio || null)
             setHashGenerado(resultado.hash || null)
             if (resultado.success) {
-                hablarJarvis("Operación registrada y almacenada en el expediente.")
+                hablarJarvis("Operación de software registrada en el expediente con éxito.")
                 cargarMemoria()
             }
         })
@@ -284,20 +299,20 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                         <header className="flex justify-between items-center border-b border-cyan-500/20 pb-4 mb-6">
                             <div>
                                 <h1 className="text-xl font-bold tracking-wider flex items-center gap-2">
-                                    <span>🛡️</span> Jarvis Master Core — <span className="text-cyan-300">Audio & Modulares Separados</span>
+                                    <span>🛡️</span> Jarvis Master Core — <span className="text-cyan-300">Arquitectura Total Nexcode</span>
                                 </h1>
                                 <p className="text-xs text-slate-400">Investigador Titular: fg782270@gmail.com (C. Francisco)</p>
                             </div>
                             <button onClick={() => setAccesoConcedido(false)} className="text-xs bg-red-600 hover:bg-red-500 text-white px-3 py-1 rounded font-bold">🔒 Bloquear Sesión</button>
                         </header>
 
-                        {/* PANEL DE ESTADO DE AUDIO INDEPENDIENTE */}
+                        {/* PANEL DE ESTADO DE AUDIO */}
                         <div className="mb-4 p-3 bg-slate-950 border border-cyan-500/40 rounded-lg flex justify-between items-center">
                             <div className="flex items-center gap-2">
                                 <span className="text-sm">🎙️</span>
                                 <span className="text-xs font-bold text-cyan-300">{estadoAudio}</span>
                             </div>
-                            {grabandoAudio && <span className="animate-pulse text-xs bg-red-500 text-white px-2 py-0.5 rounded font-bold">GRABANDO...</span>}
+                            {grabandoAudio && <span className="animate-pulse text-xs bg-red-500 text-white px-2 py-0.5 rounded font-bold">GRABANDO AUDIO...</span>}
                         </div>
 
                         {/* SELECTOR GEOPOLÍTICO */}
@@ -323,13 +338,16 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                             </div>
                         </div>
 
-                        {/* SELECTOR DE MÓDULOS SEPARADOS E INDEPENDIENTES */}
+                        {/* SELECTOR DE LOS TRES MÓDULOS PRINCIPALES DE NEXCODE */}
                         <div className="mb-6 p-4 bg-slate-950 border-2 border-cyan-500/50 rounded-lg flex gap-3">
-                            <button type="button" onClick={() => setSeccionActiva('academico')} className={`flex-1 py-3 px-4 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'academico' ? 'bg-amber-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-amber-300'}`}>
-                                🎓 Módulo 1: Proyecto Escolar (Zapia AI - Seguridad Pública)
+                            <button type="button" onClick={() => setSeccionActiva('academico')} className={`flex-1 py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'academico' ? 'bg-amber-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-amber-300'}`}>
+                                🎓 1. Proyecto Escolar (Zapia AI)
                             </button>
-                            <button type="button" onClick={() => setSeccionActiva('empresa')} className={`flex-1 py-3 px-4 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'empresa' ? 'bg-cyan-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-cyan-300'}`}>
-                                🏢 Módulo 2: Comercialización y Venta de Software
+                            <button type="button" onClick={() => setSeccionActiva('comercial')} className={`flex-1 py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'comercial' ? 'bg-blue-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-blue-300'}`}>
+                                🏢 2. Comercialización Software
+                            </button>
+                            <button type="button" onClick={() => setSeccionActiva('ingenieria')} className={`flex-1 py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'ingenieria' ? 'bg-cyan-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-cyan-300'}`}>
+                                ⚙️ 3. Ingeniería de Software (Core)
                             </button>
                         </div>
 
@@ -339,60 +357,84 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                 <input type="email" name="emailSolicitante" defaultValue="fg782270@gmail.com" />
                             </div>
 
-                            {/* MÓDULO 1: PROYECTO ESCOLAR (Zapia AI) */}
+                            {/* MÓDULO 1: PROYECTO ESCOLAR */}
                             {seccionActiva === 'academico' && (
                                 <div className="space-y-4 p-5 bg-slate-950 rounded border-2 border-amber-500/60 animate-fadeIn shadow-inner">
                                     <div className="flex justify-between items-center border-b border-amber-500/30 pb-3">
                                         <h3 className="text-sm font-bold text-amber-300 uppercase tracking-wide">🎓 Procesador Proyecto Escolar — Zapia AI (Seguridad Pública)</h3>
                                         <div className="flex gap-2 items-center">
-                                            {/* BOTÓN DE AUDIO / MICRÓFONO ESCOLAR */}
                                             <button type="button" onClick={() => iniciarDictadoAudio(setContenidoAcademico, 'Proyecto Escolar')} className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow-lg flex items-center gap-1">
                                                 🎤 Dictar Audio Escolar
                                             </button>
-                                            <button type="button" onClick={descargarDocumentoWord} className="bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg">
+                                            <button type="button" onClick={() => descargarDocumentoWord(tituloDocumentoAcademico, contenidoAcademico)} className="bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg">
                                                 📥 Descargar Word (.doc)
                                             </button>
                                         </div>
                                     </div>
-                                    <div>
-                                        <label className="block text-xs font-bold text-amber-300 mb-1">Título del Proyecto Escolar:</label>
-                                        <input type="text" value={tituloDocumentoAcademico} onChange={(e) => setTituloDocumentoAcademico(e.target.value)} className="w-full bg-slate-900 border border-amber-500/40 rounded p-2 text-white text-xs font-bold" required />
-                                    </div>
-                                    <div>
-                                        <label className="block text-xs font-bold text-amber-300 mb-1">Contenido Metodológico (Almacenamiento Automático):</label>
-                                        <textarea value={contenidoAcademico} onChange={(e) => setContenidoAcademico(e.target.value)} rows={12} className="w-full bg-slate-900 border border-amber-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none leading-relaxed" required />
-                                    </div>
+                                    <input type="text" value={tituloDocumentoAcademico} onChange={(e) => setTituloDocumentoAcademico(e.target.value)} className="w-full bg-slate-900 border border-amber-500/40 rounded p-2 text-white text-xs font-bold" required />
+                                    <textarea value={contenidoAcademico} onChange={(e) => setContenidoAcademico(e.target.value)} rows={12} className="w-full bg-slate-900 border border-amber-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none leading-relaxed" required />
                                 </div>
                             )}
 
-                            {/* MÓDULO 2: COMERCIALIZACIÓN Y VENTA DE SOFTWARE */}
-                            {seccionActiva === 'empresa' && (
-                                <div className="space-y-4 p-5 bg-slate-950 rounded border-2 border-cyan-500/60 animate-fadeIn shadow-inner">
-                                    <div className="flex justify-between items-center border-b border-cyan-500/30 pb-3">
-                                        <h3 className="text-sm font-bold text-cyan-300 uppercase tracking-wide">🏢 Creador de Documentos para Venta de Software</h3>
+                            {/* MÓDULO 2: COMERCIALIZACIÓN DE SOFTWARE */}
+                            {seccionActiva === 'comercial' && (
+                                <div className="space-y-4 p-5 bg-slate-950 rounded border-2 border-blue-500/60 animate-fadeIn shadow-inner">
+                                    <div className="flex justify-between items-center border-b border-blue-500/30 pb-3">
+                                        <h3 className="text-sm font-bold text-blue-300 uppercase tracking-wide">🏢 Creador de Documentos Comerciales de Software</h3>
                                         <div className="flex gap-2 items-center">
-                                            {/* BOTÓN DE AUDIO / MICRÓFONO COMERCIAL */}
-                                            <button type="button" onClick={() => iniciarDictadoAudio(setContenidoComercial, 'Módulo Comercial')} className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow-lg flex items-center gap-1">
+                                            <button type="button" onClick={() => iniciarDictadoAudio(setContenidoComercial, 'Módulo Comercial')} className="bg-blue-500 hover:bg-blue-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow-lg flex items-center gap-1">
                                                 🎤 Dictar Audio Comercial
                                             </button>
-                                            <button type="button" onClick={descargarDocumentoWord} className="bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg">
+                                            <button type="button" onClick={() => descargarDocumentoWord(tituloComercial, contenidoComercial)} className="bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg">
                                                 📥 Descargar Dictamen (.doc)
                                             </button>
                                         </div>
                                     </div>
-                                    <div>
-                                        <label className="block text-xs font-bold text-cyan-300 mb-1">Título del Documento Comercial:</label>
-                                        <input type="text" value={tituloComercial} onChange={(e) => setTituloComercial(e.target.value)} className="w-full bg-slate-900 border border-cyan-500/40 rounded p-2 text-white text-xs font-bold" required />
+                                    <input type="text" value={tituloComercial} onChange={(e) => setTituloComercial(e.target.value)} className="w-full bg-slate-900 border border-blue-500/40 rounded p-2 text-white text-xs font-bold" required />
+                                    <textarea value={contenidoComercial} onChange={(e) => setContenidoComercial(e.target.value)} rows={12} className="w-full bg-slate-900 border border-blue-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none leading-relaxed" required />
+                                </div>
+                            )}
+
+                            {/* MÓDULO 3: INGENIERÍA Y DESARROLLO DE SOFTWARE NEXCODE (FINORA, SÓNICA, APK BUILDER) */}
+                            {seccionActiva === 'ingenieria' && (
+                                <div className="space-y-4 p-5 bg-slate-950 rounded border-2 border-cyan-500/60 animate-fadeIn shadow-inner">
+                                    <div className="flex justify-between items-center border-b border-cyan-500/30 pb-3">
+                                        <h3 className="text-sm font-bold text-cyan-300 uppercase tracking-wide">⚙️ Módulo de Ingeniería y Calidad de Software (Finora / Sónica / APK Builder)</h3>
+                                        <div className="flex gap-2 items-center">
+                                            <button type="button" onClick={() => iniciarDictadoAudio(setCodigoIngenieria, 'Ingeniería de Software')} className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow-lg flex items-center gap-1">
+                                                🎤 Dictar Lógica de Software
+                                            </button>
+                                            <button type="button" onClick={() => descargarDocumentoWord("Nexcode-Software-Core-Architecture", codigoIngenieria)} className="bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg">
+                                                📥 Exportar Código (.ts / .doc)
+                                            </button>
+                                        </div>
                                     </div>
+
+                                    {/* Sub-selector de proyectos de software */}
+                                    <div className="grid grid-cols-4 gap-2 bg-slate-900 p-2 rounded border border-cyan-500/30">
+                                        <button type="button" onClick={() => setSubTabIngenieria('finora')} className={`py-1.5 px-2 rounded text-[11px] font-bold transition-all ${subTabIngenieria === 'finora' ? 'bg-cyan-500 text-slate-950' : 'text-cyan-300'}`}>
+                                            💳 Finora Core
+                                        </button>
+                                        <button type="button" onClick={() => setSubTabIngenieria('sonica')} className={`py-1.5 px-2 rounded text-[11px] font-bold transition-all ${subTabIngenieria === 'sonica' ? 'bg-cyan-500 text-slate-950' : 'text-cyan-300'}`}>
+                                            🎵 Sónica Streaming
+                                        </button>
+                                        <button type="button" onClick={() => setSubTabIngenieria('apk')} className={`py-1.5 px-2 rounded text-[11px] font-bold transition-all ${subTabIngenieria === 'apk' ? 'bg-cyan-500 text-slate-950' : 'text-cyan-300'}`}>
+                                            📦 APK Builder
+                                        </button>
+                                        <button type="button" onClick={() => setSubTabIngenieria('arquitectura')} className={`py-1.5 px-2 rounded text-[11px] font-bold transition-all ${subTabIngenieria === 'arquitectura' ? 'bg-cyan-500 text-slate-950' : 'text-cyan-300'}`}>
+                                            🔒 Vault & Supabase
+                                        </button>
+                                    </div>
+
                                     <div>
-                                        <label className="block text-xs font-bold text-cyan-300 mb-1">Contenido Comercial y Financiero (Almacenamiento Automático):</label>
-                                        <textarea value={contenidoComercial} onChange={(e) => setContenidoComercial(e.target.value)} rows={12} className="w-full bg-slate-900 border border-cyan-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none leading-relaxed" required />
+                                        <label className="block text-xs font-bold text-cyan-300 mb-1">Editor de Código Fuente y Arquitectura de Calidad:</label>
+                                        <textarea value={codigoIngenieria} onChange={(e) => setCodigoIngenieria(e.target.value)} rows={14} className="w-full bg-slate-900 border border-cyan-500/40 rounded p-4 text-xs text-cyan-200 font-mono outline-none leading-relaxed shadow-inner" required />
                                     </div>
                                 </div>
                             )}
 
-                            <button type="submit" disabled={isPending} className={`w-full font-bold py-3 px-4 rounded text-slate-950 shadow-lg ${seccionActiva === 'academico' ? 'bg-amber-500 hover:bg-amber-400' : 'bg-cyan-500 hover:bg-cyan-400'}`}>
-                                {isPending ? 'Sincronizando Expediente...' : `Registrar y Almacenar Operación en [${seccionActiva.toUpperCase()}]`}
+                            <button type="submit" disabled={isPending} className="w-full bg-cyan-500 hover:bg-cyan-400 font-bold py-3 px-4 rounded text-slate-950 shadow-lg">
+                                {isPending ? 'Sincronizando Core...' : `Registrar Operación Institucional en [${seccionActiva.toUpperCase()}]`}
                             </button>
                         </form>
 

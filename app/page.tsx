@@ -9,7 +9,9 @@ export default function MasterCorePage() {
     const [folioUltimo, setFolioUltimo] = useState<string | null>(null)
     const [hashGenerado, setHashGenerado] = useState<string | null>(null)
     const [memorias, setMemorias] = useState<any[]>([])
-    const [panelDesplegado, setPanelDesplegado] = useState(false)
+    
+    // Predeterminado en true para que aparezca abierto por sí solo al cargar
+    const [panelDesplegado, setPanelDesplegado] = useState(true)
 
     async function cargarMemoria() {
         const res = await obtenerMemoriaJarvis()
@@ -37,11 +39,10 @@ export default function MasterCorePage() {
         })
     }
 
-    // Botones independientes para AMBOS tipos de software
     async function ejecutarAccionSoftware(tipo: string, detalle: string) {
         const formData = new FormData()
         formData.append('emailSolicitante', 'fg782270@gmail.com')
-        formData.append('accion', 'Optimización y Mejora Modular')
+        formData.append('accion', 'Optimización Modular')
         formData.append('tipoSoftware', tipo)
         formData.append('detalleSoftware', detalle)
 
@@ -64,55 +65,91 @@ export default function MasterCorePage() {
                         <h1 className="text-xl font-bold tracking-wider flex items-center gap-2">
                             <span>⚡</span> Jarvis AI Core — <span className="text-cyan-300">Omnirouter & FreeLLAMPI</span>
                         </h1>
-                        <p className="text-xs text-slate-400">Gestión Integral de Software Open Source y Privado (C. Francisco)</p>
+                        <p className="text-xs text-slate-400">Estructura Dual Predeterminada — Gestión de Software (C. Francisco)</p>
                     </div>
                     <span className="text-xs text-slate-400 bg-slate-950 px-3 py-1 rounded border border-cyan-500/20">fg782270@gmail.com</span>
                 </header>
 
-                {/* BOTÓN PARA DESPLEGAR EL PANEL DE AMBOS MÓDULOS */}
+                {/* BOTÓN DE CONTROL DEL PANEL */}
                 <div className="mb-6">
                     <button
                         type="button"
                         onClick={() => setPanelDesplegado(!panelDesplegado)}
                         className="w-full bg-slate-950 border-2 border-cyan-500/60 hover:bg-cyan-950/30 text-cyan-300 font-bold py-3 px-4 rounded-lg transition-all duration-200 flex justify-between items-center shadow-lg"
                     >
-                        <span>📂 Panel Desplegable: Control de Open Source y Software Privado</span>
+                        <span>📂 Panel Principal: Estructura Dual de Botones Independientes</span>
                         <span className="text-xs bg-cyan-600 text-slate-950 px-2 py-1 rounded">
-                            {panelDesplegado ? 'Ocultar ▲' : 'Desplegar ▼'}
+                            {panelDesplegado ? 'Ocultar Panel ▲' : 'Desplegar Panel ▼'}
                         </span>
                     </button>
                 </div>
 
-                {/* PANEL DESPLEGABLE CON BOTONES SEPARADOS PARA AMBOS */}
+                {/* PANEL CON DOS ESTRUCTURAS DISTINTAS DE BOTONES (ABIERTO POR DEFECTO) */}
                 {panelDesplegado && (
-                    <div className="mb-6 p-4 bg-slate-950 border border-cyan-500/50 rounded-lg animate-fadeIn shadow-inner">
-                        <h3 className="text-sm font-bold text-cyan-300 mb-3 border-b border-cyan-500/20 pb-2">
-                            Acciones Modulares para Ambos Enfoques
-                        </h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div className="p-3 bg-slate-900 border border-cyan-500/30 rounded">
-                                <h4 className="text-xs font-bold text-white mb-2">🌐 Enfoque Open Source / Libre</h4>
-                                <button
-                                    type="button"
-                                    disabled={isPending}
-                                    onClick={() => ejecutarAccionSoftware('Open Source', 'Clonar, integrar y mejorar repositorio libre con Jarvis')}
-                                    className="w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-2 px-3 rounded text-xs transition-all disabled:opacity-50"
-                                >
-                                    🚀 Clonar y Mejorar Open Source
-                                </button>
+                    <div className="mb-6 p-5 bg-slate-950 border-2 border-cyan-500/50 rounded-lg shadow-inner space-y-6">
+                        
+                        {/* ESTRUCTURA A: Grid de Tarjetas (Open Source y Privado) */}
+                        <div>
+                            <h3 className="text-xs font-bold uppercase tracking-wider text-cyan-300 mb-3 border-b border-cyan-500/20 pb-1">
+                                [Estructura A] Módulos de Clonación y Reingeniería
+                            </h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div className="p-3 bg-slate-900 border border-cyan-500/30 rounded flex flex-col justify-between">
+                                    <div>
+                                        <h4 className="text-xs font-bold text-white mb-1">🌐 Enfoque Open Source</h4>
+                                        <p className="text-[11px] text-slate-400 mb-3">Integración y mejora directa de repositorios libres.</p>
+                                    </div>
+                                    <button
+                                        type="button"
+                                        disabled={isPending}
+                                        onClick={() => ejecutarAccionSoftware('Open Source', 'Clonar y mejorar software libre')}
+                                        className="w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-2 px-3 rounded text-xs transition-all disabled:opacity-50"
+                                    >
+                                        🚀 Ejecutar Open Source
+                                    </button>
+                                </div>
+                                <div className="p-3 bg-slate-900 border border-cyan-500/30 rounded flex flex-col justify-between">
+                                    <div>
+                                        <h4 className="text-xs font-bold text-white mb-1">🔒 Enfoque Software Privado</h4>
+                                        <p className="text-[11px] text-slate-400 mb-3">Reingeniería funcional y optimización propietaria.</p>
+                                    </div>
+                                    <button
+                                        type="button"
+                                        disabled={isPending}
+                                        onClick={() => ejecutarAccionSoftware('Software Privado', 'Emular y mejorar software privado')}
+                                        className="w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-2 px-3 rounded text-xs transition-all disabled:opacity-50"
+                                    >
+                                        ⚡ Ejecutar Software Privado
+                                    </button>
+                                </div>
                             </div>
-                            <div className="p-3 bg-slate-900 border border-cyan-500/30 rounded">
-                                <h4 className="text-xs font-bold text-white mb-2">🔒 Enfoque Software Privado</h4>
+                        </div>
+
+                        {/* ESTRUCTURA B: Barra de Acciones en Línea (Sistema y Memoria) */}
+                        <div>
+                            <h3 className="text-xs font-bold uppercase tracking-wider text-cyan-300 mb-3 border-b border-cyan-500/20 pb-1">
+                                [Estructura B] Comandos Rápidos del Núcleo y Tokens Ilimitados
+                            </h3>
+                            <div className="flex flex-wrap gap-3">
                                 <button
                                     type="button"
                                     disabled={isPending}
-                                    onClick={() => ejecutarAccionSoftware('Software Privado', 'Reingeniería funcional y optimización propietaria')}
-                                    className="w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-2 px-3 rounded text-xs transition-all disabled:opacity-50"
+                                    onClick={() => ejecutarAccionSoftware('Sistema', 'Sincronización de tokens ilimitados Omnirouter')}
+                                    className="flex-1 bg-slate-900 border border-cyan-500/40 hover:bg-cyan-950 text-cyan-300 font-bold py-2 px-4 rounded text-xs transition-all shadow"
                                 >
-                                    ⚡ Emular y Mejorar Privado
+                                    ⚡ Sincronizar Tokens Omnirouter
+                                </button>
+                                <button
+                                    type="button"
+                                    disabled={isPending}
+                                    onClick={() => ejecutarAccionSoftware('Memoria', 'Respaldo automático en Supabase y GitHub')}
+                                    className="flex-1 bg-slate-900 border border-cyan-500/40 hover:bg-cyan-950 text-cyan-300 font-bold py-2 px-4 rounded text-xs transition-all shadow"
+                                >
+                                    🛡️ Forzar Respaldo Dual
                                 </button>
                             </div>
                         </div>
+
                     </div>
                 )}
 
@@ -130,13 +167,13 @@ export default function MasterCorePage() {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label className="block text-sm text-slate-300 mb-1">Tipo de Software a Gestionar:</label>
+                            <label className="block text-sm text-slate-300 mb-1">Tipo de Software:</label>
                             <select 
                                 name="tipoSoftware" 
                                 className="w-full bg-slate-950 border border-cyan-500/40 rounded p-2 text-white text-sm"
                             >
                                 <option value="Open Source">Open Source / Software Libre</option>
-                                <option value="Software Privado">Software Privado (Reingeniería Funcional)</option>
+                                <option value="Software Privado">Software Privado (Reingeniería)</option>
                             </select>
                         </div>
                         <div>
@@ -144,7 +181,7 @@ export default function MasterCorePage() {
                             <input 
                                 type="text" 
                                 name="accion" 
-                                defaultValue="Optimización y Mejora por Botones" 
+                                defaultValue="Optimización Modular" 
                                 className="w-full bg-slate-950 border border-cyan-500/40 rounded p-2 text-white text-sm"
                             />
                         </div>
@@ -154,7 +191,7 @@ export default function MasterCorePage() {
                         <label className="block text-sm text-slate-300 mb-1">Detalle o Parámetro de Mejora:</label>
                         <textarea 
                             name="detalleSoftware" 
-                            placeholder="Especifique las características o funciones que Jarvis mejorará..."
+                            placeholder="Especificaciones adicionales..."
                             className="w-full bg-slate-950 border border-cyan-500/40 rounded p-2 text-white text-sm h-24"
                             required
                         />
@@ -165,7 +202,7 @@ export default function MasterCorePage() {
                         disabled={isPending}
                         className="w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-2 px-4 rounded transition-all duration-200 disabled:opacity-50"
                     >
-                        {isPending ? 'Procesando con Tokens Ilimitados...' : 'Ejecutar Comando de Mejora General'}
+                        {isPending ? 'Procesando...' : 'Ejecutar Comando Principal Jarvis'}
                     </button>
                 </form>
 

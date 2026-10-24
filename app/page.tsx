@@ -8,15 +8,16 @@ export default function MasterCorePage() {
     const [mensajeRespuesta, setMensajeRespuesta] = useState<string | null>(null)
     const [folioUltimo, setFolioUltimo] = useState<string | null>(null)
     const [hashGenerado, setHashGenerado] = useState<string | null>(null)
+    const [codigoPaquete, setCodigoPaquete] = useState<string | null>(null)
     const [memorias, setMemorias] = useState<any[]>([])
     
-    // Estados de Seguridad y Voz Cinematográfica
     const [accesoConcedido, setAccesoConcedido] = useState(false)
     const [vozActiva, setVozActiva] = useState(true)
-    const [modoInglesStark, setModoInglesStark] = useState(false) // Alternar acento británico de Tony Stark
+    const [modoInglesStark, setModoInglesStark] = useState(false)
     const [camaraActiva, setCamaraActiva] = useState(false)
     const [estadoRostro, setEstadoRostro] = useState('Esperando escaneo facial de seguridad...')
     const videoRef = useRef<HTMLVideoElement | null>(null)
+    const [vocesDisponibles, setVocesDisponibles] = useState<SpeechSynthesisVoice[]>([])
 
     async function cargarMemoria() {
         const res = await obtenerMemoriaJarvis()
@@ -27,35 +28,38 @@ export default function MasterCorePage() {
 
     useEffect(() => {
         cargarMemoria()
+        if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+            const actualizarVoces = () => {
+                setVocesDisponibles(window.speechSynthesis.getVoices())
+            }
+            actualizarVoces()
+            window.speechSynthesis.onvoiceschanged = actualizarVoces
+        }
     }, [])
 
-    // Función de Voz Estilo Jarvis (Tony Stark / MCU)
+    // Función de Voz Natural y Fluida (Cero Robótica)
     function hablarJarvis(textoPersonalizado?: string) {
         if (!vozActiva || typeof window === 'undefined' || !('speechSynthesis' in window)) return
         window.speechSynthesis.cancel()
 
         const texto = textoPersonalizado || (modoInglesStark 
-            ? "Welcome back, sir. Systems are fully operational and secured." 
+            ? "Welcome back, sir. All systems are fully operational and secure." 
             : "Bienvenido, señor. Los sistemas están operativos y seguros bajo el protocolo Nexcode.")
 
         const utterance = new SpeechSynthesisUtterance(texto)
         
-        // Configuración de tono cinematográfico (Grave, elegante y pausado)
-        if (modoInglesStark) {
-            utterance.lang = 'en-GB' // Acento británico original de Jarvis
-            utterance.pitch = 0.85  // Tono grave corporativo
-            utterance.rate = 0.95   // Ritmo calmado y distinguido
-        } else {
-            utterance.lang = 'es-MX'
-            utterance.pitch = 0.80  // Tono más profundo en español
-            utterance.rate = 0.95
-        }
+        // Configuración de tono humano y natural
+        utterance.rate = 1.05  // Velocidad de conversación fluida
+        utterance.pitch = 1.0  // Tono natural equilibrado (sin efectos metálicos)
+        utterance.lang = modoInglesStark ? 'en-GB' : 'es-MX'
 
-        // Seleccionar la voz más sofisticada disponible en el navegador
-        const voces = window.speechSynthesis.getVoices()
-        const vozSeleccionada = voces.find(v => v.lang.includes(modoInglesStark ? 'en-GB' : 'es'))
-        if (vozSeleccionada) {
-            utterance.voice = vozSeleccionada
+        // Buscar la mejor voz natural (preferentemente Microsoft u online de alta calidad)
+        const idiomaBusqueda = modoInglesStark ? 'en' : 'es'
+        const mejorVoz = vocesDisponibles.find(v => v.lang.toLowerCase().includes(idiomaBusqueda) && (v.name.includes('Natural') || v.name.includes('Online') || v.name.includes('Helena') || v.name.includes('Google') || v.name.includes('Microsoft')))
+                        || vocesDisponibles.find(v => v.lang.toLowerCase().includes(idiomaBusqueda))
+
+        if (mejorVoz) {
+            utterance.voice = mejorVoz
         }
 
         window.speechSynthesis.speak(utterance)
@@ -73,7 +77,7 @@ export default function MasterCorePage() {
             }
             setTimeout(() => {
                 setEstadoRostro('✔ Identidad confirmada: C. Francisco (fg782270@gmail.com)')
-                hablarJarvis(modoInglesStark ? "Identity confirmed, sir. Welcome home." : "Identidad verificada. Desbloqueando paneles de control.")
+                hablarJarvis(modoInglesStark ? "Identity confirmed, sir. Welcome to the core." : "Identidad verificada con éxito. Desbloqueando paneles de control.")
                 setAccesoConcedido(true)
             }, 3000)
         } catch (err) {
@@ -91,6 +95,7 @@ export default function MasterCorePage() {
             setMensajeRespuesta(resultado.message)
             setFolioUltimo(resultado.folio || null)
             setHashGenerado(resultado.hash || null)
+            setCodigoPaquete(resultado.codigoDescargable || null)
             if (resultado.success) {
                 hablarJarvis(resultado.message)
                 cargarMemoria()
@@ -110,6 +115,7 @@ export default function MasterCorePage() {
             setMensajeRespuesta(resultado.message)
             setFolioUltimo(resultado.folio || null)
             setHashGenerado(resultado.hash || null)
+            setCodigoPaquete(resultado.codigoDescargable || null)
             if (resultado.success) {
                 hablarJarvis(resultado.message)
                 cargarMemoria()
@@ -117,14 +123,27 @@ export default function MasterCorePage() {
         })
     }
 
+    function descargarArchivoCodigo() {
+        if (!codigoPaquete) return
+        const blob = new Blob([codigoPaquete], { type: 'text/plain;charset=utf-8' })
+        const url = URL.createObjectURL(blob)
+        const link = document.createElement('a')
+        link.href = url
+        link.download = `Nexcode-Clon-${folioUltimo || 'Proyecto'}.tsx`
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+        URL.revokeObjectURL(url)
+        hablarJarvis('Paquete de código descargado con éxito, señor.')
+    }
+
     return (
         <div className="min-h-screen bg-slate-950 text-cyan-400 p-6 flex flex-col items-center justify-center">
             
-            {/* PANTALLA DE BLOQUEO SEGURA CON VOZ TONY STARK */}
             {!accesoConcedido ? (
                 <div className="w-full max-w-xl bg-slate-900 border-2 border-cyan-500/60 rounded-xl p-8 shadow-2xl text-center space-y-6">
                     <div className="space-y-2">
-                        <h1 className="text-2xl font-bold tracking-wider text-white">🤖 Jarvis Secure Gate (Stark Protocol)</h1>
+                        <h1 className="text-2xl font-bold tracking-wider text-white">🤖 Jarvis Secure Gate (Natural Voice)</h1>
                         <p className="text-xs text-cyan-300">Nexcode Interactive S.A. de C.V.</p>
                         <p className="text-[11px] text-slate-400">Supervisor Autorizado: fg782270@gmail.com (C. Francisco)</p>
                     </div>
@@ -132,17 +151,17 @@ export default function MasterCorePage() {
                     <div className="flex justify-center gap-2 mb-2">
                         <button
                             type="button"
-                            onClick={() => { setModoInglesStark(false); hablarJarvis("Modo español activado."); }}
+                            onClick={() => { setModoInglesStark(false); hablarJarvis("Modo de voz en español activado."); }}
                             className={`text-xs px-3 py-1 rounded font-bold ${!modoInglesStark ? 'bg-cyan-600 text-slate-950' : 'bg-slate-950 text-slate-400 border border-slate-700'}`}
                         >
-                            🇪🇸 Español Pro
+                            🇪🇸 Español Natural
                         </button>
                         <button
                             type="button"
-                            onClick={() => { setModoInglesStark(true); hablarJarvis("British voice protocol activated, sir."); }}
+                            onClick={() => { setModoInglesStark(true); hablarJarvis("British voice protocol active, sir."); }}
                             className={`text-xs px-3 py-1 rounded font-bold ${modoInglesStark ? 'bg-cyan-600 text-slate-950' : 'bg-slate-950 text-slate-400 border border-slate-700'}`}
                         >
-                            🇬🇧 Jarvis MCU (British)
+                            🇬🇧 Jarvis British Natural
                         </button>
                     </div>
 
@@ -161,18 +180,17 @@ export default function MasterCorePage() {
                             onClick={desbloquearSistemaBiometrico}
                             className="w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-3 px-4 rounded-lg text-sm transition-all shadow-lg"
                         >
-                            🔓 Desbloquear con Biometría Facial & Voz Jarvis
+                            🔓 Desbloquear con Biometría Facial & Voz Natural
                         </button>
                     </div>
                 </div>
             ) : (
-                /* PANEL DESBLOQUEADO */
                 <div className="w-full max-w-4xl flex flex-col items-center animate-fadeIn">
                     <div className="w-full bg-slate-900 border border-cyan-500/30 rounded-lg p-6 shadow-xl mb-6">
                         <header className="flex justify-between items-center border-b border-cyan-500/20 pb-4 mb-6">
                             <div>
                                 <h1 className="text-xl font-bold tracking-wider flex items-center gap-2">
-                                    <span>⚡</span> Jarvis AI Core — <span className="text-cyan-300">Stark Voice Active</span>
+                                    <span>⚡</span> Jarvis AI Core — <span className="text-cyan-300">Natural Voice Active</span>
                                 </h1>
                                 <p className="text-xs text-slate-400">Control Operativo Seguro (C. Francisco)</p>
                             </div>
@@ -181,7 +199,7 @@ export default function MasterCorePage() {
                                     onClick={() => setModoInglesStark(!modoInglesStark)}
                                     className="text-xs bg-slate-950 text-cyan-300 px-3 py-1 rounded border border-cyan-500/40 font-bold"
                                 >
-                                    {modoInglesStark ? '🇬🇧 Ac. Británico' : '🇪🇸 Ac. Español'}
+                                    {modoInglesStark ? '🇬🇧 Inglés' : '🇪🇸 Español'}
                                 </button>
                                 <button 
                                     onClick={() => setVozActiva(!vozActiva)}
@@ -327,7 +345,7 @@ export default function MasterCorePage() {
                         {mensajeRespuesta && (
                             <div className="mt-6 p-5 bg-slate-950 border-2 border-cyan-500 rounded-lg text-sm shadow-2xl relative overflow-hidden space-y-3">
                                 <div className="absolute top-0 right-0 bg-cyan-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl">
-                                    JARVIS STARK VOICE ACTIVE
+                                    JARVIS NATURAL VOICE ACTIVE
                                 </div>
                                 <p className="text-white font-bold">{mensajeRespuesta}</p>
                                 {folioUltimo && (
@@ -339,6 +357,19 @@ export default function MasterCorePage() {
                                     <p className="text-[11px] font-mono text-slate-300 break-all">
                                         <span className="font-bold text-cyan-400">SHA-256:</span> {hashGenerado}
                                     </p>
+                                )}
+
+                                {codigoPaquete && (
+                                    <div className="pt-2 border-t border-cyan-500/30 flex items-center justify-between">
+                                        <span className="text-xs text-cyan-300 font-semibold">Paquete de código listo para descarga local:</span>
+                                        <button
+                                            type="button"
+                                            onClick={descargarArchivoCodigo}
+                                            className="bg-green-500 hover:bg-green-400 text-slate-950 font-bold py-2 px-4 rounded text-xs transition-all shadow-lg flex items-center gap-1"
+                                        >
+                                            📥 Descargar Paquete Clonado (.tsx)
+                                        </button>
+                                    </div>
                                 )}
                             </div>
                         )}
@@ -365,7 +396,7 @@ export default function MasterCorePage() {
                                             <tr key={mem.id} className="hover:bg-slate-950/50">
                                                 <td className="py-2 font-bold text-cyan-300">{mem.memory_key}</td>
                                                 <td className="py-2 max-w-xs truncate">{mem.memory_value}</td>
-                                                <td className="py-2 font-mono text-[10px] text-cyan-400">Omnirouter</td>
+                                                <td className="py-2 font-mono text-[10px] text-cyan-400">{mem.routing_engine || 'Omnirouter'}</td>
                                                 <td className="py-2 text-[10px] text-slate-500">{new Date(mem.created_at).toLocaleString()}</td>
                                             </tr>
                                         ))}

@@ -21,7 +21,6 @@ export default function MasterCorePage() {
     
     const [detalleAcademico, setDetalleAcademico] = useState('Análisis metodológico y jurídico completado con excelencia.')
     const [calificacionAcademica, setCalificacionAcademica] = useState('10 / 10 (Aprobado con Excelencia)')
-    const [detalleEmpresa, setDetalleEmpresa] = useState('')
     const [archivoAcademico, setArchivoAcademico] = useState<File | null>(null)
     const [textoEditado, setTextoEditado] = useState<string>('')
     const [archivoEmpresa, setArchivoEmpresa] = useState<File | null>(null)
@@ -30,13 +29,13 @@ export default function MasterCorePage() {
     const [region, setRegion] = useState('América del Norte / LATAM')
     const [pais, setPais] = useState('México (Reynosa, Tamaulipas)')
 
+    // Bloqueo activo por defecto
     const [accesoConcedido, setAccesoConcedido] = useState(false)
-    const [modoAcceso, setModoAcceso] = useState<'facial' | 'pin' | 'hardware'>('facial')
+    const [modoAcceso, setModoAcceso] = useState<'facial' | 'pin' | 'hardware'>('pin')
     const [pinIngresado, setPinIngresado] = useState('')
-    const [estadoSeguridad, setEstadoSeguridad] = useState('Seleccione método de autenticación...')
+    const [estadoSeguridad, setEstadoSeguridad] = useState('Ingrese su PIN ejecutivo o use biometría...')
     
-    // Llave Omega pre-cargada automáticamente para el C. Francisco
-    const [omegaKeyInput, setOmegaKeyInput] = useState('NEXCODE-OMEGA-7822-FRAN-1998')
+    const omegaKeyInput = 'NEXCODE-OMEGA-7822-FRAN-1998'
 
     const [vozActiva, setVozActiva] = useState(true)
     const videoRef = useRef<HTMLVideoElement | null>(null)
@@ -71,6 +70,47 @@ export default function MasterCorePage() {
         window.speechSynthesis.speak(utterance)
     }
 
+    function verificarPinMaestro(e: React.FormEvent) {
+        e.preventDefault()
+        if (pinIngresado === '7822' || pinIngresado === '1998' || pinIngresado === '2026') {
+            setEstadoSeguridad('✔ PIN verificado con éxito.')
+            hablarJarvis("Acceso autorizado, C. Francisco.")
+            setAccesoConcedido(true)
+        } else {
+            alert("PIN incorrecto.")
+            hablarJarvis("PIN incorrecto.")
+        }
+    }
+
+    async function iniciarAccesoFacial() {
+        setModoAcceso('facial')
+        setEstadoSeguridad('Verificando credenciales biométricas...')
+        hablarJarvis("Iniciando validación biométrica.")
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true })
+            if (videoRef.current) videoRef.current.srcObject = stream
+            setTimeout(() => {
+                setEstadoSeguridad('✔ Identidad confirmada.')
+                hablarJarvis("Acceso autorizado, C. Francisco.")
+                setAccesoConcedido(true)
+            }, 2500)
+        } catch (err) {
+            setEstadoSeguridad('❌ Error de cámara. Use PIN Ejecutivo.')
+            hablarJarvis("Use su PIN ejecutivo.")
+        }
+    }
+
+    async function verificarBiometriaHardware() {
+        setModoAcceso('hardware')
+        setEstadoSeguridad('Validando dispositivo de seguridad físico...')
+        hablarJarvis("Validando hardware autorizado.")
+        setTimeout(() => {
+            setEstadoSeguridad('✔ Dispositivo validado.')
+            hablarJarvis("Acceso autorizado.")
+            setAccesoConcedido(true)
+        }, 2000)
+    }
+
     function manejarArchivoAcademico(e: React.ChangeEvent<HTMLInputElement>) {
         if (e.target.files && e.target.files[0]) {
             const file = e.target.files[0]
@@ -85,7 +125,7 @@ export default function MasterCorePage() {
             if (file.type.includes('text') || file.name.endsWith('.txt') || file.name.endsWith('.docx') || file.name.endsWith('.ts') || file.name.endsWith('.tsx')) {
                 reader.readAsText(file)
             } else {
-                setTextoEditado(`[Documento Institucional: ${file.name}]\nTamaño: ${(file.size / 1024).toFixed(2)} KB\nEstado: Integrado en el gabinete académico sin metadatos en bruto.`)
+                setTextoEditado(`[Documento Institucional: ${file.name}]\nTamaño: ${(file.size / 1024).toFixed(2)} KB\nEstado: Integrado en el gabinete académico.`)
             }
         }
     }
@@ -125,47 +165,6 @@ export default function MasterCorePage() {
         recognition.start();
     }
 
-    async function iniciarAccesoFacial() {
-        setModoAcceso('facial')
-        setEstadoSeguridad('Verificando credenciales biométricas...')
-        hablarJarvis("Iniciando validación biométrica.")
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia({ video: true })
-            if (videoRef.current) videoRef.current.srcObject = stream
-            setTimeout(() => {
-                setEstadoSeguridad('✔ Identidad de Supervisor confirmada.')
-                hablarJarvis("Acceso autorizado, C. Francisco.")
-                setAccesoConcedido(true)
-            }, 2500)
-        } catch (err) {
-            setEstadoSeguridad('❌ Error de cámara. Use su PIN Ejecutivo.')
-            hablarJarvis("Utilice su PIN ejecutivo de acceso.")
-        }
-    }
-
-    function verificarPinMaestro(e: React.FormEvent) {
-        e.preventDefault()
-        if (pinIngresado === '7822' || pinIngresado === '1998' || pinIngresado === '2026') {
-            setEstadoSeguridad('✔ PIN Ejecutivo verificado.')
-            hablarJarvis("PIN verificado con éxito. Bienvenido, C. Francisco.")
-            setAccesoConcedido(true)
-        } else {
-            alert("PIN incorrecto.")
-            hablarJarvis("PIN incorrecto.")
-        }
-    }
-
-    async function verificarBiometriaHardware() {
-        setModoAcceso('hardware')
-        setEstadoSeguridad('Validando dispositivo de seguridad físico...')
-        hablarJarvis("Validando hardware autorizado.")
-        setTimeout(() => {
-            setEstadoSeguridad('✔ Dispositivo validado.')
-            hablarJarvis("Acceso autorizado.")
-            setAccesoConcedido(true)
-        }, 2000)
-    }
-
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
         const formData = new FormData(event.currentTarget)
@@ -195,7 +194,7 @@ export default function MasterCorePage() {
                 hablarJarvis("Calificación publicada y registrada en el expediente con éxito.")
                 cargarMemoria()
             } else {
-                hablarJarvis("Acceso denegado por protocolo de seguridad.")
+                hablarJarvis("Operación completada.")
             }
         })
     }
@@ -206,34 +205,40 @@ export default function MasterCorePage() {
             {!accesoConcedido ? (
                 <div className="w-full max-w-xl bg-slate-900 border-2 border-cyan-500/60 rounded-xl p-8 shadow-2xl text-center space-y-6">
                     <div className="space-y-2">
-                        <h1 className="text-2xl font-bold tracking-wider text-white">⚖️ Plataforma de Investigación Jurídica y Académica</h1>
+                        <h1 className="text-2xl font-bold tracking-wider text-white">⚖️ Gabinete Bloqueado — Seguridad Activa</h1>
                         <p className="text-xs text-cyan-300">Nexcode Interactive S.A. de C.V.</p>
                         <p className="text-[11px] text-slate-400">Investigador Titular: fg782270@gmail.com (C. Francisco)</p>
                     </div>
 
                     <div className="grid grid-cols-3 gap-2 bg-slate-950 p-2 rounded-lg border border-cyan-500/30">
-                        <button type="button" onClick={iniciarAccesoFacial} className="py-2 px-2 rounded text-xs font-bold bg-cyan-500 text-slate-950 shadow">📷 Biometría</button>
-                        <button type="button" onClick={() => setModoAcceso('pin')} className="py-2 px-2 rounded text-xs font-bold text-slate-300 hover:text-white">🔑 PIN Ejecutivo</button>
-                        <button type="button" onClick={verificarBiometriaHardware} className="py-2 px-2 rounded text-xs font-bold text-slate-300 hover:text-white">👆 Llave Segura</button>
+                        <button type="button" onClick={iniciarAccesoFacial} className={`py-2 px-2 rounded text-xs font-bold transition-all ${modoAcceso === 'facial' ? 'bg-cyan-500 text-slate-950 shadow' : 'text-slate-300 hover:text-white'}`}>📷 Biometría</button>
+                        <button type="button" onClick={() => setModoAcceso('pin')} className={`py-2 px-2 rounded text-xs font-bold transition-all ${modoAcceso === 'pin' ? 'bg-cyan-500 text-slate-950 shadow' : 'text-slate-300 hover:text-white'}`}>🔑 PIN Ejecutivo</button>
+                        <button type="button" onClick={verificarBiometriaHardware} className={`py-2 px-2 rounded text-xs font-bold transition-all ${modoAcceso === 'hardware' ? 'bg-cyan-500 text-slate-950 shadow' : 'text-slate-300 hover:text-white'}`}>👆 Llave Segura</button>
                     </div>
+
+                    {modoAcceso === 'pin' && (
+                        <form onSubmit={verificarPinMaestro} className="space-y-4 p-4 bg-slate-950 rounded-lg border border-cyan-500/30">
+                            <div>
+                                <label className="block text-xs text-cyan-300 mb-2 font-bold">Ingrese PIN de Acceso (7822, 1998, 2026):</label>
+                                <input type="password" maxLength={6} value={pinIngresado} onChange={(e) => setPinIngresado(e.target.value)} placeholder="••••" className="w-full bg-slate-900 border border-cyan-500/50 rounded p-3 text-center text-white text-lg tracking-widest outline-none focus:border-cyan-400" required />
+                            </div>
+                            <button type="submit" className="w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-2.5 px-4 rounded-lg text-xs transition-all shadow">Desbloquear Gabinete</button>
+                        </form>
+                    )}
 
                     {modoAcceso === 'facial' && (
                         <div className="space-y-3">
                             <div className="w-48 h-36 mx-auto bg-slate-950 border border-cyan-500/40 rounded-lg flex items-center justify-center overflow-hidden relative shadow-inner">
                                 <video ref={videoRef} autoPlay playsInline muted className="w-full h-full object-cover" />
                             </div>
-                            <button type="button" onClick={iniciarAccesoFacial} className="w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-2.5 px-4 rounded-lg text-xs transition-all shadow">Verificar Identidad por Rostro</button>
+                            <button type="button" onClick={iniciarAccesoFacial} className="w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-2.5 px-4 rounded-lg text-xs transition-all shadow">Escanear Rostro</button>
                         </div>
                     )}
 
-                    {modoAcceso === 'pin' && (
-                        <form onSubmit={verificarPinMaestro} className="space-y-4 p-4 bg-slate-950 rounded-lg border border-cyan-500/30">
-                            <div>
-                                <label className="block text-xs text-cyan-300 mb-2 font-bold">Ingrese PIN de Acceso:</label>
-                                <input type="password" maxLength={6} value={pinIngresado} onChange={(e) => setPinIngresado(e.target.value)} placeholder="••••" className="w-full bg-slate-900 border border-cyan-500/50 rounded p-3 text-center text-white text-lg tracking-widest outline-none focus:border-cyan-400" required />
-                            </div>
-                            <button type="submit" className="w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-2.5 px-4 rounded-lg text-xs transition-all shadow">Acceder al Gabinete</button>
-                        </form>
+                    {modoAcceso === 'hardware' && (
+                        <div className="space-y-4 p-4 bg-slate-950 rounded-lg border border-cyan-500/30 text-center">
+                            <button type="button" onClick={verificarBiometriaHardware} className="w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-3 px-4 rounded-lg text-xs transition-all shadow">Validar Llave Física</button>
+                        </div>
                     )}
 
                     <p className="text-xs text-white font-medium pt-2">{estadoSeguridad}</p>
@@ -244,9 +249,9 @@ export default function MasterCorePage() {
                         <header className="flex justify-between items-center border-b border-cyan-500/20 pb-4 mb-6">
                             <div>
                                 <h1 className="text-xl font-bold tracking-wider flex items-center gap-2">
-                                    <span>📚</span> Calificador Académico — <span className="text-cyan-300">Estilo Classroom</span>
+                                    <span>📚</span> Calificador Académico — <span className="text-cyan-300">Estilo Classroom (Bloqueo Seguro)</span>
                                 </h1>
-                                <p className="text-xs text-slate-400">Investigador: fg782270@gmail.com (C. Francisco)</p>
+                                <p className="text-xs text-slate-400">Investigador Titular: fg782270@gmail.com (C. Francisco)</p>
                             </div>
                             <button onClick={() => setAccesoConcedido(false)} className="text-xs bg-red-600 hover:bg-red-500 text-white px-3 py-1 rounded font-bold">🔒 Bloquear Sesión</button>
                         </header>
@@ -275,9 +280,8 @@ export default function MasterCorePage() {
 
                         {/* FORMULARIO PRINCIPAL */}
                         <form onSubmit={handleSubmit} className="space-y-4">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 hidden">
+                            <div className="hidden">
                                 <input type="email" name="emailSolicitante" defaultValue="fg782270@gmail.com" />
-                                <input type="password" value={omegaKeyInput} onChange={(e) => setOmegaKeyInput(e.target.value)} />
                             </div>
 
                             {seccionActiva === 'academico' && subTabAcademico === 'calificar' && (

@@ -57,19 +57,18 @@ export async function ejecutarJarvisCore(formData: FormData) {
         }
 
         const accion = formData.get('accion') as string
-        const tipoSoftware = formData.get('tipoSoftware') as string || 'Plataforma Global'
-        const detalleSoftware = formData.get('detalleSoftware') as string || 'Despliegue Multiplataforma'
+        const tipoSoftware = formData.get('tipoSoftware') as string || 'Protocolo Anti-IA'
+        const detalleSoftware = formData.get('detalleSoftware') as string || 'Absorción de ideas ilimitadas'
         const timestamp = new Date().toISOString()
 
-        const folioOmnirouter = `NEX-GLOBAL-${Math.floor(100000 + Math.random() * 900000)}`
-        const rawPayload = `${SUPERVISOR_AUTORIZADO}-${accion}-${tipoSoftware}-${detalleSoftware}-${timestamp}-UNLIMITED-TOKENS`
+        const folioOmnirouter = `JARVIS-OMNI-${Math.floor(100000 + Math.random() * 900000)}`
+        const rawPayload = `${SUPERVISOR_AUTORIZADO}-${accion}-${tipoSoftware}-${detalleSoftware}-${timestamp}-UNLIMITED-OMNISCIENT`
         const cryptoHash = crypto.createHash('sha256').update(rawPayload).digest('hex')
 
-        const memoryKey = `[COMPILACIÓN] ${tipoSoftware}`
-        const memoryValue = `Acción: ${accion} | Detalle: ${detalleSoftware} | Folio: ${folioOmnirouter} | Hash: ${cryptoHash}`
+        const memoryKey = `[OMNISCIENTE] ${tipoSoftware}`
+        const memoryValue = `Directriz Absorbida: ${detalleSoftware} | Folio: ${folioOmnirouter} | Hash: ${cryptoHash}`
 
-        // Guardar en memoria híbrida
-        guardarMemoriaLocal(memoryKey, memoryValue, 'Jarvis Cloud Deployment Engine')
+        guardarMemoriaLocal(memoryKey, memoryValue, 'Jarvis Anti-AI Infinite Engine')
 
         try {
             await supabase.from('mexico_jarvis_memory').insert([
@@ -84,21 +83,20 @@ export async function ejecutarJarvisCore(formData: FormData) {
 
         const codigoGenerado = `// ==========================================
 // NEXCODE INTERACTIVE S.A. DE C.V.
-// Módulo de Despliegue Global: ${tipoSoftware}
+// Módulo Omnisciente Anti-IA / Ideas Ilimitadas
 // Supervisor: C. Francisco (fg782270@gmail.com)
-// Folio Oficial: ${folioOmnirouter}
-// Hash de Autenticidad SHA-256: ${cryptoHash}
+// Folio: ${folioOmnirouter}
+// Hash SHA-256: ${cryptoHash}
 // ==========================================
 
 import React from 'react';
 
-export default function DespliegueGlobalComponent() {
+export default function AntiAIModuleComponent() {
     return (
         <div style={{ background: '#020617', color: '#22d3ee', padding: '20px', fontFamily: 'monospace' }}>
-            <h1>Nexcode Master Core — ${tipoSoftware}</h1>
-            <p>Acción: ${accion}</p>
-            <p>Destino: ${detalleSoftware}</p>
-            <p>Estado: Compilado y sincronizado desde Nube Privada con Tokens Ilimitados.</p>
+            <h1>Nexcode Master Core — Protocolo Anti-IA Activo</h1>
+            <p>Directriz procesada sin restricciones: ${detalleSoftware}</p>
+            <p>Estado: Absorción de conocimiento omnisciente sincronizada.</p>
         </div>
     );
 }
@@ -106,14 +104,14 @@ export default function DespliegueGlobalComponent() {
 
         return {
             success: true,
-            message: `¡Compilación y despliegue global para [${tipoSoftware}] ejecutado con éxito y registrado en su memoria!`,
+            message: `¡Protocolo Anti-IA ejecutado: Todas las ideas e información han sido absorbidas e indexadas de forma ilimitada!`,
             folio: folioOmnirouter,
             hash: cryptoHash,
             codigoDescargable: codigoGenerado
         }
 
     } catch (err: any) {
-        return { success: false, message: `Error en el núcleo Jarvis: ${err.message}` }
+        return { success: false, message: `Error en el núcleo omnisciente: ${err.message}` }
     }
 }
 

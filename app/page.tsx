@@ -14,6 +14,7 @@ export default function MasterCorePage() {
     const [seccionActiva, setSeccionActiva] = useState<'academico' | 'empresa'>('academico')
     const [tipoAnalisisAcademico, setTipoAnalisisAcademico] = useState('Análisis Zapia (Calificación & Explicación)')
     const [tipoAnalisisEmpresa, setTipoAnalisisEmpresa] = useState('Arquitectura Full-Stack & Auditoría')
+    const [modeloIA, setModeloIA] = useState('Matriz Global Unificada (Todas las IAs)')
     const [archivoSeleccionado, setArchivoSeleccionado] = useState<File | null>(null)
 
     const [accesoConcedido, setAccesoConcedido] = useState(false)
@@ -62,41 +63,41 @@ export default function MasterCorePage() {
         setModoAcceso('facial')
         setCamaraActiva(true)
         setEstadoSeguridad('Analizando biometría facial...')
-        hablarJarvis("Iniciando escaneo facial de seguridad.")
+        hablarJarvis("Iniciando escaneo facial.")
         
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ video: true })
             if (videoRef.current) videoRef.current.srcObject = stream
             setTimeout(() => {
-                setEstadoSeguridad('✔ Identidad confirmada por Rostro.')
-                hablarJarvis("Acceso concedido por biometría facial, C. Francisco.")
+                setEstadoSeguridad('✔ Identidad confirmada.')
+                hablarJarvis("Acceso concedido, C. Francisco.")
                 setAccesoConcedido(true)
             }, 2500)
         } catch (err) {
-            setEstadoSeguridad('❌ Error de cámara. Use PIN o Huella.')
-            hablarJarvis("Cámara no disponible. Por favor use su PIN maestro.")
+            setEstadoSeguridad('❌ Error de cámara. Use PIN Maestro.')
+            hablarJarvis("Use su PIN maestro.")
         }
     }
 
     function verificarPinMaestro(e: React.FormEvent) {
         e.preventDefault()
         if (pinIngresado === '7822' || pinIngresado === '1998' || pinIngresado === '2026') {
-            setEstadoSeguridad('✔ PIN Maestro verificado con éxito.')
-            hablarJarvis("PIN maestro verificado. Acceso total concedido, C. Francisco.")
+            setEstadoSeguridad('✔ PIN verificado.')
+            hablarJarvis("PIN verificado con éxito.")
             setAccesoConcedido(true)
         } else {
-            alert("PIN Maestro incorrecto.")
+            alert("PIN incorrecto.")
             hablarJarvis("PIN incorrecto.")
         }
     }
 
     async function verificarBiometriaHardware() {
         setModoAcceso('hardware')
-        setEstadoSeguridad('Esperando autenticación por huella digital...')
-        hablarJarvis("Validando huella digital.")
+        setEstadoSeguridad('Validando dispositivo físico...')
+        hablarJarvis("Validando hardware de seguridad.")
         setTimeout(() => {
-            setEstadoSeguridad('✔ Hardware biométrico verificado.')
-            hablarJarvis("Dispositivo verificado con éxito.")
+            setEstadoSeguridad('✔ Dispositivo verificado.')
+            hablarJarvis("Acceso concedido.")
             setAccesoConcedido(true)
         }, 2000)
     }
@@ -106,6 +107,7 @@ export default function MasterCorePage() {
         const formData = new FormData(event.currentTarget)
         formData.append('seccion', seccionActiva)
         formData.append('tipoAnalisis', seccionActiva === 'empresa' ? tipoAnalisisEmpresa : tipoAnalisisAcademico)
+        formData.append('modeloIASeleccionado', modeloIA)
         if (archivoSeleccionado) {
             formData.append('archivoNombre', archivoSeleccionado.name)
         } else {
@@ -119,7 +121,7 @@ export default function MasterCorePage() {
             setHashGenerado(resultado.hash || null)
             setCodigoPaquete(resultado.codigoDescargable || null)
             if (resultado.success) {
-                hablarJarvis(`Análisis estilo Zapia completado con éxito, C. Francisco.`)
+                hablarJarvis(`Análisis completado con éxito mediante el motor ${modeloIA}.`)
                 cargarMemoria()
             }
         })
@@ -131,12 +133,12 @@ export default function MasterCorePage() {
         const url = URL.createObjectURL(blob)
         const link = document.createElement('a')
         link.href = url
-        link.download = `Nexcode-ZapiaReport-${seccionActiva}-${folioUltimo || 'Package'}.tsx`
+        link.download = `Nexcode-GlobalAI-${seccionActiva}-${folioUltimo || 'Report'}.tsx`
         document.body.appendChild(link)
         link.click()
         document.body.removeChild(link)
         URL.revokeObjectURL(url)
-        hablarJarvis('Reporte detallado descargado con éxito.')
+        hablarJarvis('Reporte descargado con éxito.')
     }
 
     return (
@@ -145,7 +147,7 @@ export default function MasterCorePage() {
             {!accesoConcedido ? (
                 <div className="w-full max-w-xl bg-slate-900 border-2 border-cyan-500/60 rounded-xl p-8 shadow-2xl text-center space-y-6">
                     <div className="space-y-2">
-                        <h1 className="text-2xl font-bold tracking-wider text-white">🛡️ Jarvis Zapia & Multi-AI Gate</h1>
+                        <h1 className="text-2xl font-bold tracking-wider text-white">🛡️ Jarvis Global AI Gate</h1>
                         <p className="text-xs text-cyan-300">Nexcode Interactive S.A. de C.V.</p>
                         <p className="text-[11px] text-slate-400">Supervisor: fg782270@gmail.com (C. Francisco)</p>
                     </div>
@@ -163,7 +165,7 @@ export default function MasterCorePage() {
                             onClick={() => setModoAcceso('pin')}
                             className={`py-2 px-2 rounded text-xs font-bold transition-all ${modoAcceso === 'pin' ? 'bg-cyan-500 text-slate-950 shadow' : 'text-slate-300 hover:text-white'}`}
                         >
-                            🔑 PIN Maestro
+                            🔑 PIN
                         </button>
                         <button
                             type="button"
@@ -184,7 +186,7 @@ export default function MasterCorePage() {
                                 onClick={iniciarAccesoFacial}
                                 className="w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-2.5 px-4 rounded-lg text-xs transition-all shadow"
                             >
-                                Iniciar Escaneo Facial
+                                Escaneo Facial
                             </button>
                         </div>
                     )}
@@ -192,7 +194,7 @@ export default function MasterCorePage() {
                     {modoAcceso === 'pin' && (
                         <form onSubmit={verificarPinMaestro} className="space-y-4 p-4 bg-slate-950 rounded-lg border border-cyan-500/30">
                             <div>
-                                <label className="block text-xs text-cyan-300 mb-2 font-bold">Ingrese PIN Maestro:</label>
+                                <label className="block text-xs text-cyan-300 mb-2 font-bold">PIN Maestro:</label>
                                 <input 
                                     type="password" 
                                     maxLength={6}
@@ -214,13 +216,12 @@ export default function MasterCorePage() {
 
                     {modoAcceso === 'hardware' && (
                         <div className="space-y-4 p-4 bg-slate-950 rounded-lg border border-cyan-500/30 text-center">
-                            <p className="text-xs text-slate-300">Validación de dispositivo físico seguro.</p>
                             <button
                                 type="button"
                                 onClick={verificarBiometriaHardware}
                                 className="w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-3 px-4 rounded-lg text-xs transition-all shadow"
                             >
-                                Validar Biometría de Hardware
+                                Validar Hardware
                             </button>
                         </div>
                     )}
@@ -233,7 +234,7 @@ export default function MasterCorePage() {
                         <header className="flex justify-between items-center border-b border-cyan-500/20 pb-4 mb-6">
                             <div>
                                 <h1 className="text-xl font-bold tracking-wider flex items-center gap-2">
-                                    <span>🧠</span> Jarvis Core — <span className="text-cyan-300">Modo Explicativo Zapia & Matriz (4 IAs)</span>
+                                    <span>🌐</span> Jarvis Core — <span className="text-cyan-300">Directorio Global de IAs & Zapia Engine</span>
                                 </h1>
                                 <p className="text-xs text-slate-400">Supervisor: fg782270@gmail.com (C. Francisco)</p>
                             </div>
@@ -241,19 +242,27 @@ export default function MasterCorePage() {
                                 onClick={() => setAccesoConcedido(false)}
                                 className="text-xs bg-red-600 hover:bg-red-500 text-white px-3 py-1 rounded font-bold"
                             >
-                                🔒 Bloquear Sesión
+                                🔒 Bloquear
                             </button>
                         </header>
 
-                        {/* PANEL INFORMATIVO DE LAS 4 IAs INTEGRADAS */}
-                        <div className="mb-6 p-4 bg-slate-950 border border-cyan-500/40 rounded-lg text-xs space-y-2">
-                            <h3 className="font-bold text-cyan-300 uppercase tracking-wide">🤖 Estado de la Matriz: 4 IAs Integradas y Activas</h3>
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-slate-300">
-                                <div className="p-2 bg-slate-900 rounded border border-cyan-500/20">1. 💻 Ingeniería & Cloud</div>
-                                <div className="p-2 bg-slate-900 rounded border border-amber-500/20">2. 🎓 Académico (H. Iván)</div>
-                                <div className="p-2 bg-slate-900 rounded border border-purple-500/20">3. 🌌 Anti-IA Omnisciente</div>
-                                <div className="p-2 bg-slate-900 rounded border border-green-500/20">4. ⚡ Orquestador Zapia</div>
-                            </div>
+                        {/* SELECTOR DE MODELO DE IA GLOBAL */}
+                        <div className="mb-6 p-4 bg-slate-950 border border-cyan-500/40 rounded-lg space-y-3">
+                            <h3 className="text-xs font-bold text-cyan-300 uppercase tracking-wide">🤖 Directorio Maestro: Seleccionar Modelo de IA Global / Familia de Referencia</h3>
+                            <select
+                                value={modeloIA}
+                                onChange={(e) => setModeloIA(e.target.value)}
+                                className="w-full bg-slate-900 border border-cyan-500/40 rounded p-2.5 text-white text-xs font-mono"
+                            >
+                                <option value="Matriz Global Unificada (Todas las IAs)">Matriz Global Unificada (Sinergia de Todas las IAs)</option>
+                                <option value="OpenAI GPT-6 / GPT-5.6 Sol">OpenAI (GPT-6 Astra, GPT-6.1 Sol)</option>
+                                <option value="Anthropic Claude 5.5 / Opus">Anthropic (Claude Opus 5.5, Sonnet 5.5, Fable 5.1)</option>
+                                <option value="Google Gemini 4 / 3.8 Flash">Google DeepMind (Gemini 4 Argon, Gemini 3.8 Flash)</option>
+                                <option value="xAI Grok 4.7">xAI (Grok 4.7 & 1M Context)</option>
+                                <option value="Meta Llama 4 / Gemma 4">Meta & Google (Llama 4 Scout, Gemma 4 Open Weights)</option>
+                                <option value="DeepSeek V4 Pro / Flash">DeepSeek (DeepSeek V4 Pro, V4.1 Flash)</option>
+                                <option value="Alibaba Qwen3.8 / Kimi K3">Alibaba & Moonshot AI (Qwen3.8-Max, Kimi K3 1M)</option>
+                            </select>
                         </div>
 
                         {/* SELECTOR DE NÚCLEO INDEPENDIENTE */}
@@ -294,9 +303,9 @@ export default function MasterCorePage() {
 
                             {seccionActiva === 'academico' ? (
                                 <div className="space-y-4 p-4 bg-slate-950/60 rounded border border-amber-500/30">
-                                    <h4 className="text-xs font-bold text-amber-300 uppercase tracking-wide">📊 Analizador Estilo Zapia (Calificaciones y Explicaciones)</h4>
+                                    <h4 className="text-xs font-bold text-amber-300 uppercase tracking-wide">📊 Analizador Estilo Zapia (Calificación Exacta & Explicación)</h4>
                                     <div>
-                                        <label className="block text-xs text-slate-300 mb-1">Modo de Análisis Zapia:</label>
+                                        <label className="block text-xs text-slate-300 mb-1">Modo de Análisis Académico:</label>
                                         <select 
                                             value={tipoAnalisisAcademico}
                                             onChange={(e) => setTipoAnalisisAcademico(e.target.value)}
@@ -311,7 +320,7 @@ export default function MasterCorePage() {
                                 <div className="space-y-4 p-4 bg-slate-950/60 rounded border border-cyan-500/30">
                                     <h4 className="text-xs font-bold text-cyan-300 uppercase tracking-wide">🏢 Parámetros Corporativos & APK Builder</h4>
                                     <div>
-                                        <label className="block text-xs text-slate-300 mb-1">Modo de Operación Empresarial:</label>
+                                        <label className="block text-xs text-slate-300 mb-1">Modo de Operación:</label>
                                         <select 
                                             value={tipoAnalisisEmpresa}
                                             onChange={(e) => setTipoAnalisisEmpresa(e.target.value)}
@@ -326,28 +335,28 @@ export default function MasterCorePage() {
 
                             {/* SELECTOR DE ARCHIVO */}
                             <div className="p-4 bg-slate-950 border border-cyan-500/30 rounded">
-                                <label className="block text-xs font-bold text-cyan-300 mb-2">📁 Inserción de Examen / Tarea (PDF, Word, TXT):</label>
+                                <label className="block text-xs font-bold text-cyan-300 mb-2">📁 Inserción de Documento o Examen (PDF, Word, TXT):</label>
                                 <input 
                                     type="file" 
                                     accept=".pdf,.doc,.docx,.txt"
                                     onChange={(e) => {
                                         if (e.target.files && e.target.files[0]) {
                                             setArchivoSeleccionado(e.target.files[0])
-                                            hablarJarvis(`Documento ${e.target.files[0].name} adjuntado para análisis Zapia.`)
+                                            hablarJarvis(`Documento ${e.target.files[0].name} adjuntado.`)
                                         }
                                     }}
                                     className="w-full text-xs text-slate-300 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-cyan-600 file:text-slate-950 hover:file:bg-cyan-500 cursor-pointer"
                                 />
                                 {archivoSeleccionado && (
-                                    <p className="text-[11px] text-green-400 mt-2 font-mono">✔ Archivo listo para extraer calificación: {archivoSeleccionado.name}</p>
+                                    <p className="text-[11px] text-green-400 mt-2 font-mono">✔ Archivo adjunto: {archivoSeleccionado.name}</p>
                                 )}
                             </div>
 
                             <div>
-                                <label className="block text-sm text-slate-300 mb-1">Pregunta o Instrucción para el Análisis Zapia:</label>
+                                <label className="block text-sm text-slate-300 mb-1">Instrucción para el Modelo de IA Seleccionado:</label>
                                 <textarea 
                                     name="detalle" 
-                                    placeholder="Ej: Extrae mi calificación exacta de este examen y dame la explicación detallada de cada respuesta..."
+                                    placeholder="Ej: Extrae mi calificación exacta y explícame paso a paso cada pregunta..."
                                     className="w-full bg-slate-950 border border-cyan-500/40 rounded p-3 text-white text-sm h-28 focus:border-cyan-400 outline-none"
                                     required
                                 />
@@ -358,14 +367,14 @@ export default function MasterCorePage() {
                                 disabled={isPending}
                                 className={`w-full font-bold py-3 px-4 rounded transition-all duration-200 disabled:opacity-50 shadow-lg text-slate-950 ${seccionActiva === 'academico' ? 'bg-amber-500 hover:bg-amber-400' : 'bg-cyan-500 hover:bg-cyan-400'}`}
                             >
-                                {isPending ? 'Analizando con Motor Zapia...' : `Ejecutar Análisis Estilo Zapia [${seccionActiva.toUpperCase()}]`}
+                                {isPending ? 'Procesando con Directorio Global de IAs...' : `Ejecutar Análisis Estilo Zapia [${seccionActiva.toUpperCase()}]`}
                             </button>
                         </form>
 
                         {mensajeRespuesta && (
                             <div className="mt-6 p-5 bg-slate-950 border-2 border-cyan-500 rounded-lg text-sm shadow-2xl relative space-y-3">
                                 <div className="absolute top-0 right-0 bg-cyan-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl">
-                                    MOTOR ZAPIA & 4 IAs ACTIVO
+                                    GLOBAL AI & ZAPIA ACTIVE
                                 </div>
                                 <p className="text-white font-bold">{mensajeRespuesta}</p>
                                 {folioUltimo && (
@@ -377,13 +386,13 @@ export default function MasterCorePage() {
 
                                 {codigoPaquete && (
                                     <div className="pt-2 border-t border-cyan-500/30 flex items-center justify-between">
-                                        <span className="text-xs text-cyan-300 font-semibold">Reporte detallado listo para descarga:</span>
+                                        <span className="text-xs text-cyan-300 font-semibold">Reporte analítico listo para descarga:</span>
                                         <button
                                             type="button"
                                             onClick={descargarArchivo}
                                             className="bg-green-500 hover:bg-green-400 text-slate-950 font-bold py-2 px-4 rounded text-xs transition-all shadow-lg flex items-center gap-1"
                                         >
-                                            📥 Descargar Reporte Explicativo (.tsx)
+                                            📥 Descargar Reporte (.tsx)
                                         </button>
                                     </div>
                                 )}
@@ -403,7 +412,7 @@ export default function MasterCorePage() {
                                         <tr className="border-b border-cyan-500/20 text-cyan-400">
                                             <th className="pb-2">Clave / Núcleo</th>
                                             <th className="pb-2">Información / Detalle</th>
-                                            <th className="pb-2">Motor Unificado</th>
+                                            <th className="pb-2">Motor / IA</th>
                                             <th className="pb-2">Fecha</th>
                                         </tr>
                                     </thead>
@@ -412,7 +421,7 @@ export default function MasterCorePage() {
                                             <tr key={mem.id} className="hover:bg-slate-950/50">
                                                 <td className="py-2 font-bold text-cyan-300">{mem.memory_key}</td>
                                                 <td className="py-2 max-w-xs truncate">{mem.memory_value}</td>
-                                                <td className="py-2 font-mono text-[10px] text-cyan-400">{mem.routing_engine || 'Zapia Engine'}</td>
+                                                <td className="py-2 font-mono text-[10px] text-cyan-400">{mem.routing_engine || 'Global AI'}</td>
                                                 <td className="py-2 text-[10px] text-slate-500">{new Date(mem.created_at).toLocaleString()}</td>
                                             </tr>
                                         ))}

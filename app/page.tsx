@@ -13,7 +13,7 @@ export default function MasterCorePage() {
     const [memoriasEstado, setMemoriasEstado] = useState<any[]>([])
     
     const [seccionActiva, setSeccionActiva] = useState<'academico' | 'empresa'>('academico')
-    const [tipoAnalisisAcademico, setTipoAnalisisAcademico] = useState('Análisis Documental y Criterios Jurídicos')
+    const [tipoAnalisisAcademico, setTipoAnalisisAcademico] = useState('Revisión y Calificación Estilo Classroom')
     const [tipoAnalisisEmpresa, setTipoAnalisisEmpresa] = useState('Arquitectura Full-Stack & Auditoría')
     const [modeloIA, setModeloIA] = useState('Sistema Autónomo de Investigación Documental')
     
@@ -33,7 +33,6 @@ export default function MasterCorePage() {
     const [omegaKeyInput, setOmegaKeyInput] = useState('')
 
     const [vozActiva, setVozActiva] = useState(true)
-    const [camaraActiva, setCamaraActiva] = useState(false)
     const videoRef = useRef<HTMLVideoElement | null>(null)
     const [vocesDisponibles, setVocesDisponibles] = useState<SpeechSynthesisVoice[]>([])
 
@@ -56,15 +55,12 @@ export default function MasterCorePage() {
     function hablarJarvis(texto: string, tonoAlto: boolean = false) {
         if (!vozActiva || typeof window === 'undefined' || !('speechSynthesis' in window)) return
         window.speechSynthesis.cancel()
-
         const utterance = new SpeechSynthesisUtterance(texto)
         utterance.rate = 1.05
         utterance.pitch = tonoAlto ? 1.25 : 0.95
         utterance.lang = 'es-MX'
-
         const mejorVoz = vocesDisponibles.find(v => v.lang.toLowerCase().includes('es') && (v.name.includes('Natural') || v.name.includes('Google')))
                         || vocesDisponibles.find(v => v.lang.toLowerCase().includes('es'))
-
         if (mejorVoz) utterance.voice = mejorVoz
         window.speechSynthesis.speak(utterance)
     }
@@ -80,7 +76,6 @@ export default function MasterCorePage() {
         recognition.lang = 'es-MX';
         recognition.interimResults = false;
         recognition.maxAlternatives = 1;
-
         recognition.onstart = () => { hablarJarvis(`Dictado activo para ${nombreModulo}, licenciado.`); };
         recognition.onresult = (event: any) => {
             const textoTranscrito = event.results[0][0].transcript;
@@ -93,10 +88,8 @@ export default function MasterCorePage() {
 
     async function iniciarAccesoFacial() {
         setModoAcceso('facial')
-        setCamaraActiva(true)
         setEstadoSeguridad('Verificando credenciales biométricas...')
         hablarJarvis("Iniciando validación biométrica.")
-        
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ video: true })
             if (videoRef.current) videoRef.current.srcObject = stream
@@ -160,7 +153,7 @@ export default function MasterCorePage() {
             setHashGenerado(resultado.hash || null)
             setCodigoPaquete(resultado.codigoDescargable || null)
             if (resultado.success) {
-                hablarJarvis("Análisis metodológico procesado y archivado en el expediente.")
+                hablarJarvis("Evaluación académica procesada y registrada correctamente.")
                 cargarMemoria()
             } else {
                 hablarJarvis("Acceso denegado por protocolo de seguridad.")
@@ -185,10 +178,10 @@ export default function MasterCorePage() {
     function formatearActividad(clave: string) {
         if (!clave) return 'Expediente Institucional'
         const lower = clave.toLowerCase()
-        if (lower.includes('academico') || lower.includes('zapia') || lower.includes('evaluacion') || lower.includes('analisis') || lower.includes('documental')) {
-            return 'Dictamen Jurídico y Síntesis Documental'
+        if (lower.includes('academico') || lower.includes('zapia') || lower.includes('evaluacion') || lower.includes('classroom')) {
+            return 'Calificación y Revisión Académica (Estilo Classroom)'
         }
-        if (lower.includes('empresa') || lower.includes('apk') || lower.includes('auditoria') || lower.includes('full-stack')) {
+        if (lower.includes('empresa') || lower.includes('apk') || lower.includes('auditoria')) {
             return 'Dictamen Técnico y Desarrollo Arquitectónico'
         }
         return 'Investigación Documental y Bitácora'
@@ -197,20 +190,6 @@ export default function MasterCorePage() {
     function formatearMotor(motor: string) {
         if (!motor) return 'Subsistema de Investigación Documental'
         return 'Gabinete de Análisis Jurídico'
-    }
-
-    function descargarBancoMemoria() {
-        const contenidoJson = JSON.stringify(memoriasEstado, null, 2)
-        const blob = new Blob([contenidoJson], { type: 'application/json;charset=utf-8' })
-        const url = URL.createObjectURL(blob)
-        const link = document.createElement('a')
-        link.href = url
-        link.download = `Expediente-Academico-Juridico.json`
-        document.body.appendChild(link)
-        link.click()
-        document.body.removeChild(link)
-        URL.revokeObjectURL(url)
-        hablarJarvis('Expediente exportado correctamente.')
     }
 
     return (
@@ -225,27 +204,9 @@ export default function MasterCorePage() {
                     </div>
 
                     <div className="grid grid-cols-3 gap-2 bg-slate-950 p-2 rounded-lg border border-cyan-500/30">
-                        <button
-                            type="button"
-                            onClick={iniciarAccesoFacial}
-                            className={`py-2 px-2 rounded text-xs font-bold transition-all ${modoAcceso === 'facial' ? 'bg-cyan-500 text-slate-950 shadow' : 'text-slate-300 hover:text-white'}`}
-                        >
-                            📷 Biometría
-                        </button>
-                        <button
-                            type="button"
-                            onClick={() => setModoAcceso('pin')}
-                            className={`py-2 px-2 rounded text-xs font-bold transition-all ${modoAcceso === 'pin' ? 'bg-cyan-500 text-slate-950 shadow' : 'text-slate-300 hover:text-white'}`}
-                        >
-                            🔑 PIN Ejecutivo
-                        </button>
-                        <button
-                            type="button"
-                            onClick={verificarBiometriaHardware}
-                            className={`py-2 px-2 rounded text-xs font-bold transition-all ${modoAcceso === 'hardware' ? 'bg-cyan-500 text-slate-950 shadow' : 'text-slate-300 hover:text-white'}`}
-                        >
-                            👆 Llave Segura
-                        </button>
+                        <button type="button" onClick={iniciarAccesoFacial} className="py-2 px-2 rounded text-xs font-bold bg-cyan-500 text-slate-950 shadow">📷 Biometría</button>
+                        <button type="button" onClick={() => setModoAcceso('pin')} className="py-2 px-2 rounded text-xs font-bold text-slate-300 hover:text-white">🔑 PIN Ejecutivo</button>
+                        <button type="button" onClick={verificarBiometriaHardware} className="py-2 px-2 rounded text-xs font-bold text-slate-300 hover:text-white">👆 Llave Segura</button>
                     </div>
 
                     {modoAcceso === 'facial' && (
@@ -253,13 +214,7 @@ export default function MasterCorePage() {
                             <div className="w-48 h-36 mx-auto bg-slate-950 border border-cyan-500/40 rounded-lg flex items-center justify-center overflow-hidden relative shadow-inner">
                                 <video ref={videoRef} autoPlay playsInline muted className="w-full h-full object-cover" />
                             </div>
-                            <button
-                                type="button"
-                                onClick={iniciarAccesoFacial}
-                                className="w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-2.5 px-4 rounded-lg text-xs transition-all shadow"
-                            >
-                                Verificar Identidad por Rostro
-                            </button>
+                            <button type="button" onClick={iniciarAccesoFacial} className="w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-2.5 px-4 rounded-lg text-xs transition-all shadow">Verificar Identidad por Rostro</button>
                         </div>
                     )}
 
@@ -267,335 +222,94 @@ export default function MasterCorePage() {
                         <form onSubmit={verificarPinMaestro} className="space-y-4 p-4 bg-slate-950 rounded-lg border border-cyan-500/30">
                             <div>
                                 <label className="block text-xs text-cyan-300 mb-2 font-bold">Ingrese PIN de Acceso:</label>
-                                <input 
-                                    type="password" 
-                                    maxLength={6}
-                                    value={pinIngresado}
-                                    onChange={(e) => setPinIngresado(e.target.value)}
-                                    placeholder="••••" 
-                                    className="w-full bg-slate-900 border border-cyan-500/50 rounded p-3 text-center text-white text-lg tracking-widest outline-none focus:border-cyan-400"
-                                    required
-                                />
+                                <input type="password" maxLength={6} value={pinIngresado} onChange={(e) => setPinIngresado(e.target.value)} placeholder="••••" className="w-full bg-slate-900 border border-cyan-500/50 rounded p-3 text-center text-white text-lg tracking-widest outline-none focus:border-cyan-400" required />
                             </div>
-                            <button 
-                                type="submit"
-                                className="w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-2.5 px-4 rounded-lg text-xs transition-all shadow"
-                            >
-                                Acceder al Gabinete
-                            </button>
+                            <button type="submit" className="w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-2.5 px-4 rounded-lg text-xs transition-all shadow">Acceder al Gabinete</button>
                         </form>
-                    )}
-
-                    {modoAcceso === 'hardware' && (
-                        <div className="space-y-4 p-4 bg-slate-950 rounded-lg border border-cyan-500/30 text-center">
-                            <button
-                                type="button"
-                                onClick={verificarBiometriaHardware}
-                                className="w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-3 px-4 rounded-lg text-xs transition-all shadow"
-                            >
-                                Validar Llave de Hardware
-                            </button>
-                        </div>
                     )}
 
                     <p className="text-xs text-white font-medium pt-2">{estadoSeguridad}</p>
                 </div>
             ) : (
-                <div className="w-full max-w-4xl flex flex-col items-center animate-fadeIn">
+                <div className="w-full max-w-5xl flex flex-col items-center animate-fadeIn">
                     <div className="w-full bg-slate-900 border border-cyan-500/30 rounded-lg p-6 shadow-xl mb-6">
                         <header className="flex justify-between items-center border-b border-cyan-500/20 pb-4 mb-6">
                             <div>
                                 <h1 className="text-xl font-bold tracking-wider flex items-center gap-2">
-                                    <span>⚖️</span> Gabinete Académico y Jurídico — <span className="text-cyan-300">Sistema de Investigación Autónoma</span>
+                                    <span>📚</span> Lector y Calificador Académico — <span className="text-cyan-300">Estilo Classroom</span>
                                 </h1>
                                 <p className="text-xs text-slate-400">Investigador: fg782270@gmail.com (C. Francisco)</p>
                             </div>
-                            <button 
-                                onClick={() => setAccesoConcedido(false)}
-                                className="text-xs bg-red-600 hover:bg-red-500 text-white px-3 py-1 rounded font-bold"
-                            >
-                                🔒 Bloquear Sesión
-                            </button>
+                            <button onClick={() => setAccesoConcedido(false)} className="text-xs bg-red-600 hover:bg-red-500 text-white px-3 py-1 rounded font-bold">🔒 Bloquear Sesión</button>
                         </header>
 
-                        {/* SELECTOR GEOPOLÍTICO Y JURÍDICO */}
-                        <div className="mb-6 p-4 bg-slate-950 border border-cyan-500/40 rounded-lg space-y-3">
-                            <h3 className="text-xs font-bold text-cyan-300 uppercase tracking-wide">🌍 Marco Geopolítico y Normativo</h3>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                                <div>
-                                    <label className="block text-[11px] text-slate-300 mb-1">Continente:</label>
-                                    <select
-                                        value={continente}
-                                        onChange={(e) => setContinente(e.target.value)}
-                                        className="w-full bg-slate-900 border border-cyan-500/40 rounded p-2 text-white text-xs"
-                                    >
-                                        <option value="América">América</option>
-                                        <option value="Europa">Europa</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label className="block text-[11px] text-slate-300 mb-1">Región de Estudio:</label>
-                                    <select
-                                        value={region}
-                                        onChange={(e) => setRegion(e.target.value)}
-                                        className="w-full bg-slate-900 border border-cyan-500/40 rounded p-2 text-white text-xs"
-                                    >
-                                        <option value="América del Norte / LATAM">América del Norte / LATAM</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label className="block text-[11px] text-slate-300 mb-1">Jurisdicción:</label>
-                                    <input
-                                        type="text"
-                                        value={pais}
-                                        onChange={(e) => setPais(e.target.value)}
-                                        className="w-full bg-slate-900 border border-cyan-500/40 rounded p-2 text-white text-xs"
-                                    />
-                                </div>
-                            </div>
+                        {/* SELECTOR DE MÓDULO */}
+                        <div className="mb-6 p-4 bg-slate-950 border-2 border-cyan-500/50 rounded-lg flex gap-3">
+                            <button type="button" onClick={() => setSeccionActiva('academico')} className={`flex-1 py-3 px-4 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'academico' ? 'bg-amber-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-amber-300'}`}>
+                                🎓 Lector Académico & Calificación (Classroom)
+                            </button>
+                            <button type="button" onClick={() => setSeccionActiva('empresa')} className={`flex-1 py-3 px-4 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'empresa' ? 'bg-cyan-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-cyan-300'}`}>
+                                🏢 Módulo Corporativo & APK
+                            </button>
                         </div>
 
-                        {/* SELECTOR DE MÓDULO INDEPENDIENTE */}
-                        <div className="mb-6 p-4 bg-slate-950 border-2 border-cyan-500/50 rounded-lg shadow-inner space-y-4">
-                            <h3 className="text-xs font-bold uppercase tracking-wider text-cyan-300">
-                                🔀 Selección de Gabinete de Trabajo:
-                            </h3>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                <button
-                                    type="button"
-                                    onClick={() => { setSeccionActiva('academico'); hablarJarvis("Gabinete Académico y Jurídico Activo", true); }}
-                                    className={`py-3 px-4 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-2 ${seccionActiva === 'academico' ? 'bg-amber-500 text-slate-950 shadow-lg border-2 border-white' : 'bg-slate-900 text-amber-300 border border-amber-500/30'}`}
-                                >
-                                    🎓 Gabinete Académico — Análisis Jurídico & Citación Orgánica
-                                </button>
-                                <button
-                                    type="button"
-                                    onClick={() => { setSeccionActiva('empresa'); hablarJarvis("Gabinete Corporativo Activo"); }}
-                                    className={`py-3 px-4 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-2 ${seccionActiva === 'empresa' ? 'bg-cyan-500 text-slate-950 shadow-lg border-2 border-white' : 'bg-slate-900 text-cyan-300 border border-cyan-500/30'}`}
-                                >
-                                    🏢 Gabinete Corporativo — Nexcode & Desarrollo
-                                </button>
-                            </div>
-                        </div>
-
-                        {/* FORMULARIO PRINCIPAL */}
+                        {/* FORMULARIO PRINCIPAL - VISTA DE LECTOR CLASSROOM */}
                         <form onSubmit={handleSubmit} className="space-y-4">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-sm text-slate-300 mb-1">Identidad del Investigador:</label>
-                                    <input 
-                                        type="email" 
-                                        name="emailSolicitante" 
-                                        defaultValue="fg782270@gmail.com" 
-                                        className="w-full bg-slate-950 border border-cyan-500/40 rounded p-2 text-white text-sm"
-                                        required
-                                    />
+                                    <label className="block text-sm text-slate-300 mb-1">Investigador:</label>
+                                    <input type="email" name="emailSolicitante" defaultValue="fg782270@gmail.com" className="w-full bg-slate-950 border border-cyan-500/40 rounded p-2 text-white text-sm" required />
                                 </div>
                                 <div>
-                                    <label className="block text-sm text-cyan-300 mb-1 font-bold">🔑 Llave de Acceso Criptográfico:</label>
-                                    <input 
-                                        type="password" 
-                                        value={omegaKeyInput}
-                                        onChange={(e) => setOmegaKeyInput(e.target.value)}
-                                        placeholder="Ingrese Llave Segura..." 
-                                        className="w-full bg-slate-950 border-2 border-cyan-500 rounded p-2 text-white text-sm outline-none focus:border-cyan-300 font-mono"
-                                        required
-                                    />
+                                    <label className="block text-sm text-cyan-300 mb-1 font-bold">🔑 Llave Criptográfica:</label>
+                                    <input type="password" value={omegaKeyInput} onChange={(e) => setOmegaKeyInput(e.target.value)} placeholder="NEXCODE-OMEGA-7822-FRAN-1998" className="w-full bg-slate-950 border-2 border-cyan-500 rounded p-2 text-white text-sm outline-none font-mono" required />
                                 </div>
                             </div>
 
                             {seccionActiva === 'academico' && (
-                                <div className="space-y-4 p-4 bg-amber-950/20 rounded border border-amber-500/40 animate-fadeIn">
-                                    <div className="flex justify-between items-center">
-                                        <h4 className="text-xs font-bold text-amber-300 uppercase tracking-wide">📊 Gabinete Académico — Análisis y Síntesis Documental</h4>
-                                        <button
-                                            type="button"
-                                            onClick={() => escucharMic(setDetalleAcademico, 'Académico')}
-                                            className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs flex items-center gap-1 shadow transition-all"
-                                        >
-                                            🎤 Dictar Directriz por Voz
-                                        </button>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 bg-slate-950 rounded border border-amber-500/40">
+                                    {/* Panel Izquierdo: Visor de Documento */}
+                                    <div className="space-y-3">
+                                        <h4 className="text-xs font-bold text-amber-300 uppercase tracking-wide">📄 Visor del Trabajo del Alumno / Tesis</h4>
+                                        <div className="p-3 bg-slate-900 border border-amber-500/30 rounded">
+                                            <label className="block text-xs font-bold text-amber-300 mb-1">Cargar Archivo (PDF, Word, TXT):</label>
+                                            <input type="file" accept=".pdf,.doc,.docx,.txt" onChange={(e) => { if (e.target.files && e.target.files[0]) { setArchivoAcademico(e.target.files[0]); hablarJarvis("Documento cargado en el visor."); } }} className="w-full text-xs text-slate-300 file:mr-2 file:py-1 file:px-3 file:rounded file:border-0 file:bg-amber-500 file:text-slate-950 font-semibold cursor-pointer" />
+                                            {archivoAcademico && <p className="text-[11px] text-green-400 mt-2 font-mono">✔ Documento activo: {archivoAcademico.name}</p>}
+                                        </div>
+                                        <div className="h-40 bg-slate-900 border border-slate-700 rounded p-3 text-xs text-slate-300 overflow-y-auto">
+                                            <p className="text-slate-500 italic">[Vista previa del texto extraído del documento para lectura limpia sin código ni metadatos...]</p>
+                                            {archivoAcademico ? <p className="mt-2 text-cyan-300">Analizando estructura y coherencia del archivo: {archivoAcademico.name}</p> : <p className="mt-2">Adjunte un archivo para iniciar la lectura y revisión detallada.</p>}
+                                        </div>
                                     </div>
 
-                                    <div>
-                                        <label className="block text-xs text-slate-300 mb-1">Criterio Metodológico:</label>
-                                        <select 
-                                            value={tipoAnalisisAcademico}
-                                            onChange={(e) => setTipoAnalisisAcademico(e.target.value)}
-                                            className="w-full bg-slate-900 border border-amber-500/40 rounded p-2 text-white text-xs"
-                                        >
-                                            <option value="Análisis Documental y Criterios Jurídicos">Análisis Documental y Criterios Jurídicos</option>
-                                            <option value="Síntesis Bibliográfica y Citación Contextual">Síntesis Bibliográfica y Citación Contextual</option>
-                                            <option value="Estructuración y Fundamentación de Tesis (UnADM)">Estructuración y Fundamentación de Tesis (UnADM)</option>
-                                        </select>
-                                    </div>
-
-                                    <div className="p-3 bg-slate-950 border border-amber-500/30 rounded">
-                                        <label className="block text-xs font-bold text-amber-300 mb-1">📁 Expediente o Borrador de Investigación (PDF, Word, TXT):</label>
-                                        <input 
-                                            type="file" 
-                                            accept=".pdf,.doc,.docx,.txt"
-                                            onChange={(e) => {
-                                                if (e.target.files && e.target.files[0]) {
-                                                    setArchivoAcademico(e.target.files[0])
-                                                    hablarJarvis(`Expediente ${e.target.files[0].name} adjuntado con éxito.`)
-                                                }
-                                            }}
-                                            className="w-full text-xs text-slate-300 file:mr-4 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-amber-500 file:text-slate-950 hover:file:bg-amber-400 cursor-pointer"
-                                        />
-                                        {archivoAcademico && (
-                                            <p className="text-[11px] text-green-400 mt-1 font-mono">✔ Documento integrado: {archivoAcademico.name}</p>
-                                        )}
-                                    </div>
-
-                                    <div>
-                                        <label className="block text-xs text-slate-300 mb-1">Instrucción de Análisis y Argumentación:</label>
-                                        <textarea 
-                                            name="detalle" 
-                                            value={detalleAcademico}
-                                            onChange={(e) => setDetalleAcademico(e.target.value)}
-                                            placeholder="Ej: Analice el marco jurídico integrando las fuentes bibliográficas de manera fluida y contextual..."
-                                            className="w-full bg-slate-950 border border-amber-500/40 rounded p-3 text-white text-sm h-28 focus:border-amber-400 outline-none"
-                                            required
-                                        />
+                                    {/* Panel Derecho: Calificación y Retroalimentación Estilo Classroom */}
+                                    <div className="space-y-3">
+                                        <div className="flex justify-between items-center">
+                                            <h4 className="text-xs font-bold text-amber-300 uppercase tracking-wide">✍️ Calificación & Retroalimentación</h4>
+                                            <button type="button" onClick={() => escucharMic(setDetalleAcademico, 'Classroom')} className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-1 px-2 rounded text-[11px]">🎤 Dictar Nota</button>
+                                        </div>
+                                        <div>
+                                            <label className="block text-xs text-slate-300 mb-1">Calificación Asignada (Ej: 10 / 10):</label>
+                                            <input type="text" placeholder="10 / 10 (Aprobado)" className="w-full bg-slate-900 border border-amber-500/40 rounded p-2 text-white text-xs" />
+                                        </div>
+                                        <div>
+                                            <label className="block text-xs text-slate-300 mb-1">Comentarios Privados y Corrección Metodológica:</label>
+                                            <textarea name="detalle" value={detalleAcademico} onChange={(e) => setDetalleAcademico(e.target.value)} placeholder="Redacte la retroalimentación formal, revisión de tesis o justificación de la calificación..." className="w-full bg-slate-900 border border-amber-500/40 rounded p-2 text-white text-xs h-24 outline-none" required />
+                                        </div>
                                     </div>
                                 </div>
                             )}
 
-                            {seccionActiva === 'empresa' && (
-                                <div className="space-y-4 p-4 bg-cyan-950/20 rounded border border-cyan-500/40 animate-fadeIn">
-                                    <div className="flex justify-between items-center">
-                                        <h4 className="text-xs font-bold text-cyan-300 uppercase tracking-wide">🏢 Gabinete Corporativo — Nexcode & Desarrollo Tecnológico</h4>
-                                        <button
-                                            type="button"
-                                            onClick={() => escucharMic(setDetalleEmpresa, 'Empresa')}
-                                            className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs flex items-center gap-1 shadow transition-all"
-                                        >
-                                            🎤 Dictar Directriz por Voz
-                                        </button>
-                                    </div>
-
-                                    <div>
-                                        <label className="block text-xs text-slate-300 mb-1">Modelo de Análisis Tecnológico:</label>
-                                        <select 
-                                            value={modeloIA}
-                                            onChange={(e) => setModeloIA(e.target.value)}
-                                            className="w-full bg-slate-900 border border-cyan-500/40 rounded p-2 text-white text-xs"
-                                        >
-                                            <option value="Sistema Autónomo de Investigación Documental">Sistema Autónomo de Investigación Documental</option>
-                                            <option value="Auditoría y Síntesis de Código Fuente">Auditoría y Síntesis de Código Fuente</option>
-                                            <option value="Metodología de Arquitectura Full-Stack">Metodología de Arquitectura Full-Stack</option>
-                                        </select>
-                                    </div>
-
-                                    <div className="p-3 bg-slate-950 border border-cyan-500/30 rounded">
-                                        <label className="block text-xs font-bold text-cyan-300 mb-1">📁 Repositorio o Documento de Ingeniería:</label>
-                                        <input 
-                                            type="file" 
-                                            accept=".pdf,.doc,.docx,.txt,.ts,.tsx,.js"
-                                            onChange={(e) => {
-                                                if (e.target.files && e.target.files[0]) {
-                                                    setArchivoEmpresa(e.target.files[0])
-                                                    hablarJarvis(`Archivo corporativo ${e.target.files[0].name} adjuntado.`)
-                                                }
-                                            }}
-                                            className="w-full text-xs text-slate-300 file:mr-4 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-cyan-500 file:text-slate-950 hover:file:bg-cyan-400 cursor-pointer"
-                                        />
-                                        {archivoEmpresa && (
-                                            <p className="text-[11px] text-green-400 mt-1 font-mono">✔ Archivo corporativo listo: {archivoEmpresa.name}</p>
-                                        )}
-                                    </div>
-
-                                    <div>
-                                        <label className="block text-xs text-slate-300 mb-1">Instrucción Corporativa o de Compilación:</label>
-                                        <textarea 
-                                            name="detalle" 
-                                            value={detalleEmpresa}
-                                            onChange={(e) => setDetalleEmpresa(e.target.value)}
-                                            placeholder="Ej: Genere el paquete de compilación o audite los componentes del sistema..."
-                                            className="w-full bg-slate-950 border border-cyan-500/40 rounded p-3 text-white text-sm h-28 focus:border-cyan-400 outline-none"
-                                            required
-                                        />
-                                    </div>
-                                </div>
-                            )}
-
-                            <button 
-                                type="submit" 
-                                disabled={isPending}
-                                className={`w-full font-bold py-3 px-4 rounded transition-all duration-200 disabled:opacity-50 shadow-lg text-slate-950 ${seccionActiva === 'academico' ? 'bg-amber-500 hover:bg-amber-400' : 'bg-cyan-500 hover:bg-cyan-400'}`}
-                            >
-                                {isPending ? 'Procesando Dictamen Institucional...' : `Ejecutar Análisis en [${seccionActiva.toUpperCase()}]`}
+                            <button type="submit" disabled={isPending} className="w-full bg-amber-500 hover:bg-amber-400 font-bold py-3 px-4 rounded text-slate-950 shadow-lg">
+                                {isPending ? 'Guardando Calificación...' : 'Publicar Calificación y Enviar Retroalimentación (Classroom)'}
                             </button>
                         </form>
 
                         {mensajeRespuesta && (
-                            <div className="mt-6 p-5 bg-slate-950 border-2 border-cyan-500 rounded-lg text-sm shadow-2xl relative space-y-3">
-                                <div className="absolute top-0 right-0 bg-cyan-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl">
-                                    ESTADO: VERIFICADO Y CERTIFICADO
-                                </div>
+                            <div className="mt-6 p-5 bg-slate-950 border-2 border-cyan-500 rounded-lg text-sm shadow-2xl relative space-y-2">
+                                <div className="absolute top-0 right-0 bg-cyan-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl">ESTADO: CALIFICACIÓN PUBLICADA</div>
                                 <div className="text-white font-medium whitespace-pre-line leading-relaxed">{mensajeRespuesta}</div>
-                                
-                                {folioUltimo && (
-                                    <p className="text-xs text-cyan-300"><span className="font-bold">Folio de Expediente:</span> {folioUltimo}</p>
-                                )}
-                                {hashGenerado && (
-                                    <p className="text-[11px] font-mono text-slate-300 break-all"><span className="font-bold text-cyan-400">Firma de Integridad SHA-256:</span> {hashGenerado}</p>
-                                )}
-
-                                {!esAcademicoResultado && codigoPaquete && (
-                                    <div className="pt-2 border-t border-cyan-500/30 flex items-center justify-between">
-                                        <span className="text-xs text-cyan-300 font-semibold">Paquete técnico compilado y listo:</span>
-                                        <button
-                                            type="button"
-                                            onClick={descargarArchivo}
-                                            className="bg-green-500 hover:bg-green-400 text-slate-950 font-bold py-2 px-4 rounded text-xs transition-all shadow-lg flex items-center gap-1"
-                                        >
-                                            📥 Descargar Paquete (.tsx)
-                                        </button>
-                                    </div>
-                                )}
-                            </div>
-                        )}
-                    </div>
-
-                    {/* EXPEDIENTE Y REGISTROS INSTITUCIONALES */}
-                    <div className="w-full bg-slate-900 border border-cyan-500/30 rounded-lg p-6 shadow-xl space-y-4">
-                        <div className="flex justify-between items-center border-b border-cyan-500/20 pb-2">
-                            <h2 className="text-lg font-bold text-cyan-300">Expediente y Registros Institucionales</h2>
-                            <button
-                                type="button"
-                                onClick={descargarBancoMemoria}
-                                className="bg-green-500 hover:bg-green-400 text-slate-950 font-bold py-2 px-4 rounded text-xs transition-all shadow-lg flex items-center gap-1"
-                            >
-                                📥 Exportar Expediente (.json)
-                            </button>
-                        </div>
-
-                        {memoriasEstado.length === 0 ? (
-                            <p className="text-xs text-slate-400">No hay registros almacenados en el expediente todavía.</p>
-                        ) : (
-                            <div className="overflow-x-auto">
-                                <table className="w-full text-left text-xs">
-                                    <thead>
-                                        <tr className="border-b border-cyan-500/20 text-cyan-400">
-                                            <th className="pb-2">Expediente / Actividad</th>
-                                            <th className="pb-2">Detalle Analítico</th>
-                                            <th className="pb-2">Gabinete Responsable</th>
-                                            <th className="pb-2">Fecha y Hora</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className="divide-y divide-slate-800 text-slate-300">
-                                        {memoriasEstado.map((mem) => (
-                                            <tr key={mem.id} className="hover:bg-slate-950/50">
-                                                <td className="py-2 font-bold text-cyan-300">{formatearActividad(mem.memory_key)}</td>
-                                                <td className="py-2 max-w-xs truncate">{mem.memory_value}</td>
-                                                <td className="py-2 font-mono text-[10px] text-cyan-400">{formatearMotor(mem.routing_engine)}</td>
-                                                <td className="py-2 text-[10px] text-slate-500">{new Date(mem.created_at).toLocaleString()}</td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
+                                {folioUltimo && <p className="text-xs text-cyan-300"><span className="font-bold">Folio de Revisión:</span> {folioUltimo}</p>}
                             </div>
                         )}
                     </div>

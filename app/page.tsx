@@ -6,14 +6,12 @@ import { ejecutarJarvisCore, obtenerMemoriaJarvis } from './actions/master-actio
 export default function MasterCorePage() {
     const [isPending, startTransition] = useTransition()
     const [mensajeRespuesta, setMensajeRespuesta] = useState<string | null>(null)
-    const [esAcademicoResultado, setEsAcademicoResultado] = useState(false)
     const [folioUltimo, setFolioUltimo] = useState<string | null>(null)
     const [hashGenerado, setHashGenerado] = useState<string | null>(null)
-    const [codigoPaquete, setCodigoPaquete] = useState<string | null>(null)
     const [memoriasEstado, setMemoriasEstado] = useState<any[]>([])
     
     const [seccionActiva, setSeccionActiva] = useState<'academico' | 'empresa'>('academico')
-    const [subTabAcademico, setSubTabAcademico] = useState<'calificar' | 'editor'>('calificar')
+    const [subTabAcademico, setSubTabAcademico] = useState<'calificar' | 'editor'>('editor')
     
     const [tipoAnalisisAcademico, setTipoAnalisisAcademico] = useState('Revisión y Calificación Estilo Classroom')
     const [tipoAnalisisEmpresa, setTipoAnalisisEmpresa] = useState('Arquitectura Full-Stack & Auditoría')
@@ -21,23 +19,39 @@ export default function MasterCorePage() {
     
     const [detalleAcademico, setDetalleAcademico] = useState('Análisis metodológico y jurídico completado con excelencia.')
     const [calificacionAcademica, setCalificacionAcademica] = useState('10 / 10 (Aprobado con Excelencia)')
-    const [archivoAcademico, setArchivoAcademico] = useState<File | null>(null)
-    const [textoEditado, setTextoEditado] = useState<string>('')
-    const [archivoEmpresa, setArchivoEmpresa] = useState<File | null>(null)
+    
+    // Contenido del documento limpio estilo Word
+    const [tituloDocumento, setTituloDocumento] = useState('Proyecto de Investigación y Caso Práctico Jurídico')
+    const [contenidoDocumento, setContenidoDocumento] = useState(
+`UNIVERSIDAD ABIERTA Y A DISTANCIA DE MÉXICO (UnADM)
+LICENCIATURA EN DERECHO
+
+TÍTULO DEL TRABAJO: 
+Proyecto de Investigación y Análisis Jurídico Aplicado
+
+1. INTRODUCCIÓN Y MARCO TEÓRICO
+El presente documento constituye el desarrollo formal del caso práctico y marco metodológico, estructurado conforme a los estándares institucionales más rigurosos. 
+
+2. DESARROLLO DEL CASO PRÁCTICO
+[Comience a redactar, analizar o pegar aquí el contenido íntegro de su trabajo académico, ensayo o tesis de manera limpia y profesional, exactamente como en un procesador de textos tipo Word...]
+
+3. CONCLUSIONES Y FUENTES DE CONSULTA
+- Conclusiones derivadas del análisis normativo.
+- Referencias bibliográficas integradas de forma contextual y orgánica.`
+    )
 
     const [continente, setContinente] = useState('América')
     const [region, setRegion] = useState('América del Norte / LATAM')
     const [pais, setPais] = useState('México (Reynosa, Tamaulipas)')
 
     const [accesoConcedido, setAccesoConcedido] = useState(false)
-    const [modoAcceso, setModoAcceso] = useState<'facial' | 'pin' | 'hardware'>('pin')
+    const [modoAcceso, setModoAcceso] = useState<'pin'>('pin')
     const [pinIngresado, setPinIngresado] = useState('')
-    const [estadoSeguridad, setEstadoSeguridad] = useState('Ingrese su PIN ejecutivo o use biometría...')
+    const [estadoSeguridad, setEstadoSeguridad] = useState('Ingrese su PIN ejecutivo para acceder al gabinete...')
     
     const omegaKeyInput = 'NEXCODE-OMEGA-7822-FRAN-1998'
 
     const [vozActiva, setVozActiva] = useState(true)
-    const videoRef = useRef<HTMLVideoElement | null>(null)
     const [vocesDisponibles, setVocesDisponibles] = useState<SpeechSynthesisVoice[]>([])
 
     async function cargarMemoria() {
@@ -56,16 +70,12 @@ export default function MasterCorePage() {
         }
     }, [])
 
-    function hablarJarvis(texto: string, tonoAlto: boolean = false) {
+    function hablarJarvis(texto: string) {
         if (!vozActiva || typeof window === 'undefined' || !('speechSynthesis' in window)) return
         window.speechSynthesis.cancel()
         const utterance = new SpeechSynthesisUtterance(texto)
         utterance.rate = 1.05
-        utterance.pitch = tonoAlto ? 1.25 : 0.95
         utterance.lang = 'es-MX'
-        const mejorVoz = vocesDisponibles.find(v => v.lang.toLowerCase().includes('es') && (v.name.includes('Natural') || v.name.includes('Google')))
-                        || vocesDisponibles.find(v => v.lang.toLowerCase().includes('es'))
-        if (mejorVoz) utterance.voice = mejorVoz
         window.speechSynthesis.speak(utterance)
     }
 
@@ -81,105 +91,18 @@ export default function MasterCorePage() {
         }
     }
 
-    async function iniciarAccesoFacial() {
-        setModoAcceso('facial')
-        setEstadoSeguridad('Verificando credenciales biométricas...')
-        hablarJarvis("Iniciando validación biométrica.")
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia({ video: true })
-            if (videoRef.current) videoRef.current.srcObject = stream
-            setTimeout(() => {
-                setEstadoSeguridad('✔ Identidad confirmada.')
-                hablarJarvis("Acceso autorizado, C. Francisco.")
-                setAccesoConcedido(true)
-            }, 2500)
-        } catch (err) {
-            setEstadoSeguridad('❌ Error de cámara. Use PIN Ejecutivo.')
-            hablarJarvis("Use su PIN ejecutivo.")
-        }
-    }
-
-    async function verificarBiometriaHardware() {
-        setModoAcceso('hardware')
-        setEstadoSeguridad('Validando dispositivo de seguridad físico...')
-        hablarJarvis("Validando hardware autorizado.")
-        setTimeout(() => {
-            setEstadoSeguridad('✔ Dispositivo validado.')
-            hablarJarvis("Acceso autorizado.")
-            setAccesoConcedido(true)
-        }, 2000)
-    }
-
-    // Conversor inteligente: Traduce archivos JSON técnicos a un reporte en lenguaje natural
-    function manejarArchivoAcademico(e: React.ChangeEvent<HTMLInputElement>) {
-        if (e.target.files && e.target.files[0]) {
-            const file = e.target.files[0]
-            setArchivoAcademico(file)
-            hablarJarvis(`Documento ${file.name} integrado y formateado en lenguaje natural.`)
-            
-            const reader = new FileReader()
-            reader.onload = (event) => {
-                const contenido = event.target?.result as string || ''
-                if (file.name.endsWith('.json')) {
-                    try {
-                        const parsed = JSON.parse(contenido)
-                        if (Array.isArray(parsed)) {
-                            const reporteHumano = parsed.map((item, idx) => 
-                                `DICTAMEN Y REVISIÓN ACADÉMICA NÚMERO #${idx + 1}\n` +
-                                `• Actividad Evaluada: ${item.memory_key || 'Evaluación General'}\n` +
-                                `• Observación / Detalle: ${item.memory_value || 'Sin observaciones'}\n` +
-                                `• Subsistema de Dictamen: ${item.routing_engine || 'Gabinete Central'}\n` +
-                                `• Fecha de Emisión: ${item.created_at ? new Date(item.created_at).toLocaleString() : 'Fecha no especificada'}\n` +
-                                `------------------------------------------------------------------------\n`
-                            ).join('\n')
-                            setTextoEditado(reporteHumano)
-                        } else {
-                            setTextoEditado(contenido)
-                        }
-                    } catch (err) {
-                        setTextoEditado(contenido)
-                    }
-                } else {
-                    setTextoEditado(contenido)
-                }
-            }
-            reader.readAsText(file)
-        }
-    }
-
-    function descargarDocumentoEditado() {
-        if (!textoEditado) return
-        const blob = new Blob([textoEditado], { type: 'text/plain;charset=utf-8' })
+    function descargarDocumentoWord() {
+        const textoCompleto = `${tituloDocumento.toUpperCase()}\n\n${contenidoDocumento}`
+        const blob = new Blob([textoCompleto], { type: 'application/msword;charset=utf-8' })
         const url = URL.createObjectURL(blob)
         const link = document.createElement('a')
         link.href = url
-        link.download = archivoAcademico ? `Reporte-Ejecutivo-${archivoAcademico.name.replace('.json', '')}.txt` : 'Documento-Institucional.txt'
+        link.download = `${tituloDocumento.replace(/\s+/g, '-')}.doc`
         document.body.appendChild(link)
         link.click()
         document.body.removeChild(link)
         URL.revokeObjectURL(url)
-        hablarJarvis('Reporte institucional descargado con éxito.')
-    }
-
-    function escucharMic(setTextTarget: (val: string) => void, nombreModulo: string) {
-        if (typeof window === 'undefined') return;
-        const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-        if (!SpeechRecognition) {
-            alert("Su navegador no soporta reconocimiento de voz nativo.");
-            return;
-        }
-        const recognition = new SpeechRecognition();
-        recognition.lang = 'es-MX';
-        recognition.interimResults = false;
-        recognition.maxAlternatives = 1;
-        recognition.onstart = () => { hablarJarvis(`Dictado activo para ${nombreModulo}, licenciado.`); };
-        recognition.onresult = (event: any) => {
-            const textoTranscrito = event.results[0][0].transcript;
-            setTextTarget(textoTranscrito);
-            hablarJarvis("Dictado registrado correctamente.");
-        };
-        recognition.onerror = () => { hablarJarvis("No se pudo capturar el audio."); };
-        recognition.start();
+        hablarJarvis('Documento exportado en formato Word con éxito.')
     }
 
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -192,26 +115,16 @@ export default function MasterCorePage() {
         formData.append('region', region)
         formData.append('pais', pais)
         formData.append('omegaKey', omegaKeyInput)
-
-        const archivoActual = seccionActiva === 'academico' ? archivoAcademico : archivoEmpresa
-        if (archivoActual) {
-            formData.append('archivoNombre', archivoActual.name)
-        } else {
-            formData.append('archivoNombre', 'Ningún documento adjunto')
-        }
+        formData.append('archivoNombre', `${tituloDocumento}.doc`)
 
         startTransition(async () => {
             const resultado = await ejecutarJarvisCore(formData)
             setMensajeRespuesta(resultado.message)
-            setEsAcademicoResultado(resultado.isAcademic || false)
             setFolioUltimo(resultado.folio || null)
             setHashGenerado(resultado.hash || null)
-            setCodigoPaquete(resultado.codigoDescargable || null)
             if (resultado.success) {
-                hablarJarvis("Calificación publicada y registrada en el expediente con éxito.")
+                hablarJarvis("Calificación y documento procesados y registrados correctamente.")
                 cargarMemoria()
-            } else {
-                hablarJarvis("Operación completada.")
             }
         })
     }
@@ -227,37 +140,13 @@ export default function MasterCorePage() {
                         <p className="text-[11px] text-slate-400">Investigador Titular: fg782270@gmail.com (C. Francisco)</p>
                     </div>
 
-                    <div className="grid grid-cols-3 gap-2 bg-slate-950 p-2 rounded-lg border border-cyan-500/30">
-                        <button type="button" onClick={iniciarAccesoFacial} className={`py-2 px-2 rounded text-xs font-bold transition-all ${modoAcceso === 'facial' ? 'bg-cyan-500 text-slate-950 shadow' : 'text-slate-300 hover:text-white'}`}>📷 Biometría</button>
-                        <button type="button" onClick={() => setModoAcceso('pin')} className={`py-2 px-2 rounded text-xs font-bold transition-all ${modoAcceso === 'pin' ? 'bg-cyan-500 text-slate-950 shadow' : 'text-slate-300 hover:text-white'}`}>🔑 PIN Ejecutivo</button>
-                        <button type="button" onClick={verificarBiometriaHardware} className={`py-2 px-2 rounded text-xs font-bold transition-all ${modoAcceso === 'hardware' ? 'bg-cyan-500 text-slate-950 shadow' : 'text-slate-300 hover:text-white'}`}>👆 Llave Segura</button>
-                    </div>
-
-                    {modoAcceso === 'pin' && (
-                        <form onSubmit={verificarPinMaestro} className="space-y-4 p-4 bg-slate-950 rounded-lg border border-cyan-500/30">
-                            <div>
-                                <label className="block text-xs text-cyan-300 mb-2 font-bold">Ingrese PIN de Acceso (7822, 1998, 2026):</label>
-                                <input type="password" maxLength={6} value={pinIngresado} onChange={(e) => setPinIngresado(e.target.value)} placeholder="••••" className="w-full bg-slate-900 border border-cyan-500/50 rounded p-3 text-center text-white text-lg tracking-widest outline-none focus:border-cyan-400" required />
-                            </div>
-                            <button type="submit" className="w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-2.5 px-4 rounded-lg text-xs transition-all shadow">Desbloquear Gabinete</button>
-                        </form>
-                    )}
-
-                    {modoAcceso === 'facial' && (
-                        <div className="space-y-3">
-                            <div className="w-48 h-36 mx-auto bg-slate-950 border border-cyan-500/40 rounded-lg flex items-center justify-center overflow-hidden relative shadow-inner">
-                                <video ref={videoRef} autoPlay playsInline muted className="w-full h-full object-cover" />
-                            </div>
-                            <button type="button" onClick={iniciarAccesoFacial} className="w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-2.5 px-4 rounded-lg text-xs transition-all shadow">Escanear Rostro</button>
+                    <form onSubmit={verificarPinMaestro} className="space-y-4 p-4 bg-slate-950 rounded-lg border border-cyan-500/30">
+                        <div>
+                            <label className="block text-xs text-cyan-300 mb-2 font-bold">Ingrese PIN de Acceso (7822, 1998, 2026):</label>
+                            <input type="password" maxLength={6} value={pinIngresado} onChange={(e) => setPinIngresado(e.target.value)} placeholder="••••" className="w-full bg-slate-900 border border-cyan-500/50 rounded p-3 text-center text-white text-lg tracking-widest outline-none focus:border-cyan-400" required />
                         </div>
-                    )}
-
-                    {modoAcceso === 'hardware' && (
-                        <div className="space-y-4 p-4 bg-slate-950 rounded-lg border border-cyan-500/30 text-center">
-                            <button type="button" onClick={verificarBiometriaHardware} className="w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-3 px-4 rounded-lg text-xs transition-all shadow">Validar Llave Física</button>
-                        </div>
-                    )}
-
+                        <button type="submit" className="w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-2.5 px-4 rounded-lg text-xs transition-all shadow">Desbloquear Gabinete</button>
+                    </form>
                     <p className="text-xs text-white font-medium pt-2">{estadoSeguridad}</p>
                 </div>
             ) : (
@@ -266,7 +155,7 @@ export default function MasterCorePage() {
                         <header className="flex justify-between items-center border-b border-cyan-500/20 pb-4 mb-6">
                             <div>
                                 <h1 className="text-xl font-bold tracking-wider flex items-center gap-2">
-                                    <span>📚</span> Calificador Académico — <span className="text-cyan-300">Estilo Classroom (Lectura Natural)</span>
+                                    <span>📄</span> Procesador de Textos Académico — <span className="text-cyan-300">Formato Word Profesional</span>
                                 </h1>
                                 <p className="text-xs text-slate-400">Investigador Titular: fg782270@gmail.com (C. Francisco)</p>
                             </div>
@@ -276,21 +165,21 @@ export default function MasterCorePage() {
                         {/* SELECTOR DE MÓDULO */}
                         <div className="mb-6 p-4 bg-slate-950 border-2 border-cyan-500/50 rounded-lg flex gap-3">
                             <button type="button" onClick={() => setSeccionActiva('academico')} className={`flex-1 py-3 px-4 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'academico' ? 'bg-amber-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-amber-300'}`}>
-                                🎓 Módulo Académico & Calificador
+                                🎓 Módulo Académico & Editor Word
                             </button>
                             <button type="button" onClick={() => setSeccionActiva('empresa')} className={`flex-1 py-3 px-4 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'empresa' ? 'bg-cyan-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-cyan-300'}`}>
                                 🏢 Módulo Corporativo & APK
                             </button>
                         </div>
 
-                        {/* SUB-PESTAÑAS EN MÓDULO ACADÉMICO */}
+                        {/* SUB-PESTAÑAS */}
                         {seccionActiva === 'academico' && (
                             <div className="flex gap-2 mb-4 border-b border-amber-500/30 pb-3">
+                                <button type="button" onClick={() => setSubTabAcademico('editor')} className={`py-1.5 px-4 rounded text-xs font-bold transition-all ${subTabAcademico === 'editor' ? 'bg-amber-500 text-slate-950' : 'bg-slate-950 text-amber-300 border border-amber-500/30'}`}>
+                                    📝 Procesador de Documento (Estilo Word)
+                                </button>
                                 <button type="button" onClick={() => setSubTabAcademico('calificar')} className={`py-1.5 px-4 rounded text-xs font-bold transition-all ${subTabAcademico === 'calificar' ? 'bg-amber-500 text-slate-950' : 'bg-slate-950 text-amber-300 border border-amber-500/30'}`}>
                                     ✍️ Panel de Calificación y Retroalimentación
-                                </button>
-                                <button type="button" onClick={() => setSubTabAcademico('editor')} className={`py-1.5 px-4 rounded text-xs font-bold transition-all ${subTabAcademico === 'editor' ? 'bg-amber-500 text-slate-950' : 'bg-slate-950 text-amber-300 border border-amber-500/30'}`}>
-                                    ✏️ Visor y Editor en Lenguaje Natural
                                 </button>
                             </div>
                         )}
@@ -301,14 +190,43 @@ export default function MasterCorePage() {
                                 <input type="email" name="emailSolicitante" defaultValue="fg782270@gmail.com" />
                             </div>
 
-                            {seccionActiva === 'academico' && subTabAcademico === 'calificar' && (
-                                <div className="space-y-4 p-4 bg-slate-950 rounded border border-amber-500/40 animate-fadeIn">
-                                    <div className="p-3 bg-slate-900 border border-amber-500/30 rounded">
-                                        <label className="block text-xs font-bold text-amber-300 mb-1">📁 Cargar Archivo del Alumno / Tesis (PDF, Word, TXT, JSON):</label>
-                                        <input type="file" accept=".pdf,.doc,.docx,.txt,.json" onChange={manejarArchivoAcademico} className="w-full text-xs text-slate-300 file:mr-2 file:py-1 file:px-3 file:rounded file:border-0 file:bg-amber-500 file:text-slate-950 font-semibold cursor-pointer" />
-                                        {archivoAcademico && <p className="text-[11px] text-green-400 mt-2 font-mono">✔ Documento activo: {archivoAcademico.name} (Revise la pestaña "Visor y Editor" para leerlo en lenguaje natural)</p>}
+                            {seccionActiva === 'academico' && subTabAcademico === 'editor' && (
+                                <div className="space-y-4 p-5 bg-slate-950 rounded border-2 border-amber-500/60 animate-fadeIn shadow-inner">
+                                    <div className="flex justify-between items-center border-b border-amber-500/30 pb-3">
+                                        <h3 className="text-sm font-bold text-amber-300 uppercase tracking-wide">📄 Editor de Documento Institucional (Formato Word)</h3>
+                                        <div className="flex gap-2 items-center">
+                                            <button type="button" onClick={descargarDocumentoWord} className="bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg flex items-center gap-1">
+                                                📥 Descargar Archivo Word (.doc)
+                                            </button>
+                                        </div>
                                     </div>
 
+                                    <div>
+                                        <label className="block text-xs font-bold text-amber-300 mb-1">Título del Documento o Tesis:</label>
+                                        <input 
+                                            type="text" 
+                                            value={tituloDocumento} 
+                                            onChange={(e) => setTituloDocumento(e.target.value)} 
+                                            className="w-full bg-slate-900 border border-amber-500/40 rounded p-2 text-white text-xs font-bold" 
+                                            required 
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-xs font-bold text-amber-300 mb-1">Contenido del Documento (Procesador de Textos):</label>
+                                        <textarea 
+                                            value={contenidoDocumento} 
+                                            onChange={(e) => setContenidoDocumento(e.target.value)}
+                                            rows={12}
+                                            className="w-full bg-slate-900 border border-amber-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none focus:border-amber-400 leading-relaxed shadow-inner"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                            )}
+
+                            {seccionActiva === 'academico' && subTabAcademico === 'calificar' && (
+                                <div className="space-y-4 p-4 bg-slate-950 rounded border border-amber-500/40 animate-fadeIn">
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div>
                                             <label className="block text-xs text-slate-300 mb-1">Calificación Asignada:</label>
@@ -321,10 +239,7 @@ export default function MasterCorePage() {
                                             />
                                         </div>
                                         <div>
-                                            <div className="flex justify-between items-center mb-1">
-                                                <label className="block text-xs text-slate-300">Retroalimentación Académica:</label>
-                                                <button type="button" onClick={() => escucharMic(setDetalleAcademico, 'Classroom')} className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-0.5 px-2 rounded text-[10px]">🎤 Dictar Nota</button>
-                                            </div>
+                                            <label className="block text-xs text-slate-300 mb-1">Retroalimentación Académica:</label>
                                             <textarea 
                                                 name="detalle" 
                                                 value={detalleAcademico} 
@@ -337,36 +252,16 @@ export default function MasterCorePage() {
                                 </div>
                             )}
 
-                            {seccionActiva === 'academico' && subTabAcademico === 'editor' && (
-                                <div className="space-y-4 p-5 bg-slate-950 rounded border-2 border-amber-500/60 animate-fadeIn shadow-inner">
-                                    <div className="flex justify-between items-center border-b border-amber-500/30 pb-3">
-                                        <h3 className="text-sm font-bold text-amber-300 uppercase tracking-wide">✏️ Visor y Editor en Lenguaje Natural</h3>
-                                        <div className="flex gap-2 items-center">
-                                            <span className="text-xs font-mono text-slate-400">{archivoAcademico ? archivoAcademico.name : 'Documento en blanco'}</span>
-                                            <button type="button" onClick={descargarDocumentoEditado} className="bg-green-500 hover:bg-green-400 text-slate-950 font-bold py-1 px-3 rounded text-xs shadow">
-                                                📥 Descargar Reporte en Texto (.txt)
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <textarea 
-                                        value={textoEditado} 
-                                        onChange={(e) => setTextoEditado(e.target.value)}
-                                        placeholder="El contenido del documento aparecerá aquí formateado de manera limpia, sin códigos ni corchetes técnicos..." 
-                                        className="w-full h-80 bg-slate-900 border border-amber-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none focus:border-amber-400 leading-relaxed shadow-inner"
-                                    />
-                                </div>
-                            )}
-
                             <button type="submit" disabled={isPending} className="w-full bg-amber-500 hover:bg-amber-400 font-bold py-3 px-4 rounded text-slate-950 shadow-lg">
-                                {isPending ? 'Procesando...' : 'Publicar Calificación y Enviar Retroalimentación'}
+                                {isPending ? 'Procesando Documento...' : 'Registrar y Guardar en el Expediente Institucional'}
                             </button>
                         </form>
 
                         {mensajeRespuesta && (
                             <div className="mt-6 p-5 bg-slate-950 border-2 border-cyan-500 rounded-lg text-sm shadow-2xl relative space-y-2">
-                                <div className="absolute top-0 right-0 bg-cyan-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl">ESTADO: CALIFICACIÓN PUBLICADA</div>
+                                <div className="absolute top-0 right-0 bg-cyan-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl">ESTADO: DOCUMENTO REGISTRADO</div>
                                 <div className="text-white font-medium whitespace-pre-line leading-relaxed">{mensajeRespuesta}</div>
-                                {folioUltimo && <p className="text-xs text-cyan-300"><span className="font-bold">Folio de Revisión:</span> {folioUltimo}</p>}
+                                {folioUltimo && <p className="text-xs text-cyan-300"><span className="font-bold">Folio de Expediente:</span> {folioUltimo}</p>}
                             </div>
                         )}
                     </div>

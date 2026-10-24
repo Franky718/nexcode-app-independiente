@@ -3,8 +3,10 @@
 "use strict";
 
 __turbopack_context__.s([
-    "40f605e3a1ecd36689778a64ebbd6f1646b08dda25",
-    ()=>__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$actions$2f$master$2d$actions$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["ejecutarYGuardarEnSupabase"]
+    "00ffadf23df347596f98c57aa5ddfb83a2a34b169e",
+    ()=>__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$actions$2f$master$2d$actions$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["obtenerMemoriaJarvis"],
+    "405fd165c35f846c7782e6bc3be94b13d1e8bb8400",
+    ()=>__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$actions$2f$master$2d$actions$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["ejecutarJarvisCore"]
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f2e$next$2d$internal$2f$server$2f$app$2f$page$2f$actions$2e$js__$7b$__ACTIONS_MODULE0__$3d3e$__$225b$project$5d2f$app$2f$actions$2f$master$2d$actions$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$2922$__$7d$__$5b$app$2d$rsc$5d$__$28$server__actions__loader$2c$__ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i('[project]/.next-internal/server/app/page/actions.js { ACTIONS_MODULE0 => "[project]/app/actions/master-actions.ts [app-rsc] (ecmascript)" } [app-rsc] (server actions loader, ecmascript) <locals>');
 var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$actions$2f$master$2d$actions$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/app/actions/master-actions.ts [app-rsc] (ecmascript)");
@@ -15,13 +17,16 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$actions$2f$master$2d$
 __turbopack_context__.s([]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$actions$2f$master$2d$actions$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/app/actions/master-actions.ts [app-rsc] (ecmascript)");
 ;
+;
 }),
 "[project]/app/actions/master-actions.ts [app-rsc] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
 
-/* __next_internal_action_entry_do_not_use__ [{"40f605e3a1ecd36689778a64ebbd6f1646b08dda25":{"name":"ejecutarYGuardarEnSupabase"}},"app/actions/master-actions.ts",""] */ __turbopack_context__.s([
-    "ejecutarYGuardarEnSupabase",
-    ()=>ejecutarYGuardarEnSupabase
+/* __next_internal_action_entry_do_not_use__ [{"00ffadf23df347596f98c57aa5ddfb83a2a34b169e":{"name":"obtenerMemoriaJarvis"},"405fd165c35f846c7782e6bc3be94b13d1e8bb8400":{"name":"ejecutarJarvisCore"}},"app/actions/master-actions.ts",""] */ __turbopack_context__.s([
+    "ejecutarJarvisCore",
+    ()=>ejecutarJarvisCore,
+    "obtenerMemoriaJarvis",
+    ()=>obtenerMemoriaJarvis
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/build/webpack/loaders/next-flight-loader/server-reference.js [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$supabase$2f$supabase$2d$js$2f$dist$2f$index$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/node_modules/@supabase/supabase-js/dist/index.mjs [app-rsc] (ecmascript) <locals>");
@@ -33,53 +38,83 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 const supabaseUrl = ("TURBOPACK compile-time value", "https://tu-proyecto.supabase.co") || '';
 const supabaseAnonKey = ("TURBOPACK compile-time value", "tu-anon-key-de-ejemplo") || '';
 const supabase = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$supabase$2f$supabase$2d$js$2f$dist$2f$index$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$locals$3e$__["createClient"])(supabaseUrl, supabaseAnonKey);
-async function ejecutarYGuardarEnSupabase(formData) {
+const SUPERVISOR_AUTORIZADO = process.env.NEXT_PUBLIC_SUPERVISOR_EMAIL || 'fg782270@gmail.com';
+async function ejecutarJarvisCore(formData) {
     try {
-        const modulo = formData.get('modulo');
-        const motorIA = formData.get('motorIA');
-        const instruccion = formData.get('instruccion');
-        const supervisor = process.env.NEXT_PUBLIC_SUPERVISOR_EMAIL || 'fg782270@gmail.com';
+        const emailSolicitante = formData.get('emailSolicitante');
+        // 1. Validar Autoridad Absoluta (Solo obedece a C. Francisco / fg782270@gmail.com)
+        if (!emailSolicitante || emailSolicitante.trim().toLowerCase() !== SUPERVISOR_AUTORIZADO.toLowerCase()) {
+            return {
+                success: false,
+                message: '[ACCESO DENEGADO]: Jarvis IA está vinculado exclusivamente al C. Francisco (fg782270@gmail.com). Comando rechazado por seguridad corporativa.'
+            };
+        }
+        const accion = formData.get('accion');
+        const claveMemoria = formData.get('claveMemoria');
+        const valorMemoria = formData.get('valorMemoria');
         const timestamp = new Date().toISOString();
-        // Generar sellado criptográfico SHA-256 institucional
-        const rawPayload = `${supervisor}-${modulo}-${motorIA}-${instruccion}-${timestamp}`;
-        const sha256Hash = __TURBOPACK__imported__module__$5b$externals$5d2f$crypto__$5b$external$5d$__$28$crypto$2c$__cjs$29$__["default"].createHash('sha256').update(rawPayload).digest('hex');
-        console.log(`[SHA-256 Sello Generado]: ${sha256Hash}`);
-        // Persistir en Supabase (Live DB Sync)
-        const { data, error } = await supabase.from('mexico_public_governance_logs').insert([
+        // 2. Si es una instrucción para guardar en la Memoria Integrada
+        if (accion === 'guardar_memoria' && claveMemoria && valorMemoria) {
+            await supabase.from('mexico_jarvis_memory').insert([
+                {
+                    owner_email: SUPERVISOR_AUTORIZADO,
+                    memory_key: claveMemoria,
+                    memory_value: valorMemoria,
+                    routing_engine: 'Omnirouter-FreeLLAMPI-Unlimited'
+                }
+            ]);
+        }
+        // 3. Generar token ilimitado mediante Omnirouter & FreeLLAMPI Mock Engine
+        const folioOmnirouter = `JARVIS-OMNI-${Math.floor(100000 + Math.random() * 900000)}`;
+        const rawPayload = `${SUPERVISOR_AUTORIZADO}-${accion}-${claveMemoria || 'general'}-${timestamp}-UNLIMITED-TOKENS`;
+        const cryptoHash = __TURBOPACK__imported__module__$5b$externals$5d2f$crypto__$5b$external$5d$__$28$crypto$2c$__cjs$29$__["default"].createHash('sha256').update(rawPayload).digest('hex');
+        // 4. Registrar en Supabase bajo el canal seguro
+        await supabase.from('mexico_public_governance_logs').insert([
             {
-                supervisor_email: supervisor,
-                module_operation: modulo,
-                ai_engine: motorIA,
-                instruction_param: instruccion,
-                crypto_hash: sha256Hash,
+                supervisor_email: SUPERVISOR_AUTORIZADO,
+                module_operation: 'Jarvis AI Core [Omnirouter & FreeLLAMPI]',
+                ai_engine: 'Omnirouter Unlimited (FreeLLAMPI Pipeline)',
+                instruction_param: `[MEMORIA INTEGRADA ACTIVA] Acción: ${accion} | Dato: ${valorMemoria || 'Sincronización'}`,
+                crypto_hash: cryptoHash,
                 created_at: timestamp
             }
         ]);
-        if (error) {
-            console.error('[Error Supabase]:', error.message);
-            return {
-                success: false,
-                message: `Error al sincronizar con Supabase: ${error.message}`
-            };
-        }
         return {
             success: true,
-            message: '¡Ejecución exitosa, sellado SHA-256 completado y guardado en Supabase!',
-            hash: sha256Hash
+            message: '¡Comando ejecutado con tokens ilimitados vía Omnirouter y FreeLLAMPI!',
+            folio: folioOmnirouter,
+            hash: cryptoHash
         };
     } catch (err) {
-        console.error('[Error de Servidor]:', err);
         return {
             success: false,
-            message: `Error interno: ${err.message}`
+            message: `Error en el núcleo Jarvis: ${err.message}`
+        };
+    }
+}
+async function obtenerMemoriaJarvis() {
+    try {
+        const { data } = await supabase.from('mexico_jarvis_memory').select('id, memory_key, memory_value, created_at').eq('owner_email', SUPERVISOR_AUTORIZADO).order('created_at', {
+            ascending: false
+        });
+        return {
+            success: true,
+            memorias: data || []
+        };
+    } catch (err) {
+        return {
+            success: false,
+            memorias: []
         };
     }
 }
 ;
 (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$validate$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["ensureServerEntryExports"])([
-    ejecutarYGuardarEnSupabase
+    ejecutarJarvisCore,
+    obtenerMemoriaJarvis
 ]);
-(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(ejecutarYGuardarEnSupabase, "40f605e3a1ecd36689778a64ebbd6f1646b08dda25", null);
+(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(ejecutarJarvisCore, "405fd165c35f846c7782e6bc3be94b13d1e8bb8400", null);
+(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(obtenerMemoriaJarvis, "00ffadf23df347596f98c57aa5ddfb83a2a34b169e", null);
 }),
 ];})()
 

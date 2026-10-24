@@ -1,6 +1,6 @@
 {
   "node": {
-    "40f605e3a1ecd36689778a64ebbd6f1646b08dda25": {
+    "00ffadf23df347596f98c57aa5ddfb83a2a34b169e": {
       "workers": {
         "app/page": {
           "moduleId": "[project]/.next-internal/server/app/page/actions.js { ACTIONS_MODULE0 => \"[project]/app/actions/master-actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
@@ -8,7 +8,17 @@
         }
       },
       "filename": "app/actions/master-actions.ts",
-      "exportedName": "ejecutarYGuardarEnSupabase"
+      "exportedName": "obtenerMemoriaJarvis"
+    },
+    "405fd165c35f846c7782e6bc3be94b13d1e8bb8400": {
+      "workers": {
+        "app/page": {
+          "moduleId": "[project]/.next-internal/server/app/page/actions.js { ACTIONS_MODULE0 => \"[project]/app/actions/master-actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        }
+      },
+      "filename": "app/actions/master-actions.ts",
+      "exportedName": "ejecutarJarvisCore"
     }
   },
   "edge": {},

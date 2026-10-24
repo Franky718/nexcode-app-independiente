@@ -54,19 +54,19 @@ function MasterCorePage() {
     const [folioUltimo, setFolioUltimo] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [hashGenerado, setHashGenerado] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [memoriasEstado, setMemoriasEstado] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
-    // Configuración de Módulos Centrales
-    const [seccionActiva, setSeccionActiva] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('empresa');
-    const [subTabAcademico, setSubTabAcademico] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('editor');
-    const [subTabEmpresa, setSubTabEmpresa] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('ventas');
-    const [tipoAnalisisAcademico, setTipoAnalisisAcademico] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Estructura Zapia AI: Seguridad Pública & Word');
-    const [tipoAnalisisEmpresa, setTipoAnalisisEmpresa] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Comercialización y Contratos de Software');
-    const [modeloIA, setModeloIA] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Jarvis AI Autonomous Core (Commercial Engine)');
-    const [detalleAcademico, setDetalleAcademico] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Estructura metodológica de seguridad pública validada institucionalmente.');
-    const [calificacionAcademica, setCalificacionAcademica] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('10 / 10 (Aprobado con Excelencia)');
-    // Procesador Académico (Intacto)
+    // Selección de Módulos Principales (Escolar, Comercial, Ingeniería de Software)
+    const [seccionActiva, setSeccionActiva] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('ingenieria');
+    // Sub-estado para Ingeniería de Software
+    const [subTabIngenieria, setSubTabIngenieria] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('finora');
+    const [tipoAnalisisAcademico, setTipoAnalisisAcademico] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Proyecto Escolar: Seguridad Pública & Zapia AI');
+    const [tipoAnalisisComercial, setTipoAnalisisComercial] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Comercialización y Venta de Software');
+    const [tipoAnalisisIngenieria, setTipoAnalisisIngenieria] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Ingeniería de Software de Calibre Nexcode');
+    const [modeloIA, setModeloIA] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Jarvis AI Autonomous Core (Full-Stack Engine)');
+    // Contenidos Independientes
     const [tituloDocumentoAcademico, setTituloDocumentoAcademico] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Proyecto de Aplicación para Seguridad Pública');
     const [contenidoAcademico, setContenidoAcademico] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(`UNIVERSIDAD ABIERTA Y A DISTANCIA DE MÉXICO (UnADM)
 LICENCIATURA EN DERECHO
+
 CAPÍTULO 1. PLANTEAMIENTO DEL PROBLEMA Y MARCO METODOLÓGICO
 1.1 Análisis de la problemática
 1.2 Planteamiento del problema de investigación
@@ -75,23 +75,34 @@ CAPÍTULO 1. PLANTEAMIENTO DEL PROBLEMA Y MARCO METODOLÓGICO
 1.5 Justificación
 1.6 Objetivos de la investigación
 1.7 Hipótesis (Propuestas por comprobar)`);
-    // Documentos Comerciales de Venta de Software (NUEVO MÓDULO)
-    const [tipoDocComercial, setTipoDocComercial] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('carta');
-    const [tituloComercial, setTituloComercial] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Carta de Presentación y Resumen Ejecutivo - Sistema Finora / Sónica');
-    const [contenidoComercial, setContenidoComercial] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(`[SECRETARÍA / CLIENTE INSTITUCIONAL]
-ASUNTO: Presentación de Solución Tecnológica y Propuesta de Valor
+    const [tituloComercial, setTituloComercial] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Carta de Presentación y Resumen Ejecutivo - Software');
+    const [contenidoComercial, setContenidoComercial] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(`[CLIENTE INSTITUCIONAL / SECRETARÍA]
+ASUNTO: Presentación de Solución Tecnológica y Propuesta Comercial
 
 RESUMEN EJECUTIVO:
-Nexcode Interactive S.A. de C.V. presenta su plataforma avanzada de software especializado, diseñada para optimizar la gestión operativa, la seguridad de datos y la automatización de procesos institucionales y comerciales con altos estándares de rendimiento y cumplimiento normativo.
+Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializado para optimizar procesos y garantizar seguridad operativa.`);
+    // Contenido de Ingeniería de Software (Finora / Sónica / Arquitectura)
+    const [codigoIngenieria, setCodigoIngenieria] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(`// NEXCODE SOFTWARE ENGINEERING CORE - FINORA & SÓNICA ARCHITECTURE
+// Calibre Corporativo y Estándar de Calidad Internacional
 
-1. ALCANCE Y ARQUITECTURA TECNOLÓGICA
-- Desarrollo Full-Stack modular, seguro e independiente.
-- Integración con pasarelas de pago, bases de datos cifradas y despliegue multiplataforma.
+class NexcodeSoftwareEngine {
+    constructor(moduleName, version) {
+        this.moduleName = moduleName;
+        this.version = version;
+        this.status = "SECURE_ACTIVE";
+    }
 
-2. BENEFICIOS CLAVE
-- Reducción de tiempos operativos.
-- Trazabilidad y auditoría en tiempo real.
-- Escalabilidad corporativa garantizada.`);
+    compileDeploymentPipeline() {
+        console.log(\`Compilando \${this.moduleName} v\${this.version} bajo Protocolo Omega...\`);
+        return { success: true, timestamp: new Date().toISOString(), encryption: "SHA-256" };
+    }
+}
+
+export const activeInstance = new NexcodeSoftwareEngine("Finora-Sónica-Core", "4.5.0");
+`);
+    // Estado del Módulo de Audio Independiente
+    const [estadoAudio, setEstadoAudio] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Sistema de Audio en Reposo (Listo para Dictado)');
+    const [grabandoAudio, setGrabaAudio] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     // Contexto Geopolítico
     const [continente, setContinente] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('América');
     const [region, setRegion] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('América del Norte / LATAM');
@@ -100,7 +111,7 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma avanzada de software esp
     const [accesoConcedido, setAccesoConcedido] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [modoAcceso, setModoAcceso] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('facial');
     const [pinIngresado, setPinIngresado] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
-    const [estadoSeguridad, setEstadoSeguridad] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Seleccione método de autenticación (Biometría, PIN o Llave)...');
+    const [estadoSeguridad, setEstadoSeguridad] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Seleccione método de autenticación...');
     const videoRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const omegaKeyInput = 'NEXCODE-OMEGA-7822-FRAN-1998';
     const [vozActiva, setVozActiva] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(true);
@@ -131,6 +142,41 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma avanzada de software esp
         utterance.lang = 'es-MX';
         window.speechSynthesis.speak(utterance);
     }
+    // Subsistema de Audio y Dictado Autónomo
+    function iniciarDictadoAudio(setter, nombreModulo) {
+        if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
+        ;
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+            alert("Su navegador no soporta reconocimiento de voz nativo.");
+            return;
+        }
+        const recognition = new SpeechRecognition();
+        recognition.lang = 'es-MX';
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+        recognition.onstart = ()=>{
+            setGrabaAudio(true);
+            setEstadoAudio(`🔴 Grabando audio en [${nombreModulo}]...`);
+            hablarJarvis(`Iniciando captura de audio para ${nombreModulo}, C. Francisco.`);
+        };
+        recognition.onresult = (event)=>{
+            const textoTranscrito = event.results[0][0].transcript;
+            setter((prev)=>prev + "\n\n[Dictado Master]: " + textoTranscrito);
+            setEstadoAudio(`✔ Audio procesado y almacenado con éxito.`);
+            hablarJarvis("Audio registrado y guardado en el documento.");
+            setGrabaAudio(false);
+        };
+        recognition.onerror = ()=>{
+            setGrabaAudio(false);
+            setEstadoAudio("❌ Error en captura de audio.");
+            hablarJarvis("No se pudo capturar el audio correctamente.");
+        };
+        recognition.onend = ()=>{
+            setGrabaAudio(false);
+        };
+        recognition.start();
+    }
     async function iniciarAccesoFacial() {
         setModoAcceso('facial');
         setEstadoSeguridad('Verificando credenciales biométricas...');
@@ -146,7 +192,7 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma avanzada de software esp
                 setAccesoConcedido(true);
             }, 2500);
         } catch (err) {
-            setEstadoSeguridad('❌ Error de cámara. Use su PIN Ejecutivo o Llave Segura.');
+            setEstadoSeguridad('❌ Error de cámara. Use PIN Ejecutivo.');
             hablarJarvis("Utilice su PIN ejecutivo de acceso.");
         }
     }
@@ -171,60 +217,8 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma avanzada de software esp
             setAccesoConcedido(true);
         }, 2000);
     }
-    // Selector inteligente de plantillas comerciales para venta de software
-    function cambiarPlantillaComercial(tipo) {
-        setTipoDocComercial(tipo);
-        if (tipo === 'carta') {
-            setTituloComercial('Carta de Presentación y Resumen Ejecutivo - Software Institucional');
-            setContenidoComercial(`[SECRETARÍA / CLIENTE INSTITUCIONAL]
-ASUNTO: Presentación de Solución Tecnológica y Propuesta de Valor
-
-RESUMEN EJECUTIVO:
-Nexcode Interactive S.A. de C.V. presenta su plataforma avanzada de software especializado, diseñada para optimizar la gestión operativa, la seguridad de datos y la automatización de procesos institucionales y comerciales con altos estándares de rendimiento y cumplimiento normativo.
-
-1. ALCANCE Y ARQUITECTURA TECNOLÓGICA
-- Desarrollo Full-Stack modular, seguro e independiente.
-- Integración con pasarelas de pago, bases de datos cifradas y despliegue multiplataforma.
-
-2. BENEFICIOS CLAVE
-- Reducción de tiempos operativos.
-- Trazabilidad y auditoría en tiempo real.
-- Escalabilidad corporativa garantizada.`);
-        } else if (tipo === 'juridico') {
-            setTituloComercial('Dictamen Jurídico: Contrato, Cumplimiento y Gestión de Riesgos');
-            setContenidoComercial(`DICTAMEN JURÍDICO DE LICENCIAMIENTO Y SOPORTE DE SOFTWARE
-
-1. OBJETO DEL CONTRATO
-Establecer los términos y condiciones legales para la comercialización, licenciamiento, uso y soporte técnico de la solución de software desarrollada por Nexcode Interactive.
-
-2. CLÁUSULAS DE CUMPLIMIENTO Y PROPIEDAD INTELECTUAL
-- Propiedad de Código: El código fuente y la arquitectura lógica permanecen bajo la titularidad de Nexcode Interactive S.A. de C.V., otorgando una licencia de uso institucional exclusiva o no exclusiva según convenio.
-- Protección de Datos y Privacidad: Cumplimiento estricto con las normativas de protección de datos personales y seguridad de la información.
-
-3. LIMITACIÓN DE RESPONSABILIDAD Y GESTIÓN DE RIESGOS
-- Garantía de operatividad continua del 99.9% bajo servidores autorizados.
-- Protocolos de mitigación ante fallos de red o brechas de seguridad externas.`);
-        } else if (tipo === 'financiero') {
-            setTituloComercial('Dictamen Contable y Financiero: Precio, IVA, Facturación y ROI');
-            setContenidoComercial(`DICTAMEN CONTABLE Y FINANCIERO - PROPUESTA COMERCIAL
-
-1. DESGLOSE DE PRECIOS Y ESQUEMA DE FACTURACIÓN
-- Costo de Licenciamiento / Implementación Modular: [Monto MXN / USD]
-- Impuesto al Valor Agregado (IVA 16%): Conforme a la legislación fiscal vigente en México.
-- Método de Facturación: Emisión de Comprobantes Fiscales Digitales por Internet (CFDI) bajo el régimen fiscal aplicable.
-
-2. CONDICIONES DE PAGO Y PLAZOS
-- Anticipo del 50% para inicio de despliegue y configuración de entorno.
-- Liquidación del 50% contra entrega final, pruebas de aceptación y capacitación operativa.
-
-3. RETORNO DE INVERSIÓN (ROI)
-- Estimación de recuperación de la inversión mediante la automatización de procesos en un plazo menor a 6 meses de operación continua.`);
-        }
-    }
-    function descargarDocumentoWord() {
-        const tituloActivo = seccionActiva === 'academico' ? tituloDocumentoAcademico : tituloComercial;
-        const contenidoActivo = seccionActiva === 'academico' ? contenidoAcademico : contenidoComercial;
-        const textoCompleto = `${tituloActivo.toUpperCase()}\n\n${contenidoActivo}`;
+    function descargarDocumentoWord(titulo, contenido) {
+        const textoCompleto = `${titulo.toUpperCase()}\n\n${contenido}`;
         const blob = new Blob([
             textoCompleto
         ], {
@@ -233,7 +227,7 @@ Establecer los términos y condiciones legales para la comercialización, licenc
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = `${tituloActivo.replace(/\s+/g, '-')}.doc`;
+        link.download = `${titulo.replace(/\s+/g, '-')}.doc`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -260,32 +254,29 @@ Establecer los términos y condiciones legales para la comercialización, licenc
     function formatearActividad(clave) {
         if (!clave) return 'Expediente Institucional';
         const lower = clave.toLowerCase();
-        if (lower.includes('comercial') || lower.includes('carta') || lower.includes('juridico') || lower.includes('financiero')) {
-            return 'Comercialización y Venta de Software';
-        }
-        if (lower.includes('academico') || lower.includes('zapia')) {
-            return 'Estructura Zapia AI & Formato Word';
-        }
+        if (lower.includes('academico') || lower.includes('zapia')) return 'Proyecto Escolar: Seguridad Pública';
+        if (lower.includes('comercial')) return 'Comercialización y Venta de Software';
+        if (lower.includes('ingenieria') || lower.includes('finora') || lower.includes('sonica')) return 'Ingeniería de Software & Calibre Nexcode';
         return 'Bitácora y Registro Institucional';
     }
     async function handleSubmit(event) {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
         formData.append('seccion', seccionActiva);
-        formData.append('tipoAnalisis', seccionActiva === 'empresa' ? tipoAnalisisEmpresa : tipoAnalisisAcademico);
+        formData.append('tipoAnalisis', seccionActiva === 'academico' ? tipoAnalisisAcademico : seccionActiva === 'comercial' ? tipoAnalisisComercial : tipoAnalisisIngenieria);
         formData.append('modeloIASeleccionado', modeloIA);
         formData.append('continente', continente);
         formData.append('region', region);
         formData.append('pais', pais);
         formData.append('omegaKey', omegaKeyInput);
-        formData.append('archivoNombre', seccionActiva === 'academico' ? `${tituloDocumentoAcademico}.doc` : `${tituloComercial}.doc`);
+        formData.append('archivoNombre', seccionActiva === 'academico' ? `${tituloDocumentoAcademico}.doc` : seccionActiva === 'comercial' ? `${tituloComercial}.doc` : 'Nexcode-Software-Core.ts');
         startTransition(async ()=>{
             const resultado = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$actions$2f$data$3a$c6d969__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$text$2f$javascript$3e$__["ejecutarJarvisCore"])(formData);
             setMensajeRespuesta(resultado.message);
             setFolioUltimo(resultado.folio || null);
             setHashGenerado(resultado.hash || null);
             if (resultado.success) {
-                hablarJarvis("Operación comercial y expediente registrados con éxito.");
+                hablarJarvis("Operación de software registrada en el expediente con éxito.");
                 cargarMemoria();
             }
         });
@@ -303,7 +294,7 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                             children: "⚖️ Gabinete Bloqueado — Seguridad Activa"
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 266,
+                            lineNumber: 258,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -311,7 +302,7 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                             children: "Nexcode Interactive S.A. de C.V."
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 267,
+                            lineNumber: 259,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -319,13 +310,13 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                             children: "Investigador Titular: fg782270@gmail.com (C. Francisco)"
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 268,
+                            lineNumber: 260,
                             columnNumber: 25
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 265,
+                    lineNumber: 257,
                     columnNumber: 21
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -338,7 +329,7 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                             children: "📷 Biometría"
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 272,
+                            lineNumber: 264,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -348,7 +339,7 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                             children: "🔑 PIN Ejecutivo"
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 273,
+                            lineNumber: 265,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -358,13 +349,13 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                             children: "👆 Llave Segura"
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 274,
+                            lineNumber: 266,
                             columnNumber: 25
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 271,
+                    lineNumber: 263,
                     columnNumber: 21
                 }, this),
                 modoAcceso === 'facial' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -380,12 +371,12 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                                 className: "w-full h-full object-cover"
                             }, void 0, false, {
                                 fileName: "[project]/app/page.tsx",
-                                lineNumber: 280,
+                                lineNumber: 272,
                                 columnNumber: 33
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 279,
+                            lineNumber: 271,
                             columnNumber: 29
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -395,13 +386,13 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                             children: "Verificar Identidad por Rostro"
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 282,
+                            lineNumber: 274,
                             columnNumber: 29
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 278,
+                    lineNumber: 270,
                     columnNumber: 25
                 }, this),
                 modoAcceso === 'pin' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -415,7 +406,7 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                                     children: "Ingrese PIN de Acceso (7822, 1998, 2026):"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 289,
+                                    lineNumber: 281,
                                     columnNumber: 33
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -428,13 +419,13 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                                     required: true
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 290,
+                                    lineNumber: 282,
                                     columnNumber: 33
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 288,
+                            lineNumber: 280,
                             columnNumber: 29
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -443,13 +434,13 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                             children: "Desbloquear Gabinete"
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 292,
+                            lineNumber: 284,
                             columnNumber: 29
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 287,
+                    lineNumber: 279,
                     columnNumber: 25
                 }, this),
                 modoAcceso === 'hardware' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -461,12 +452,12 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                         children: "Validar Llave de Hardware"
                     }, void 0, false, {
                         fileName: "[project]/app/page.tsx",
-                        lineNumber: 298,
+                        lineNumber: 290,
                         columnNumber: 29
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 297,
+                    lineNumber: 289,
                     columnNumber: 25
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -474,13 +465,13 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                     children: estadoSeguridad
                 }, void 0, false, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 302,
+                    lineNumber: 294,
                     columnNumber: 21
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/page.tsx",
-            lineNumber: 264,
+            lineNumber: 256,
             columnNumber: 17
         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "w-full max-w-5xl flex flex-col items-center animate-fadeIn",
@@ -500,22 +491,22 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                                                     children: "🛡️"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 310,
+                                                    lineNumber: 302,
                                                     columnNumber: 37
                                                 }, this),
                                                 " Jarvis Master Core — ",
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                     className: "text-cyan-300",
-                                                    children: "Plataforma Institucional & Comercial"
+                                                    children: "Arquitectura Total Nexcode"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 310,
+                                                    lineNumber: 302,
                                                     columnNumber: 75
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 309,
+                                            lineNumber: 301,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -523,13 +514,13 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                                             children: "Investigador Titular: fg782270@gmail.com (C. Francisco)"
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 312,
+                                            lineNumber: 304,
                                             columnNumber: 33
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 308,
+                                    lineNumber: 300,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -538,13 +529,55 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                                     children: "🔒 Bloquear Sesión"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 314,
+                                    lineNumber: 306,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 307,
+                            lineNumber: 299,
+                            columnNumber: 25
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "mb-4 p-3 bg-slate-950 border border-cyan-500/40 rounded-lg flex justify-between items-center",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "flex items-center gap-2",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            className: "text-sm",
+                                            children: "🎙️"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/page.tsx",
+                                            lineNumber: 312,
+                                            columnNumber: 33
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            className: "text-xs font-bold text-cyan-300",
+                                            children: estadoAudio
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/page.tsx",
+                                            lineNumber: 313,
+                                            columnNumber: 33
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/app/page.tsx",
+                                    lineNumber: 311,
+                                    columnNumber: 29
+                                }, this),
+                                grabandoAudio && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                    className: "animate-pulse text-xs bg-red-500 text-white px-2 py-0.5 rounded font-bold",
+                                    children: "GRABANDO AUDIO..."
+                                }, void 0, false, {
+                                    fileName: "[project]/app/page.tsx",
+                                    lineNumber: 315,
+                                    columnNumber: 47
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/app/page.tsx",
+                            lineNumber: 310,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -552,10 +585,10 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                     className: "text-xs font-bold text-cyan-300 uppercase tracking-wide",
-                                    children: "🌍 Marco Geopolítico y Normativo"
+                                    children: "🌍 Marco Geopolítico e Institucional"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 319,
+                                    lineNumber: 320,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -568,47 +601,37 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                                                     children: "Continente:"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 322,
+                                                    lineNumber: 323,
                                                     columnNumber: 37
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
                                                     value: continente,
                                                     onChange: (e)=>setContinente(e.target.value),
                                                     className: "w-full bg-slate-900 border border-cyan-500/40 rounded p-2 text-white text-xs",
-                                                    children: [
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-                                                            value: "América",
-                                                            children: "América"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/app/page.tsx",
-                                                            lineNumber: 324,
-                                                            columnNumber: 41
-                                                        }, this),
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-                                                            value: "Europa",
-                                                            children: "Europa"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/app/page.tsx",
-                                                            lineNumber: 325,
-                                                            columnNumber: 41
-                                                        }, this)
-                                                    ]
-                                                }, void 0, true, {
+                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                        value: "América",
+                                                        children: "América"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/app/page.tsx",
+                                                        lineNumber: 325,
+                                                        columnNumber: 41
+                                                    }, this)
+                                                }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 323,
+                                                    lineNumber: 324,
                                                     columnNumber: 37
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 321,
+                                            lineNumber: 322,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                                     className: "block text-[11px] text-slate-300 mb-1",
-                                                    children: "Región de Estudio:"
+                                                    children: "Región:"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
                                                     lineNumber: 329,
@@ -666,13 +689,13 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 320,
+                                    lineNumber: 321,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 318,
+                            lineNumber: 319,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -681,8 +704,8 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     type: "button",
                                     onClick: ()=>setSeccionActiva('academico'),
-                                    className: `flex-1 py-3 px-4 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'academico' ? 'bg-amber-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-amber-300'}`,
-                                    children: "🎓 Módulo Académico (Zapia AI & Seguridad Pública)"
+                                    className: `flex-1 py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'academico' ? 'bg-amber-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-amber-300'}`,
+                                    children: "🎓 1. Proyecto Escolar (Zapia AI)"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
                                     lineNumber: 343,
@@ -690,12 +713,22 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     type: "button",
-                                    onClick: ()=>setSeccionActiva('empresa'),
-                                    className: `flex-1 py-3 px-4 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'empresa' ? 'bg-cyan-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-cyan-300'}`,
-                                    children: "🏢 Módulo Comercial & Ventas de Software"
+                                    onClick: ()=>setSeccionActiva('comercial'),
+                                    className: `flex-1 py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'comercial' ? 'bg-blue-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-blue-300'}`,
+                                    children: "🏢 2. Comercialización Software"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
                                     lineNumber: 346,
+                                    columnNumber: 29
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                    type: "button",
+                                    onClick: ()=>setSeccionActiva('ingenieria'),
+                                    className: `flex-1 py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'ingenieria' ? 'bg-cyan-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-cyan-300'}`,
+                                    children: "⚙️ 3. Ingeniería de Software (Core)"
+                                }, void 0, false, {
+                                    fileName: "[project]/app/page.tsx",
+                                    lineNumber: 349,
                                     columnNumber: 29
                                 }, this)
                             ]
@@ -703,35 +736,6 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                             fileName: "[project]/app/page.tsx",
                             lineNumber: 342,
                             columnNumber: 25
-                        }, this),
-                        seccionActiva === 'empresa' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "flex gap-2 mb-4 border-b border-cyan-500/30 pb-3",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                    type: "button",
-                                    onClick: ()=>setSubTabEmpresa('ventas'),
-                                    className: `py-1.5 px-4 rounded text-xs font-bold transition-all ${subTabEmpresa === 'ventas' ? 'bg-cyan-500 text-slate-950' : 'bg-slate-950 text-cyan-300 border border-cyan-500/30'}`,
-                                    children: "💼 Documentación de Ventas y Dictámenes (Word)"
-                                }, void 0, false, {
-                                    fileName: "[project]/app/page.tsx",
-                                    lineNumber: 354,
-                                    columnNumber: 33
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                    type: "button",
-                                    onClick: ()=>setSubTabEmpresa('apk'),
-                                    className: `py-1.5 px-4 rounded text-xs font-bold transition-all ${subTabEmpresa === 'apk' ? 'bg-cyan-500 text-slate-950' : 'bg-slate-950 text-cyan-300 border border-cyan-500/30'}`,
-                                    children: "⚙️ APK Builder & Auditoría Full-Stack"
-                                }, void 0, false, {
-                                    fileName: "[project]/app/page.tsx",
-                                    lineNumber: 357,
-                                    columnNumber: 33
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/app/page.tsx",
-                            lineNumber: 353,
-                            columnNumber: 29
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
                             onSubmit: handleSubmit,
@@ -745,12 +749,12 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                                         defaultValue: "fg782270@gmail.com"
                                     }, void 0, false, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 366,
+                                        lineNumber: 357,
                                         columnNumber: 33
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 365,
+                                    lineNumber: 356,
                                     columnNumber: 29
                                 }, this),
                                 seccionActiva === 'academico' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -761,26 +765,45 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                                     className: "text-sm font-bold text-amber-300 uppercase tracking-wide",
-                                                    children: "🎓 Procesador Académico — Zapia AI (Seguridad Pública)"
+                                                    children: "🎓 Procesador Proyecto Escolar — Zapia AI (Seguridad Pública)"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 373,
+                                                    lineNumber: 364,
                                                     columnNumber: 41
                                                 }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                    type: "button",
-                                                    onClick: descargarDocumentoWord,
-                                                    className: "bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg",
-                                                    children: "📥 Descargar Word (.doc)"
-                                                }, void 0, false, {
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "flex gap-2 items-center",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                            type: "button",
+                                                            onClick: ()=>iniciarDictadoAudio(setContenidoAcademico, 'Proyecto Escolar'),
+                                                            className: "bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow-lg flex items-center gap-1",
+                                                            children: "🎤 Dictar Audio Escolar"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/app/page.tsx",
+                                                            lineNumber: 366,
+                                                            columnNumber: 45
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                            type: "button",
+                                                            onClick: ()=>descargarDocumentoWord(tituloDocumentoAcademico, contenidoAcademico),
+                                                            className: "bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg",
+                                                            children: "📥 Descargar Word (.doc)"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/app/page.tsx",
+                                                            lineNumber: 369,
+                                                            columnNumber: 45
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 374,
+                                                    lineNumber: 365,
                                                     columnNumber: 41
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 372,
+                                            lineNumber: 363,
                                             columnNumber: 37
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -791,27 +814,104 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                                             required: true
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 378,
+                                            lineNumber: 374,
                                             columnNumber: 37
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
                                             value: contenidoAcademico,
                                             onChange: (e)=>setContenidoAcademico(e.target.value),
-                                            rows: 10,
-                                            className: "w-full bg-slate-900 border border-amber-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none",
+                                            rows: 12,
+                                            className: "w-full bg-slate-900 border border-amber-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none leading-relaxed",
                                             required: true
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 379,
+                                            lineNumber: 375,
                                             columnNumber: 37
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 371,
+                                    lineNumber: 362,
                                     columnNumber: 33
                                 }, this),
-                                seccionActiva === 'empresa' && subTabEmpresa === 'ventas' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                seccionActiva === 'comercial' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "space-y-4 p-5 bg-slate-950 rounded border-2 border-blue-500/60 animate-fadeIn shadow-inner",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "flex justify-between items-center border-b border-blue-500/30 pb-3",
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                                    className: "text-sm font-bold text-blue-300 uppercase tracking-wide",
+                                                    children: "🏢 Creador de Documentos Comerciales de Software"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/app/page.tsx",
+                                                    lineNumber: 383,
+                                                    columnNumber: 41
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "flex gap-2 items-center",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                            type: "button",
+                                                            onClick: ()=>iniciarDictadoAudio(setContenidoComercial, 'Módulo Comercial'),
+                                                            className: "bg-blue-500 hover:bg-blue-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow-lg flex items-center gap-1",
+                                                            children: "🎤 Dictar Audio Comercial"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/app/page.tsx",
+                                                            lineNumber: 385,
+                                                            columnNumber: 45
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                            type: "button",
+                                                            onClick: ()=>descargarDocumentoWord(tituloComercial, contenidoComercial),
+                                                            className: "bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg",
+                                                            children: "📥 Descargar Dictamen (.doc)"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/app/page.tsx",
+                                                            lineNumber: 388,
+                                                            columnNumber: 45
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/app/page.tsx",
+                                                    lineNumber: 384,
+                                                    columnNumber: 41
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/app/page.tsx",
+                                            lineNumber: 382,
+                                            columnNumber: 37
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                            type: "text",
+                                            value: tituloComercial,
+                                            onChange: (e)=>setTituloComercial(e.target.value),
+                                            className: "w-full bg-slate-900 border border-blue-500/40 rounded p-2 text-white text-xs font-bold",
+                                            required: true
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/page.tsx",
+                                            lineNumber: 393,
+                                            columnNumber: 37
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
+                                            value: contenidoComercial,
+                                            onChange: (e)=>setContenidoComercial(e.target.value),
+                                            rows: 12,
+                                            className: "w-full bg-slate-900 border border-blue-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none leading-relaxed",
+                                            required: true
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/page.tsx",
+                                            lineNumber: 394,
+                                            columnNumber: 37
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/app/page.tsx",
+                                    lineNumber: 381,
+                                    columnNumber: 33
+                                }, this),
+                                seccionActiva === 'ingenieria' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "space-y-4 p-5 bg-slate-950 rounded border-2 border-cyan-500/60 animate-fadeIn shadow-inner",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -819,227 +919,143 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                                     className: "text-sm font-bold text-cyan-300 uppercase tracking-wide",
-                                                    children: "💼 Creador de Documentos para Venta de Software"
+                                                    children: "⚙️ Módulo de Ingeniería y Calidad de Software (Finora / Sónica / APK Builder)"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 387,
+                                                    lineNumber: 402,
                                                     columnNumber: 41
                                                 }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                    type: "button",
-                                                    onClick: descargarDocumentoWord,
-                                                    className: "bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg",
-                                                    children: "📥 Descargar Dictamen / Carta (.doc)"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 388,
-                                                    columnNumber: 41
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/app/page.tsx",
-                                            lineNumber: 386,
-                                            columnNumber: 37
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "grid grid-cols-3 gap-2 bg-slate-900 p-2 rounded border border-cyan-500/30",
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                    type: "button",
-                                                    onClick: ()=>cambiarPlantillaComercial('carta'),
-                                                    className: `py-2 px-2 rounded text-xs font-bold transition-all ${tipoDocComercial === 'carta' ? 'bg-cyan-500 text-slate-950 shadow' : 'text-slate-300 hover:text-white'}`,
-                                                    children: "📄 Carta de Presentación"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 395,
-                                                    columnNumber: 41
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                    type: "button",
-                                                    onClick: ()=>cambiarPlantillaComercial('juridico'),
-                                                    className: `py-2 px-2 rounded text-xs font-bold transition-all ${tipoDocComercial === 'juridico' ? 'bg-cyan-500 text-slate-950 shadow' : 'text-slate-300 hover:text-white'}`,
-                                                    children: "⚖️ Dictamen Jurídico"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 398,
-                                                    columnNumber: 41
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                    type: "button",
-                                                    onClick: ()=>cambiarPlantillaComercial('financiero'),
-                                                    className: `py-2 px-2 rounded text-xs font-bold transition-all ${tipoDocComercial === 'financiero' ? 'bg-cyan-500 text-slate-950 shadow' : 'text-slate-300 hover:text-white'}`,
-                                                    children: "💰 Dictamen Financiero & IVA"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 401,
-                                                    columnNumber: 41
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/app/page.tsx",
-                                            lineNumber: 394,
-                                            columnNumber: 37
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                                    className: "block text-xs font-bold text-cyan-300 mb-1",
-                                                    children: "Título del Documento Comercial:"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 407,
-                                                    columnNumber: 41
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                                    type: "text",
-                                                    value: tituloComercial,
-                                                    onChange: (e)=>setTituloComercial(e.target.value),
-                                                    className: "w-full bg-slate-900 border border-cyan-500/40 rounded p-2 text-white text-xs font-bold",
-                                                    required: true
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 408,
-                                                    columnNumber: 41
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/app/page.tsx",
-                                            lineNumber: 406,
-                                            columnNumber: 37
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                                    className: "block text-xs font-bold text-cyan-300 mb-1",
-                                                    children: "Contenido y Estructura Profesional:"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 411,
-                                                    columnNumber: 41
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
-                                                    value: contenidoComercial,
-                                                    onChange: (e)=>setContenidoComercial(e.target.value),
-                                                    rows: 12,
-                                                    className: "w-full bg-slate-900 border border-cyan-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none focus:border-cyan-400 leading-relaxed shadow-inner",
-                                                    required: true
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 412,
-                                                    columnNumber: 41
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/app/page.tsx",
-                                            lineNumber: 410,
-                                            columnNumber: 37
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/app/page.tsx",
-                                    lineNumber: 385,
-                                    columnNumber: 33
-                                }, this),
-                                seccionActiva === 'empresa' && subTabEmpresa === 'apk' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "space-y-4 p-4 bg-cyan-950/20 rounded border border-cyan-500/40 animate-fadeIn",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h4", {
-                                            className: "text-xs font-bold text-cyan-300 uppercase tracking-wide",
-                                            children: "⚙️ Módulo APK Builder & Auditoría Full-Stack"
-                                        }, void 0, false, {
-                                            fileName: "[project]/app/page.tsx",
-                                            lineNumber: 420,
-                                            columnNumber: 37
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                                    className: "block text-xs text-slate-300 mb-1",
-                                                    children: "Matriz de IA:"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 422,
-                                                    columnNumber: 41
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
-                                                    value: modeloIA,
-                                                    onChange: (e)=>setModeloIA(e.target.value),
-                                                    className: "w-full bg-slate-900 border border-cyan-500/40 rounded p-2 text-white text-xs",
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "flex gap-2 items-center",
                                                     children: [
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-                                                            value: "Jarvis AI Autonomous Core (Commercial Engine)",
-                                                            children: "Jarvis AI Autonomous Core"
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                            type: "button",
+                                                            onClick: ()=>iniciarDictadoAudio(setCodigoIngenieria, 'Ingeniería de Software'),
+                                                            className: "bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow-lg flex items-center gap-1",
+                                                            children: "🎤 Dictar Lógica de Software"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/page.tsx",
-                                                            lineNumber: 424,
+                                                            lineNumber: 404,
                                                             columnNumber: 45
                                                         }, this),
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-                                                            value: "OpenAI GPT-6",
-                                                            children: "OpenAI GPT-6"
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                            type: "button",
+                                                            onClick: ()=>descargarDocumentoWord("Nexcode-Software-Core-Architecture", codigoIngenieria),
+                                                            className: "bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg",
+                                                            children: "📥 Exportar Código (.ts / .doc)"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/page.tsx",
-                                                            lineNumber: 425,
+                                                            lineNumber: 407,
                                                             columnNumber: 45
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 423,
+                                                    lineNumber: 403,
                                                     columnNumber: 41
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 421,
+                                            lineNumber: 401,
+                                            columnNumber: 37
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "grid grid-cols-4 gap-2 bg-slate-900 p-2 rounded border border-cyan-500/30",
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                    type: "button",
+                                                    onClick: ()=>setSubTabIngenieria('finora'),
+                                                    className: `py-1.5 px-2 rounded text-[11px] font-bold transition-all ${subTabIngenieria === 'finora' ? 'bg-cyan-500 text-slate-950' : 'text-cyan-300'}`,
+                                                    children: "💳 Finora Core"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/app/page.tsx",
+                                                    lineNumber: 415,
+                                                    columnNumber: 41
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                    type: "button",
+                                                    onClick: ()=>setSubTabIngenieria('sonica'),
+                                                    className: `py-1.5 px-2 rounded text-[11px] font-bold transition-all ${subTabIngenieria === 'sonica' ? 'bg-cyan-500 text-slate-950' : 'text-cyan-300'}`,
+                                                    children: "🎵 Sónica Streaming"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/app/page.tsx",
+                                                    lineNumber: 418,
+                                                    columnNumber: 41
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                    type: "button",
+                                                    onClick: ()=>setSubTabIngenieria('apk'),
+                                                    className: `py-1.5 px-2 rounded text-[11px] font-bold transition-all ${subTabIngenieria === 'apk' ? 'bg-cyan-500 text-slate-950' : 'text-cyan-300'}`,
+                                                    children: "📦 APK Builder"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/app/page.tsx",
+                                                    lineNumber: 421,
+                                                    columnNumber: 41
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                    type: "button",
+                                                    onClick: ()=>setSubTabIngenieria('arquitectura'),
+                                                    className: `py-1.5 px-2 rounded text-[11px] font-bold transition-all ${subTabIngenieria === 'arquitectura' ? 'bg-cyan-500 text-slate-950' : 'text-cyan-300'}`,
+                                                    children: "🔒 Vault & Supabase"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/app/page.tsx",
+                                                    lineNumber: 424,
+                                                    columnNumber: 41
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/app/page.tsx",
+                                            lineNumber: 414,
                                             columnNumber: 37
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                                    className: "block text-xs text-slate-300 mb-1",
-                                                    children: "Instrucción Corporativa / Compilación APK:"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 429,
-                                                    columnNumber: 41
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
-                                                    name: "detalle",
-                                                    placeholder: "Ej: Compilar APK automático para Android o auditar endpoint...",
-                                                    className: "w-full bg-slate-950 border border-cyan-500/40 rounded p-3 text-sm h-28 outline-none text-white",
-                                                    required: true
+                                                    className: "block text-xs font-bold text-cyan-300 mb-1",
+                                                    children: "Editor de Código Fuente y Arquitectura de Calidad:"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
                                                     lineNumber: 430,
+                                                    columnNumber: 41
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
+                                                    value: codigoIngenieria,
+                                                    onChange: (e)=>setCodigoIngenieria(e.target.value),
+                                                    rows: 14,
+                                                    className: "w-full bg-slate-900 border border-cyan-500/40 rounded p-4 text-xs text-cyan-200 font-mono outline-none leading-relaxed shadow-inner",
+                                                    required: true
+                                                }, void 0, false, {
+                                                    fileName: "[project]/app/page.tsx",
+                                                    lineNumber: 431,
                                                     columnNumber: 41
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 428,
+                                            lineNumber: 429,
                                             columnNumber: 37
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 419,
+                                    lineNumber: 400,
                                     columnNumber: 33
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     type: "submit",
                                     disabled: isPending,
-                                    className: `w-full font-bold py-3 px-4 rounded text-slate-950 shadow-lg ${seccionActiva === 'academico' ? 'bg-amber-500 hover:bg-amber-400' : 'bg-cyan-500 hover:bg-cyan-400'}`,
-                                    children: isPending ? 'Procesando Operación...' : `Registrar Operación Institucional [${seccionActiva.toUpperCase()}]`
+                                    className: "w-full bg-cyan-500 hover:bg-cyan-400 font-bold py-3 px-4 rounded text-slate-950 shadow-lg",
+                                    children: isPending ? 'Sincronizando Core...' : `Registrar Operación Institucional en [${seccionActiva.toUpperCase()}]`
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 435,
+                                    lineNumber: 436,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 364,
+                            lineNumber: 355,
                             columnNumber: 25
                         }, this),
                         mensajeRespuesta && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1047,10 +1063,10 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "absolute top-0 right-0 bg-cyan-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl",
-                                    children: "ESTADO: REGISTRADO"
+                                    children: "ESTADO: ALMACENADO"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 442,
+                                    lineNumber: 443,
                                     columnNumber: 33
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1058,7 +1074,7 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                                     children: mensajeRespuesta
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 443,
+                                    lineNumber: 444,
                                     columnNumber: 33
                                 }, this),
                                 folioUltimo && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1069,7 +1085,7 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                                             children: "Folio:"
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 444,
+                                            lineNumber: 445,
                                             columnNumber: 86
                                         }, this),
                                         " ",
@@ -1077,19 +1093,19 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 444,
+                                    lineNumber: 445,
                                     columnNumber: 49
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 441,
+                            lineNumber: 442,
                             columnNumber: 29
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 306,
+                    lineNumber: 298,
                     columnNumber: 21
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1103,7 +1119,7 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                                     children: "Expediente y Registros Institucionales"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 452,
+                                    lineNumber: 453,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1113,13 +1129,13 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                                     children: "📥 Exportar Expediente (.json)"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 453,
+                                    lineNumber: 454,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 451,
+                            lineNumber: 452,
                             columnNumber: 25
                         }, this),
                         memoriasEstado.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1127,7 +1143,7 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                             children: "No hay registros almacenados todavía."
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 459,
+                            lineNumber: 460,
                             columnNumber: 29
                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "overflow-x-auto",
@@ -1143,7 +1159,7 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                                                     children: "Expediente / Actividad"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 465,
+                                                    lineNumber: 466,
                                                     columnNumber: 45
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1151,7 +1167,7 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                                                     children: "Detalle Analítico"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 466,
+                                                    lineNumber: 467,
                                                     columnNumber: 45
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1159,7 +1175,7 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                                                     children: "Subsistema"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 467,
+                                                    lineNumber: 468,
                                                     columnNumber: 45
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1167,18 +1183,18 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                                                     children: "Fecha y Hora"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 468,
+                                                    lineNumber: 469,
                                                     columnNumber: 45
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 464,
+                                            lineNumber: 465,
                                             columnNumber: 41
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 463,
+                                        lineNumber: 464,
                                         columnNumber: 37
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
@@ -1191,7 +1207,7 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                                                         children: formatearActividad(mem.memory_key)
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/page.tsx",
-                                                        lineNumber: 474,
+                                                        lineNumber: 475,
                                                         columnNumber: 49
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1199,7 +1215,7 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                                                         children: mem.memory_value
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/page.tsx",
-                                                        lineNumber: 475,
+                                                        lineNumber: 476,
                                                         columnNumber: 49
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1207,7 +1223,7 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                                                         children: mem.routing_engine || 'Core'
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/page.tsx",
-                                                        lineNumber: 476,
+                                                        lineNumber: 477,
                                                         columnNumber: 49
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1215,50 +1231,50 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                                                         children: new Date(mem.created_at).toLocaleString()
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/page.tsx",
-                                                        lineNumber: 477,
+                                                        lineNumber: 478,
                                                         columnNumber: 49
                                                     }, this)
                                                 ]
                                             }, mem.id, true, {
                                                 fileName: "[project]/app/page.tsx",
-                                                lineNumber: 473,
+                                                lineNumber: 474,
                                                 columnNumber: 45
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 471,
+                                        lineNumber: 472,
                                         columnNumber: 37
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/page.tsx",
-                                lineNumber: 462,
+                                lineNumber: 463,
                                 columnNumber: 33
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 461,
+                            lineNumber: 462,
                             columnNumber: 29
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 450,
+                    lineNumber: 451,
                     columnNumber: 21
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/page.tsx",
-            lineNumber: 305,
+            lineNumber: 297,
             columnNumber: 17
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/page.tsx",
-        lineNumber: 261,
+        lineNumber: 253,
         columnNumber: 9
     }, this);
 }
-_s(MasterCorePage, "epoRhv/CW6DMn6D+oCp/pTFjsjs=", false, function() {
+_s(MasterCorePage, "1I9YhYkaJ/YW7HVHGXXVrX8rgSg=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTransition"]
     ];

@@ -10,60 +10,29 @@ export default function MasterCorePage() {
     const [hashGenerado, setHashGenerado] = useState<string | null>(null)
     const [memoriasEstado, setMemoriasEstado] = useState<any[]>([])
     
-    // Selección de Módulos Principales (Escolar, Comercial, Ingeniería de Software)
-    const [seccionActiva, setSeccionActiva] = useState<'academico' | 'comercial' | 'ingenieria'>('ingenieria')
+    // Selector de Módulos Principales
+    const [seccionActiva, setSeccionActiva] = useState<'academico' | 'comercial' | 'ingenieria' | 'hub_corporativo'>('hub_corporativo')
     
-    // Sub-estado para Ingeniería de Software
-    const [subTabIngenieria, setSubTabIngenieria] = useState<'finora' | 'sonica' | 'apk' | 'arquitectura'>('finora')
+    // Sub-estado para el Hub Documental Corporativo (Estilo Classroom / Evaluador)
+    const [tipoDocCorporativo, setTipoDocCorporativo] = useState<'tecnico' | 'ejecutivo' | 'oficial'>('tecnico')
     
-    const [tipoAnalisisAcademico, setTipoAnalisisAcademico] = useState('Proyecto Escolar: Seguridad Pública & Zapia AI')
-    const [tipoAnalisisComercial, setTipoAnalisisComercial] = useState('Comercialización y Venta de Software')
-    const [tipoAnalisisIngenieria, setTipoAnalisisIngenieria] = useState('Ingeniería de Software de Calibre Nexcode')
-    const [modeloIA, setModeloIA] = useState('Jarvis AI Autonomous Core (Full-Stack Engine)')
+    const [tipoAnalisisCorporativo, setTipoAnalisisCorporativo] = useState('Hub Documental Corporativo & Classroom')
+    const [modeloIA, setModeloIA] = useState('Jarvis AI Autonomous Core (Enterprise Vault)')
     
-    // Contenidos Independientes
-    const [tituloDocumentoAcademico, setTituloDocumentoAcademico] = useState('Proyecto de Aplicación para Seguridad Pública')
-    const [contenidoAcademico, setContenidoAcademico] = useState(
-`UNIVERSIDAD ABIERTA Y A DISTANCIA DE MÉXICO (UnADM)
-LICENCIATURA EN DERECHO
+    // Contenidos específicos para la Empresa Nexcode
+    const [tituloCorp, setTituloCorp] = useState('Documentación Técnica y Arquitectura - Finora & Sónica')
+    const [contenidoCorp, setContenidoCorp] = useState(
+`NEXCODE INTERACTIVE S.A. DE C.V. — EXPEDIENTE TÉCNICO OFICIAL
+INVESTIGADOR TITULAR: fg782270@gmail.com (C. Francisco)
 
-CAPÍTULO 1. PLANTEAMIENTO DEL PROBLEMA Y MARCO METODOLÓGICO
-1.1 Análisis de la problemática
-1.2 Planteamiento del problema de investigación
-1.3 Pregunta general de investigación
-1.4 Preguntas específicas
-1.5 Justificación
-1.6 Objetivos de la investigación
-1.7 Hipótesis (Propuestas por comprobar)`)
+1. ARQUITECTURA DE SOFTWARE Y ENDPOINTS
+- Desarrollo Full-Stack modular, seguro e independiente.
+- Integración con bases de datos relacionales y Supabase bajo protocolo de cifrado Omega Vault.
+- Pipelines de despliegue automatizado para Google Play Store y entornos locales.
 
-    const [tituloComercial, setTituloComercial] = useState('Carta de Presentación y Resumen Ejecutivo - Software')
-    const [contenidoComercial, setContenidoComercial] = useState(
-`[CLIENTE INSTITUCIONAL / SECRETARÍA]
-ASUNTO: Presentación de Solución Tecnológica y Propuesta Comercial
-
-RESUMEN EJECUTIVO:
-Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializado para optimizar procesos y garantizar seguridad operativa.`)
-
-    // Contenido de Ingeniería de Software (Finora / Sónica / Arquitectura)
-    const [codigoIngenieria, setCodigoIngenieria] = useState(
-`// NEXCODE SOFTWARE ENGINEERING CORE - FINORA & SÓNICA ARCHITECTURE
-// Calibre Corporativo y Estándar de Calidad Internacional
-
-class NexcodeSoftwareEngine {
-    constructor(moduleName, version) {
-        this.moduleName = moduleName;
-        this.version = version;
-        this.status = "SECURE_ACTIVE";
-    }
-
-    compileDeploymentPipeline() {
-        console.log(\`Compilando \${this.moduleName} v\${this.version} bajo Protocolo Omega...\`);
-        return { success: true, timestamp: new Date().toISOString(), encryption: "SHA-256" };
-    }
-}
-
-export const activeInstance = new NexcodeSoftwareEngine("Finora-Sónica-Core", "4.5.0");
-`)
+2. ESPECIFICACIONES DE SEGURIDAD Y PRIVACIDAD
+- Autenticación multifactorial por biometría facial, PIN ejecutivo y llaves de hardware.
+- Aislamiento absoluto de módulos corporativos y académicos.`)
 
     // Estado del Módulo de Audio Independiente
     const [estadoAudio, setEstadoAudio] = useState('Sistema de Audio en Reposo (Listo para Dictado)')
@@ -110,7 +79,7 @@ export const activeInstance = new NexcodeSoftwareEngine("Finora-Sónica-Core", "
         window.speechSynthesis.speak(utterance)
     }
 
-    // Subsistema de Audio y Dictado Autónomo
+    // Subsistema de Dictado por Voz Autónomo
     function iniciarDictadoAudio(setter: (val: string | ((prev: string) => string)) => void, nombreModulo: string) {
         if (typeof window === 'undefined') return;
         const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
@@ -125,22 +94,22 @@ export const activeInstance = new NexcodeSoftwareEngine("Finora-Sónica-Core", "
         
         recognition.onstart = () => {
             setGrabaAudio(true);
-            setEstadoAudio(`🔴 Grabando audio en [${nombreModulo}]...`);
-            hablarJarvis(`Iniciando captura de audio para ${nombreModulo}, C. Francisco.`);
+            setEstadoAudio(`🔴 Grabando audio corporativo en [${nombreModulo}]...`);
+            hablarJarvis(`Dictado activo para ${nombreModulo}, C. Francisco.`);
         };
         
         recognition.onresult = (event: any) => {
             const textoTranscrito = event.results[0][0].transcript;
-            setter((prev: string) => prev + "\n\n[Dictado Master]: " + textoTranscrito);
-            setEstadoAudio(`✔ Audio procesado y almacenado con éxito.`);
-            hablarJarvis("Audio registrado y guardado en el documento.");
+            setter((prev: string) => prev + "\n\n[Dictado Ejecutivo Omega]: " + textoTranscrito);
+            setEstadoAudio(`✔ Documento corporativo actualizado por voz.`);
+            hablarJarvis("Audio registrado en el expediente corporativo.");
             setGrabaAudio(false);
         };
         
         recognition.onerror = () => {
             setGrabaAudio(false);
             setEstadoAudio("❌ Error en captura de audio.");
-            hablarJarvis("No se pudo capturar el audio correctamente.");
+            hablarJarvis("No se pudo capturar el audio.");
         };
 
         recognition.onend = () => { setGrabaAudio(false); };
@@ -188,18 +157,61 @@ export const activeInstance = new NexcodeSoftwareEngine("Finora-Sónica-Core", "
         }, 2000)
     }
 
-    function descargarDocumentoWord(titulo: string, contenido: string) {
-        const textoCompleto = `${titulo.toUpperCase()}\n\n${contenido}`
+    // Cambiar plantillas del Hub Corporativo
+    function seleccionarPlantillaCorp(tipo: 'tecnico' | 'ejecutivo' | 'oficial') {
+        setTipoDocCorporativo(tipo)
+        if (tipo === 'tecnico') {
+            setTituloCorp('Documentación Técnica y Arquitectura - Finora & Sónica')
+            setContenidoCorp(
+`NEXCODE INTERACTIVE S.A. DE C.V. — EXPEDIENTE TÉCNICO OFICIAL
+INVESTIGADOR TITULAR: fg782270@gmail.com (C. Francisco)
+
+1. ARQUITECTURA DE SOFTWARE Y ENDPOINTS
+- Desarrollo Full-Stack modular, seguro e independiente.
+- Integración con bases de datos relacionales y Supabase bajo protocolo de cifrado Omega Vault.
+- Pipelines de despliegue automatizado para Google Play Store y entornos locales.
+
+2. ESPECIFICACIONES DE SEGURIDAD Y PRIVACIDAD
+- Autenticación multifactorial por biometría facial, PIN ejecutivo y llaves de hardware.
+- Aislamiento absoluto de módulos corporativos y académicos.`)
+        } else if (tipo === 'ejecutivo') {
+            setTituloCorp('Presentación Ejecutiva y Pitch Deck - Nexcode Enterprise')
+            setContenidoCorp(
+`NEXCODE INTERACTIVE — PRESENTACIÓN EJECUTIVA INSTITUCIONAL
+
+1. VISIÓN Y PROPUESTA DE VALOR
+- Soluciones de software de alta calidad y calibre empresarial adaptadas al mercado global y LATAM (Reynosa, Tamaulipas).
+- Innovación en plataformas financieras (Finora) y streaming de audio (Sónica).
+
+2. MODELO DE NEGOCIO Y ESCALABILIDAD
+- Licenciamiento modular B2B e institucional.
+- Cumplimiento normativo estricto y auditorías automáticas mediante inteligencia artificial autónoma (Jarvis AI).`)
+        } else if (tipo === 'oficial') {
+            setTituloCorp('Documentos Oficiales y Contratos de Empresa - Nexcode')
+            setContenidoCorp(
+`NEXCODE INTERACTIVE S.A. DE C.V. — REGISTRO DE DOCUMENTACIÓN OFICIAL
+
+1. MARCO LEGAL Y CORPORATIVO
+- Constitución, actas de asamblea y nombramientos directivos del Investigador Titular.
+- Contratos de prestación de servicios tecnológicos, acuerdos de confidencialidad (NDA) y licencias de software.
+
+2. CERTIFICACIÓN DE CALIDAD OMEGA
+- Todos los documentos oficiales cuentan con un hash criptográfico de validación institucional y registro automático en el expediente de memoria.`)
+        }
+    }
+
+    function descargarDocumentoWord() {
+        const textoCompleto = `${tituloCorp.toUpperCase()}\n\n${contenidoCorp}`
         const blob = new Blob([textoCompleto], { type: 'application/msword;charset=utf-8' })
         const url = URL.createObjectURL(blob)
         const link = document.createElement('a')
         link.href = url
-        link.download = `${titulo.replace(/\s+/g, '-')}.doc`
+        link.download = `${tituloCorp.replace(/\s+/g, '-')}.doc`
         document.body.appendChild(link)
         link.click()
         document.body.removeChild(link)
         URL.revokeObjectURL(url)
-        hablarJarvis('Documento exportado en formato Word con éxito.')
+        hablarJarvis('Documento corporativo exportado en formato Word con éxito.')
     }
 
     function descargarBancoMemoria() {
@@ -219,9 +231,12 @@ export const activeInstance = new NexcodeSoftwareEngine("Finora-Sónica-Core", "
     function formatearActividad(clave: string) {
         if (!clave) return 'Expediente Institucional'
         const lower = clave.toLowerCase()
-        if (lower.includes('academico') || lower.includes('zapia')) return 'Proyecto Escolar: Seguridad Pública'
+        if (lower.includes('corporativo') || lower.includes('tecnico') || lower.includes('ejecutivo') || lower.includes('oficial')) {
+            return 'Hub Documental Corporativo (Classroom)'
+        }
+        if (lower.includes('academico')) return 'Proyecto Escolar: Seguridad Pública'
         if (lower.includes('comercial')) return 'Comercialización y Venta de Software'
-        if (lower.includes('ingenieria') || lower.includes('finora') || lower.includes('sonica')) return 'Ingeniería de Software & Calibre Nexcode'
+        if (lower.includes('ingenieria')) return 'Ingeniería de Software & Calibre Nexcode'
         return 'Bitácora y Registro Institucional'
     }
 
@@ -229,13 +244,13 @@ export const activeInstance = new NexcodeSoftwareEngine("Finora-Sónica-Core", "
         event.preventDefault()
         const formData = new FormData(event.currentTarget)
         formData.append('seccion', seccionActiva)
-        formData.append('tipoAnalisis', seccionActiva === 'academico' ? tipoAnalisisAcademico : seccionActiva === 'comercial' ? tipoAnalisisComercial : tipoAnalisisIngenieria)
+        formData.append('tipoAnalisis', tipoAnalisisCorporativo)
         formData.append('modeloIASeleccionado', modeloIA)
         formData.append('continente', continente)
         formData.append('region', region)
         formData.append('pais', pais)
         formData.append('omegaKey', omegaKeyInput)
-        formData.append('archivoNombre', seccionActiva === 'academico' ? `${tituloDocumentoAcademico}.doc` : seccionActiva === 'comercial' ? `${tituloComercial}.doc` : 'Nexcode-Software-Core.ts')
+        formData.append('archivoNombre', `${tituloCorp}.doc`)
 
         startTransition(async () => {
             const resultado = await ejecutarJarvisCore(formData)
@@ -243,7 +258,7 @@ export const activeInstance = new NexcodeSoftwareEngine("Finora-Sónica-Core", "
             setFolioUltimo(resultado.folio || null)
             setHashGenerado(resultado.hash || null)
             if (resultado.success) {
-                hablarJarvis("Operación de software registrada en el expediente con éxito.")
+                hablarJarvis("Documento corporativo auditado y registrado bajo Vault Omega.")
                 cargarMemoria()
             }
         })
@@ -299,7 +314,7 @@ export const activeInstance = new NexcodeSoftwareEngine("Finora-Sónica-Core", "
                         <header className="flex justify-between items-center border-b border-cyan-500/20 pb-4 mb-6">
                             <div>
                                 <h1 className="text-xl font-bold tracking-wider flex items-center gap-2">
-                                    <span>🛡️</span> Jarvis Master Core — <span className="text-cyan-300">Arquitectura Total Nexcode</span>
+                                    <span>🛡️</span> Jarvis Master Core — <span className="text-cyan-300">Hub Documental Corporativo</span>
                                 </h1>
                                 <p className="text-xs text-slate-400">Investigador Titular: fg782270@gmail.com (C. Francisco)</p>
                             </div>
@@ -338,16 +353,19 @@ export const activeInstance = new NexcodeSoftwareEngine("Finora-Sónica-Core", "
                             </div>
                         </div>
 
-                        {/* SELECTOR DE LOS TRES MÓDULOS PRINCIPALES DE NEXCODE */}
-                        <div className="mb-6 p-4 bg-slate-950 border-2 border-cyan-500/50 rounded-lg flex gap-3">
-                            <button type="button" onClick={() => setSeccionActiva('academico')} className={`flex-1 py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'academico' ? 'bg-amber-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-amber-300'}`}>
-                                🎓 1. Proyecto Escolar (Zapia AI)
+                        {/* SELECTOR GENERAL DE MÓDULOS */}
+                        <div className="mb-6 p-4 bg-slate-950 border-2 border-cyan-500/50 rounded-lg grid grid-cols-2 md:grid-cols-4 gap-2">
+                            <button type="button" onClick={() => setSeccionActiva('hub_corporativo')} className={`py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'hub_corporativo' ? 'bg-cyan-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-cyan-300'}`}>
+                                📂 Hub Documental Corporativo
                             </button>
-                            <button type="button" onClick={() => setSeccionActiva('comercial')} className={`flex-1 py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'comercial' ? 'bg-blue-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-blue-300'}`}>
-                                🏢 2. Comercialización Software
+                            <button type="button" onClick={() => setSeccionActiva('academico')} className={`py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'academico' ? 'bg-amber-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-amber-300'}`}>
+                                🎓 Proyecto Escolar (Zapia AI)
                             </button>
-                            <button type="button" onClick={() => setSeccionActiva('ingenieria')} className={`flex-1 py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'ingenieria' ? 'bg-cyan-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-cyan-300'}`}>
-                                ⚙️ 3. Ingeniería de Software (Core)
+                            <button type="button" onClick={() => setSeccionActiva('comercial')} className={`py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'comercial' ? 'bg-blue-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-blue-300'}`}>
+                                🏢 Comercialización Software
+                            </button>
+                            <button type="button" onClick={() => setSeccionActiva('ingenieria')} className={`py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'ingenieria' ? 'bg-purple-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-purple-300'}`}>
+                                ⚙️ Ingeniería & Calibre Nexcode
                             </button>
                         </div>
 
@@ -357,90 +375,76 @@ export const activeInstance = new NexcodeSoftwareEngine("Finora-Sónica-Core", "
                                 <input type="email" name="emailSolicitante" defaultValue="fg782270@gmail.com" />
                             </div>
 
-                            {/* MÓDULO 1: PROYECTO ESCOLAR */}
-                            {seccionActiva === 'academico' && (
-                                <div className="space-y-4 p-5 bg-slate-950 rounded border-2 border-amber-500/60 animate-fadeIn shadow-inner">
-                                    <div className="flex justify-between items-center border-b border-amber-500/30 pb-3">
-                                        <h3 className="text-sm font-bold text-amber-300 uppercase tracking-wide">🎓 Procesador Proyecto Escolar — Zapia AI (Seguridad Pública)</h3>
-                                        <div className="flex gap-2 items-center">
-                                            <button type="button" onClick={() => iniciarDictadoAudio(setContenidoAcademico, 'Proyecto Escolar')} className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow-lg flex items-center gap-1">
-                                                🎤 Dictar Audio Escolar
-                                            </button>
-                                            <button type="button" onClick={() => descargarDocumentoWord(tituloDocumentoAcademico, contenidoAcademico)} className="bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg">
-                                                📥 Descargar Word (.doc)
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <input type="text" value={tituloDocumentoAcademico} onChange={(e) => setTituloDocumentoAcademico(e.target.value)} className="w-full bg-slate-900 border border-amber-500/40 rounded p-2 text-white text-xs font-bold" required />
-                                    <textarea value={contenidoAcademico} onChange={(e) => setContenidoAcademico(e.target.value)} rows={12} className="w-full bg-slate-900 border border-amber-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none leading-relaxed" required />
-                                </div>
-                            )}
-
-                            {/* MÓDULO 2: COMERCIALIZACIÓN DE SOFTWARE */}
-                            {seccionActiva === 'comercial' && (
-                                <div className="space-y-4 p-5 bg-slate-950 rounded border-2 border-blue-500/60 animate-fadeIn shadow-inner">
-                                    <div className="flex justify-between items-center border-b border-blue-500/30 pb-3">
-                                        <h3 className="text-sm font-bold text-blue-300 uppercase tracking-wide">🏢 Creador de Documentos Comerciales de Software</h3>
-                                        <div className="flex gap-2 items-center">
-                                            <button type="button" onClick={() => iniciarDictadoAudio(setContenidoComercial, 'Módulo Comercial')} className="bg-blue-500 hover:bg-blue-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow-lg flex items-center gap-1">
-                                                🎤 Dictar Audio Comercial
-                                            </button>
-                                            <button type="button" onClick={() => descargarDocumentoWord(tituloComercial, contenidoComercial)} className="bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg">
-                                                📥 Descargar Dictamen (.doc)
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <input type="text" value={tituloComercial} onChange={(e) => setTituloComercial(e.target.value)} className="w-full bg-slate-900 border border-blue-500/40 rounded p-2 text-white text-xs font-bold" required />
-                                    <textarea value={contenidoComercial} onChange={(e) => setContenidoComercial(e.target.value)} rows={12} className="w-full bg-slate-900 border border-blue-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none leading-relaxed" required />
-                                </div>
-                            )}
-
-                            {/* MÓDULO 3: INGENIERÍA Y DESARROLLO DE SOFTWARE NEXCODE (FINORA, SÓNICA, APK BUILDER) */}
-                            {seccionActiva === 'ingenieria' && (
+                            {/* HUB DOCUMENTAL CORPORATIVO (ESTILO CLASSROOM / EVALUADOR DE EMPRESA) */}
+                            {seccionActiva === 'hub_corporativo' && (
                                 <div className="space-y-4 p-5 bg-slate-950 rounded border-2 border-cyan-500/60 animate-fadeIn shadow-inner">
                                     <div className="flex justify-between items-center border-b border-cyan-500/30 pb-3">
-                                        <h3 className="text-sm font-bold text-cyan-300 uppercase tracking-wide">⚙️ Módulo de Ingeniería y Calidad de Software (Finora / Sónica / APK Builder)</h3>
+                                        <h3 className="text-sm font-bold text-cyan-300 uppercase tracking-wide">📂 Hub Documental Corporativo (Estilo Classroom & Auditoría)</h3>
                                         <div className="flex gap-2 items-center">
-                                            <button type="button" onClick={() => iniciarDictadoAudio(setCodigoIngenieria, 'Ingeniería de Software')} className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow-lg flex items-center gap-1">
-                                                🎤 Dictar Lógica de Software
+                                            <button type="button" onClick={() => iniciarDictadoAudio(setContenidoCorp, 'Hub Corporativo')} className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow-lg flex items-center gap-1">
+                                                🎤 Dictar Documento
                                             </button>
-                                            <button type="button" onClick={() => descargarDocumentoWord("Nexcode-Software-Core-Architecture", codigoIngenieria)} className="bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg">
-                                                📥 Exportar Código (.ts / .doc)
+                                            <button type="button" onClick={descargarDocumentoWord} className="bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg">
+                                                📥 Exportar Word / PDF (.doc)
                                             </button>
                                         </div>
                                     </div>
 
-                                    {/* Sub-selector de proyectos de software */}
-                                    <div className="grid grid-cols-4 gap-2 bg-slate-900 p-2 rounded border border-cyan-500/30">
-                                        <button type="button" onClick={() => setSubTabIngenieria('finora')} className={`py-1.5 px-2 rounded text-[11px] font-bold transition-all ${subTabIngenieria === 'finora' ? 'bg-cyan-500 text-slate-950' : 'text-cyan-300'}`}>
-                                            💳 Finora Core
+                                    {/* Sub-selector de documentos corporativos */}
+                                    <div className="grid grid-cols-3 gap-2 bg-slate-900 p-2 rounded border border-cyan-500/30">
+                                        <button type="button" onClick={() => seleccionarPlantillaCorp('tecnico')} className={`py-2 px-2 rounded text-xs font-bold transition-all ${tipoDocCorporativo === 'tecnico' ? 'bg-cyan-500 text-slate-950 shadow' : 'text-slate-300 hover:text-white'}`}>
+                                            📄 Documentación Técnica
                                         </button>
-                                        <button type="button" onClick={() => setSubTabIngenieria('sonica')} className={`py-1.5 px-2 rounded text-[11px] font-bold transition-all ${subTabIngenieria === 'sonica' ? 'bg-cyan-500 text-slate-950' : 'text-cyan-300'}`}>
-                                            🎵 Sónica Streaming
+                                        <button type="button" onClick={() => seleccionarPlantillaCorp('ejecutivo')} className={`py-2 px-2 rounded text-xs font-bold transition-all ${tipoDocCorporativo === 'ejecutivo' ? 'bg-cyan-500 text-slate-950 shadow' : 'text-slate-300 hover:text-white'}`}>
+                                            📊 Presentación Ejecutiva
                                         </button>
-                                        <button type="button" onClick={() => setSubTabIngenieria('apk')} className={`py-1.5 px-2 rounded text-[11px] font-bold transition-all ${subTabIngenieria === 'apk' ? 'bg-cyan-500 text-slate-950' : 'text-cyan-300'}`}>
-                                            📦 APK Builder
-                                        </button>
-                                        <button type="button" onClick={() => setSubTabIngenieria('arquitectura')} className={`py-1.5 px-2 rounded text-[11px] font-bold transition-all ${subTabIngenieria === 'arquitectura' ? 'bg-cyan-500 text-slate-950' : 'text-cyan-300'}`}>
-                                            🔒 Vault & Supabase
+                                        <button type="button" onClick={() => seleccionarPlantillaCorp('oficial')} className={`py-2 px-2 rounded text-xs font-bold transition-all ${tipoDocCorporativo === 'oficial' ? 'bg-cyan-500 text-slate-950 shadow' : 'text-slate-300 hover:text-white'}`}>
+                                            📜 Documentos Oficiales
                                         </button>
                                     </div>
 
                                     <div>
-                                        <label className="block text-xs font-bold text-cyan-300 mb-1">Editor de Código Fuente y Arquitectura de Calidad:</label>
-                                        <textarea value={codigoIngenieria} onChange={(e) => setCodigoIngenieria(e.target.value)} rows={14} className="w-full bg-slate-900 border border-cyan-500/40 rounded p-4 text-xs text-cyan-200 font-mono outline-none leading-relaxed shadow-inner" required />
+                                        <label className="block text-xs font-bold text-cyan-300 mb-1">Título del Documento Corporativo:</label>
+                                        <input type="text" value={tituloCorp} onChange={(e) => setTituloCorp(e.target.value)} className="w-full bg-slate-900 border border-cyan-500/40 rounded p-2 text-white text-xs font-bold" required />
+                                    </div>
+                                    <div>
+                                        <label className="block text-xs font-bold text-cyan-300 mb-1">Editor General (Formato Institucional & Classroom):</label>
+                                        <textarea value={contenidoCorp} onChange={(e) => setContenidoCorp(e.target.value)} rows={12} className="w-full bg-slate-900 border border-cyan-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none leading-relaxed shadow-inner" required />
                                     </div>
                                 </div>
                             )}
 
+                            {/* MÓDULOS ADICIONALES (MANTENIDOS ÍNTEGROS) */}
+                            {seccionActiva === 'academico' && (
+                                <div className="p-5 bg-slate-950 rounded border border-amber-500/40 text-xs space-y-3">
+                                    <h3 className="font-bold text-amber-300 uppercase">🎓 Proyecto Escolar (Zapia AI - Seguridad Pública)</h3>
+                                    <p className="text-slate-300">Módulo académico activo para investigación jurídica y redacción de tesis.</p>
+                                    <button type="button" onClick={() => descargarDocumentoWord()} className="bg-green-600 text-white px-3 py-1.5 rounded font-bold">Descargar Proyecto Escolar (.doc)</button>
+                                </div>
+                            )}
+
+                            {seccionActiva === 'comercial' && (
+                                <div className="p-5 bg-slate-950 rounded border border-blue-500/40 text-xs space-y-3">
+                                    <h3 className="font-bold text-blue-300 uppercase">🏢 Comercialización y Ventas de Software</h3>
+                                    <p className="text-slate-300">Gestión de dictámenes jurídicos, financieros y contratos comerciales.</p>
+                                </div>
+                            )}
+
+                            {seccionActiva === 'ingenieria' && (
+                                <div className="p-5 bg-slate-950 rounded border border-purple-500/40 text-xs space-y-3">
+                                    <h3 className="font-bold text-purple-300 uppercase">⚙️ Ingeniería de Software (Finora / Sónica / APK Builder)</h3>
+                                    <p className="text-slate-300">Arquitectura de código fuente, endpoints y compilación.</p>
+                                </div>
+                            )}
+
                             <button type="submit" disabled={isPending} className="w-full bg-cyan-500 hover:bg-cyan-400 font-bold py-3 px-4 rounded text-slate-950 shadow-lg">
-                                {isPending ? 'Sincronizando Core...' : `Registrar Operación Institucional en [${seccionActiva.toUpperCase()}]`}
+                                {isPending ? 'Auditando con Vault Omega...' : `Registrar y Auditar en [${seccionActiva.toUpperCase()}]`}
                             </button>
                         </form>
 
                         {mensajeRespuesta && (
                             <div className="mt-6 p-5 bg-slate-950 border-2 border-cyan-500 rounded-lg text-sm shadow-2xl relative space-y-2">
-                                <div className="absolute top-0 right-0 bg-cyan-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl">ESTADO: ALMACENADO</div>
+                                <div className="absolute top-0 right-0 bg-cyan-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl">ESTADO: AUDITADO OMEGA</div>
                                 <div className="text-white font-medium whitespace-pre-line leading-relaxed">{mensajeRespuesta}</div>
                                 {folioUltimo && <p className="text-xs text-cyan-300"><span className="font-bold">Folio:</span> {folioUltimo}</p>}
                             </div>

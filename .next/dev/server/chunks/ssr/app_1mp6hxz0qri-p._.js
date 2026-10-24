@@ -46,14 +46,15 @@ function MasterCorePage() {
     const [folioUltimo, setFolioUltimo] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
     const [hashGenerado, setHashGenerado] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
     const [memoriasEstado, setMemoriasEstado] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
-    // Selección de Módulos Independientes
-    const [seccionActiva, setSeccionActiva] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('academico');
-    const [subTabAcademico, setSubTabAcademico] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('editor');
-    const [subTabEmpresa, setSubTabEmpresa] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('ventas');
+    // Selección de Módulos Principales (Escolar, Comercial, Ingeniería de Software)
+    const [seccionActiva, setSeccionActiva] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('ingenieria');
+    // Sub-estado para Ingeniería de Software
+    const [subTabIngenieria, setSubTabIngenieria] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('finora');
     const [tipoAnalisisAcademico, setTipoAnalisisAcademico] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('Proyecto Escolar: Seguridad Pública & Zapia AI');
-    const [tipoAnalisisEmpresa, setTipoAnalisisEmpresa] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('Comercialización y Venta de Software');
-    const [modeloIA, setModeloIA] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('Jarvis AI Autonomous Core (Master Audio Engine)');
-    // Estados de Documentos Separados e Independientes
+    const [tipoAnalisisComercial, setTipoAnalisisComercial] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('Comercialización y Venta de Software');
+    const [tipoAnalisisIngenieria, setTipoAnalisisIngenieria] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('Ingeniería de Software de Calibre Nexcode');
+    const [modeloIA, setModeloIA] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('Jarvis AI Autonomous Core (Full-Stack Engine)');
+    // Contenidos Independientes
     const [tituloDocumentoAcademico, setTituloDocumentoAcademico] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('Proyecto de Aplicación para Seguridad Pública');
     const [contenidoAcademico, setContenidoAcademico] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(`UNIVERSIDAD ABIERTA Y A DISTANCIA DE MÉXICO (UnADM)
 LICENCIATURA EN DERECHO
@@ -72,6 +73,25 @@ ASUNTO: Presentación de Solución Tecnológica y Propuesta Comercial
 
 RESUMEN EJECUTIVO:
 Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializado para optimizar procesos y garantizar seguridad operativa.`);
+    // Contenido de Ingeniería de Software (Finora / Sónica / Arquitectura)
+    const [codigoIngenieria, setCodigoIngenieria] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(`// NEXCODE SOFTWARE ENGINEERING CORE - FINORA & SÓNICA ARCHITECTURE
+// Calibre Corporativo y Estándar de Calidad Internacional
+
+class NexcodeSoftwareEngine {
+    constructor(moduleName, version) {
+        this.moduleName = moduleName;
+        this.version = version;
+        this.status = "SECURE_ACTIVE";
+    }
+
+    compileDeploymentPipeline() {
+        console.log(\`Compilando \${this.moduleName} v\${this.version} bajo Protocolo Omega...\`);
+        return { success: true, timestamp: new Date().toISOString(), encryption: "SHA-256" };
+    }
+}
+
+export const activeInstance = new NexcodeSoftwareEngine("Finora-Sónica-Core", "4.5.0");
+`);
     // Estado del Módulo de Audio Independiente
     const [estadoAudio, setEstadoAudio] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('Sistema de Audio en Reposo (Listo para Dictado)');
     const [grabandoAudio, setGrabaAudio] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
@@ -105,7 +125,7 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
         ;
         const utterance = undefined;
     }
-    // Subsistema de Audio y Dictado Autónomo Interconectado
+    // Subsistema de Audio y Dictado Autónomo
     function iniciarDictadoAudio(setter, nombreModulo) {
         if ("TURBOPACK compile-time truthy", 1) return;
         //TURBOPACK unreachable
@@ -153,10 +173,8 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
             setAccesoConcedido(true);
         }, 2000);
     }
-    function descargarDocumentoWord() {
-        const tituloActivo = seccionActiva === 'academico' ? tituloDocumentoAcademico : tituloComercial;
-        const contenidoActivo = seccionActiva === 'academico' ? contenidoAcademico : contenidoComercial;
-        const textoCompleto = `${tituloActivo.toUpperCase()}\n\n${contenidoActivo}`;
+    function descargarDocumentoWord(titulo, contenido) {
+        const textoCompleto = `${titulo.toUpperCase()}\n\n${contenido}`;
         const blob = new Blob([
             textoCompleto
         ], {
@@ -165,7 +183,7 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = `${tituloActivo.replace(/\s+/g, '-')}.doc`;
+        link.download = `${titulo.replace(/\s+/g, '-')}.doc`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -192,32 +210,29 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
     function formatearActividad(clave) {
         if (!clave) return 'Expediente Institucional';
         const lower = clave.toLowerCase();
-        if (lower.includes('academico') || lower.includes('zapia')) {
-            return 'Proyecto Escolar: Seguridad Pública & Audio';
-        }
-        if (lower.includes('empresa') || lower.includes('comercial')) {
-            return 'Comercialización y Venta de Software';
-        }
+        if (lower.includes('academico') || lower.includes('zapia')) return 'Proyecto Escolar: Seguridad Pública';
+        if (lower.includes('comercial')) return 'Comercialización y Venta de Software';
+        if (lower.includes('ingenieria') || lower.includes('finora') || lower.includes('sonica')) return 'Ingeniería de Software & Calibre Nexcode';
         return 'Bitácora y Registro Institucional';
     }
     async function handleSubmit(event) {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
         formData.append('seccion', seccionActiva);
-        formData.append('tipoAnalisis', seccionActiva === 'empresa' ? tipoAnalisisEmpresa : tipoAnalisisAcademico);
+        formData.append('tipoAnalisis', seccionActiva === 'academico' ? tipoAnalisisAcademico : seccionActiva === 'comercial' ? tipoAnalisisComercial : tipoAnalisisIngenieria);
         formData.append('modeloIASeleccionado', modeloIA);
         formData.append('continente', continente);
         formData.append('region', region);
         formData.append('pais', pais);
         formData.append('omegaKey', omegaKeyInput);
-        formData.append('archivoNombre', seccionActiva === 'academico' ? `${tituloDocumentoAcademico}.doc` : `${tituloComercial}.doc`);
+        formData.append('archivoNombre', seccionActiva === 'academico' ? `${tituloDocumentoAcademico}.doc` : seccionActiva === 'comercial' ? `${tituloComercial}.doc` : 'Nexcode-Software-Core.ts');
         startTransition(async ()=>{
             const resultado = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$actions$2f$data$3a$c6d969__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$text$2f$javascript$3e$__["ejecutarJarvisCore"])(formData);
             setMensajeRespuesta(resultado.message);
             setFolioUltimo(resultado.folio || null);
             setHashGenerado(resultado.hash || null);
             if (resultado.success) {
-                hablarJarvis("Operación registrada y almacenada en el expediente.");
+                hablarJarvis("Operación de software registrada en el expediente con éxito.");
                 cargarMemoria();
             }
         });
@@ -235,7 +250,7 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                             children: "⚖️ Gabinete Bloqueado — Seguridad Activa"
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 243,
+                            lineNumber: 258,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -243,7 +258,7 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                             children: "Nexcode Interactive S.A. de C.V."
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 244,
+                            lineNumber: 259,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -251,13 +266,13 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                             children: "Investigador Titular: fg782270@gmail.com (C. Francisco)"
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 245,
+                            lineNumber: 260,
                             columnNumber: 25
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 242,
+                    lineNumber: 257,
                     columnNumber: 21
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -270,7 +285,7 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                             children: "📷 Biometría"
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 249,
+                            lineNumber: 264,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -280,7 +295,7 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                             children: "🔑 PIN Ejecutivo"
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 250,
+                            lineNumber: 265,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -290,13 +305,13 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                             children: "👆 Llave Segura"
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 251,
+                            lineNumber: 266,
                             columnNumber: 25
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 248,
+                    lineNumber: 263,
                     columnNumber: 21
                 }, this),
                 modoAcceso === 'facial' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -312,12 +327,12 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                 className: "w-full h-full object-cover"
                             }, void 0, false, {
                                 fileName: "[project]/app/page.tsx",
-                                lineNumber: 257,
+                                lineNumber: 272,
                                 columnNumber: 33
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 256,
+                            lineNumber: 271,
                             columnNumber: 29
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -327,13 +342,13 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                             children: "Verificar Identidad por Rostro"
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 259,
+                            lineNumber: 274,
                             columnNumber: 29
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 255,
+                    lineNumber: 270,
                     columnNumber: 25
                 }, this),
                 modoAcceso === 'pin' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -347,7 +362,7 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                     children: "Ingrese PIN de Acceso (7822, 1998, 2026):"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 266,
+                                    lineNumber: 281,
                                     columnNumber: 33
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -360,13 +375,13 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                     required: true
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 267,
+                                    lineNumber: 282,
                                     columnNumber: 33
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 265,
+                            lineNumber: 280,
                             columnNumber: 29
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -375,13 +390,13 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                             children: "Desbloquear Gabinete"
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 269,
+                            lineNumber: 284,
                             columnNumber: 29
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 264,
+                    lineNumber: 279,
                     columnNumber: 25
                 }, this),
                 modoAcceso === 'hardware' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -393,12 +408,12 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                         children: "Validar Llave de Hardware"
                     }, void 0, false, {
                         fileName: "[project]/app/page.tsx",
-                        lineNumber: 275,
+                        lineNumber: 290,
                         columnNumber: 29
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 274,
+                    lineNumber: 289,
                     columnNumber: 25
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -406,13 +421,13 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                     children: estadoSeguridad
                 }, void 0, false, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 279,
+                    lineNumber: 294,
                     columnNumber: 21
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/page.tsx",
-            lineNumber: 241,
+            lineNumber: 256,
             columnNumber: 17
         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "w-full max-w-5xl flex flex-col items-center animate-fadeIn",
@@ -432,22 +447,22 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                                     children: "🛡️"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 287,
+                                                    lineNumber: 302,
                                                     columnNumber: 37
                                                 }, this),
                                                 " Jarvis Master Core — ",
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                     className: "text-cyan-300",
-                                                    children: "Audio & Modulares Separados"
+                                                    children: "Arquitectura Total Nexcode"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 287,
+                                                    lineNumber: 302,
                                                     columnNumber: 75
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 286,
+                                            lineNumber: 301,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -455,13 +470,13 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                             children: "Investigador Titular: fg782270@gmail.com (C. Francisco)"
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 289,
+                                            lineNumber: 304,
                                             columnNumber: 33
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 285,
+                                    lineNumber: 300,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -470,13 +485,13 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                     children: "🔒 Bloquear Sesión"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 291,
+                                    lineNumber: 306,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 284,
+                            lineNumber: 299,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -490,7 +505,7 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                             children: "🎙️"
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 297,
+                                            lineNumber: 312,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -498,27 +513,27 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                             children: estadoAudio
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 298,
+                                            lineNumber: 313,
                                             columnNumber: 33
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 296,
+                                    lineNumber: 311,
                                     columnNumber: 29
                                 }, this),
                                 grabandoAudio && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                     className: "animate-pulse text-xs bg-red-500 text-white px-2 py-0.5 rounded font-bold",
-                                    children: "GRABANDO..."
+                                    children: "GRABANDO AUDIO..."
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 300,
+                                    lineNumber: 315,
                                     columnNumber: 47
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 295,
+                            lineNumber: 310,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -529,7 +544,7 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                     children: "🌍 Marco Geopolítico e Institucional"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 305,
+                                    lineNumber: 320,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -542,7 +557,7 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                                     children: "Continente:"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 308,
+                                                    lineNumber: 323,
                                                     columnNumber: 37
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -554,18 +569,18 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                                         children: "América"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/page.tsx",
-                                                        lineNumber: 310,
+                                                        lineNumber: 325,
                                                         columnNumber: 41
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 309,
+                                                    lineNumber: 324,
                                                     columnNumber: 37
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 307,
+                                            lineNumber: 322,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -575,7 +590,7 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                                     children: "Región:"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 314,
+                                                    lineNumber: 329,
                                                     columnNumber: 37
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -587,18 +602,18 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                                         children: "América del Norte / LATAM"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/page.tsx",
-                                                        lineNumber: 316,
+                                                        lineNumber: 331,
                                                         columnNumber: 41
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 315,
+                                                    lineNumber: 330,
                                                     columnNumber: 37
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 313,
+                                            lineNumber: 328,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -608,7 +623,7 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                                     children: "Jurisdicción:"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 320,
+                                                    lineNumber: 335,
                                                     columnNumber: 37
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -618,25 +633,25 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                                     className: "w-full bg-slate-900 border border-cyan-500/40 rounded p-2 text-white text-xs"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 321,
+                                                    lineNumber: 336,
                                                     columnNumber: 37
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 319,
+                                            lineNumber: 334,
                                             columnNumber: 33
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 306,
+                                    lineNumber: 321,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 304,
+                            lineNumber: 319,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -645,27 +660,37 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     type: "button",
                                     onClick: ()=>setSeccionActiva('academico'),
-                                    className: `flex-1 py-3 px-4 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'academico' ? 'bg-amber-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-amber-300'}`,
-                                    children: "🎓 Módulo 1: Proyecto Escolar (Zapia AI - Seguridad Pública)"
+                                    className: `flex-1 py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'academico' ? 'bg-amber-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-amber-300'}`,
+                                    children: "🎓 1. Proyecto Escolar (Zapia AI)"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 328,
+                                    lineNumber: 343,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     type: "button",
-                                    onClick: ()=>setSeccionActiva('empresa'),
-                                    className: `flex-1 py-3 px-4 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'empresa' ? 'bg-cyan-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-cyan-300'}`,
-                                    children: "🏢 Módulo 2: Comercialización y Venta de Software"
+                                    onClick: ()=>setSeccionActiva('comercial'),
+                                    className: `flex-1 py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'comercial' ? 'bg-blue-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-blue-300'}`,
+                                    children: "🏢 2. Comercialización Software"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 331,
+                                    lineNumber: 346,
+                                    columnNumber: 29
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                    type: "button",
+                                    onClick: ()=>setSeccionActiva('ingenieria'),
+                                    className: `flex-1 py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'ingenieria' ? 'bg-cyan-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-cyan-300'}`,
+                                    children: "⚙️ 3. Ingeniería de Software (Core)"
+                                }, void 0, false, {
+                                    fileName: "[project]/app/page.tsx",
+                                    lineNumber: 349,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 327,
+                            lineNumber: 342,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -680,12 +705,12 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                         defaultValue: "fg782270@gmail.com"
                                     }, void 0, false, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 339,
+                                        lineNumber: 357,
                                         columnNumber: 33
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 338,
+                                    lineNumber: 356,
                                     columnNumber: 29
                                 }, this),
                                 seccionActiva === 'academico' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -699,7 +724,7 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                                     children: "🎓 Procesador Proyecto Escolar — Zapia AI (Seguridad Pública)"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 346,
+                                                    lineNumber: 364,
                                                     columnNumber: 41
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -712,103 +737,71 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                                             children: "🎤 Dictar Audio Escolar"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/page.tsx",
-                                                            lineNumber: 349,
+                                                            lineNumber: 366,
                                                             columnNumber: 45
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                             type: "button",
-                                                            onClick: descargarDocumentoWord,
+                                                            onClick: ()=>descargarDocumentoWord(tituloDocumentoAcademico, contenidoAcademico),
                                                             className: "bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg",
                                                             children: "📥 Descargar Word (.doc)"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/page.tsx",
-                                                            lineNumber: 352,
+                                                            lineNumber: 369,
                                                             columnNumber: 45
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 347,
+                                                    lineNumber: 365,
                                                     columnNumber: 41
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 345,
+                                            lineNumber: 363,
                                             columnNumber: 37
                                         }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                                    className: "block text-xs font-bold text-amber-300 mb-1",
-                                                    children: "Título del Proyecto Escolar:"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 358,
-                                                    columnNumber: 41
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                                    type: "text",
-                                                    value: tituloDocumentoAcademico,
-                                                    onChange: (e)=>setTituloDocumentoAcademico(e.target.value),
-                                                    className: "w-full bg-slate-900 border border-amber-500/40 rounded p-2 text-white text-xs font-bold",
-                                                    required: true
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 359,
-                                                    columnNumber: 41
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                            type: "text",
+                                            value: tituloDocumentoAcademico,
+                                            onChange: (e)=>setTituloDocumentoAcademico(e.target.value),
+                                            className: "w-full bg-slate-900 border border-amber-500/40 rounded p-2 text-white text-xs font-bold",
+                                            required: true
+                                        }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 357,
+                                            lineNumber: 374,
                                             columnNumber: 37
                                         }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                                    className: "block text-xs font-bold text-amber-300 mb-1",
-                                                    children: "Contenido Metodológico (Almacenamiento Automático):"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 362,
-                                                    columnNumber: 41
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
-                                                    value: contenidoAcademico,
-                                                    onChange: (e)=>setContenidoAcademico(e.target.value),
-                                                    rows: 12,
-                                                    className: "w-full bg-slate-900 border border-amber-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none leading-relaxed",
-                                                    required: true
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 363,
-                                                    columnNumber: 41
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
+                                            value: contenidoAcademico,
+                                            onChange: (e)=>setContenidoAcademico(e.target.value),
+                                            rows: 12,
+                                            className: "w-full bg-slate-900 border border-amber-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none leading-relaxed",
+                                            required: true
+                                        }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 361,
+                                            lineNumber: 375,
                                             columnNumber: 37
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 344,
+                                    lineNumber: 362,
                                     columnNumber: 33
                                 }, this),
-                                seccionActiva === 'empresa' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "space-y-4 p-5 bg-slate-950 rounded border-2 border-cyan-500/60 animate-fadeIn shadow-inner",
+                                seccionActiva === 'comercial' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "space-y-4 p-5 bg-slate-950 rounded border-2 border-blue-500/60 animate-fadeIn shadow-inner",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "flex justify-between items-center border-b border-cyan-500/30 pb-3",
+                                            className: "flex justify-between items-center border-b border-blue-500/30 pb-3",
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                                    className: "text-sm font-bold text-cyan-300 uppercase tracking-wide",
-                                                    children: "🏢 Creador de Documentos para Venta de Software"
+                                                    className: "text-sm font-bold text-blue-300 uppercase tracking-wide",
+                                                    children: "🏢 Creador de Documentos Comerciales de Software"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 372,
+                                                    lineNumber: 383,
                                                     columnNumber: 41
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -817,109 +810,208 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                             type: "button",
                                                             onClick: ()=>iniciarDictadoAudio(setContenidoComercial, 'Módulo Comercial'),
-                                                            className: "bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow-lg flex items-center gap-1",
+                                                            className: "bg-blue-500 hover:bg-blue-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow-lg flex items-center gap-1",
                                                             children: "🎤 Dictar Audio Comercial"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/page.tsx",
-                                                            lineNumber: 375,
+                                                            lineNumber: 385,
                                                             columnNumber: 45
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                             type: "button",
-                                                            onClick: descargarDocumentoWord,
+                                                            onClick: ()=>descargarDocumentoWord(tituloComercial, contenidoComercial),
                                                             className: "bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg",
                                                             children: "📥 Descargar Dictamen (.doc)"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/page.tsx",
-                                                            lineNumber: 378,
+                                                            lineNumber: 388,
                                                             columnNumber: 45
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 373,
-                                                    columnNumber: 41
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/app/page.tsx",
-                                            lineNumber: 371,
-                                            columnNumber: 37
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                                    className: "block text-xs font-bold text-cyan-300 mb-1",
-                                                    children: "Título del Documento Comercial:"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/page.tsx",
                                                     lineNumber: 384,
                                                     columnNumber: 41
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                                    type: "text",
-                                                    value: tituloComercial,
-                                                    onChange: (e)=>setTituloComercial(e.target.value),
-                                                    className: "w-full bg-slate-900 border border-cyan-500/40 rounded p-2 text-white text-xs font-bold",
-                                                    required: true
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 385,
-                                                    columnNumber: 41
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 383,
+                                            lineNumber: 382,
                                             columnNumber: 37
                                         }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                                    className: "block text-xs font-bold text-cyan-300 mb-1",
-                                                    children: "Contenido Comercial y Financiero (Almacenamiento Automático):"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 388,
-                                                    columnNumber: 41
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
-                                                    value: contenidoComercial,
-                                                    onChange: (e)=>setContenidoComercial(e.target.value),
-                                                    rows: 12,
-                                                    className: "w-full bg-slate-900 border border-cyan-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none leading-relaxed",
-                                                    required: true
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 389,
-                                                    columnNumber: 41
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                            type: "text",
+                                            value: tituloComercial,
+                                            onChange: (e)=>setTituloComercial(e.target.value),
+                                            className: "w-full bg-slate-900 border border-blue-500/40 rounded p-2 text-white text-xs font-bold",
+                                            required: true
+                                        }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 387,
+                                            lineNumber: 393,
+                                            columnNumber: 37
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
+                                            value: contenidoComercial,
+                                            onChange: (e)=>setContenidoComercial(e.target.value),
+                                            rows: 12,
+                                            className: "w-full bg-slate-900 border border-blue-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none leading-relaxed",
+                                            required: true
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/page.tsx",
+                                            lineNumber: 394,
                                             columnNumber: 37
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 370,
+                                    lineNumber: 381,
+                                    columnNumber: 33
+                                }, this),
+                                seccionActiva === 'ingenieria' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "space-y-4 p-5 bg-slate-950 rounded border-2 border-cyan-500/60 animate-fadeIn shadow-inner",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "flex justify-between items-center border-b border-cyan-500/30 pb-3",
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                                    className: "text-sm font-bold text-cyan-300 uppercase tracking-wide",
+                                                    children: "⚙️ Módulo de Ingeniería y Calidad de Software (Finora / Sónica / APK Builder)"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/app/page.tsx",
+                                                    lineNumber: 402,
+                                                    columnNumber: 41
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "flex gap-2 items-center",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                            type: "button",
+                                                            onClick: ()=>iniciarDictadoAudio(setCodigoIngenieria, 'Ingeniería de Software'),
+                                                            className: "bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow-lg flex items-center gap-1",
+                                                            children: "🎤 Dictar Lógica de Software"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/app/page.tsx",
+                                                            lineNumber: 404,
+                                                            columnNumber: 45
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                            type: "button",
+                                                            onClick: ()=>descargarDocumentoWord("Nexcode-Software-Core-Architecture", codigoIngenieria),
+                                                            className: "bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg",
+                                                            children: "📥 Exportar Código (.ts / .doc)"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/app/page.tsx",
+                                                            lineNumber: 407,
+                                                            columnNumber: 45
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/app/page.tsx",
+                                                    lineNumber: 403,
+                                                    columnNumber: 41
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/app/page.tsx",
+                                            lineNumber: 401,
+                                            columnNumber: 37
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "grid grid-cols-4 gap-2 bg-slate-900 p-2 rounded border border-cyan-500/30",
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                    type: "button",
+                                                    onClick: ()=>setSubTabIngenieria('finora'),
+                                                    className: `py-1.5 px-2 rounded text-[11px] font-bold transition-all ${subTabIngenieria === 'finora' ? 'bg-cyan-500 text-slate-950' : 'text-cyan-300'}`,
+                                                    children: "💳 Finora Core"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/app/page.tsx",
+                                                    lineNumber: 415,
+                                                    columnNumber: 41
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                    type: "button",
+                                                    onClick: ()=>setSubTabIngenieria('sonica'),
+                                                    className: `py-1.5 px-2 rounded text-[11px] font-bold transition-all ${subTabIngenieria === 'sonica' ? 'bg-cyan-500 text-slate-950' : 'text-cyan-300'}`,
+                                                    children: "🎵 Sónica Streaming"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/app/page.tsx",
+                                                    lineNumber: 418,
+                                                    columnNumber: 41
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                    type: "button",
+                                                    onClick: ()=>setSubTabIngenieria('apk'),
+                                                    className: `py-1.5 px-2 rounded text-[11px] font-bold transition-all ${subTabIngenieria === 'apk' ? 'bg-cyan-500 text-slate-950' : 'text-cyan-300'}`,
+                                                    children: "📦 APK Builder"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/app/page.tsx",
+                                                    lineNumber: 421,
+                                                    columnNumber: 41
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                    type: "button",
+                                                    onClick: ()=>setSubTabIngenieria('arquitectura'),
+                                                    className: `py-1.5 px-2 rounded text-[11px] font-bold transition-all ${subTabIngenieria === 'arquitectura' ? 'bg-cyan-500 text-slate-950' : 'text-cyan-300'}`,
+                                                    children: "🔒 Vault & Supabase"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/app/page.tsx",
+                                                    lineNumber: 424,
+                                                    columnNumber: 41
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/app/page.tsx",
+                                            lineNumber: 414,
+                                            columnNumber: 37
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                                    className: "block text-xs font-bold text-cyan-300 mb-1",
+                                                    children: "Editor de Código Fuente y Arquitectura de Calidad:"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/app/page.tsx",
+                                                    lineNumber: 430,
+                                                    columnNumber: 41
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
+                                                    value: codigoIngenieria,
+                                                    onChange: (e)=>setCodigoIngenieria(e.target.value),
+                                                    rows: 14,
+                                                    className: "w-full bg-slate-900 border border-cyan-500/40 rounded p-4 text-xs text-cyan-200 font-mono outline-none leading-relaxed shadow-inner",
+                                                    required: true
+                                                }, void 0, false, {
+                                                    fileName: "[project]/app/page.tsx",
+                                                    lineNumber: 431,
+                                                    columnNumber: 41
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/app/page.tsx",
+                                            lineNumber: 429,
+                                            columnNumber: 37
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/app/page.tsx",
+                                    lineNumber: 400,
                                     columnNumber: 33
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     type: "submit",
                                     disabled: isPending,
-                                    className: `w-full font-bold py-3 px-4 rounded text-slate-950 shadow-lg ${seccionActiva === 'academico' ? 'bg-amber-500 hover:bg-amber-400' : 'bg-cyan-500 hover:bg-cyan-400'}`,
-                                    children: isPending ? 'Sincronizando Expediente...' : `Registrar y Almacenar Operación en [${seccionActiva.toUpperCase()}]`
+                                    className: "w-full bg-cyan-500 hover:bg-cyan-400 font-bold py-3 px-4 rounded text-slate-950 shadow-lg",
+                                    children: isPending ? 'Sincronizando Core...' : `Registrar Operación Institucional en [${seccionActiva.toUpperCase()}]`
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 394,
+                                    lineNumber: 436,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 337,
+                            lineNumber: 355,
                             columnNumber: 25
                         }, this),
                         mensajeRespuesta && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -930,7 +1022,7 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                     children: "ESTADO: ALMACENADO"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 401,
+                                    lineNumber: 443,
                                     columnNumber: 33
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -938,7 +1030,7 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                     children: mensajeRespuesta
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 402,
+                                    lineNumber: 444,
                                     columnNumber: 33
                                 }, this),
                                 folioUltimo && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -949,7 +1041,7 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                             children: "Folio:"
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 403,
+                                            lineNumber: 445,
                                             columnNumber: 86
                                         }, this),
                                         " ",
@@ -957,19 +1049,19 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 403,
+                                    lineNumber: 445,
                                     columnNumber: 49
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 400,
+                            lineNumber: 442,
                             columnNumber: 29
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 283,
+                    lineNumber: 298,
                     columnNumber: 21
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -983,7 +1075,7 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                     children: "Expediente y Registros Institucionales"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 411,
+                                    lineNumber: 453,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -993,13 +1085,13 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                     children: "📥 Exportar Expediente (.json)"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 412,
+                                    lineNumber: 454,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 410,
+                            lineNumber: 452,
                             columnNumber: 25
                         }, this),
                         memoriasEstado.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1007,7 +1099,7 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                             children: "No hay registros almacenados todavía."
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 418,
+                            lineNumber: 460,
                             columnNumber: 29
                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "overflow-x-auto",
@@ -1023,7 +1115,7 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                                     children: "Expediente / Actividad"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 424,
+                                                    lineNumber: 466,
                                                     columnNumber: 45
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1031,7 +1123,7 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                                     children: "Detalle Analítico"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 425,
+                                                    lineNumber: 467,
                                                     columnNumber: 45
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1039,7 +1131,7 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                                     children: "Subsistema"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 426,
+                                                    lineNumber: 468,
                                                     columnNumber: 45
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1047,18 +1139,18 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                                     children: "Fecha y Hora"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 427,
+                                                    lineNumber: 469,
                                                     columnNumber: 45
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 423,
+                                            lineNumber: 465,
                                             columnNumber: 41
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 422,
+                                        lineNumber: 464,
                                         columnNumber: 37
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
@@ -1071,7 +1163,7 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                                         children: formatearActividad(mem.memory_key)
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/page.tsx",
-                                                        lineNumber: 433,
+                                                        lineNumber: 475,
                                                         columnNumber: 49
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1079,7 +1171,7 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                                         children: mem.memory_value
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/page.tsx",
-                                                        lineNumber: 434,
+                                                        lineNumber: 476,
                                                         columnNumber: 49
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1087,7 +1179,7 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                                         children: mem.routing_engine || 'Core'
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/page.tsx",
-                                                        lineNumber: 435,
+                                                        lineNumber: 477,
                                                         columnNumber: 49
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1095,46 +1187,46 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializad
                                                         children: new Date(mem.created_at).toLocaleString()
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/page.tsx",
-                                                        lineNumber: 436,
+                                                        lineNumber: 478,
                                                         columnNumber: 49
                                                     }, this)
                                                 ]
                                             }, mem.id, true, {
                                                 fileName: "[project]/app/page.tsx",
-                                                lineNumber: 432,
+                                                lineNumber: 474,
                                                 columnNumber: 45
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 430,
+                                        lineNumber: 472,
                                         columnNumber: 37
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/page.tsx",
-                                lineNumber: 421,
+                                lineNumber: 463,
                                 columnNumber: 33
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 420,
+                            lineNumber: 462,
                             columnNumber: 29
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 409,
+                    lineNumber: 451,
                     columnNumber: 21
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/page.tsx",
-            lineNumber: 282,
+            lineNumber: 297,
             columnNumber: 17
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/page.tsx",
-        lineNumber: 238,
+        lineNumber: 253,
         columnNumber: 9
     }, this);
 }

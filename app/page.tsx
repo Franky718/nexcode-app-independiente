@@ -10,9 +10,10 @@ export default function MasterCorePage() {
     const [hashGenerado, setHashGenerado] = useState<string | null>(null)
     const [memorias, setMemorias] = useState<any[]>([])
     
-    // Estado de Seguridad y Acceso Restringido (Bloqueado por defecto)
+    // Estados de Seguridad y Voz Cinematográfica
     const [accesoConcedido, setAccesoConcedido] = useState(false)
     const [vozActiva, setVozActiva] = useState(true)
+    const [modoInglesStark, setModoInglesStark] = useState(false) // Alternar acento británico de Tony Stark
     const [camaraActiva, setCamaraActiva] = useState(false)
     const [estadoRostro, setEstadoRostro] = useState('Esperando escaneo facial de seguridad...')
     const videoRef = useRef<HTMLVideoElement | null>(null)
@@ -28,20 +29,43 @@ export default function MasterCorePage() {
         cargarMemoria()
     }, [])
 
-    function hablarJarvis(texto: string) {
+    // Función de Voz Estilo Jarvis (Tony Stark / MCU)
+    function hablarJarvis(textoPersonalizado?: string) {
         if (!vozActiva || typeof window === 'undefined' || !('speechSynthesis' in window)) return
         window.speechSynthesis.cancel()
+
+        const texto = textoPersonalizado || (modoInglesStark 
+            ? "Welcome back, sir. Systems are fully operational and secured." 
+            : "Bienvenido, señor. Los sistemas están operativos y seguros bajo el protocolo Nexcode.")
+
         const utterance = new SpeechSynthesisUtterance(texto)
-        utterance.lang = 'es-MX'
-        utterance.rate = 1.0
-        utterance.pitch = 0.9
+        
+        // Configuración de tono cinematográfico (Grave, elegante y pausado)
+        if (modoInglesStark) {
+            utterance.lang = 'en-GB' // Acento británico original de Jarvis
+            utterance.pitch = 0.85  // Tono grave corporativo
+            utterance.rate = 0.95   // Ritmo calmado y distinguido
+        } else {
+            utterance.lang = 'es-MX'
+            utterance.pitch = 0.80  // Tono más profundo en español
+            utterance.rate = 0.95
+        }
+
+        // Seleccionar la voz más sofisticada disponible en el navegador
+        const voces = window.speechSynthesis.getVoices()
+        const vozSeleccionada = voces.find(v => v.lang.includes(modoInglesStark ? 'en-GB' : 'es'))
+        if (vozSeleccionada) {
+            utterance.voice = vozSeleccionada
+        }
+
         window.speechSynthesis.speak(utterance)
     }
 
     async function desbloquearSistemaBiometrico() {
         setCamaraActiva(true)
         setEstadoRostro('Analizando biometría facial...')
-        hablarJarvis('Iniciando escaneo biométrico para desbloqueo del sistema maestro.')
+        hablarJarvis(modoInglesStark ? "Running biometric scan. Identifying C. Francisco." : "Iniciando escaneo biométrico para verificación del C. Francisco.")
+        
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ video: true })
             if (videoRef.current) {
@@ -49,12 +73,12 @@ export default function MasterCorePage() {
             }
             setTimeout(() => {
                 setEstadoRostro('✔ Identidad confirmada: C. Francisco (fg782270@gmail.com)')
-                hablarJarvis('Identidad verificada. Desbloqueando paneles de control y banco de memoria.')
+                hablarJarvis(modoInglesStark ? "Identity confirmed, sir. Welcome home." : "Identidad verificada. Desbloqueando paneles de control.")
                 setAccesoConcedido(true)
             }, 3000)
         } catch (err) {
             setEstadoRostro('❌ Error de acceso biométrico.')
-            hablarJarvis('Acceso denegado. Error en los sensores de cámara.')
+            hablarJarvis("Access denied. Biometric verification failed.")
         }
     }
 
@@ -96,13 +120,30 @@ export default function MasterCorePage() {
     return (
         <div className="min-h-screen bg-slate-950 text-cyan-400 p-6 flex flex-col items-center justify-center">
             
-            {/* PANTALLA DE BLOQUEO / ACCESO RESTRINGIDO (VISIBLE POR DEFECTO) */}
+            {/* PANTALLA DE BLOQUEO SEGURA CON VOZ TONY STARK */}
             {!accesoConcedido ? (
                 <div className="w-full max-w-xl bg-slate-900 border-2 border-cyan-500/60 rounded-xl p-8 shadow-2xl text-center space-y-6">
                     <div className="space-y-2">
-                        <h1 className="text-2xl font-bold tracking-wider text-white">🔒 Jarvis Secure Gate</h1>
-                        <p className="text-xs text-cyan-300">Nexcode Interactive S.A. de C.V. — Acceso Exclusivo</p>
+                        <h1 className="text-2xl font-bold tracking-wider text-white">🤖 Jarvis Secure Gate (Stark Protocol)</h1>
+                        <p className="text-xs text-cyan-300">Nexcode Interactive S.A. de C.V.</p>
                         <p className="text-[11px] text-slate-400">Supervisor Autorizado: fg782270@gmail.com (C. Francisco)</p>
+                    </div>
+
+                    <div className="flex justify-center gap-2 mb-2">
+                        <button
+                            type="button"
+                            onClick={() => { setModoInglesStark(false); hablarJarvis("Modo español activado."); }}
+                            className={`text-xs px-3 py-1 rounded font-bold ${!modoInglesStark ? 'bg-cyan-600 text-slate-950' : 'bg-slate-950 text-slate-400 border border-slate-700'}`}
+                        >
+                            🇪🇸 Español Pro
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => { setModoInglesStark(true); hablarJarvis("British voice protocol activated, sir."); }}
+                            className={`text-xs px-3 py-1 rounded font-bold ${modoInglesStark ? 'bg-cyan-600 text-slate-950' : 'bg-slate-950 text-slate-400 border border-slate-700'}`}
+                        >
+                            🇬🇧 Jarvis MCU (British)
+                        </button>
                     </div>
 
                     <div className="w-48 h-36 mx-auto bg-slate-950 border border-cyan-500/40 rounded-lg flex items-center justify-center overflow-hidden relative shadow-inner">
@@ -120,33 +161,39 @@ export default function MasterCorePage() {
                             onClick={desbloquearSistemaBiometrico}
                             className="w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-3 px-4 rounded-lg text-sm transition-all shadow-lg"
                         >
-                            🔓 Desbloquear con Biometría Facial
+                            🔓 Desbloquear con Biometría Facial & Voz Jarvis
                         </button>
                     </div>
                 </div>
             ) : (
-                /* PANELES COMPLETOS (SE REVELAN SOLO TRAS EL DESBLOQUEO EXITOSO) */
+                /* PANEL DESBLOQUEADO */
                 <div className="w-full max-w-4xl flex flex-col items-center animate-fadeIn">
                     <div className="w-full bg-slate-900 border border-cyan-500/30 rounded-lg p-6 shadow-xl mb-6">
                         <header className="flex justify-between items-center border-b border-cyan-500/20 pb-4 mb-6">
                             <div>
                                 <h1 className="text-xl font-bold tracking-wider flex items-center gap-2">
-                                    <span>⚡</span> Jarvis AI Core — <span className="text-cyan-300">Master Platform (Desbloqueado)</span>
+                                    <span>⚡</span> Jarvis AI Core — <span className="text-cyan-300">Stark Voice Active</span>
                                 </h1>
                                 <p className="text-xs text-slate-400">Control Operativo Seguro (C. Francisco)</p>
                             </div>
-                            <div className="flex items-center gap-3">
+                            <div className="flex items-center gap-2">
+                                <button 
+                                    onClick={() => setModoInglesStark(!modoInglesStark)}
+                                    className="text-xs bg-slate-950 text-cyan-300 px-3 py-1 rounded border border-cyan-500/40 font-bold"
+                                >
+                                    {modoInglesStark ? '🇬🇧 Ac. Británico' : '🇪🇸 Ac. Español'}
+                                </button>
                                 <button 
                                     onClick={() => setVozActiva(!vozActiva)}
                                     className={`text-xs px-3 py-1 rounded border ${vozActiva ? 'bg-cyan-600 text-slate-950 border-cyan-400 font-bold' : 'bg-slate-950 text-slate-400 border-slate-700'}`}
                                 >
-                                    {vozActiva ? '🔊 Voz Activada' : '🔇 Voz Silenciada'}
+                                    {vozActiva ? '🔊 Voz On' : '🔇 Voz Off'}
                                 </button>
                                 <button 
                                     onClick={() => setAccesoConcedido(false)}
                                     className="text-xs bg-red-600 hover:bg-red-500 text-white px-3 py-1 rounded font-bold"
                                 >
-                                    🔒 Bloquear Sistema
+                                    🔒 Bloquear
                                 </button>
                             </div>
                         </header>
@@ -273,14 +320,14 @@ export default function MasterCorePage() {
                                 disabled={isPending}
                                 className="w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-2 px-4 rounded transition-all duration-200 disabled:opacity-50"
                             >
-                                {isPending ? 'Procesando con Jarvis...' : 'Ejecutar Comando Principal'}
+                                {isPending ? 'Jarvis procesando...' : 'Ejecutar Comando Principal'}
                             </button>
                         </form>
 
                         {mensajeRespuesta && (
                             <div className="mt-6 p-5 bg-slate-950 border-2 border-cyan-500 rounded-lg text-sm shadow-2xl relative overflow-hidden space-y-3">
                                 <div className="absolute top-0 right-0 bg-cyan-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl">
-                                    JARVIS SECURE ACTIVE
+                                    JARVIS STARK VOICE ACTIVE
                                 </div>
                                 <p className="text-white font-bold">{mensajeRespuesta}</p>
                                 {folioUltimo && (
@@ -297,7 +344,7 @@ export default function MasterCorePage() {
                         )}
                     </div>
 
-                    {/* BANCO DE MEMORIA Y REGISTROS (OCULTO TRAS LA CORTINA DE SEGURIDAD) */}
+                    {/* BANCO DE MEMORIA */}
                     <div className="w-full bg-slate-900 border border-cyan-500/30 rounded-lg p-6 shadow-xl">
                         <h2 className="text-lg font-bold mb-4 text-cyan-300 border-b border-cyan-500/20 pb-2">Banco de Memoria y Registros (C. Francisco)</h2>
                         {memorias.length === 0 ? (

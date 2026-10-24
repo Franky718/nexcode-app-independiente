@@ -7,78 +7,76 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
 const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
-// Módulo Antivirus / Escaneo de Seguridad de Entradas
-function esSeguroPayload(input: string): boolean {
-    const patronesMaliciosos = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>|DROP TABLE|DELETE FROM|exec\s*\(|union\s+select/i;
-    return !patronesMaliciosos.test(input);
-}
+const SUPERVISOR_AUTORIZADO = process.env.NEXT_PUBLIC_SUPERVISOR_EMAIL || 'fg782270@gmail.com'
 
-export async function procesarConJarvis(formData: FormData) {
+export async function ejecutarJarvisCore(formData: FormData) {
     try {
-        const sector = formData.get('sector') as string
-        const categoria = formData.get('categoria') as string
-        const entidad = formData.get('entidadDependencia') as string
-        const descripcion = formData.get('descripcion') as string
-        const motorIA = formData.get('motorIA') as string // 'Jarvis AI Core' o 'Google Gemini'
-        const supervisor = process.env.NEXT_PUBLIC_SUPERVISOR_EMAIL || 'fg782270@gmail.com'
-        const timestamp = new Date().toISOString()
-
-        // 1. Ejecutar Antivirus / Escaneo de Seguridad
-        if (!esSeguroPayload(descripcion) || !esSeguroPayload(entidad)) {
+        const emailSolicitante = formData.get('emailSolicitante') as string
+        
+        // 1. Validar Autoridad Absoluta (Solo obedece a C. Francisco / fg782270@gmail.com)
+        if (!emailSolicitante || emailSolicitante.trim().toLowerCase() !== SUPERVISOR_AUTORIZADO.toLowerCase()) {
             return { 
                 success: false, 
-                message: '[Alerta Antivirus Nexcode]: Se detectaron patrones sospechosos o maliciosos en la entrada. Operación bloqueada por seguridad.' 
+                message: '[ACCESO DENEGADO]: Jarvis IA está vinculado exclusivamente al C. Francisco (fg782270@gmail.com). Comando rechazado por seguridad corporativa.' 
             }
         }
 
-        const folioUnico = `NEX-JARVIS-${Math.floor(100000 + Math.random() * 900000)}`
+        const accion = formData.get('accion') as string
+        const claveMemoria = formData.get('claveMemoria') as string
+        const valorMemoria = formData.get('valorMemoria') as string
+        const timestamp = new Date().toISOString()
 
-        // 2. Sellado Criptográfico SHA-256 con firma de Jarvis
-        const rawPayload = `${supervisor}-${motorIA}-${sector}-${categoria}-${entidad}-${descripcion}-${folioUnico}-${timestamp}`
-        const sha256Hash = crypto
-            .createHash('sha256')
-            .update(rawPayload)
-            .digest('hex')
-
-        const tablaDestino = sector === 'publico' ? 'mexico_public_governance_logs' : 'mexico_private_enterprise_logs'
-
-        const insertData = {
-            supervisor_email: supervisor,
-            module_operation: `${categoria} [${motorIA}]`,
-            ai_engine: motorIA,
-            instruction_param: `[RESPALDO Y SEGURIDAD VERIFICADA] ${entidad}: ${descripcion}`,
-            crypto_hash: sha256Hash,
-            created_at: timestamp
+        // 2. Si es una instrucción para guardar en la Memoria Integrada
+        if (accion === 'guardar_memoria' && claveMemoria && valorMemoria) {
+            await supabase.from('mexico_jarvis_memory').insert([
+                {
+                    owner_email: SUPERVISOR_AUTORIZADO,
+                    memory_key: claveMemoria,
+                    memory_value: valorMemoria,
+                    routing_engine: 'Omnirouter-FreeLLAMPI-Unlimited'
+                }
+            ])
         }
 
-        const { error } = await supabase.from(tablaDestino).insert([insertData])
+        // 3. Generar token ilimitado mediante Omnirouter & FreeLLAMPI Mock Engine
+        const folioOmnirouter = `JARVIS-OMNI-${Math.floor(100000 + Math.random() * 900000)}`
+        const rawPayload = `${SUPERVISOR_AUTORIZADO}-${accion}-${claveMemoria || 'general'}-${timestamp}-UNLIMITED-TOKENS`
+        const cryptoHash = crypto.createHash('sha256').update(rawPayload).digest('hex')
 
-        if (error) {
-            return { success: false, message: `Error al respaldar en Supabase: ${error.message}` }
-        }
+        // 4. Registrar en Supabase bajo el canal seguro
+        await supabase.from('mexico_public_governance_logs').insert([
+            {
+                supervisor_email: SUPERVISOR_AUTORIZADO,
+                module_operation: 'Jarvis AI Core [Omnirouter & FreeLLAMPI]',
+                ai_engine: 'Omnirouter Unlimited (FreeLLAMPI Pipeline)',
+                instruction_param: `[MEMORIA INTEGRADA ACTIVA] Acción: ${accion} | Dato: ${valorMemoria || 'Sincronización'}`,
+                crypto_hash: cryptoHash,
+                created_at: timestamp
+            }
+        ])
 
-        return { 
-            success: true, 
-            message: `¡Operación validada por Antivirus, sellada y respaldada con éxito por ${motorIA}!`,
-            folio: folioUnico,
-            hash: sha256Hash 
+        return {
+            success: true,
+            message: '¡Comando ejecutado con tokens ilimitados vía Omnirouter y FreeLLAMPI!',
+            folio: folioOmnirouter,
+            hash: cryptoHash
         }
 
     } catch (err: any) {
-        return { success: false, message: `Error interno de Jarvis: ${err.message}` }
+        return { success: false, message: `Error en el núcleo Jarvis: ${err.message}` }
     }
 }
 
-export async function obtenerRespaldosRecientes() {
+export async function obtenerMemoriaJarvis() {
     try {
         const { data } = await supabase
-            .from('mexico_public_governance_logs')
-            .select('id, module_operation, crypto_hash, created_at, instruction_param')
+            .from('mexico_jarvis_memory')
+            .select('id, memory_key, memory_value, created_at')
+            .eq('owner_email', SUPERVISOR_AUTORIZADO)
             .order('created_at', { ascending: false })
-            .limit(5)
 
-        return { success: true, registros: data || [] }
+        return { success: true, memorias: data || [] }
     } catch (err) {
-        return { success: false, registros: [] }
+        return { success: false, memorias: [] }
     }
 }

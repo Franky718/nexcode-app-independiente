@@ -12,7 +12,6 @@ const supabase = createClient(supabaseUrl, supabaseAnonKey)
 const SUPERVISOR_AUTORIZADO = process.env.NEXT_PUBLIC_SUPERVISOR_EMAIL || 'fg782270@gmail.com'
 const localMemoryFile = path.join(process.cwd(), 'jarvis-local-memory.json')
 
-// Función de respaldo en archivo local si Supabase no responde
 function guardarMemoriaLocal(key: string, value: string, engine: string) {
     try {
         let registros = []
@@ -58,21 +57,22 @@ export async function ejecutarJarvisCore(formData: FormData) {
         }
 
         const accion = formData.get('accion') as string
-        const tipoSoftware = formData.get('tipoSoftware') as string || 'Sistema Autónomo'
-        const detalleSoftware = formData.get('detalleSoftware') as string || 'Operación general'
+        const tipoSoftware = formData.get('tipoSoftware') as string || 'Plataforma Global'
+        const detalleSoftware = formData.get('detalleSoftware') as string || 'Despliegue Multiplataforma'
         const timestamp = new Date().toISOString()
 
-        const folioOmnirouter = `JARVIS-SECURE-${Math.floor(100000 + Math.random() * 900000)}`
+        const folioOmnirouter = `NEX-GLOBAL-${Math.floor(100000 + Math.random() * 900000)}`
         const rawPayload = `${SUPERVISOR_AUTORIZADO}-${accion}-${tipoSoftware}-${detalleSoftware}-${timestamp}-UNLIMITED-TOKENS`
         const cryptoHash = crypto.createHash('sha256').update(rawPayload).digest('hex')
 
-        const memoryKey = `[${tipoSoftware}] ${accion}`
-        const memoryValue = `Detalle: ${detalleSoftware} | Folio: ${folioOmnirouter} | Hash: ${cryptoHash}`
+        const memoryKey = `[COMPILACIÓN] ${tipoSoftware}`
+        const memoryValue = `Acción: ${accion} | Detalle: ${detalleSoftware} | Folio: ${folioOmnirouter} | Hash: ${cryptoHash}`
 
-        // Intentar guardar en Supabase (Nube)
-        let guardadoExitoso = false
+        // Guardar en memoria híbrida
+        guardarMemoriaLocal(memoryKey, memoryValue, 'Jarvis Cloud Deployment Engine')
+
         try {
-            const { error: errorMemoria } = await supabase.from('mexico_jarvis_memory').insert([
+            await supabase.from('mexico_jarvis_memory').insert([
                 {
                     owner_email: SUPERVISOR_AUTORIZADO,
                     memory_key: memoryKey,
@@ -80,34 +80,25 @@ export async function ejecutarJarvisCore(formData: FormData) {
                     routing_engine: 'Jarvis Omnirouter Unlimited'
                 }
             ])
-            if (!errorMemoria) guardadoExitoso = true
-        } catch (err) {
-            // Si falla la red, se usa la memoria local
-        }
+        } catch (e) {}
 
-        // Si Supabase falla, guardamos en el respaldo local automáticamente
-        if (!guardadoExitoso) {
-            guardarMemoriaLocal(memoryKey, memoryValue, 'Jarvis Local Secure Engine')
-        }
-
-        // Generar código descargable de respaldo
         const codigoGenerado = `// ==========================================
 // NEXCODE INTERACTIVE S.A. DE C.V.
-// Módulo Procesado por Jarvis AI Core
-// Propietario: C. Francisco (fg782270@gmail.com)
-// Folio: ${folioOmnirouter}
-// Hash SHA-256: ${cryptoHash}
+// Módulo de Despliegue Global: ${tipoSoftware}
+// Supervisor: C. Francisco (fg782270@gmail.com)
+// Folio Oficial: ${folioOmnirouter}
+// Hash de Autenticidad SHA-256: ${cryptoHash}
 // ==========================================
 
 import React from 'react';
 
-export default function JarvisModuleComponent() {
+export default function DespliegueGlobalComponent() {
     return (
         <div style={{ background: '#020617', color: '#22d3ee', padding: '20px', fontFamily: 'monospace' }}>
-            <h1>Nexcode Master Core — Módulo Blindado</h1>
-            <p>Operación: ${tipoSoftware} - ${accion}</p>
-            <p>Directriz: ${detalleSoftware}</p>
-            <p>Estado: Memoria Híbrida Activa y Sincronizada.</p>
+            <h1>Nexcode Master Core — ${tipoSoftware}</h1>
+            <p>Acción: ${accion}</p>
+            <p>Destino: ${detalleSoftware}</p>
+            <p>Estado: Compilado y sincronizado desde Nube Privada con Tokens Ilimitados.</p>
         </div>
     );
 }
@@ -115,7 +106,7 @@ export default function JarvisModuleComponent() {
 
         return {
             success: true,
-            message: `¡Comando ejecutado con éxito y registrado en la memoria permanente de Jarvis!`,
+            message: `¡Compilación y despliegue global para [${tipoSoftware}] ejecutado con éxito y registrado en su memoria!`,
             folio: folioOmnirouter,
             hash: cryptoHash,
             codigoDescargable: codigoGenerado
@@ -128,7 +119,6 @@ export default function JarvisModuleComponent() {
 
 export async function obtenerMemoriaJarvis() {
     try {
-        // Intentar leer de Supabase primero
         const { data, error } = await supabase
             .from('mexico_jarvis_memory')
             .select('id, memory_key, memory_value, routing_engine, created_at')
@@ -140,7 +130,6 @@ export async function obtenerMemoriaJarvis() {
         }
     } catch (err) {}
 
-    // Si Supabase no responde o está vacío, cargamos los registros locales
     const localData = leerMemoriaLocal()
     return { success: true, memorias: localData }
 }

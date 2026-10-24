@@ -10,64 +10,57 @@ export default function MasterCorePage() {
     const [hashGenerado, setHashGenerado] = useState<string | null>(null)
     const [memoriasEstado, setMemoriasEstado] = useState<any[]>([])
     
-    // Configuración de Módulos Centrales bajo Instrucción Maestra de Jarvis AI
-    const [seccionActiva, setSeccionActiva] = useState<'academico' | 'empresa'>('academico')
+    // Configuración de Módulos Centrales
+    const [seccionActiva, setSeccionActiva] = useState<'academico' | 'empresa'>('empresa')
     const [subTabAcademico, setSubTabAcademico] = useState<'editor' | 'calificar'>('editor')
+    const [subTabEmpresa, setSubTabEmpresa] = useState<'ventas' | 'apk'>('ventas')
     
     const [tipoAnalisisAcademico, setTipoAnalisisAcademico] = useState('Estructura Zapia AI: Seguridad Pública & Word')
-    const [tipoAnalisisEmpresa, setTipoAnalisisEmpresa] = useState('Matriz Global Unificada & APK Builder')
-    const [modeloIA, setModeloIA] = useState('Jarvis AI Autonomous Core (Zapia Integrated)')
+    const [tipoAnalisisEmpresa, setTipoAnalisisEmpresa] = useState('Comercialización y Contratos de Software')
+    const [modeloIA, setModeloIA] = useState('Jarvis AI Autonomous Core (Commercial Engine)')
     
     const [detalleAcademico, setDetalleAcademico] = useState('Estructura metodológica de seguridad pública validada institucionalmente.')
     const [calificacionAcademica, setCalificacionAcademica] = useState('10 / 10 (Aprobado con Excelencia)')
-    const [detalleEmpresa, setDetalleEmpresa] = useState('')
     
-    // Procesador de Textos Institucional pre-cargado con la estructura de Zapia AI
-    const [tituloDocumento, setTituloDocumento] = useState('Proyecto de Aplicación para Seguridad Pública')
-    const [contenidoDocumento, setContenidoDocumento] = useState(
+    // Procesador Académico (Intacto)
+    const [tituloDocumentoAcademico, setTituloDocumentoAcademico] = useState('Proyecto de Aplicación para Seguridad Pública')
+    const [contenidoAcademico, setContenidoAcademico] = useState(
 `UNIVERSIDAD ABIERTA Y A DISTANCIA DE MÉXICO (UnADM)
 LICENCIATURA EN DERECHO
-
-TÍTULO DEL PROYECTO:
-Proyecto de Aplicación para Seguridad Pública
-
 CAPÍTULO 1. PLANTEAMIENTO DEL PROBLEMA Y MARCO METODOLÓGICO
-
 1.1 Análisis de la problemática
-[Describa detalladamente el contexto actual, los factores criminológicos, sociales o normativos que originan la problemática en materia de seguridad pública...]
-
 1.2 Planteamiento del problema de investigación
-[Formule el problema central de estudio, delimitando el objeto de análisis jurídico y operativo conforme a la normatividad aplicable...]
-
 1.3 Pregunta general de investigación
-[¿De qué manera... / Cuál es el impacto... / Cómo influye... redactada de forma clara y directa conforme al alcance del proyecto?]
-
 1.4 Preguntas específicas
-- ¿Cuáles son los factores determinantes que inciden en...?
-- ¿Qué marco normativo regula o limita la actuación de...?
-- ¿De qué forma se pueden optimizar los mecanismos de... ?
-
 1.5 Justificación
-[Argumente la relevancia teórica, práctica, social e institucional del proyecto, destacando su viabilidad y aportación al orden jurídico y de seguridad pública...]
-
 1.6 Objetivos de la investigación
-- Objetivo General: [Analizar, evaluar o proponer...]
-- Objetivos Específicos:
-  * Diagnosticar la situación actual de...
-  * Examinar las disposiciones normativas de...
-  * Diseñar la propuesta de solución o mejora...
+1.7 Hipótesis (Propuestas por comprobar)`)
 
-1.7 Hipótesis (Propuestas por comprobar)
-- Hipótesis General: [Enunciado provisional sujeto a demostración empírica y normativa, planteado como propuesta analítica, no como resultado inventado...]
-- Hipótesis Secundarias:`
-    )
+    // Documentos Comerciales de Venta de Software (NUEVO MÓDULO)
+    const [tipoDocComercial, setTipoDocComercial] = useState<'carta' | 'juridico' | 'financiero'>('carta')
+    const [tituloComercial, setTituloComercial] = useState('Carta de Presentación y Resumen Ejecutivo - Sistema Finora / Sónica')
+    const [contenidoComercial, setContenidoComercial] = useState(
+`[SECRETARÍA / CLIENTE INSTITUCIONAL]
+ASUNTO: Presentación de Solución Tecnológica y Propuesta de Valor
 
-    // Contexto Geopolítico Institucional
+RESUMEN EJECUTIVO:
+Nexcode Interactive S.A. de C.V. presenta su plataforma avanzada de software especializado, diseñada para optimizar la gestión operativa, la seguridad de datos y la automatización de procesos institucionales y comerciales con altos estándares de rendimiento y cumplimiento normativo.
+
+1. ALCANCE Y ARQUITECTURA TECNOLÓGICA
+- Desarrollo Full-Stack modular, seguro e independiente.
+- Integración con pasarelas de pago, bases de datos cifradas y despliegue multiplataforma.
+
+2. BENEFICIOS CLAVE
+- Reducción de tiempos operativos.
+- Trazabilidad y auditoría en tiempo real.
+- Escalabilidad corporativa garantizada.`)
+
+    // Contexto Geopolítico
     const [continente, setContinente] = useState('América')
     const [region, setRegion] = useState('América del Norte / LATAM')
     const [pais, setPais] = useState('México (Reynosa, Tamaulipas)')
 
-    // Seguridad y Bloqueo (Protocolo Omega / PINs: 7822, 1998, 2026)
+    // Seguridad y Bloqueo
     const [accesoConcedido, setAccesoConcedido] = useState(false)
     const [modoAcceso, setModoAcceso] = useState<'facial' | 'pin' | 'hardware'>('facial')
     const [pinIngresado, setPinIngresado] = useState('')
@@ -144,18 +137,74 @@ CAPÍTULO 1. PLANTEAMIENTO DEL PROBLEMA Y MARCO METODOLÓGICO
         }, 2000)
     }
 
+    // Selector inteligente de plantillas comerciales para venta de software
+    function cambiarPlantillaComercial(tipo: 'carta' | 'juridico' | 'financiero') {
+        setTipoDocComercial(tipo)
+        if (tipo === 'carta') {
+            setTituloComercial('Carta de Presentación y Resumen Ejecutivo - Software Institucional')
+            setContenidoComercial(
+`[SECRETARÍA / CLIENTE INSTITUCIONAL]
+ASUNTO: Presentación de Solución Tecnológica y Propuesta de Valor
+
+RESUMEN EJECUTIVO:
+Nexcode Interactive S.A. de C.V. presenta su plataforma avanzada de software especializado, diseñada para optimizar la gestión operativa, la seguridad de datos y la automatización de procesos institucionales y comerciales con altos estándares de rendimiento y cumplimiento normativo.
+
+1. ALCANCE Y ARQUITECTURA TECNOLÓGICA
+- Desarrollo Full-Stack modular, seguro e independiente.
+- Integración con pasarelas de pago, bases de datos cifradas y despliegue multiplataforma.
+
+2. BENEFICIOS CLAVE
+- Reducción de tiempos operativos.
+- Trazabilidad y auditoría en tiempo real.
+- Escalabilidad corporativa garantizada.`)
+        } else if (tipo === 'juridico') {
+            setTituloComercial('Dictamen Jurídico: Contrato, Cumplimiento y Gestión de Riesgos')
+            setContenidoComercial(
+`DICTAMEN JURÍDICO DE LICENCIAMIENTO Y SOPORTE DE SOFTWARE
+
+1. OBJETO DEL CONTRATO
+Establecer los términos y condiciones legales para la comercialización, licenciamiento, uso y soporte técnico de la solución de software desarrollada por Nexcode Interactive.
+
+2. CLÁUSULAS DE CUMPLIMIENTO Y PROPIEDAD INTELECTUAL
+- Propiedad de Código: El código fuente y la arquitectura lógica permanecen bajo la titularidad de Nexcode Interactive S.A. de C.V., otorgando una licencia de uso institucional exclusiva o no exclusiva según convenio.
+- Protección de Datos y Privacidad: Cumplimiento estricto con las normativas de protección de datos personales y seguridad de la información.
+
+3. LIMITACIÓN DE RESPONSABILIDAD Y GESTIÓN DE RIESGOS
+- Garantía de operatividad continua del 99.9% bajo servidores autorizados.
+- Protocolos de mitigación ante fallos de red o brechas de seguridad externas.`)
+        } else if (tipo === 'financiero') {
+            setTituloComercial('Dictamen Contable y Financiero: Precio, IVA, Facturación y ROI')
+            setContenidoComercial(
+`DICTAMEN CONTABLE Y FINANCIERO - PROPUESTA COMERCIAL
+
+1. DESGLOSE DE PRECIOS Y ESQUEMA DE FACTURACIÓN
+- Costo de Licenciamiento / Implementación Modular: [Monto MXN / USD]
+- Impuesto al Valor Agregado (IVA 16%): Conforme a la legislación fiscal vigente en México.
+- Método de Facturación: Emisión de Comprobantes Fiscales Digitales por Internet (CFDI) bajo el régimen fiscal aplicable.
+
+2. CONDICIONES DE PAGO Y PLAZOS
+- Anticipo del 50% para inicio de despliegue y configuración de entorno.
+- Liquidación del 50% contra entrega final, pruebas de aceptación y capacitación operativa.
+
+3. RETORNO DE INVERSIÓN (ROI)
+- Estimación de recuperación de la inversión mediante la automatización de procesos en un plazo menor a 6 meses de operación continua.`)
+        }
+    }
+
     function descargarDocumentoWord() {
-        const textoCompleto = `${tituloDocumento.toUpperCase()}\n\n${contenidoDocumento}`
+        const tituloActivo = seccionActiva === 'academico' ? tituloDocumentoAcademico : tituloComercial
+        const contenidoActivo = seccionActiva === 'academico' ? contenidoAcademico : contenidoComercial
+        const textoCompleto = `${tituloActivo.toUpperCase()}\n\n${contenidoActivo}`
         const blob = new Blob([textoCompleto], { type: 'application/msword;charset=utf-8' })
         const url = URL.createObjectURL(blob)
         const link = document.createElement('a')
         link.href = url
-        link.download = `${tituloDocumento.replace(/\s+/g, '-')}.doc`
+        link.download = `${tituloActivo.replace(/\s+/g, '-')}.doc`
         document.body.appendChild(link)
         link.click()
         document.body.removeChild(link)
         URL.revokeObjectURL(url)
-        hablarJarvis('Documento estructurado exportado en formato Word con éxito.')
+        hablarJarvis('Documento exportado en formato Word con éxito.')
     }
 
     function descargarBancoMemoria() {
@@ -175,11 +224,11 @@ CAPÍTULO 1. PLANTEAMIENTO DEL PROBLEMA Y MARCO METODOLÓGICO
     function formatearActividad(clave: string) {
         if (!clave) return 'Expediente Institucional'
         const lower = clave.toLowerCase()
-        if (lower.includes('academico') || lower.includes('zapia') || lower.includes('evaluacion') || lower.includes('word')) {
-            return 'Estructura Zapia AI & Formato Word'
+        if (lower.includes('comercial') || lower.includes('carta') || lower.includes('juridico') || lower.includes('financiero')) {
+            return 'Comercialización y Venta de Software'
         }
-        if (lower.includes('empresa') || lower.includes('apk') || lower.includes('auditoria')) {
-            return 'Auditoría y Desarrollo Corporativo'
+        if (lower.includes('academico') || lower.includes('zapia')) {
+            return 'Estructura Zapia AI & Formato Word'
         }
         return 'Bitácora y Registro Institucional'
     }
@@ -194,7 +243,7 @@ CAPÍTULO 1. PLANTEAMIENTO DEL PROBLEMA Y MARCO METODOLÓGICO
         formData.append('region', region)
         formData.append('pais', pais)
         formData.append('omegaKey', omegaKeyInput)
-        formData.append('archivoNombre', `${tituloDocumento}.doc`)
+        formData.append('archivoNombre', seccionActiva === 'academico' ? `${tituloDocumentoAcademico}.doc` : `${tituloComercial}.doc`)
 
         startTransition(async () => {
             const resultado = await ejecutarJarvisCore(formData)
@@ -202,7 +251,7 @@ CAPÍTULO 1. PLANTEAMIENTO DEL PROBLEMA Y MARCO METODOLÓGICO
             setFolioUltimo(resultado.folio || null)
             setHashGenerado(resultado.hash || null)
             if (resultado.success) {
-                hablarJarvis("Proyecto estructurado y registrado bajo instrucción maestra.")
+                hablarJarvis("Operación comercial y expediente registrados con éxito.")
                 cargarMemoria()
             }
         })
@@ -258,7 +307,7 @@ CAPÍTULO 1. PLANTEAMIENTO DEL PROBLEMA Y MARCO METODOLÓGICO
                         <header className="flex justify-between items-center border-b border-cyan-500/20 pb-4 mb-6">
                             <div>
                                 <h1 className="text-xl font-bold tracking-wider flex items-center gap-2">
-                                    <span>🛡️</span> Jarvis Master Core — <span className="text-cyan-300">Zapia AI Structure Integration</span>
+                                    <span>🛡️</span> Jarvis Master Core — <span className="text-cyan-300">Plataforma Institucional & Comercial</span>
                                 </h1>
                                 <p className="text-xs text-slate-400">Investigador Titular: fg782270@gmail.com (C. Francisco)</p>
                             </div>
@@ -289,24 +338,24 @@ CAPÍTULO 1. PLANTEAMIENTO DEL PROBLEMA Y MARCO METODOLÓGICO
                             </div>
                         </div>
 
-                        {/* SELECTOR DE MÓDULO INDEPENDIENTE */}
+                        {/* SELECTOR DE MÓDULO PRINCIPAL */}
                         <div className="mb-6 p-4 bg-slate-950 border-2 border-cyan-500/50 rounded-lg flex gap-3">
                             <button type="button" onClick={() => setSeccionActiva('academico')} className={`flex-1 py-3 px-4 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'academico' ? 'bg-amber-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-amber-300'}`}>
-                                🎓 Módulo Académico (Estructura Zapia AI & Word)
+                                🎓 Módulo Académico (Zapia AI & Seguridad Pública)
                             </button>
                             <button type="button" onClick={() => setSeccionActiva('empresa')} className={`flex-1 py-3 px-4 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'empresa' ? 'bg-cyan-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-cyan-300'}`}>
-                                🏢 Módulo Corporativo (APK Builder & Auditoría)
+                                🏢 Módulo Comercial & Ventas de Software
                             </button>
                         </div>
 
-                        {/* SUB-PESTAÑAS EN MÓDULO ACADÉMICO */}
-                        {seccionActiva === 'academico' && (
-                            <div className="flex gap-2 mb-4 border-b border-amber-500/30 pb-3">
-                                <button type="button" onClick={() => setSubTabAcademico('editor')} className={`py-1.5 px-4 rounded text-xs font-bold transition-all ${subTabAcademico === 'editor' ? 'bg-amber-500 text-slate-950' : 'bg-slate-950 text-amber-300 border border-amber-500/30'}`}>
-                                    📝 Procesador con Estructura Zapia AI (Word)
+                        {/* SUB-PESTAÑAS EN MÓDULO EMPRESA / COMERCIAL */}
+                        {seccionActiva === 'empresa' && (
+                            <div className="flex gap-2 mb-4 border-b border-cyan-500/30 pb-3">
+                                <button type="button" onClick={() => setSubTabEmpresa('ventas')} className={`py-1.5 px-4 rounded text-xs font-bold transition-all ${subTabEmpresa === 'ventas' ? 'bg-cyan-500 text-slate-950' : 'bg-slate-950 text-cyan-300 border border-cyan-500/30'}`}>
+                                    💼 Documentación de Ventas y Dictámenes (Word)
                                 </button>
-                                <button type="button" onClick={() => setSubTabAcademico('calificar')} className={`py-1.5 px-4 rounded text-xs font-bold transition-all ${subTabAcademico === 'calificar' ? 'bg-amber-500 text-slate-950' : 'bg-slate-950 text-amber-300 border border-amber-500/30'}`}>
-                                    ✍️ Panel de Calificación y Retroalimentación
+                                <button type="button" onClick={() => setSubTabEmpresa('apk')} className={`py-1.5 px-4 rounded text-xs font-bold transition-all ${subTabEmpresa === 'apk' ? 'bg-cyan-500 text-slate-950' : 'bg-slate-950 text-cyan-300 border border-cyan-500/30'}`}>
+                                    ⚙️ APK Builder & Auditoría Full-Stack
                                 </button>
                             </div>
                         )}
@@ -317,60 +366,74 @@ CAPÍTULO 1. PLANTEAMIENTO DEL PROBLEMA Y MARCO METODOLÓGICO
                                 <input type="email" name="emailSolicitante" defaultValue="fg782270@gmail.com" />
                             </div>
 
-                            {seccionActiva === 'academico' && subTabAcademico === 'editor' && (
+                            {/* VISTA MÓDULO ACADÉMICO */}
+                            {seccionActiva === 'academico' && (
                                 <div className="space-y-4 p-5 bg-slate-950 rounded border-2 border-amber-500/60 animate-fadeIn shadow-inner">
                                     <div className="flex justify-between items-center border-b border-amber-500/30 pb-3">
-                                        <h3 className="text-sm font-bold text-amber-300 uppercase tracking-wide">📄 Procesador de Documento — Seguridad Pública (Zapia AI)</h3>
-                                        <button type="button" onClick={descargarDocumentoWord} className="bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg flex items-center gap-1">
-                                            📥 Descargar Archivo Word (.doc)
+                                        <h3 className="text-sm font-bold text-amber-300 uppercase tracking-wide">🎓 Procesador Académico — Zapia AI (Seguridad Pública)</h3>
+                                        <button type="button" onClick={descargarDocumentoWord} className="bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg">
+                                            📥 Descargar Word (.doc)
                                         </button>
                                     </div>
+                                    <input type="text" value={tituloDocumentoAcademico} onChange={(e) => setTituloDocumentoAcademico(e.target.value)} className="w-full bg-slate-900 border border-amber-500/40 rounded p-2 text-white text-xs font-bold" required />
+                                    <textarea value={contenidoAcademico} onChange={(e) => setContenidoAcademico(e.target.value)} rows={10} className="w-full bg-slate-900 border border-amber-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none" required />
+                                </div>
+                            )}
+
+                            {/* VISTA MÓDULO COMERCIAL DE VENTAS DE SOFTWARE */}
+                            {seccionActiva === 'empresa' && subTabEmpresa === 'ventas' && (
+                                <div className="space-y-4 p-5 bg-slate-950 rounded border-2 border-cyan-500/60 animate-fadeIn shadow-inner">
+                                    <div className="flex justify-between items-center border-b border-cyan-500/30 pb-3">
+                                        <h3 className="text-sm font-bold text-cyan-300 uppercase tracking-wide">💼 Creador de Documentos para Venta de Software</h3>
+                                        <button type="button" onClick={descargarDocumentoWord} className="bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg">
+                                            📥 Descargar Dictamen / Carta (.doc)
+                                        </button>
+                                    </div>
+
+                                    {/* Selector de Plantillas Comerciales */}
+                                    <div className="grid grid-cols-3 gap-2 bg-slate-900 p-2 rounded border border-cyan-500/30">
+                                        <button type="button" onClick={() => cambiarPlantillaComercial('carta')} className={`py-2 px-2 rounded text-xs font-bold transition-all ${tipoDocComercial === 'carta' ? 'bg-cyan-500 text-slate-950 shadow' : 'text-slate-300 hover:text-white'}`}>
+                                            📄 Carta de Presentación
+                                        </button>
+                                        <button type="button" onClick={() => cambiarPlantillaComercial('juridico')} className={`py-2 px-2 rounded text-xs font-bold transition-all ${tipoDocComercial === 'juridico' ? 'bg-cyan-500 text-slate-950 shadow' : 'text-slate-300 hover:text-white'}`}>
+                                            ⚖️ Dictamen Jurídico
+                                        </button>
+                                        <button type="button" onClick={() => cambiarPlantillaComercial('financiero')} className={`py-2 px-2 rounded text-xs font-bold transition-all ${tipoDocComercial === 'financiero' ? 'bg-cyan-500 text-slate-950 shadow' : 'text-slate-300 hover:text-white'}`}>
+                                            💰 Dictamen Financiero & IVA
+                                        </button>
+                                    </div>
+
                                     <div>
-                                        <label className="block text-xs font-bold text-amber-300 mb-1">Título del Proyecto:</label>
-                                        <input type="text" value={tituloDocumento} onChange={(e) => setTituloDocumento(e.target.value)} className="w-full bg-slate-900 border border-amber-500/40 rounded p-2 text-white text-xs font-bold" required />
+                                        <label className="block text-xs font-bold text-cyan-300 mb-1">Título del Documento Comercial:</label>
+                                        <input type="text" value={tituloComercial} onChange={(e) => setTituloComercial(e.target.value)} className="w-full bg-slate-900 border border-cyan-500/40 rounded p-2 text-white text-xs font-bold" required />
                                     </div>
                                     <div>
-                                        <label className="block text-xs font-bold text-amber-300 mb-1">Contenido Metodológico (Zapia AI Template):</label>
-                                        <textarea value={contenidoDocumento} onChange={(e) => setContenidoDocumento(e.target.value)} rows={14} className="w-full bg-slate-900 border border-amber-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none focus:border-amber-400 leading-relaxed shadow-inner" required />
+                                        <label className="block text-xs font-bold text-cyan-300 mb-1">Contenido y Estructura Profesional:</label>
+                                        <textarea value={contenidoComercial} onChange={(e) => setContenidoComercial(e.target.value)} rows={12} className="w-full bg-slate-900 border border-cyan-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none focus:border-cyan-400 leading-relaxed shadow-inner" required />
                                     </div>
                                 </div>
                             )}
 
-                            {seccionActiva === 'academico' && subTabAcademico === 'calificar' && (
-                                <div className="space-y-4 p-4 bg-slate-950 rounded border border-amber-500/40 animate-fadeIn">
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div>
-                                            <label className="block text-xs text-slate-300 mb-1">Calificación Asignada:</label>
-                                            <input type="text" value={calificacionAcademica} onChange={(e) => setCalificacionAcademica(e.target.value)} className="w-full bg-slate-900 border border-amber-500/40 rounded p-2 text-white text-xs" required />
-                                        </div>
-                                        <div>
-                                            <label className="block text-xs text-slate-300 mb-1">Retroalimentación Académica:</label>
-                                            <textarea name="detalle" value={detalleAcademico} onChange={(e) => setDetalleAcademico(e.target.value)} className="w-full bg-slate-900 border border-amber-500/40 rounded p-2 text-white text-xs h-20 outline-none" required />
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
-
-                            {seccionActiva === 'empresa' && (
+                            {/* VISTA APK BUILDER */}
+                            {seccionActiva === 'empresa' && subTabEmpresa === 'apk' && (
                                 <div className="space-y-4 p-4 bg-cyan-950/20 rounded border border-cyan-500/40 animate-fadeIn">
-                                    <h4 className="text-xs font-bold text-cyan-300 uppercase tracking-wide">🏢 Módulo Corporativo — APK Builder & Auditoría Full-Stack</h4>
+                                    <h4 className="text-xs font-bold text-cyan-300 uppercase tracking-wide">⚙️ Módulo APK Builder & Auditoría Full-Stack</h4>
                                     <div>
                                         <label className="block text-xs text-slate-300 mb-1">Matriz de IA:</label>
                                         <select value={modeloIA} onChange={(e) => setModeloIA(e.target.value)} className="w-full bg-slate-900 border border-cyan-500/40 rounded p-2 text-white text-xs">
-                                            <option value="Matriz Global Unificada">Matriz Global Unificada (Todas las IAs)</option>
+                                            <option value="Jarvis AI Autonomous Core (Commercial Engine)">Jarvis AI Autonomous Core</option>
                                             <option value="OpenAI GPT-6">OpenAI GPT-6</option>
-                                            <option value="Anthropic Claude 5.5">Anthropic Claude 5.5</option>
                                         </select>
                                     </div>
                                     <div>
                                         <label className="block text-xs text-slate-300 mb-1">Instrucción Corporativa / Compilación APK:</label>
-                                        <textarea name="detalle" value={detalleEmpresa} onChange={(e) => setDetalleEmpresa(e.target.value)} placeholder="Ej: Compilar APK automático para Android o auditar endpoint..." className="w-full bg-slate-950 border border-cyan-500/40 rounded p-3 text-sm h-28 outline-none text-white" required />
+                                        <textarea name="detalle" placeholder="Ej: Compilar APK automático para Android o auditar endpoint..." className="w-full bg-slate-950 border border-cyan-500/40 rounded p-3 text-sm h-28 outline-none text-white" required />
                                     </div>
                                 </div>
                             )}
 
                             <button type="submit" disabled={isPending} className={`w-full font-bold py-3 px-4 rounded text-slate-950 shadow-lg ${seccionActiva === 'academico' ? 'bg-amber-500 hover:bg-amber-400' : 'bg-cyan-500 hover:bg-cyan-400'}`}>
-                                {isPending ? 'Procesando Operación...' : `Ejecutar Operación en [${seccionActiva.toUpperCase()}]`}
+                                {isPending ? 'Procesando Operación...' : `Registrar Operación Institucional [${seccionActiva.toUpperCase()}]`}
                             </button>
                         </form>
 

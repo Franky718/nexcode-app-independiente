@@ -13,7 +13,7 @@ export default function MasterCorePage() {
     const [memoriasEstado, setMemoriasEstado] = useState<any[]>([])
     
     const [seccionActiva, setSeccionActiva] = useState<'academico' | 'empresa'>('academico')
-    const [tipoAnalisisAcademico, setTipoAnalisisAcademico] = useState('Formato APA 7ª Edición (Validación Internacional)')
+    const [tipoAnalisisAcademico, setTipoAnalisisAcademico] = useState('Análisis Documental y Criterios Jurídicos')
     const [tipoAnalisisEmpresa, setTipoAnalisisEmpresa] = useState('Arquitectura Full-Stack & Auditoría')
     const [modeloIA, setModeloIA] = useState('Sistema Autónomo de Investigación Documental')
     
@@ -160,7 +160,7 @@ export default function MasterCorePage() {
             setHashGenerado(resultado.hash || null)
             setCodigoPaquete(resultado.codigoDescargable || null)
             if (resultado.success) {
-                hablarJarvis("Análisis metodológico APA procesado y archivado en el expediente.")
+                hablarJarvis("Análisis metodológico procesado y archivado en el expediente.")
                 cargarMemoria()
             } else {
                 hablarJarvis("Acceso denegado por protocolo de seguridad.")
@@ -174,7 +174,7 @@ export default function MasterCorePage() {
         const url = URL.createObjectURL(blob)
         const link = document.createElement('a')
         link.href = url
-        link.download = `Nexcode-Expediente-APA.tsx`
+        link.download = `Nexcode-Expediente-Tecnico.tsx`
         document.body.appendChild(link)
         link.click()
         document.body.removeChild(link)
@@ -185,8 +185,8 @@ export default function MasterCorePage() {
     function formatearActividad(clave: string) {
         if (!clave) return 'Expediente Institucional'
         const lower = clave.toLowerCase()
-        if (lower.includes('academico') || lower.includes('zapia') || lower.includes('evaluacion') || lower.includes('analisis') || lower.includes('apa')) {
-            return 'Validación de Formato APA (7ª Edición Internacional)'
+        if (lower.includes('academico') || lower.includes('zapia') || lower.includes('evaluacion') || lower.includes('analisis') || lower.includes('documental')) {
+            return 'Dictamen Jurídico y Síntesis Documental'
         }
         if (lower.includes('empresa') || lower.includes('apk') || lower.includes('auditoria') || lower.includes('full-stack')) {
             return 'Dictamen Técnico y Desarrollo Arquitectónico'
@@ -196,7 +196,7 @@ export default function MasterCorePage() {
 
     function formatearMotor(motor: string) {
         if (!motor) return 'Subsistema de Investigación Documental'
-        return 'Gabinete de Análisis Jurídico & APA'
+        return 'Gabinete de Análisis Jurídico'
     }
 
     function descargarBancoMemoria() {
@@ -205,7 +205,7 @@ export default function MasterCorePage() {
         const url = URL.createObjectURL(blob)
         const link = document.createElement('a')
         link.href = url
-        link.download = `Expediente-Academico-APA.json`
+        link.download = `Expediente-Academico-Juridico.json`
         document.body.appendChild(link)
         link.click()
         document.body.removeChild(link)
@@ -306,7 +306,7 @@ export default function MasterCorePage() {
                         <header className="flex justify-between items-center border-b border-cyan-500/20 pb-4 mb-6">
                             <div>
                                 <h1 className="text-xl font-bold tracking-wider flex items-center gap-2">
-                                    <span>⚖️</span> Gabinete Académico y Jurídico — <span className="text-cyan-300">Normativa APA Internacional</span>
+                                    <span>⚖️</span> Gabinete Académico y Jurídico — <span className="text-cyan-300">Sistema de Investigación Autónoma</span>
                                 </h1>
                                 <p className="text-xs text-slate-400">Investigador: fg782270@gmail.com (C. Francisco)</p>
                             </div>
@@ -363,10 +363,10 @@ export default function MasterCorePage() {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                 <button
                                     type="button"
-                                    onClick={() => { setSeccionActiva('academico'); hablarJarvis("Gabinete Académico y APA Activo", true); }}
+                                    onClick={() => { setSeccionActiva('academico'); hablarJarvis("Gabinete Académico y Jurídico Activo", true); }}
                                     className={`py-3 px-4 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-2 ${seccionActiva === 'academico' ? 'bg-amber-500 text-slate-950 shadow-lg border-2 border-white' : 'bg-slate-900 text-amber-300 border border-amber-500/30'}`}
                                 >
-                                    🎓 Gabinete Académico — Normativa APA 7ª Edición
+                                    🎓 Gabinete Académico — Análisis Jurídico & Citación Orgánica
                                 </button>
                                 <button
                                     type="button"
@@ -407,7 +407,7 @@ export default function MasterCorePage() {
                             {seccionActiva === 'academico' && (
                                 <div className="space-y-4 p-4 bg-amber-950/20 rounded border border-amber-500/40 animate-fadeIn">
                                     <div className="flex justify-between items-center">
-                                        <h4 className="text-xs font-bold text-amber-300 uppercase tracking-wide">📊 Gabinete Académico — Validación Formato APA 7ª Edición</h4>
+                                        <h4 className="text-xs font-bold text-amber-300 uppercase tracking-wide">📊 Gabinete Académico — Análisis y Síntesis Documental</h4>
                                         <button
                                             type="button"
                                             onClick={() => escucharMic(setDetalleAcademico, 'Académico')}
@@ -418,27 +418,27 @@ export default function MasterCorePage() {
                                     </div>
 
                                     <div>
-                                        <label className="block text-xs text-slate-300 mb-1">Criterio de Validación APA:</label>
+                                        <label className="block text-xs text-slate-300 mb-1">Criterio Metodológico:</label>
                                         <select 
                                             value={tipoAnalisisAcademico}
                                             onChange={(e) => setTipoAnalisisAcademico(e.target.value)}
                                             className="w-full bg-slate-900 border border-amber-500/40 rounded p-2 text-white text-xs"
                                         >
-                                            <option value="Formato APA 7ª Edición (Validación Internacional)">Validación Completa de Formato y Citación APA 7</option>
-                                            <option value="Construcción de Referencias Bibliográficas APA">Generación y Depuración de Referencias APA</option>
-                                            <option value="Estructura de Tesis y Ensayos (Normativa UnADM)">Estructura de Tesis y Ensayos (Normativa UnADM)</option>
+                                            <option value="Análisis Documental y Criterios Jurídicos">Análisis Documental y Criterios Jurídicos</option>
+                                            <option value="Síntesis Bibliográfica y Citación Contextual">Síntesis Bibliográfica y Citación Contextual</option>
+                                            <option value="Estructuración y Fundamentación de Tesis (UnADM)">Estructuración y Fundamentación de Tesis (UnADM)</option>
                                         </select>
                                     </div>
 
                                     <div className="p-3 bg-slate-950 border border-amber-500/30 rounded">
-                                        <label className="block text-xs font-bold text-amber-300 mb-1">📁 Documento o Borrador de Investigación (PDF, Word, TXT):</label>
+                                        <label className="block text-xs font-bold text-amber-300 mb-1">📁 Expediente o Borrador de Investigación (PDF, Word, TXT):</label>
                                         <input 
                                             type="file" 
                                             accept=".pdf,.doc,.docx,.txt"
                                             onChange={(e) => {
                                                 if (e.target.files && e.target.files[0]) {
                                                     setArchivoAcademico(e.target.files[0])
-                                                    hablarJarvis(`Documento ${e.target.files[0].name} adjuntado con éxito.`)
+                                                    hablarJarvis(`Expediente ${e.target.files[0].name} adjuntado con éxito.`)
                                                 }
                                             }}
                                             className="w-full text-xs text-slate-300 file:mr-4 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-amber-500 file:text-slate-950 hover:file:bg-amber-400 cursor-pointer"
@@ -449,12 +449,12 @@ export default function MasterCorePage() {
                                     </div>
 
                                     <div>
-                                        <label className="block text-xs text-slate-300 mb-1">Instrucción Específica para Normativa APA:</label>
+                                        <label className="block text-xs text-slate-300 mb-1">Instrucción de Análisis y Argumentación:</label>
                                         <textarea 
                                             name="detalle" 
                                             value={detalleAcademico}
                                             onChange={(e) => setDetalleAcademico(e.target.value)}
-                                            placeholder="Ej: Verifique que las citas en el texto coincidan con la lista de referencias bajo formato APA 7..."
+                                            placeholder="Ej: Analice el marco jurídico integrando las fuentes bibliográficas de manera fluida y contextual..."
                                             className="w-full bg-slate-950 border border-amber-500/40 rounded p-3 text-white text-sm h-28 focus:border-amber-400 outline-none"
                                             required
                                         />
@@ -525,14 +525,14 @@ export default function MasterCorePage() {
                                 disabled={isPending}
                                 className={`w-full font-bold py-3 px-4 rounded transition-all duration-200 disabled:opacity-50 shadow-lg text-slate-950 ${seccionActiva === 'academico' ? 'bg-amber-500 hover:bg-amber-400' : 'bg-cyan-500 hover:bg-cyan-400'}`}
                             >
-                                {isPending ? 'Procesando Normativa APA...' : `Ejecutar Análisis en [${seccionActiva.toUpperCase()}]`}
+                                {isPending ? 'Procesando Dictamen Institucional...' : `Ejecutar Análisis en [${seccionActiva.toUpperCase()}]`}
                             </button>
                         </form>
 
                         {mensajeRespuesta && (
                             <div className="mt-6 p-5 bg-slate-950 border-2 border-cyan-500 rounded-lg text-sm shadow-2xl relative space-y-3">
                                 <div className="absolute top-0 right-0 bg-cyan-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl">
-                                    ESTADO: VALIDACIÓN APA CERTIFICADA
+                                    ESTADO: VERIFICADO Y CERTIFICADO
                                 </div>
                                 <div className="text-white font-medium whitespace-pre-line leading-relaxed">{mensajeRespuesta}</div>
                                 

@@ -8,9 +8,9 @@ export default function MasterCorePage() {
     const [mensajeRespuesta, setMensajeRespuesta] = useState<string | null>(null)
     const [folioUltimo, setFolioUltimo] = useState<string | null>(null)
     const [hashGenerado, setHashGenerado] = useState<string | null>(null)
+    const [codigoPaquete, setCodigoPaquete] = useState<string | null>(null)
     const [memorias, setMemorias] = useState<any[]>([])
     
-    // Estados para Voz, Cámara y Paneles
     const [vozActiva, setVozActiva] = useState(true)
     const [camaraActiva, setCamaraActiva] = useState(false)
     const [estadoRostro, setEstadoRostro] = useState('Esperando escaneo facial...')
@@ -51,7 +51,7 @@ export default function MasterCorePage() {
                 hablarJarvis('Rostro verificado con éxito. Acceso total concedido.')
             }, 3000)
         } catch (err) {
-            setEstadoRostro('❌ Error: No se pudo acceder a la cámara.')
+            setEstadoRostro('❌ Error al acceder a la cámara.')
             hablarJarvis('Error al acceder a la cámara.')
         }
     }
@@ -65,6 +65,7 @@ export default function MasterCorePage() {
             setMensajeRespuesta(resultado.message)
             setFolioUltimo(resultado.folio || null)
             setHashGenerado(resultado.hash || null)
+            setCodigoPaquete(resultado.codigoDescargable || null)
             if (resultado.success) {
                 hablarJarvis(resultado.message)
                 cargarMemoria()
@@ -84,11 +85,27 @@ export default function MasterCorePage() {
             setMensajeRespuesta(resultado.message)
             setFolioUltimo(resultado.folio || null)
             setHashGenerado(resultado.hash || null)
+            setCodigoPaquete(resultado.codigoDescargable || null)
             if (resultado.success) {
                 hablarJarvis(resultado.message)
                 cargarMemoria()
             }
         })
+    }
+
+    // Función para descargar el archivo de código generado
+    function descargarArchivoCodigo() {
+        if (!codigoPaquete) return
+        const blob = new Blob([codigoPaquete], { type: 'text/plain;charset=utf-8' })
+        const url = URL.createObjectURL(blob)
+        const link = document.createElement('a')
+        link.href = url
+        link.download = `Nexcode-Clon-${folioUltimo || 'Proyecto'}.tsx`
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+        URL.revokeObjectURL(url)
+        hablarJarvis('Paquete de código descargado con éxito.')
     }
 
     return (
@@ -99,7 +116,7 @@ export default function MasterCorePage() {
                         <h1 className="text-xl font-bold tracking-wider flex items-center gap-2">
                             <span>⚡</span> Jarvis AI Core — <span className="text-cyan-300">Master Platform</span>
                         </h1>
-                        <p className="text-xs text-slate-400">Panel Unificado: Biometría, Voz, Open Source & Software Privado (C. Francisco)</p>
+                        <p className="text-xs text-slate-400">Descarga de Código, Biometría y Respaldo Dual (C. Francisco)</p>
                     </div>
                     <div className="flex items-center gap-3">
                         <button 
@@ -112,7 +129,7 @@ export default function MasterCorePage() {
                     </div>
                 </header>
 
-                {/* 1. MÓDULO DE ESCANEO FACIAL */}
+                {/* ESCANEO FACIAL */}
                 <div className="mb-6 p-4 bg-slate-950 border-2 border-cyan-500/50 rounded-lg shadow-inner">
                     <h3 className="text-xs font-bold uppercase tracking-wider text-cyan-300 mb-3 border-b border-cyan-500/20 pb-1">
                         [Seguridad Biométrica] Escaneo de Rostro e Identidad
@@ -138,10 +155,8 @@ export default function MasterCorePage() {
                     </div>
                 </div>
 
-                {/* 2. ESTRUCTURA DUAL DE BOTONES (ESTRUCTURA A & B) */}
+                {/* ESTRUCTURA DUAL DE BOTONES */}
                 <div className="mb-6 p-5 bg-slate-950 border-2 border-cyan-500/50 rounded-lg shadow-inner space-y-5">
-                    
-                    {/* Estructura A: Open Source y Software Privado */}
                     <div>
                         <h3 className="text-xs font-bold uppercase tracking-wider text-cyan-300 mb-3 border-b border-cyan-500/20 pb-1">
                             [Estructura A] Clonación y Reingeniería de Software
@@ -178,7 +193,6 @@ export default function MasterCorePage() {
                         </div>
                     </div>
 
-                    {/* Estructura B: Comandos y Gmail */}
                     <div>
                         <h3 className="text-xs font-bold uppercase tracking-wider text-cyan-300 mb-3 border-b border-cyan-500/20 pb-1">
                             [Estructura B] Sincronización, Gmail y Tokens Ilimitados
@@ -210,10 +224,9 @@ export default function MasterCorePage() {
                             </button>
                         </div>
                     </div>
-
                 </div>
 
-                {/* 3. FORMULARIO PRINCIPAL */}
+                {/* FORMULARIO PRINCIPAL */}
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
                         <label className="block text-sm text-slate-300 mb-1">Verificación de Identidad (Propietario):</label>
@@ -243,17 +256,17 @@ export default function MasterCorePage() {
                             <input 
                                 type="text" 
                                 name="accion" 
-                                defaultValue="Optimización y Memoria" 
+                                defaultValue="Clonación y Mejora" 
                                 className="w-full bg-slate-950 border border-cyan-500/40 rounded p-2 text-white text-sm"
                             />
                         </div>
                     </div>
 
                     <div>
-                        <label className="block text-sm text-slate-300 mb-1">Detalle o Directriz para Jarvis:</label>
+                        <label className="block text-sm text-slate-300 mb-1">Detalle o Directriz para Jarvis (Ej. Clona Snaptube y mejóralo):</label>
                         <textarea 
                             name="detalleSoftware" 
-                            placeholder="Instrucciones para Jarvis..."
+                            defaultValue="clona snaptube y mejoralo"
                             className="w-full bg-slate-950 border border-cyan-500/40 rounded p-2 text-white text-sm h-24"
                             required
                         />
@@ -264,31 +277,46 @@ export default function MasterCorePage() {
                         disabled={isPending}
                         className="w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-2 px-4 rounded transition-all duration-200 disabled:opacity-50"
                     >
-                        {isPending ? 'Procesando con Jarvis...' : 'Ejecutar Comando Principal'}
+                        {isPending ? 'Jarvis clonando y optimizando...' : 'Ejecutar Clonación y Habilitar Descarga'}
                     </button>
                 </form>
 
+                {/* TARJETA DE RESULTADO CON BOTÓN DE DESCARGA */}
                 {mensajeRespuesta && (
-                    <div className="mt-6 p-5 bg-slate-950 border-2 border-cyan-500 rounded-lg text-sm shadow-2xl relative overflow-hidden">
+                    <div className="mt-6 p-5 bg-slate-950 border-2 border-cyan-500 rounded-lg text-sm shadow-2xl relative overflow-hidden space-y-3">
                         <div className="absolute top-0 right-0 bg-cyan-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl">
-                            JARVIS UNIFIED CORE ACTIVE
+                            JARVIS DOWNLOAD READY
                         </div>
-                        <p className="text-white font-bold mb-2">{mensajeRespuesta}</p>
+                        <p className="text-white font-bold">{mensajeRespuesta}</p>
                         {folioUltimo && (
-                            <p className="text-xs text-cyan-300 mb-1">
+                            <p className="text-xs text-cyan-300">
                                 <span className="font-bold">Folio:</span> {folioUltimo}
                             </p>
                         )}
                         {hashGenerado && (
-                            <p className="text-[11px] font-mono text-slate-300 mb-3 break-all">
+                            <p className="text-[11px] font-mono text-slate-300 break-all">
                                 <span className="font-bold text-cyan-400">SHA-256:</span> {hashGenerado}
                             </p>
+                        )}
+
+                        {/* BOTÓN DIRECTO DE DESCARGA */}
+                        {codigoPaquete && (
+                            <div className="pt-2 border-t border-cyan-500/30 flex items-center justify-between">
+                                <span className="text-xs text-cyan-300 font-semibold">Paquete de código listo para descarga local:</span>
+                                <button
+                                    type="button"
+                                    onClick={descargarArchivoCodigo}
+                                    className="bg-green-500 hover:bg-green-400 text-slate-950 font-bold py-2 px-4 rounded text-xs transition-all shadow-lg flex items-center gap-1"
+                                >
+                                    📥 Descargar Paquete Clonado (.tsx)
+                                </button>
+                            </div>
                         )}
                     </div>
                 )}
             </div>
 
-            {/* BANCO DE MEMORIA INTEGRADA */}
+            {/* BANCO DE MEMORIA */}
             <div className="w-full max-w-4xl bg-slate-900 border border-cyan-500/30 rounded-lg p-6 shadow-xl">
                 <h2 className="text-lg font-bold mb-4 text-cyan-300 border-b border-cyan-500/20 pb-2">Banco de Memoria y Registros (C. Francisco)</h2>
                 {memorias.length === 0 ? (

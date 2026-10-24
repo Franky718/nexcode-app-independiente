@@ -56,52 +56,60 @@ function MasterCorePage() {
     const [memoriasEstado, setMemoriasEstado] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
     // Selector General de Módulos
     const [seccionActiva, setSeccionActiva] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('hub_corporativo');
-    // Sub-estado de Motores Globales Activos (Claude + DeepSeek)
-    const [tipoDocClaude, setTipoDocClaude] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('carta');
-    const [motorGlobal, setMotorGlobal] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Dual-Engine: Claude Cloud (Docs) & DeepSeek Open-Source (Audit)');
-    // Plantilla Principal: SIFV-Reynosa & Documentación Institucional
-    const [tituloCorp, setTituloCorp] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Carta de presentación y resumen ejecutivo - SIFV-REYNOSA');
+    // Sub-estado de Skills Legales y Contables (Hub Corporativo)
+    const [tipoSkillDoc, setTipoSkillDoc] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('presentacion');
+    const [modeloIA, setModeloIA] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Claude Cloud/Work 3.5 (Legal & Accounting Enterprise Skills)');
+    // 1. Presentación Ejecutiva SIFV-Reynosa
+    const [tituloCorp, setTituloCorp] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Presentación Ejecutiva — Plataforma SIFV-REYNOSA');
     const [contenidoCorp, setContenidoCorp] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(`NEXCODE INTERACTIVE, S.A. DE C.V. 
 Reynosa, Tamaulipas, a 24 de octubre de 2026
 
-Para: Secretaría de Seguridad Pública, Vialidad y Tránsito del Municipio de Reynosa, Tamaulipas
-Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
+PROPUESTA TÉCNICA, JURÍDICA Y ECONÓMICA: PLATAFORMA SIFV-REYNOSA
+Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Municipio de Reynosa, Tamaulipas.
 
-Distinguidas autoridades:
+1. RESUMEN EJECUTIVO Y ALCANCE INSTITUCIONAL
+Sistema integral modular para la gestión vial, trazabilidad de dictámenes y transparencia operativa bajo los más altos estándares tecnológicos de Nexcode.
 
-Presentamos la Plataforma SIFV-REYNOSA, desarrollada íntegramente bajo los más altos estándares de calidad global y con el respaldo del blindaje criptográfico Vault Omega.
-
-1. RESUMEN EJECUTIVO Y ALCANCE
-Sistema modular optimizado para la gestión vial, auditoría en tiempo real y máxima transparencia institucional.
-
-2. CUMPLIMIENTO NORMATIVO Y FINANCIERO
-Desglose transparente de costos de implementación, facturación CFDI e IVA (16%) conforme a la legislación fiscal vigente en México.`);
-    // Contenido Académico (Zapia AI)
+2. VALOR ESTRATÉGICO
+- Soberanía tecnológica y control absoluto sobre la infraestructura municipal.
+- Blindaje criptográfico Vault Omega y auditoría de accesos en tiempo real.`);
+    // 2. Proyecto Escolar (Zapia AI)
     const [tituloAcademico, setTituloAcademico] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Proyecto de Aplicación para Seguridad Pública');
     const [contenidoAcademico, setContenidoAcademico] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(`UNIVERSIDAD ABIERTA Y A DISTANCIA DE MÉXICO (UnADM)
 LICENCIATURA EN DERECHO
 CAPÍTULO 1. PLANTEAMIENTO DEL PROBLEMA Y MARCO METODOLÓGICO`);
-    // Contenido Comercial
-    const [tituloComercial, setTituloComercial] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Dictamen Jurídico y Financiero - Licenciamiento');
-    const [contenidoComercial, setContenidoComercial] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(`NEXCODE INTERACTIVE S.A. DE C.V. — DICTAMEN DE CONTRATACIÓN`);
-    // Contenido Ingeniería (Doble Motor DeepSeek + Claude)
-    const [tituloIngenieria, setTituloIngenieria] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Dual-Engine Audit & Endpoint Core');
-    const [contenidoIngenieria, setCodigoIngenieria] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(`// NEXCODE DUAL-ENGINE ENTERPRISE ARCHITECTURE
-// Motor A (Claude): Estructura de Negocio y Documentación
-// Motor B (DeepSeek / Open-Source): Optimización de Endpoints y Seguridad
+    // 3. Skills Legales y Contables (Comercial / Jurídico / Fiscal)
+    const [tituloComercial, setTituloComercial] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Dictamen Legal, Fiscal y de Viabilidad Financiera');
+    const [contenidoComercial, setContenidoComercial] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(`NEXCODE INTERACTIVE S.A. DE C.V. — DICTAMEN LEGAL Y CONTABLE INTEGRAL
 
-class GlobalMultiAIEnterpriseCore {
+1. ANÁLISIS DE VIGENCIA Y ESTÍMULOS FISCALES (IVA 8%)
+- Consideración crítica: El estímulo fiscal del IVA al 8% en la región fronteriza vence el 31 de diciembre de 2026.
+- Impacto proyectado: Ahorro verificado en costos de implementación para contratos ejecutados antes de la fecha límite.
+- Validez de la propuesta comercial: 30 días naturales a partir de su emisión institucional.
+
+2. MARCO JURÍDICO Y PROPIEDAD INTELECTUAL
+- Titularidad absoluta del código fuente y arquitectura a favor de Nexcode Interactive S.A. de C.V.
+- Cláusulas de confidencialidad, protección de datos personales y cumplimiento normativo municipal.
+
+3. VIABILIDAD FINANCIERA Y MÁRGENES DE UTILIDAD
+- Estructura de costos basada en Supabase, licencias y soporte 24/7.
+- Retorno de inversión (ROI) estimado a 6 meses con desglose transparente en factura CFDI.`);
+    // 4. Ingeniería (Auditoría de Endpoints)
+    const [tituloIngenieria, setTituloIngenieria] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('GOV-TECH Core Architecture & Endpoints');
+    const [contenidoIngenieria, setCodigoIngenieria] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(`// NEXCODE GOV-TECH & LEGAL-CONTABLE AUDIT CORE
+class SIFVEnterpriseArchitecture {
     constructor() {
-        this.status = "DUAL_ENGINE_ACTIVE";
-        this.security = "VAULT_OMEGA_ENCRYPTED";
+        this.jurisdiction = "Reynosa, Tamaulipas";
+        this.taxRule = "IVA_8_PERCENT_ACTIVE_UNTIL_DEC_2026";
+        this.security = "VAULT_OMEGA_SECURE";
     }
-    runSystemDiagnostics() {
-        return { audit: "PASSED", endpoints: "SECURE", owner: "fg782270@gmail.com" };
+    verifyLegalCompliance() {
+        return { status: "APPROVED", owner: "fg782270@gmail.com", audit: "PASSED" };
     }
 }
-export const coreInstance = new GlobalMultiAIEnterpriseCore();`);
+export const engine = new SIFVEnterpriseArchitecture();`);
     // Estado de Audio
-    const [estadoAudio, setEstadoAudio] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Sistema de Audio en Reposo (Listo para Dictado Dual)');
+    const [estadoAudio, setEstadoAudio] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('Sistema de Audio en Reposo (Listo para Dictado Legal/Contable)');
     const [grabandoAudio, setGrabaAudio] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     // Contexto Geopolítico
     const [continente, setContinente] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('América');
@@ -142,6 +150,39 @@ export const coreInstance = new GlobalMultiAIEnterpriseCore();`);
         utterance.lang = 'es-MX';
         window.speechSynthesis.speak(utterance);
     }
+    // Selector de Skills Legales y Contables
+    function cambiarSkillDocumental(tipo) {
+        setTipoSkillDoc(tipo);
+        if (tipo === 'presentacion') {
+            setTituloCorp('Presentación Ejecutiva — Plataforma SIFV-REYNOSA');
+            setContenidoCorp(`NEXCODE INTERACTIVE, S.A. DE C.V. 
+Reynosa, Tamaulipas, a 24 de octubre de 2026
+
+PROPUESTA TÉCNICA, JURÍDICA Y ECONÓMICA: PLATAFORMA SIFV-REYNOSA
+Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Municipio de Reynosa, Tamaulipas.
+
+1. RESUMEN EJECUTIVO Y ALCANCE INSTITUCIONAL
+Sistema integral modular para la gestión vial, trazabilidad de dictámenes y transparencia operativa bajo los más altos estándares tecnológicos de Nexcode.`);
+        } else if (tipo === 'juridico') {
+            setTituloCorp('Dictamen Jurídico y Cláusulas de Contratación');
+            setContenidoCorp(`NEXCODE INTERACTIVE S.A. DE C.V. — SKILL JURÍDICO OFICIAL
+1. Objeto del contrato de licenciamiento y soporte técnico institucional.
+2. Protección de derechos de autor y propiedad intelectual bajo Vault Omega.
+3. Rescisión, jurisdicción aplicable en Reynosa y solución de controversias.`);
+        } else if (tipo === 'contable') {
+            setTituloCorp('Dictamen Contable y Fiscal (Estímulo IVA 8% y Márgenes)');
+            setContenidoCorp(`NEXCODE INTERACTIVE S.A. DE C.V. — SKILL CONTABLE Y FISCAL
+1. Análisis de Impuestos: Aplicación del estímulo fiscal de IVA al 8% (Vigencia límite: 31 de diciembre de 2026).
+2. Estructura de Costos, Facturación CFDI y Retorno de Inversión (ROI).
+3. Márgenes de utilidad operativos y viabilidad presupuestal municipal.`);
+        } else if (tipo === 'riesgos') {
+            setTituloCorp('Matriz de Riesgos Legales y Mitigación Operativa');
+            setContenidoCorp(`NEXCODE INTERACTIVE S.A. DE C.V. — SKILL DE ANÁLISIS DE RIESGOS
+1. Identificación de factores críticos en la implementación de software gubernamental.
+2. Protocolos de contingencia y redundancia ante fallas de infraestructura.
+3. Evaluación de impacto y mitigación de riesgos operativos (Nivel controlado).`);
+        }
+    }
     // Dictado por voz
     function iniciarDictadoAudio(setter, nombreModulo) {
         if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
@@ -157,14 +198,14 @@ export const coreInstance = new GlobalMultiAIEnterpriseCore();`);
         recognition.maxAlternatives = 1;
         recognition.onstart = ()=>{
             setGrabaAudio(true);
-            setEstadoAudio(`🔴 Doble Motor Activo grabando en [${nombreModulo}]...`);
-            hablarJarvis(`Dictado activo con motores global y local para ${nombreModulo}, C. Francisco.`);
+            setEstadoAudio(`🔴 Grabando dictamen legal/contable en [${nombreModulo}]...`);
+            hablarJarvis(`Dictado activo con skills legales y contables para ${nombreModulo}, C. Francisco.`);
         };
         recognition.onresult = (event)=>{
             const textoTranscrito = event.results[0][0].transcript;
-            setter((prev)=>prev + "\n\n[Dual-Engine Struct]: " + textoTranscrito);
-            setEstadoAudio(`✔ Audio procesado por doble motor con éxito.`);
-            hablarJarvis("Audio integrado en el documento.");
+            setter((prev)=>prev + "\n\n[Legal & Accounting Skill Struct]: " + textoTranscrito);
+            setEstadoAudio(`✔ Audio legal/contable procesado y estructurado con éxito.`);
+            hablarJarvis("Información integrada en el documento oficial.");
             setGrabaAudio(false);
         };
         recognition.onerror = ()=>{
@@ -217,33 +258,6 @@ export const coreInstance = new GlobalMultiAIEnterpriseCore();`);
             setAccesoConcedido(true);
         }, 2000);
     }
-    // Selector de Plantillas Claude Docs
-    function cambiarPlantillaClaude(tipo) {
-        setTipoDocClaude(tipo);
-        if (tipo === 'carta') {
-            setTituloCorp('Carta de presentación y resumen ejecutivo - SIFV-REYNOSA');
-            setContenidoCorp(`NEXCODE INTERACTIVE, S.A. DE C.V. 
-Reynosa, Tamaulipas, a 24 de octubre de 2026
-
-Para: Secretaría de Seguridad Pública, Vialidad y Tránsito del Municipio de Reynosa, Tamaulipas
-Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA`);
-        } else if (tipo === 'juridico') {
-            setTituloCorp('Dictamen Jurídico - Contrato y Blindaje de Propiedad Intelectual');
-            setContenidoCorp(`NEXCODE INTERACTIVE S.A. DE C.V. — DICTAMEN JURÍDICO OFICIAL
-1. Objeto del Contrato de Licenciamiento e Implementación Tecnológica.
-2. Titularidad y Protección de Propiedad Intelectual bajo Vault Omega.`);
-        } else if (tipo === 'financiero') {
-            setTituloCorp('Dictamen Contable y Financiero - IVA, Precios y ROI');
-            setContenidoCorp(`NEXCODE INTERACTIVE S.A. DE C.V. — DICTAMEN FINANCIERO Y CONTABLE
-1. Desglose de Costos, Facturación CFDI e Impuesto al Valor Agregado (IVA 16%).
-2. Retorno de Inversión (ROI) estimado a corto plazo.`);
-        } else if (tipo === 'tecnico') {
-            setTituloCorp('Documentación Técnica y Auditoría de Endpoints (DeepSeek Engine)');
-            setContenidoCorp(`NEXCODE INTERACTIVE S.A. DE C.V. — EXPEDIENTE TÉCNICO Y AUDITORÍA DE ENDPOINTS
-1. Arquitectura Full-Stack, Supabase y Encriptación SHA-256.
-2. Reporte de Pruebas de Rendimiento y Despliegue Automatizado APK.`);
-        }
-    }
     // Exportador de Documento Word
     function descargarDocumentoActivo() {
         let titulo = tituloCorp;
@@ -272,7 +286,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
         link.click();
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
-        hablarJarvis('Documento formateado exportado en formato Word con éxito.');
+        hablarJarvis('Documento con skills legales y contables exportado en Word con éxito.');
     }
     function descargarBancoMemoriaJson() {
         const contenidoJson = JSON.stringify(memoriasEstado, null, 2);
@@ -284,7 +298,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = `Nexcode-Expediente-Institucional.json`;
+        link.download = `Nexcode-Expediente-Legal-Contable.json`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -294,18 +308,18 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
     function formatearActividad(clave) {
         if (!clave) return 'Expediente Institucional';
         const lower = clave.toLowerCase();
-        if (lower.includes('corporativo')) return 'Hub Dual-Engine (Claude & DeepSeek)';
+        if (lower.includes('corporativo')) return 'Hub de Skills Legales y Contables';
         if (lower.includes('academico')) return 'Proyecto Escolar: Seguridad Pública';
-        if (lower.includes('comercial')) return 'Comercialización y Venta de Software';
-        if (lower.includes('ingenieria')) return 'Ingeniería y Auditoría de Endpoints';
+        if (lower.includes('comercial')) return 'Dictamen Jurídico y Financiero';
+        if (lower.includes('ingenieria')) return 'Ingeniería y Auditoría GOV-TECH';
         return 'Bitácora y Registro Institucional';
     }
     async function handleSubmit(event) {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
         formData.append('seccion', seccionActiva);
-        formData.append('tipoAnalisis', 'Multicerebro Global (Claude Cloud & DeepSeek Audit Core)');
-        formData.append('modeloIASeleccionado', motorGlobal);
+        formData.append('tipoAnalisis', 'Hub con Skills Legales y Contables (Claude Engine)');
+        formData.append('modeloIASeleccionado', modeloIA);
         formData.append('continente', continente);
         formData.append('region', region);
         formData.append('pais', pais);
@@ -317,7 +331,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
             setFolioUltimo(resultado.folio || null);
             setHashGenerado(resultado.hash || null);
             if (resultado.success) {
-                hablarJarvis("Operación procesada con doble motor y auditada bajo Vault Omega.");
+                hablarJarvis("Documento con skills legales y contables registrado y auditado bajo Vault Omega.");
                 cargarMemoria();
             }
         });
@@ -335,7 +349,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                             children: "⚖️ Gabinete Bloqueado — Seguridad Activa"
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 307,
+                            lineNumber: 321,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -343,7 +357,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                             children: "Nexcode Interactive S.A. de C.V."
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 308,
+                            lineNumber: 322,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -351,13 +365,13 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                             children: "Investigador Titular: fg782270@gmail.com (C. Francisco)"
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 309,
+                            lineNumber: 323,
                             columnNumber: 25
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 306,
+                    lineNumber: 320,
                     columnNumber: 21
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -370,7 +384,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                             children: "📷 Biometría"
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 313,
+                            lineNumber: 327,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -380,7 +394,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                             children: "🔑 PIN Ejecutivo"
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 314,
+                            lineNumber: 328,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -390,13 +404,13 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                             children: "👆 Llave Segura"
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 315,
+                            lineNumber: 329,
                             columnNumber: 25
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 312,
+                    lineNumber: 326,
                     columnNumber: 21
                 }, this),
                 modoAcceso === 'facial' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -412,12 +426,12 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                 className: "w-full h-full object-cover"
                             }, void 0, false, {
                                 fileName: "[project]/app/page.tsx",
-                                lineNumber: 321,
+                                lineNumber: 335,
                                 columnNumber: 33
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 320,
+                            lineNumber: 334,
                             columnNumber: 29
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -427,13 +441,13 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                             children: "Verificar Identidad por Rostro"
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 323,
+                            lineNumber: 337,
                             columnNumber: 29
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 319,
+                    lineNumber: 333,
                     columnNumber: 25
                 }, this),
                 modoAcceso === 'pin' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -447,7 +461,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                     children: "Ingrese PIN de Acceso (7822, 1998, 2026):"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 330,
+                                    lineNumber: 344,
                                     columnNumber: 33
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -460,13 +474,13 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                     required: true
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 331,
+                                    lineNumber: 345,
                                     columnNumber: 33
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 329,
+                            lineNumber: 343,
                             columnNumber: 29
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -475,13 +489,13 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                             children: "Desbloquear Gabinete"
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 333,
+                            lineNumber: 347,
                             columnNumber: 29
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 328,
+                    lineNumber: 342,
                     columnNumber: 25
                 }, this),
                 modoAcceso === 'hardware' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -493,12 +507,12 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                         children: "Validar Llave de Hardware"
                     }, void 0, false, {
                         fileName: "[project]/app/page.tsx",
-                        lineNumber: 339,
+                        lineNumber: 353,
                         columnNumber: 29
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 338,
+                    lineNumber: 352,
                     columnNumber: 25
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -506,13 +520,13 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                     children: estadoSeguridad
                 }, void 0, false, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 343,
+                    lineNumber: 357,
                     columnNumber: 21
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/page.tsx",
-            lineNumber: 305,
+            lineNumber: 319,
             columnNumber: 17
         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "w-full max-w-5xl flex flex-col items-center animate-fadeIn",
@@ -532,22 +546,22 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                                     children: "🛡️"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 351,
+                                                    lineNumber: 365,
                                                     columnNumber: 37
                                                 }, this),
                                                 " Jarvis Master Core — ",
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                     className: "text-cyan-300",
-                                                    children: "Dual-Engine Active (Claude & DeepSeek)"
+                                                    children: "Legal & Accounting Enterprise Skills"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 351,
+                                                    lineNumber: 365,
                                                     columnNumber: 75
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 350,
+                                            lineNumber: 364,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -555,13 +569,13 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                             children: "Investigador Titular: fg782270@gmail.com (C. Francisco)"
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 353,
+                                            lineNumber: 367,
                                             columnNumber: 33
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 349,
+                                    lineNumber: 363,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -570,13 +584,13 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                     children: "🔒 Bloquear Sesión"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 355,
+                                    lineNumber: 369,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 348,
+                            lineNumber: 362,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -590,7 +604,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                             children: "🎙️"
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 361,
+                                            lineNumber: 375,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -598,27 +612,27 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                             children: estadoAudio
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 362,
+                                            lineNumber: 376,
                                             columnNumber: 33
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 360,
+                                    lineNumber: 374,
                                     columnNumber: 29
                                 }, this),
                                 grabandoAudio && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                     className: "animate-pulse text-xs bg-red-500 text-white px-2 py-0.5 rounded font-bold",
-                                    children: "DUAL-ENGINE RECORDING..."
+                                    children: "SKILLS RECORDING..."
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 364,
+                                    lineNumber: 378,
                                     columnNumber: 47
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 359,
+                            lineNumber: 373,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -629,7 +643,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                     children: "🌍 Marco Geopolítico e Institucional"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 369,
+                                    lineNumber: 383,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -642,7 +656,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                                     children: "Continente:"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 372,
+                                                    lineNumber: 386,
                                                     columnNumber: 37
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -654,18 +668,18 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                                         children: "América"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/page.tsx",
-                                                        lineNumber: 374,
+                                                        lineNumber: 388,
                                                         columnNumber: 41
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 373,
+                                                    lineNumber: 387,
                                                     columnNumber: 37
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 371,
+                                            lineNumber: 385,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -675,7 +689,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                                     children: "Región:"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 378,
+                                                    lineNumber: 392,
                                                     columnNumber: 37
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -687,18 +701,18 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                                         children: "América del Norte / LATAM"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/page.tsx",
-                                                        lineNumber: 380,
+                                                        lineNumber: 394,
                                                         columnNumber: 41
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 379,
+                                                    lineNumber: 393,
                                                     columnNumber: 37
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 377,
+                                            lineNumber: 391,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -708,7 +722,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                                     children: "Jurisdicción:"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 384,
+                                                    lineNumber: 398,
                                                     columnNumber: 37
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -718,25 +732,25 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                                     className: "w-full bg-slate-900 border border-cyan-500/40 rounded p-2 text-white text-xs"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 385,
+                                                    lineNumber: 399,
                                                     columnNumber: 37
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 383,
+                                            lineNumber: 397,
                                             columnNumber: 33
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 370,
+                                    lineNumber: 384,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 368,
+                            lineNumber: 382,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -746,10 +760,10 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                     type: "button",
                                     onClick: ()=>setSeccionActiva('hub_corporativo'),
                                     className: `py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'hub_corporativo' ? 'bg-cyan-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-cyan-300'}`,
-                                    children: "📂 Hub Dual (Claude/DeepSeek)"
+                                    children: "📂 Hub Legal & Contable"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 392,
+                                    lineNumber: 406,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -759,33 +773,33 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                     children: "🎓 Proyecto Escolar"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 395,
+                                    lineNumber: 409,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     type: "button",
                                     onClick: ()=>setSeccionActiva('comercial'),
                                     className: `py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'comercial' ? 'bg-blue-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-blue-300'}`,
-                                    children: "🏢 Comercialización"
+                                    children: "🏢 Dictamen Financiero"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 398,
+                                    lineNumber: 412,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     type: "button",
                                     onClick: ()=>setSeccionActiva('ingenieria'),
                                     className: `py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'ingenieria' ? 'bg-purple-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-purple-300'}`,
-                                    children: "⚙️ Auditoría Endpoints"
+                                    children: "⚙️ GOV-TECH Core"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 401,
+                                    lineNumber: 415,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 391,
+                            lineNumber: 405,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -800,12 +814,12 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                         defaultValue: "fg782270@gmail.com"
                                     }, void 0, false, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 409,
+                                        lineNumber: 423,
                                         columnNumber: 33
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 408,
+                                    lineNumber: 422,
                                     columnNumber: 29
                                 }, this),
                                 seccionActiva === 'hub_corporativo' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -816,10 +830,10 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                                     className: "text-sm font-bold text-cyan-300 uppercase tracking-wide",
-                                                    children: "📂 Hub Dual-Engine — Documentación & Auditoría"
+                                                    children: "📂 Hub Documental con Skills Legales y Fiscales"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 416,
+                                                    lineNumber: 430,
                                                     columnNumber: 41
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -827,12 +841,12 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                             type: "button",
-                                                            onClick: ()=>iniciarDictadoAudio(setContenidoCorp, 'Hub Dual-Engine'),
+                                                            onClick: ()=>iniciarDictadoAudio(setContenidoCorp, 'Skills Legales/Contables'),
                                                             className: "bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow flex items-center gap-1",
-                                                            children: "🎤 Dictar Voz (Dual)"
+                                                            children: "🎤 Dictar Voz (Skills)"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/page.tsx",
-                                                            lineNumber: 418,
+                                                            lineNumber: 432,
                                                             columnNumber: 45
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -842,19 +856,19 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                                             children: "📥 Exportar Word (.doc)"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/page.tsx",
-                                                            lineNumber: 421,
+                                                            lineNumber: 435,
                                                             columnNumber: 45
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 417,
+                                                    lineNumber: 431,
                                                     columnNumber: 41
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 415,
+                                            lineNumber: 429,
                                             columnNumber: 37
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -862,48 +876,48 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                     type: "button",
-                                                    onClick: ()=>cambiarPlantillaClaude('carta'),
-                                                    className: `py-1.5 px-2 rounded text-[11px] font-bold ${tipoDocClaude === 'carta' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`,
-                                                    children: "📄 Carta Presentación"
+                                                    onClick: ()=>cambiarSkillDocumental('presentacion'),
+                                                    className: `py-1.5 px-2 rounded text-[11px] font-bold ${tipoSkillDoc === 'presentacion' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`,
+                                                    children: "📊 Presentación"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 427,
+                                                    lineNumber: 441,
                                                     columnNumber: 41
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                     type: "button",
-                                                    onClick: ()=>cambiarPlantillaClaude('juridico'),
-                                                    className: `py-1.5 px-2 rounded text-[11px] font-bold ${tipoDocClaude === 'juridico' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`,
-                                                    children: "⚖️ Dictamen Jurídico"
+                                                    onClick: ()=>cambiarSkillDocumental('juridico'),
+                                                    className: `py-1.5 px-2 rounded text-[11px] font-bold ${tipoSkillDoc === 'juridico' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`,
+                                                    children: "⚖️ Skill Jurídico"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 428,
+                                                    lineNumber: 442,
                                                     columnNumber: 41
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                     type: "button",
-                                                    onClick: ()=>cambiarPlantillaClaude('financiero'),
-                                                    className: `py-1.5 px-2 rounded text-[11px] font-bold ${tipoDocClaude === 'financiero' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`,
-                                                    children: "💰 Dictamen Financiero"
+                                                    onClick: ()=>cambiarSkillDocumental('contable'),
+                                                    className: `py-1.5 px-2 rounded text-[11px] font-bold ${tipoSkillDoc === 'contable' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`,
+                                                    children: "💰 Skill Contable (IVA 8%)"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 429,
+                                                    lineNumber: 443,
                                                     columnNumber: 41
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                     type: "button",
-                                                    onClick: ()=>cambiarPlantillaClaude('tecnico'),
-                                                    className: `py-1.5 px-2 rounded text-[11px] font-bold ${tipoDocClaude === 'tecnico' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`,
-                                                    children: "⚙️ Auditoría Endpoints"
+                                                    onClick: ()=>cambiarSkillDocumental('riesgos'),
+                                                    className: `py-1.5 px-2 rounded text-[11px] font-bold ${tipoSkillDoc === 'riesgos' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`,
+                                                    children: "📊 Matriz de Riesgos"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 430,
+                                                    lineNumber: 444,
                                                     columnNumber: 41
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 426,
+                                            lineNumber: 440,
                                             columnNumber: 37
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -914,7 +928,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                             required: true
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 432,
+                                            lineNumber: 446,
                                             columnNumber: 37
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -925,13 +939,13 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                             required: true
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 433,
+                                            lineNumber: 447,
                                             columnNumber: 37
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 414,
+                                    lineNumber: 428,
                                     columnNumber: 33
                                 }, this),
                                 seccionActiva === 'academico' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -945,7 +959,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                                     children: "🎓 Proyecto Escolar (Zapia AI - Seguridad Pública)"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 441,
+                                                    lineNumber: 455,
                                                     columnNumber: 41
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -958,7 +972,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                                             children: "🎤 Dictar Voz"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/page.tsx",
-                                                            lineNumber: 443,
+                                                            lineNumber: 457,
                                                             columnNumber: 45
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -968,19 +982,19 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                                             children: "📥 Exportar Word (.doc)"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/page.tsx",
-                                                            lineNumber: 446,
+                                                            lineNumber: 460,
                                                             columnNumber: 45
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 442,
+                                                    lineNumber: 456,
                                                     columnNumber: 41
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 440,
+                                            lineNumber: 454,
                                             columnNumber: 37
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -991,7 +1005,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                             required: true
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 451,
+                                            lineNumber: 465,
                                             columnNumber: 37
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -1002,13 +1016,13 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                             required: true
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 452,
+                                            lineNumber: 466,
                                             columnNumber: 37
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 439,
+                                    lineNumber: 453,
                                     columnNumber: 33
                                 }, this),
                                 seccionActiva === 'comercial' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1019,10 +1033,10 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                                     className: "text-sm font-bold text-blue-300 uppercase tracking-wide",
-                                                    children: "🏢 Comercialización y Venta de Software"
+                                                    children: "🏢 Dictamen Jurídico, Fiscal y Financiero"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 460,
+                                                    lineNumber: 474,
                                                     columnNumber: 41
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1030,12 +1044,12 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                             type: "button",
-                                                            onClick: ()=>iniciarDictadoAudio(setContenidoComercial, 'Comercialización'),
+                                                            onClick: ()=>iniciarDictadoAudio(setContenidoComercial, 'Dictamen Financiero'),
                                                             className: "bg-blue-500 hover:bg-blue-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow flex items-center gap-1",
                                                             children: "🎤 Dictar Voz"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/page.tsx",
-                                                            lineNumber: 462,
+                                                            lineNumber: 476,
                                                             columnNumber: 45
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1045,19 +1059,19 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                                             children: "📥 Exportar Word (.doc)"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/page.tsx",
-                                                            lineNumber: 465,
+                                                            lineNumber: 479,
                                                             columnNumber: 45
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 461,
+                                                    lineNumber: 475,
                                                     columnNumber: 41
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 459,
+                                            lineNumber: 473,
                                             columnNumber: 37
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1068,7 +1082,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                             required: true
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 470,
+                                            lineNumber: 484,
                                             columnNumber: 37
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -1079,13 +1093,13 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                             required: true
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 471,
+                                            lineNumber: 485,
                                             columnNumber: 37
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 458,
+                                    lineNumber: 472,
                                     columnNumber: 33
                                 }, this),
                                 seccionActiva === 'ingenieria' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1096,10 +1110,10 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                                     className: "text-sm font-bold text-purple-300 uppercase tracking-wide",
-                                                    children: "⚙️ Auditoría de Endpoints & DeepSeek Core"
+                                                    children: "⚙️ GOV-TECH Core & Compliance Architecture"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 479,
+                                                    lineNumber: 493,
                                                     columnNumber: 41
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1107,12 +1121,12 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                             type: "button",
-                                                            onClick: ()=>iniciarDictadoAudio(setCodigoIngenieria, 'Auditoría Endpoints'),
+                                                            onClick: ()=>iniciarDictadoAudio(setCodigoIngenieria, 'GOV-TECH Core'),
                                                             className: "bg-purple-500 hover:bg-purple-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow flex items-center gap-1",
                                                             children: "🎤 Dictar Lógica"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/page.tsx",
-                                                            lineNumber: 481,
+                                                            lineNumber: 495,
                                                             columnNumber: 45
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1122,19 +1136,19 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                                             children: "📥 Exportar Código (.doc)"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/page.tsx",
-                                                            lineNumber: 484,
+                                                            lineNumber: 498,
                                                             columnNumber: 45
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 480,
+                                                    lineNumber: 494,
                                                     columnNumber: 41
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 478,
+                                            lineNumber: 492,
                                             columnNumber: 37
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1145,7 +1159,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                             required: true
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 489,
+                                            lineNumber: 503,
                                             columnNumber: 37
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -1156,29 +1170,29 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                             required: true
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 490,
+                                            lineNumber: 504,
                                             columnNumber: 37
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 477,
+                                    lineNumber: 491,
                                     columnNumber: 33
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     type: "submit",
                                     disabled: isPending,
                                     className: "w-full bg-cyan-500 hover:bg-cyan-400 font-bold py-3 px-4 rounded text-slate-950 shadow-lg",
-                                    children: isPending ? 'Procesando con Doble Motor...' : `Registrar y Auditar en [${seccionActiva.toUpperCase()}]`
+                                    children: isPending ? 'Procesando Skills Legales/Contables...' : `Registrar y Auditar en [${seccionActiva.toUpperCase()}]`
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 494,
+                                    lineNumber: 508,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 407,
+                            lineNumber: 421,
                             columnNumber: 25
                         }, this),
                         mensajeRespuesta && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1186,10 +1200,10 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "absolute top-0 right-0 bg-cyan-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl",
-                                    children: "ESTADO: DUAL-ENGINE AUDITED"
+                                    children: "ESTADO: LEGAL & ACCOUNTING SKILLS AUDITED"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 501,
+                                    lineNumber: 515,
                                     columnNumber: 33
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1197,7 +1211,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                     children: mensajeRespuesta
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 502,
+                                    lineNumber: 516,
                                     columnNumber: 33
                                 }, this),
                                 folioUltimo && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1208,7 +1222,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                             children: "Folio:"
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 503,
+                                            lineNumber: 517,
                                             columnNumber: 86
                                         }, this),
                                         " ",
@@ -1216,19 +1230,19 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 503,
+                                    lineNumber: 517,
                                     columnNumber: 49
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 500,
+                            lineNumber: 514,
                             columnNumber: 29
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 347,
+                    lineNumber: 361,
                     columnNumber: 21
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1242,7 +1256,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                     children: "Expediente y Registros Institucionales"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 511,
+                                    lineNumber: 525,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1252,13 +1266,13 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                     children: "📥 Exportar Expediente JSON (.json)"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 512,
+                                    lineNumber: 526,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 510,
+                            lineNumber: 524,
                             columnNumber: 25
                         }, this),
                         memoriasEstado.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1266,7 +1280,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                             children: "No hay registros almacenados todavía."
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 518,
+                            lineNumber: 532,
                             columnNumber: 29
                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "overflow-x-auto",
@@ -1282,7 +1296,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                                     children: "Expediente / Actividad"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 524,
+                                                    lineNumber: 538,
                                                     columnNumber: 45
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1290,7 +1304,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                                     children: "Detalle Analítico"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 525,
+                                                    lineNumber: 539,
                                                     columnNumber: 45
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1298,7 +1312,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                                     children: "Subsistema"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 526,
+                                                    lineNumber: 540,
                                                     columnNumber: 45
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1306,18 +1320,18 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                                     children: "Fecha y Hora"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 527,
+                                                    lineNumber: 541,
                                                     columnNumber: 45
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 523,
+                                            lineNumber: 537,
                                             columnNumber: 41
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 522,
+                                        lineNumber: 536,
                                         columnNumber: 37
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
@@ -1330,7 +1344,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                                         children: formatearActividad(mem.memory_key)
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/page.tsx",
-                                                        lineNumber: 533,
+                                                        lineNumber: 547,
                                                         columnNumber: 49
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1338,7 +1352,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                                         children: mem.memory_value
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/page.tsx",
-                                                        lineNumber: 534,
+                                                        lineNumber: 548,
                                                         columnNumber: 49
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1346,7 +1360,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                                         children: mem.routing_engine || 'Core'
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/page.tsx",
-                                                        lineNumber: 535,
+                                                        lineNumber: 549,
                                                         columnNumber: 49
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1354,50 +1368,50 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                                         children: new Date(mem.created_at).toLocaleString()
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/page.tsx",
-                                                        lineNumber: 536,
+                                                        lineNumber: 550,
                                                         columnNumber: 49
                                                     }, this)
                                                 ]
                                             }, mem.id, true, {
                                                 fileName: "[project]/app/page.tsx",
-                                                lineNumber: 532,
+                                                lineNumber: 546,
                                                 columnNumber: 45
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 530,
+                                        lineNumber: 544,
                                         columnNumber: 37
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/page.tsx",
-                                lineNumber: 521,
+                                lineNumber: 535,
                                 columnNumber: 33
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 520,
+                            lineNumber: 534,
                             columnNumber: 29
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 509,
+                    lineNumber: 523,
                     columnNumber: 21
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/page.tsx",
-            lineNumber: 346,
+            lineNumber: 360,
             columnNumber: 17
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/page.tsx",
-        lineNumber: 302,
+        lineNumber: 316,
         columnNumber: 9
     }, this);
 }
-_s(MasterCorePage, "R5yRcFHuu9iXZqDbOPKr03xdLxc=", false, function() {
+_s(MasterCorePage, "yiaMESls8XJXJhtV1Pw3n+HisDQ=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTransition"]
     ];

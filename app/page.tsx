@@ -13,9 +13,9 @@ export default function MasterCorePage() {
     // Selector General de Módulos
     const [seccionActiva, setSeccionActiva] = useState<'hub_corporativo' | 'academico' | 'comercial' | 'ingenieria'>('hub_corporativo')
     
-    // Sub-estado de Skills Legales y Contables (Hub Corporativo)
-    const [tipoSkillDoc, setTipoSkillDoc] = useState<'presentacion' | 'juridico' | 'contable' | 'riesgos'>('presentacion')
-    const [modeloIA, setModeloIA] = useState('Claude Cloud/Work 3.5 (Legal & Accounting Enterprise Skills)')
+    // Sub-estado de Documentos Institucionales (Claude & Nexcode Standards)
+    const [tipoDocInstitucional, setTipoDocInstitucional] = useState<'presentacion' | 'contable' | 'juridico' | 'caso_practico'>('presentacion')
+    const [modeloIA, setModeloIA] = useState('Claude Cloud/Work 3.5 (Master Institutional Engine)')
     
     // 1. Presentación Ejecutiva SIFV-Reynosa
     const [tituloCorp, setTituloCorp] = useState('Presentación Ejecutiva — Plataforma SIFV-REYNOSA')
@@ -23,59 +23,61 @@ export default function MasterCorePage() {
 `NEXCODE INTERACTIVE, S.A. DE C.V. 
 Reynosa, Tamaulipas, a 24 de octubre de 2026
 
-PROPUESTA TÉCNICA, JURÍDICA Y ECONÓMICA: PLATAFORMA SIFV-REYNOSA
+PROPUESTA TÉCNICA Y ECONÓMICA: PLATAFORMA SIFV-REYNOSA
 Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Municipio de Reynosa, Tamaulipas.
 
-1. RESUMEN EJECUTIVO Y ALCANCE INSTITUCIONAL
-Sistema integral modular para la gestión vial, trazabilidad de dictámenes y transparencia operativa bajo los más altos estándares tecnológicos de Nexcode.
+1. MISIÓN, VISIÓN Y OBJETIVO
+- Misión: Desarrollar tecnología de gestión pública segura, transparente y accesible para el apoyo a las autoridades de tránsito.
+- Visión: Ser el proveedor tamaulipeco de referencia en soluciones digitales para la seguridad vial y servicios municipales.
+- Objetivo: Implementar la Plataforma en el Municipio de Reynosa y ampliarla por fases a los 43 municipios del Estado.
 
-2. VALOR ESTRATÉGICO
-- Soberanía tecnológica y control absoluto sobre la infraestructura municipal.
-- Blindaje criptográfico Vault Omega y auditoría de accesos en tiempo real.`)
+2. ALCANCE FUNCIONAL
+- Consulta del reglamento, artículos y notas de vigencia.
+- Reporte ciudadano con geolocalización en mapa (semáforos, cocheras obstruidas, vehículos abandonados).
+- Consulta de multas por placa y panel administrativo con clave individual por oficial, registro de corralón y sello de integridad.`)
 
-    // 2. Proyecto Escolar (Zapia AI)
+    // 2. Proyecto Escolar (Zapia AI / UnADM)
     const [tituloAcademico, setTituloAcademico] = useState('Proyecto de Aplicación para Seguridad Pública')
     const [contenidoAcademico, setContenidoAcademico] = useState(
 `UNIVERSIDAD ABIERTA Y A DISTANCIA DE MÉXICO (UnADM)
 LICENCIATURA EN DERECHO
 CAPÍTULO 1. PLANTEAMIENTO DEL PROBLEMA Y MARCO METODOLÓGICO`)
 
-    // 3. Skills Legales y Contables (Comercial / Jurídico / Fiscal)
-    const [tituloComercial, setTituloComercial] = useState('Dictamen Legal, Fiscal y de Viabilidad Financiera')
+    // 3. Dictamen Contable, Financiero y Fiscal (IVA 8% y Opciones A/B)
+    const [tituloComercial, setTituloComercial] = useState('Dictamen Contable y Financiero - Precios, IVA y Control')
     const [contenidoComercial, setContenidoComercial] = useState(
-`NEXCODE INTERACTIVE S.A. DE C.V. — DICTAMEN LEGAL Y CONTABLE INTEGRAL
+`NEXCODE INTERACTIVE S.A. DE C.V. — DICTAMEN CONTABLE Y FINANCIERO INTERNO
 
-1. ANÁLISIS DE VIGENCIA Y ESTÍMULOS FISCALES (IVA 8%)
-- Consideración crítica: El estímulo fiscal del IVA al 8% en la región fronteriza vence el 31 de diciembre de 2026.
-- Impacto proyectado: Ahorro verificado en costos de implementación para contratos ejecutados antes de la fecha límite.
-- Validez de la propuesta comercial: 30 días naturales a partir de su emisión institucional.
+1. MODALIDADES DE CONTRATACIÓN (MXN)
+- Opción A (Licencia Anual): $166,000 de implementación más $9,000 mensuales sin IVA. Total a 3 años: $490,000 sin IVA ($529,200 con IVA 8% / $568,400 con IVA 16%).
+- Opción B (Adquisición / Perpetua): $290,000 sin IVA con 12 meses de soporte, y póliza anual de $52,200 desde el mes 13. Total a 3 años: $394,400 sin IVA ($425,952 con IVA 8% / $457,504 con IVA 16%).
 
-2. MARCO JURÍDICO Y PROPIEDAD INTELECTUAL
-- Titularidad absoluta del código fuente y arquitectura a favor de Nexcode Interactive S.A. de C.V.
-- Cláusulas de confidencialidad, protección de datos personales y cumplimiento normativo municipal.
+2. EFECTO Y VIGENCIA DEL ESTÍMULO FISCAL (IVA 8%)
+- Ahorro verificado para el Cliente de $21,920 en el primer año de la Opción A y de $23,200 en la Opción B.
+- Nota Crítica: Condicionado al decreto fronterizo vigente hasta el 31 de diciembre de 2026 y registro en padrón.
 
-3. VIABILIDAD FINANCIERA Y MÁRGENES DE UTILIDAD
-- Estructura de costos basada en Supabase, licencias y soporte 24/7.
-- Retorno de inversión (ROI) estimado a 6 meses con desglose transparente en factura CFDI.`)
+3. RECONOCIMIENTO DE INGRESOS (NIF D-1) Y CIERRE MENSUAL
+- Implementación reconocida por hitos de aceptación; licenciamiento mensual devengado a lo largo del tiempo.
+- Obligaciones fiscales: CFDI con complemento de pago, pagos provisionales mensuales de IVA e ISR (tasa 30%) a más tardar el día 17.`)
 
-    // 4. Ingeniería (Auditoría de Endpoints)
+    // 4. Ingeniería (Arquitectura GOV-TECH y Endpoints)
     const [tituloIngenieria, setTituloIngenieria] = useState('GOV-TECH Core Architecture & Endpoints')
     const [contenidoIngenieria, setCodigoIngenieria] = useState(
-`// NEXCODE GOV-TECH & LEGAL-CONTABLE AUDIT CORE
-class SIFVEnterpriseArchitecture {
+`// NEXCODE GOV-TECH & INSTITUTIONAL COMPLIANCE CORE
+class SIFVInstitutionalEngine {
     constructor() {
-        this.jurisdiction = "Reynosa, Tamaulipas";
+        this.municipality = "Reynosa, Tamaulipas";
         this.taxRule = "IVA_8_PERCENT_ACTIVE_UNTIL_DEC_2026";
         this.security = "VAULT_OMEGA_SECURE";
     }
-    verifyLegalCompliance() {
+    auditCompliance() {
         return { status: "APPROVED", owner: "fg782270@gmail.com", audit: "PASSED" };
     }
 }
-export const engine = new SIFVEnterpriseArchitecture();`)
+export const engine = new SIFVInstitutionalEngine();`)
 
     // Estado de Audio
-    const [estadoAudio, setEstadoAudio] = useState('Sistema de Audio en Reposo (Listo para Dictado Legal/Contable)')
+    const [estadoAudio, setEstadoAudio] = useState('Sistema de Audio en Reposo (Listo para Dictado Institucional)')
     const [grabandoAudio, setGrabaAudio] = useState(false)
 
     // Contexto Geopolítico
@@ -119,41 +121,48 @@ export const engine = new SIFVEnterpriseArchitecture();`)
         window.speechSynthesis.speak(utterance)
     }
 
-    // Selector de Skills Legales y Contables
-    function cambiarSkillDocumental(tipo: 'presentacion' | 'juridico' | 'contable' | 'riesgos') {
-        setTipoSkillDoc(tipo)
+    // Selector inteligente de plantillas institucionales
+    function cambiarPlantillaInstitucional(tipo: 'presentacion' | 'contable' | 'juridico' | 'caso_practico') {
+        setTipoDocInstitucional(tipo)
         if (tipo === 'presentacion') {
             setTituloCorp('Presentación Ejecutiva — Plataforma SIFV-REYNOSA')
             setContenidoCorp(
 `NEXCODE INTERACTIVE, S.A. DE C.V. 
 Reynosa, Tamaulipas, a 24 de octubre de 2026
 
-PROPUESTA TÉCNICA, JURÍDICA Y ECONÓMICA: PLATAFORMA SIFV-REYNOSA
+PROPUESTA TÉCNICA Y ECONÓMICA: PLATAFORMA SIFV-REYNOSA
 Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Municipio de Reynosa, Tamaulipas.
 
-1. RESUMEN EJECUTIVO Y ALCANCE INSTITUCIONAL
-Sistema integral modular para la gestión vial, trazabilidad de dictámenes y transparencia operativa bajo los más altos estándares tecnológicos de Nexcode.`)
-        } else if (tipo === 'juridico') {
-            setTituloCorp('Dictamen Jurídico y Cláusulas de Contratación')
-            setContenidoCorp(
-`NEXCODE INTERACTIVE S.A. DE C.V. — SKILL JURÍDICO OFICIAL
-1. Objeto del contrato de licenciamiento y soporte técnico institucional.
-2. Protección de derechos de autor y propiedad intelectual bajo Vault Omega.
-3. Rescisión, jurisdicción aplicable en Reynosa y solución de controversias.`)
+1. MISIÓN, VISIÓN Y OBJETIVO
+- Misión: Desarrollar tecnología de gestión pública segura, transparente y accesible para el apoyo a las autoridades de tránsito.
+- Visión: Ser el proveedor tamaulipeco de referencia en soluciones digitales para la seguridad vial y servicios municipales.
+- Objetivo: Implementar la Plataforma en el Municipio de Reynosa y ampliarla por fases a los 43 municipios del Estado.`)
         } else if (tipo === 'contable') {
-            setTituloCorp('Dictamen Contable y Fiscal (Estímulo IVA 8% y Márgenes)')
+            setTituloCorp('Dictamen Contable y Financiero - Precios, IVA y Control')
             setContenidoCorp(
-`NEXCODE INTERACTIVE S.A. DE C.V. — SKILL CONTABLE Y FISCAL
-1. Análisis de Impuestos: Aplicación del estímulo fiscal de IVA al 8% (Vigencia límite: 31 de diciembre de 2026).
-2. Estructura de Costos, Facturación CFDI y Retorno de Inversión (ROI).
-3. Márgenes de utilidad operativos y viabilidad presupuestal municipal.`)
-        } else if (tipo === 'riesgos') {
-            setTituloCorp('Matriz de Riesgos Legales y Mitigación Operativa')
+`NEXCODE INTERACTIVE S.A. DE C.V. — DICTAMEN CONTABLE Y FINANCIERO INTERNO
+
+1. MODALIDADES DE CONTRATACIÓN (MXN)
+- Opción A (Licencia Anual): $166,000 de implementación más $9,000 mensuales sin IVA. Total a 3 años: $490,000 sin IVA ($529,200 con IVA 8% / $568,400 con IVA 16%).
+- Opción B (Adquisición / Perpetua): $290,000 sin IVA con 12 meses de soporte, y póliza anual de $52,200 desde el mes 13. Total a 3 años: $394,400 sin IVA ($425,952 con IVA 8% / $457,504 con IVA 16%).
+
+2. EFECTO Y VIGENCIA DEL ESTÍMULO FISCAL (IVA 8%)
+- Ahorro verificado para el Cliente de $21,920 en el primer año de la Opción A y de $23,200 en la Opción B.
+- Nota Crítica: Condicionado al decreto fronterizo vigente hasta el 31 de diciembre de 2026 y registro en padrón.`)
+        } else if (tipo === 'juridico') {
+            setTituloCorp('Dictamen Jurídico y Blindaje de Propiedad Intelectual')
             setContenidoCorp(
-`NEXCODE INTERACTIVE S.A. DE C.V. — SKILL DE ANÁLISIS DE RIESGOS
-1. Identificación de factores críticos en la implementación de software gubernamental.
-2. Protocolos de contingencia y redundancia ante fallas de infraestructura.
-3. Evaluación de impacto y mitigación de riesgos operativos (Nivel controlado).`)
+`NEXCODE INTERACTIVE S.A. DE C.V. — DICTAMEN JURÍDICO OFICIAL
+1. Objeto del Contrato de Licenciamiento, Implementación y Soporte Técnico.
+2. Titularidad y Protección de Propiedad Intelectual bajo Vault Omega: El código fuente y arquitectura pertenecen en exclusiva a Nexcode Interactive.
+3. Cumplimiento con la Ley de Tránsito de Tamaulipas (reforma de marzo de 2026) y reglamentos municipales de Reynosa.`)
+        } else if (tipo === 'caso_practico') {
+            setTituloCorp('Caso Práctico Ejecutivo - Plataforma SIFV-REYNOSA')
+            setContenidoCorp(
+`NEXCODE INTERACTIVE, S.A. DE C.V. — CASO PRÁCTICO EJECUTIVO
+1. Planteamiento del problema: Optimización del control vial y blindaje de datos en Reynosa, Tamaulipas.
+2. Solución GOV-TECH: Arquitectura modular segura con cifrado Vault Omega y trazabilidad en tiempo real.
+3. Impacto institucional y retorno de inversión (ROI): Reducción de tiempos operativos y transparencia ciudadana.`)
         }
     }
 
@@ -172,14 +181,14 @@ Sistema integral modular para la gestión vial, trazabilidad de dictámenes y tr
         
         recognition.onstart = () => {
             setGrabaAudio(true);
-            setEstadoAudio(`🔴 Grabando dictamen legal/contable en [${nombreModulo}]...`);
-            hablarJarvis(`Dictado activo con skills legales y contables para ${nombreModulo}, C. Francisco.`);
+            setEstadoAudio(`🔴 Grabando documento institucional en [${nombreModulo}]...`);
+            hablarJarvis(`Dictado activo para ${nombreModulo}, C. Francisco.`);
         };
         
         recognition.onresult = (event: any) => {
             const textoTranscrito = event.results[0][0].transcript;
-            setter((prev: string) => prev + "\n\n[Legal & Accounting Skill Struct]: " + textoTranscrito);
-            setEstadoAudio(`✔ Audio legal/contable procesado y estructurado con éxito.`);
+            setter((prev: string) => prev + "\n\n[Institutional Struct]: " + textoTranscrito);
+            setEstadoAudio(`✔ Audio procesado y estructurado con éxito.`);
             hablarJarvis("Información integrada en el documento oficial.");
             setGrabaAudio(false);
         };
@@ -261,7 +270,7 @@ Sistema integral modular para la gestión vial, trazabilidad de dictámenes y tr
         link.click()
         document.body.removeChild(link)
         URL.revokeObjectURL(url)
-        hablarJarvis('Documento con skills legales y contables exportado en Word con éxito.')
+        hablarJarvis('Documento institucional exportado en formato Word con éxito.')
     }
 
     function descargarBancoMemoriaJson() {
@@ -270,7 +279,7 @@ Sistema integral modular para la gestión vial, trazabilidad de dictámenes y tr
         const url = URL.createObjectURL(blob)
         const link = document.createElement('a')
         link.href = url
-        link.download = `Nexcode-Expediente-Legal-Contable.json`
+        link.download = `Nexcode-Expediente-Institucional.json`
         document.body.appendChild(link)
         link.click()
         document.body.removeChild(link)
@@ -281,9 +290,9 @@ Sistema integral modular para la gestión vial, trazabilidad de dictámenes y tr
     function formatearActividad(clave: string) {
         if (!clave) return 'Expediente Institucional'
         const lower = clave.toLowerCase()
-        if (lower.includes('corporativo')) return 'Hub de Skills Legales y Contables'
+        if (lower.includes('corporativo')) return 'Hub Institucional (Presentación & Dictámenes)'
         if (lower.includes('academico')) return 'Proyecto Escolar: Seguridad Pública'
-        if (lower.includes('comercial')) return 'Dictamen Jurídico y Financiero'
+        if (lower.includes('comercial')) return 'Dictamen Contable y Financiero'
         if (lower.includes('ingenieria')) return 'Ingeniería y Auditoría GOV-TECH'
         return 'Bitácora y Registro Institucional'
     }
@@ -292,7 +301,7 @@ Sistema integral modular para la gestión vial, trazabilidad de dictámenes y tr
         event.preventDefault()
         const formData = new FormData(event.currentTarget)
         formData.append('seccion', seccionActiva)
-        formData.append('tipoAnalisis', 'Hub con Skills Legales y Contables (Claude Engine)')
+        formData.append('tipoAnalisis', 'Hub Institucional Claude (Motor Claude Cloud/Work)')
         formData.append('modeloIASeleccionado', modeloIA)
         formData.append('continente', continente)
         formData.append('region', region)
@@ -306,7 +315,7 @@ Sistema integral modular para la gestión vial, trazabilidad de dictámenes y tr
             setFolioUltimo(resultado.folio || null)
             setHashGenerado(resultado.hash || null)
             if (resultado.success) {
-                hablarJarvis("Documento con skills legales y contables registrado y auditado bajo Vault Omega.")
+                hablarJarvis("Documento procesado y auditado bajo Vault Omega.")
                 cargarMemoria()
             }
         })
@@ -362,7 +371,7 @@ Sistema integral modular para la gestión vial, trazabilidad de dictámenes y tr
                         <header className="flex justify-between items-center border-b border-cyan-500/20 pb-4 mb-6">
                             <div>
                                 <h1 className="text-xl font-bold tracking-wider flex items-center gap-2">
-                                    <span>🛡️</span> Jarvis Master Core — <span className="text-cyan-300">Legal & Accounting Enterprise Skills</span>
+                                    <span>🛡️</span> Jarvis Master Core — <span className="text-cyan-300">Claude Cloud Institutional Engine</span>
                                 </h1>
                                 <p className="text-xs text-slate-400">Investigador Titular: fg782270@gmail.com (C. Francisco)</p>
                             </div>
@@ -375,7 +384,7 @@ Sistema integral modular para la gestión vial, trazabilidad de dictámenes y tr
                                 <span className="text-sm">🎙️</span>
                                 <span className="text-xs font-bold text-cyan-300">{estadoAudio}</span>
                             </div>
-                            {grabandoAudio && <span className="animate-pulse text-xs bg-red-500 text-white px-2 py-0.5 rounded font-bold">SKILLS RECORDING...</span>}
+                            {grabandoAudio && <span className="animate-pulse text-xs bg-red-500 text-white px-2 py-0.5 rounded font-bold">INSTITUTIONAL DOCS ACTIVE...</span>}
                         </div>
 
                         {/* SELECTOR GEOPOLÍTICO */}
@@ -404,7 +413,7 @@ Sistema integral modular para la gestión vial, trazabilidad de dictámenes y tr
                         {/* SELECTOR PRINCIPAL DE MÓDULOS */}
                         <div className="mb-6 p-4 bg-slate-950 border-2 border-cyan-500/50 rounded-lg grid grid-cols-2 md:grid-cols-4 gap-2">
                             <button type="button" onClick={() => setSeccionActiva('hub_corporativo')} className={`py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'hub_corporativo' ? 'bg-cyan-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-cyan-300'}`}>
-                                📂 Hub Legal & Contable
+                                📂 Hub Institucional
                             </button>
                             <button type="button" onClick={() => setSeccionActiva('academico')} className={`py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'academico' ? 'bg-amber-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-amber-300'}`}>
                                 🎓 Proyecto Escolar
@@ -423,14 +432,14 @@ Sistema integral modular para la gestión vial, trazabilidad de dictámenes y tr
                                 <input type="email" name="emailSolicitante" defaultValue="fg782270@gmail.com" />
                             </div>
 
-                            {/* MÓDULO 1: HUB DE SKILLS LEGALES Y CONTABLES */}
+                            {/* MÓDULO 1: HUB INSTITUCIONAL (PRESENTACIÓN, CONTABLE, JURÍDICO, CASO PRÁCTICO) */}
                             {seccionActiva === 'hub_corporativo' && (
                                 <div className="space-y-4 p-5 bg-slate-950 rounded border-2 border-cyan-500/60 animate-fadeIn shadow-inner">
                                     <div className="flex justify-between items-center border-b border-cyan-500/30 pb-3">
-                                        <h3 className="text-sm font-bold text-cyan-300 uppercase tracking-wide">📂 Hub Documental con Skills Legales y Fiscales</h3>
+                                        <h3 className="text-sm font-bold text-cyan-300 uppercase tracking-wide">📂 Hub Institucional — Presentación y Dictámenes</h3>
                                         <div className="flex gap-2 items-center">
-                                            <button type="button" onClick={() => iniciarDictadoAudio(setContenidoCorp, 'Skills Legales/Contables')} className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow flex items-center gap-1">
-                                                🎤 Dictar Voz (Skills)
+                                            <button type="button" onClick={() => iniciarDictadoAudio(setContenidoCorp, 'Hub Institucional')} className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow flex items-center gap-1">
+                                                🎤 Dictar Voz (Claude)
                                             </button>
                                             <button type="button" onClick={descargarDocumentoActivo} className="bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg">
                                                 📥 Exportar Word (.doc)
@@ -438,10 +447,10 @@ Sistema integral modular para la gestión vial, trazabilidad de dictámenes y tr
                                         </div>
                                     </div>
                                     <div className="grid grid-cols-2 md:grid-cols-4 gap-2 bg-slate-900 p-2 rounded border border-cyan-500/30">
-                                        <button type="button" onClick={() => cambiarSkillDocumental('presentacion')} className={`py-1.5 px-2 rounded text-[11px] font-bold ${tipoSkillDoc === 'presentacion' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`}>📊 Presentación</button>
-                                        <button type="button" onClick={() => cambiarSkillDocumental('juridico')} className={`py-1.5 px-2 rounded text-[11px] font-bold ${tipoSkillDoc === 'juridico' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`}>⚖️ Skill Jurídico</button>
-                                        <button type="button" onClick={() => cambiarSkillDocumental('contable')} className={`py-1.5 px-2 rounded text-[11px] font-bold ${tipoSkillDoc === 'contable' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`}>💰 Skill Contable (IVA 8%)</button>
-                                        <button type="button" onClick={() => cambiarSkillDocumental('riesgos')} className={`py-1.5 px-2 rounded text-[11px] font-bold ${tipoSkillDoc === 'riesgos' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`}>📊 Matriz de Riesgos</button>
+                                        <button type="button" onClick={() => cambiarPlantillaInstitucional('presentacion')} className={`py-1.5 px-2 rounded text-[11px] font-bold ${tipoDocInstitucional === 'presentacion' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`}>📊 Presentación</button>
+                                        <button type="button" onClick={() => cambiarPlantillaInstitucional('contable')} className={`py-1.5 px-2 rounded text-[11px] font-bold ${tipoDocInstitucional === 'contable' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`}>💰 Dictamen Contable</button>
+                                        <button type="button" onClick={() => cambiarPlantillaInstitucional('juridico')} className={`py-1.5 px-2 rounded text-[11px] font-bold ${tipoDocInstitucional === 'juridico' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`}>⚖️ Dictamen Jurídico</button>
+                                        <button type="button" onClick={() => cambiarPlantillaInstitucional('caso_practico')} className={`py-1.5 px-2 rounded text-[11px] font-bold ${tipoDocInstitucional === 'caso_practico' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`}>📄 Caso Práctico</button>
                                     </div>
                                     <input type="text" value={tituloCorp} onChange={(e) => setTituloCorp(e.target.value)} className="w-full bg-slate-900 border border-cyan-500/40 rounded p-2 text-white text-xs font-bold" required />
                                     <textarea value={contenidoCorp} onChange={(e) => setContenidoCorp(e.target.value)} rows={14} className="w-full bg-slate-900 border border-cyan-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none leading-relaxed" required />
@@ -467,11 +476,11 @@ Sistema integral modular para la gestión vial, trazabilidad de dictámenes y tr
                                 </div>
                             )}
 
-                            {/* MÓDULO 3: COMERCIALIZACIÓN Y DICTAMEN FINANCIERO */}
+                            {/* MÓDULO 3: DICTAMEN FINANCIERO */}
                             {seccionActiva === 'comercial' && (
                                 <div className="space-y-4 p-5 bg-slate-950 rounded border-2 border-blue-500/60 animate-fadeIn shadow-inner">
                                     <div className="flex justify-between items-center border-b border-blue-500/30 pb-3">
-                                        <h3 className="text-sm font-bold text-blue-300 uppercase tracking-wide">🏢 Dictamen Jurídico, Fiscal y Financiero</h3>
+                                        <h3 className="text-sm font-bold text-blue-300 uppercase tracking-wide">🏢 Dictamen Contable y Financiero</h3>
                                         <div className="flex gap-2 items-center">
                                             <button type="button" onClick={() => iniciarDictadoAudio(setContenidoComercial, 'Dictamen Financiero')} className="bg-blue-500 hover:bg-blue-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow flex items-center gap-1">
                                                 🎤 Dictar Voz
@@ -490,7 +499,7 @@ Sistema integral modular para la gestión vial, trazabilidad de dictámenes y tr
                             {seccionActiva === 'ingenieria' && (
                                 <div className="space-y-4 p-5 bg-slate-950 rounded border-2 border-purple-500/60 animate-fadeIn shadow-inner">
                                     <div className="flex justify-between items-center border-b border-purple-500/30 pb-3">
-                                        <h3 className="text-sm font-bold text-purple-300 uppercase tracking-wide">⚙️ GOV-TECH Core & Compliance Architecture</h3>
+                                        <h3 className="text-sm font-bold text-purple-300 uppercase tracking-wide">⚙️ GOV-TECH Core Architecture</h3>
                                         <div className="flex gap-2 items-center">
                                             <button type="button" onClick={() => iniciarDictadoAudio(setCodigoIngenieria, 'GOV-TECH Core')} className="bg-purple-500 hover:bg-purple-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow flex items-center gap-1">
                                                 🎤 Dictar Lógica
@@ -506,13 +515,13 @@ Sistema integral modular para la gestión vial, trazabilidad de dictámenes y tr
                             )}
 
                             <button type="submit" disabled={isPending} className="w-full bg-cyan-500 hover:bg-cyan-400 font-bold py-3 px-4 rounded text-slate-950 shadow-lg">
-                                {isPending ? 'Procesando Skills Legales/Contables...' : `Registrar y Auditar en [${seccionActiva.toUpperCase()}]`}
+                                {isPending ? 'Procesando con Claude Cloud...' : `Registrar y Auditar en [${seccionActiva.toUpperCase()}]`}
                             </button>
                         </form>
 
                         {mensajeRespuesta && (
                             <div className="mt-6 p-5 bg-slate-950 border-2 border-cyan-500 rounded-lg text-sm shadow-2xl relative space-y-2">
-                                <div className="absolute top-0 right-0 bg-cyan-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl">ESTADO: LEGAL & ACCOUNTING SKILLS AUDITED</div>
+                                <div className="absolute top-0 right-0 bg-cyan-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl">ESTADO: INSTITUTIONAL DOC AUDITED</div>
                                 <div className="text-white font-medium whitespace-pre-line leading-relaxed">{mensajeRespuesta}</div>
                                 {folioUltimo && <p className="text-xs text-cyan-300"><span className="font-bold">Folio:</span> {folioUltimo}</p>}
                             </div>

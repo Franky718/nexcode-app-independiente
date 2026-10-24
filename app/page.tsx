@@ -17,10 +17,15 @@ export default function MasterCorePage() {
     const [tipoAnalisisEmpresa, setTipoAnalisisEmpresa] = useState('Arquitectura Full-Stack & Auditoría')
     const [modeloIA, setModeloIA] = useState('Matriz Global Unificada (Todas las IAs)')
     
+    // Textos independientes para cada núcleo y archivo
+    const [detalleAcademico, setDetalleAcademico] = useState('')
+    const [detalleEmpresa, setDetalleEmpresa] = useState('')
+    const [archivoAcademico, setArchivoAcademico] = useState<File | null>(null)
+    const [archivoEmpresa, setArchivoEmpresa] = useState<File | null>(null)
+
     const [continente, setContinente] = useState('América')
     const [region, setRegion] = useState('América del Norte / LATAM')
     const [pais, setPais] = useState('México (Reynosa, Tamaulipas)')
-    const [archivoSeleccionado, setArchivoSeleccionado] = useState<File | null>(null)
 
     const [accesoConcedido, setAccesoConcedido] = useState(false)
     const [modoAcceso, setModoAcceso] = useState<'facial' | 'pin' | 'hardware'>('facial')
@@ -62,6 +67,36 @@ export default function MasterCorePage() {
 
         if (mejorVoz) utterance.voice = mejorVoz
         window.speechSynthesis.speak(utterance)
+    }
+
+    // Función de Micrófono Independiente (Speech-to-Text)
+    function escucharMic(setTextTarget: (val: string) => void, nombre Nucleo: string) {
+        if (typeof window === 'undefined') return;
+        const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+            alert("Su navegador no soporta reconocimiento de voz nativo.");
+            return;
+        }
+        const recognition = new SpeechRecognition();
+        recognition.lang = 'es-MX';
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+
+        recognition.onstart = () => {
+            hablarJarvis(`Escuchando núcleo ${nombre Nucleo}, señor.`);
+        };
+
+        recognition.onresult = (event: any) => {
+            const textoTranscrito = event.results[0][0].transcript;
+            setTextTarget(textoTranscrito);
+            hablarJarvis("Voz registrada con éxito.");
+        };
+
+        recognition.onerror = () => {
+            hablarJarvis("No se pudo capturar el audio.");
+        };
+
+        recognition.start();
     }
 
     async function iniciarAccesoFacial() {
@@ -116,8 +151,10 @@ export default function MasterCorePage() {
         formData.append('continente', continente)
         formData.append('region', region)
         formData.append('pais', pais)
-        if (archivoSeleccionado) {
-            formData.append('archivoNombre', archivoSeleccionado.name)
+
+        const archivoActual = seccionActiva === 'academico' ? archivoAcademico : archivoEmpresa
+        if (archivoActual) {
+            formData.append('archivoNombre', archivoActual.name)
         } else {
             formData.append('archivoNombre', 'Ningún documento adjunto')
         }
@@ -130,7 +167,7 @@ export default function MasterCorePage() {
             setHashGenerado(resultado.hash || null)
             setCodigoPaquete(resultado.codigoDescargable || null)
             if (resultado.success) {
-                hablarJarvis(seccionActiva === 'academico' ? "Calificación y explicación Zapia obtenida con éxito." : "Proceso empresarial completado.")
+                hablarJarvis(seccionActiva === 'academico' ? "Análisis Zapia completado con éxito." : "Proceso empresarial completado.")
                 cargarMemoria()
             }
         })
@@ -243,7 +280,7 @@ export default function MasterCorePage() {
                         <header className="flex justify-between items-center border-b border-cyan-500/20 pb-4 mb-6">
                             <div>
                                 <h1 className="text-xl font-bold tracking-wider flex items-center gap-2">
-                                    <span>🌐</span> Jarvis Core — <span className="text-cyan-300">Núcleos Independientes (Zapia & Empresa)</span>
+                                    <span>🌐</span> Jarvis Core — <span className="text-cyan-300">Núcleos Independientes con Micrófono</span>
                                 </h1>
                                 <p className="text-xs text-slate-400">Supervisor: fg782270@gmail.com (C. Francisco)</p>
                             </div>
@@ -303,14 +340,14 @@ export default function MasterCorePage() {
                                     onClick={() => { setSeccionActiva('academico'); hablarJarvis("Núcleo Académico Zapia Activo", true); }}
                                     className={`py-3 px-4 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-2 ${seccionActiva === 'academico' ? 'bg-amber-500 text-slate-950 shadow-lg border-2 border-white' : 'bg-slate-900 text-amber-300 border border-amber-500/30'}`}
                                 >
-                                    🎓 Académico — Analizador Zapia (Calificación & Explicación)
+                                    🎓 Académico — Analizador Zapia
                                 </button>
                                 <button
                                     type="button"
                                     onClick={() => { setSeccionActiva('empresa'); hablarJarvis("Núcleo Empresa Activo"); }}
                                     className={`py-3 px-4 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-2 ${seccionActiva === 'empresa' ? 'bg-cyan-500 text-slate-950 shadow-lg border-2 border-white' : 'bg-slate-900 text-cyan-300 border border-cyan-500/30'}`}
                                 >
-                                    🏢 Empresa — Código, APK & Auditoría Full-Stack
+                                    🏢 Empresa — Código, APK & Auditoría
                                 </button>
                             </div>
                         </div>
@@ -328,14 +365,67 @@ export default function MasterCorePage() {
                                 />
                             </div>
 
-                            {seccionActiva === 'academico' ? (
-                                <div className="space-y-4 p-4 bg-slate-950/60 rounded border border-amber-500/30">
-                                    <h4 className="text-xs font-bold text-amber-300 uppercase tracking-wide">📊 Analizador Académico Estilo Zapia (Modo Texto Directo)</h4>
-                                    <p className="text-xs text-slate-400">Extrae la calificación exacta y explica paso a paso sin generar archivos de código.</p>
+                            {/* NÚCLEO ACADÉMICO / ZAPIA (INDEPENDIENTE) */}
+                            {seccionActiva === 'academico' && (
+                                <div className="space-y-4 p-4 bg-amber-950/20 rounded border border-amber-500/40 animate-fadeIn">
+                                    <div className="flex justify-between items-center">
+                                        <h4 className="text-xs font-bold text-amber-300 uppercase tracking-wide">📊 Núcleo Académico — Analizador Estilo Zapia</h4>
+                                        <button
+                                            type="button"
+                                            onClick={() => escucharMic(setDetalleAcademico, 'Académico')}
+                                            className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs flex items-center gap-1 shadow transition-all"
+                                        >
+                                            🎤 Dictar por Voz
+                                        </button>
+                                    </div>
+
+                                    {/* Archivo Académico */}
+                                    <div className="p-3 bg-slate-950 border border-amber-500/30 rounded">
+                                        <label className="block text-xs font-bold text-amber-300 mb-1">📁 Examen o Documento Académico (PDF, Word, TXT):</label>
+                                        <input 
+                                            type="file" 
+                                            accept=".pdf,.doc,.docx,.txt"
+                                            onChange={(e) => {
+                                                if (e.target.files && e.target.files[0]) {
+                                                    setArchivoAcademico(e.target.files[0])
+                                                    hablarJarvis(`Documento académico ${e.target.files[0].name} adjuntado.`)
+                                                }
+                                            }}
+                                            className="w-full text-xs text-slate-300 file:mr-4 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-amber-500 file:text-slate-950 hover:file:bg-amber-400 cursor-pointer"
+                                        />
+                                        {archivoAcademico && (
+                                            <p className="text-[11px] text-green-400 mt-1 font-mono">✔ Adjunto: {archivoAcademico.name}</p>
+                                        )}
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-xs text-slate-300 mb-1">Instrucción o Pregunta Académica:</label>
+                                        <textarea 
+                                            name="detalle" 
+                                            value={detalleAcademico}
+                                            onChange={(e) => setDetalleAcademico(e.target.value)}
+                                            placeholder="Ej: Extrae mi calificación exacta y explícame paso a paso..."
+                                            className="w-full bg-slate-950 border border-amber-500/40 rounded p-3 text-white text-sm h-28 focus:border-amber-400 outline-none"
+                                            required
+                                        />
+                                    </div>
                                 </div>
-                            ) : (
-                                <div className="space-y-4 p-4 bg-slate-950/60 rounded border border-cyan-500/30">
-                                    <h4 className="text-xs font-bold text-cyan-300 uppercase tracking-wide">🏢 Parámetros Corporativos & Generador APK</h4>
+                            )}
+
+                            {/* NÚCLEO EMPRESA / APK BUILDER (INDEPENDIENTE) */}
+                            {seccionActiva === 'empresa' && (
+                                <div className="space-y-4 p-4 bg-cyan-950/20 rounded border border-cyan-500/40 animate-fadeIn">
+                                    <div className="flex justify-between items-center">
+                                        <h4 className="text-xs font-bold text-cyan-300 uppercase tracking-wide">🏢 Núcleo Empresa — APK Builder & Auditoría</h4>
+                                        <button
+                                            type="button"
+                                            onClick={() => escucharMic(setDetalleEmpresa, 'Empresa')}
+                                            className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs flex items-center gap-1 shadow transition-all"
+                                        >
+                                            🎤 Dictar por Voz
+                                        </button>
+                                    </div>
+
                                     <div>
                                         <label className="block text-xs text-slate-300 mb-1">Modelo IA Global:</label>
                                         <select 
@@ -349,37 +439,39 @@ export default function MasterCorePage() {
                                             <option value="Google Gemini 4">Google Gemini 4</option>
                                         </select>
                                     </div>
+
+                                    {/* Archivo Empresa */}
+                                    <div className="p-3 bg-slate-950 border border-cyan-500/30 rounded">
+                                        <label className="block text-xs font-bold text-cyan-300 mb-1">📁 Código o Proyecto Empresarial:</label>
+                                        <input 
+                                            type="file" 
+                                            accept=".pdf,.doc,.docx,.txt,.ts,.tsx,.js"
+                                            onChange={(e) => {
+                                                if (e.target.files && e.target.files[0]) {
+                                                    setArchivoEmpresa(e.target.files[0])
+                                                    hablarJarvis(`Archivo corporativo ${e.target.files[0].name} adjuntado.`)
+                                                }
+                                            }}
+                                            className="w-full text-xs text-slate-300 file:mr-4 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-cyan-500 file:text-slate-950 hover:file:bg-cyan-400 cursor-pointer"
+                                        />
+                                        {archivoEmpresa && (
+                                            <p className="text-[11px] text-green-400 mt-1 font-mono">✔ Adjunto: {archivoEmpresa.name}</p>
+                                        )}
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-xs text-slate-300 mb-1">Instrucción Corporativa o de APK:</label>
+                                        <textarea 
+                                            name="detalle" 
+                                            value={detalleEmpresa}
+                                            onChange={(e) => setDetalleEmpresa(e.target.value)}
+                                            placeholder="Ej: Compila el APK automático para Android o audita el endpoint..."
+                                            className="w-full bg-slate-950 border border-cyan-500/40 rounded p-3 text-white text-sm h-28 focus:border-cyan-400 outline-none"
+                                            required
+                                        />
+                                    </div>
                                 </div>
                             )}
-
-                            {/* SELECTOR DE ARCHIVO */}
-                            <div className="p-4 bg-slate-950 border border-cyan-500/30 rounded">
-                                <label className="block text-xs font-bold text-cyan-300 mb-2">📁 Inserción de Documento o Examen (PDF, Word, TXT):</label>
-                                <input 
-                                    type="file" 
-                                    accept=".pdf,.doc,.docx,.txt"
-                                    onChange={(e) => {
-                                        if (e.target.files && e.target.files[0]) {
-                                            setArchivoSeleccionado(e.target.files[0])
-                                            hablarJarvis(`Documento ${e.target.files[0].name} adjuntado.`)
-                                        }
-                                    }}
-                                    className="w-full text-xs text-slate-300 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-cyan-600 file:text-slate-950 hover:file:bg-cyan-500 cursor-pointer"
-                                />
-                                {archivoSeleccionado && (
-                                    <p className="text-[11px] text-green-400 mt-2 font-mono">✔ Archivo adjunto: {archivoSeleccionado.name}</p>
-                                )}
-                            </div>
-
-                            <div>
-                                <label className="block text-sm text-slate-300 mb-1">Pregunta o Instrucción:</label>
-                                <textarea 
-                                    name="detalle" 
-                                    placeholder={seccionActiva === 'academico' ? "Ej: Extrae mi calificación exacta y explícame las respuestas..." : "Ej: Audita este código backend o compila el APK..."}
-                                    className="w-full bg-slate-950 border border-cyan-500/40 rounded p-3 text-white text-sm h-28 focus:border-cyan-400 outline-none"
-                                    required
-                                />
-                            </div>
 
                             <button 
                                 type="submit" 
@@ -404,7 +496,6 @@ export default function MasterCorePage() {
                                     <p className="text-[11px] font-mono text-slate-300 break-all"><span className="font-bold text-cyan-400">SHA-256:</span> {hashGenerado}</p>
                                 )}
 
-                                {/* El botón de descarga solo aparece si es la sección EMPRESA */}
                                 {!esAcademicoResultado && codigoPaquete && (
                                     <div className="pt-2 border-t border-cyan-500/30 flex items-center justify-between">
                                         <span className="text-xs text-cyan-300 font-semibold">Paquete corporativo / APK listo:</span>

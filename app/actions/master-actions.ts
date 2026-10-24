@@ -13,43 +13,29 @@ export async function ejecutarJarvisCore(formData: FormData) {
     try {
         const emailSolicitante = formData.get('emailSolicitante') as string
         
-        // 1. Validar Autoridad Absoluta (Solo obedece a C. Francisco / fg782270@gmail.com)
         if (!emailSolicitante || emailSolicitante.trim().toLowerCase() !== SUPERVISOR_AUTORIZADO.toLowerCase()) {
             return { 
                 success: false, 
-                message: '[ACCESO DENEGADO]: Jarvis IA está vinculado exclusivamente al C. Francisco (fg782270@gmail.com). Comando rechazado por seguridad corporativa.' 
+                message: '[ACCESO DENEGADO]: Jarvis IA está vinculado exclusivamente al C. Francisco (fg782270@gmail.com).' 
             }
         }
 
         const accion = formData.get('accion') as string
-        const claveMemoria = formData.get('claveMemoria') as string
-        const valorMemoria = formData.get('valorMemoria') as string
+        const tipoSoftware = formData.get('tipoSoftware') as string // 'Open Source' o 'Software Privado'
+        const detalleSoftware = formData.get('detalleSoftware') as string
         const timestamp = new Date().toISOString()
 
-        // 2. Si es una instrucción para guardar en la Memoria Integrada
-        if (accion === 'guardar_memoria' && claveMemoria && valorMemoria) {
-            await supabase.from('mexico_jarvis_memory').insert([
-                {
-                    owner_email: SUPERVISOR_AUTORIZADO,
-                    memory_key: claveMemoria,
-                    memory_value: valorMemoria,
-                    routing_engine: 'Omnirouter-FreeLLAMPI-Unlimited'
-                }
-            ])
-        }
-
-        // 3. Generar token ilimitado mediante Omnirouter & FreeLLAMPI Mock Engine
-        const folioOmnirouter = `JARVIS-OMNI-${Math.floor(100000 + Math.random() * 900000)}`
-        const rawPayload = `${SUPERVISOR_AUTORIZADO}-${accion}-${claveMemoria || 'general'}-${timestamp}-UNLIMITED-TOKENS`
+        const folioOmnirouter = `NEX-MOD-${Math.floor(100000 + Math.random() * 900000)}`
+        const rawPayload = `${SUPERVISOR_AUTORIZADO}-${accion}-${tipoSoftware}-${detalleSoftware}-${timestamp}-UNLIMITED-TOKENS`
         const cryptoHash = crypto.createHash('sha256').update(rawPayload).digest('hex')
 
-        // 4. Registrar en Supabase bajo el canal seguro
+        // Registrar operación en Supabase
         await supabase.from('mexico_public_governance_logs').insert([
             {
                 supervisor_email: SUPERVISOR_AUTORIZADO,
-                module_operation: 'Jarvis AI Core [Omnirouter & FreeLLAMPI]',
-                ai_engine: 'Omnirouter Unlimited (FreeLLAMPI Pipeline)',
-                instruction_param: `[MEMORIA INTEGRADA ACTIVA] Acción: ${accion} | Dato: ${valorMemoria || 'Sincronización'}`,
+                module_operation: `Gestión de Software [${tipoSoftware}]`,
+                ai_engine: 'Jarvis AI Core (Omnirouter Unlimited)',
+                instruction_param: `[ACCIÓN: ${accion}] ${detalleSoftware}`,
                 crypto_hash: cryptoHash,
                 created_at: timestamp
             }
@@ -57,7 +43,7 @@ export async function ejecutarJarvisCore(formData: FormData) {
 
         return {
             success: true,
-            message: '¡Comando ejecutado con tokens ilimitados vía Omnirouter y FreeLLAMPI!',
+            message: `¡Gestión de ${tipoSoftware} ejecutada y blindada con éxito por Jarvis!`,
             folio: folioOmnirouter,
             hash: cryptoHash
         }

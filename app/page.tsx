@@ -11,8 +11,9 @@ export default function MasterCorePage() {
     const [codigoPaquete, setCodigoPaquete] = useState<string | null>(null)
     const [memoriasEstado, setMemoriasEstado] = useState<any[]>([])
     
-    // Selector de Cerebro Activo
-    const [cerebroActivo, setCerebroActivo] = useState<'multicerebro' | 'ingenieria' | 'academico' | 'antiia'>('multicerebro')
+    const [cerebroActivo, setCerebroActivo] = useState<'multicerebro' | 'ingenieria' | 'academico' | 'antiia'>('academico')
+    const [modoIndetectable, setModoIndetectable] = useState(true)
+    const [envioAutotecnico, setEnvioAutotecnico] = useState(true)
     
     const [accesoConcedido, setAccesoConcedido] = useState(false)
     const [vozActiva, setVozActiva] = useState(true)
@@ -63,7 +64,7 @@ export default function MasterCorePage() {
             if (videoRef.current) videoRef.current.srcObject = stream
             setTimeout(() => {
                 setEstadoRostro('✔ Identidad confirmada: C. Francisco (fg782270@gmail.com)')
-                hablarJarvis("Acceso total concedido a la Matriz Multi-Cerebro.")
+                hablarJarvis("Acceso total concedido. Protocolo indetectable y autotécnico activado.")
                 setAccesoConcedido(true)
             }, 2500)
         } catch (err) {
@@ -76,6 +77,8 @@ export default function MasterCorePage() {
         event.preventDefault()
         const formData = new FormData(event.currentTarget)
         formData.append('cerebroModo', cerebroActivo)
+        formData.append('indetectable', modoIndetectable ? 'true' : 'false')
+        formData.append('autotecnico', envioAutotecnico ? 'true' : 'false')
 
         startTransition(async () => {
             const resultado = await ejecutarJarvisCore(formData)
@@ -84,10 +87,24 @@ export default function MasterCorePage() {
             setHashGenerado(resultado.hash || null)
             setCodigoPaquete(resultado.codigoDescargable || null)
             if (resultado.success) {
-                hablarJarvis(`Procesamiento completado bajo el modo ${cerebroActivo}.`)
+                hablarJarvis(`Trabajo humanizado y despachado de forma autotécnica con éxito.`)
                 cargarMemoria()
             }
         })
+    }
+
+    function descargarArchivoCodigo() {
+        if (!codigoPaquete) return
+        const blob = new Blob([codigoPaquete], { type: 'text/plain;charset=utf-8' })
+        const url = URL.createObjectURL(blob)
+        const link = document.createElement('a')
+        link.href = url
+        link.download = `Nexcode-Stealth-${folioUltimo || 'Reporte'}.tsx`
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+        URL.revokeObjectURL(url)
+        hablarJarvis('Archivo descargado con éxito, señor.')
     }
 
     return (
@@ -96,7 +113,7 @@ export default function MasterCorePage() {
             {!accesoConcedido ? (
                 <div className="w-full max-w-xl bg-slate-900 border-2 border-cyan-500/60 rounded-xl p-8 shadow-2xl text-center space-y-6">
                     <div className="space-y-2">
-                        <h1 className="text-2xl font-bold tracking-wider text-white">🧠 Jarvis Multi-Brain Gate</h1>
+                        <h1 className="text-2xl font-bold tracking-wider text-white">🛡️ Jarvis Stealth Gate</h1>
                         <p className="text-xs text-cyan-300">Nexcode Interactive S.A. de C.V.</p>
                         <p className="text-[11px] text-slate-400">Supervisor: fg782270@gmail.com (C. Francisco)</p>
                     </div>
@@ -116,7 +133,7 @@ export default function MasterCorePage() {
                             onClick={desbloquearSistemaBiometrico}
                             className="w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-3 px-4 rounded-lg text-sm transition-all shadow-lg"
                         >
-                            🔓 Desbloquear Matriz Multi-Cerebro
+                            🔓 Desbloquear Núcleo Indetectable
                         </button>
                     </div>
                 </div>
@@ -126,9 +143,9 @@ export default function MasterCorePage() {
                         <header className="flex justify-between items-center border-b border-cyan-500/20 pb-4 mb-6">
                             <div>
                                 <h1 className="text-xl font-bold tracking-wider flex items-center gap-2">
-                                    <span>🧠</span> Jarvis Core — <span className="text-cyan-300">Matriz Multi-Cerebro Activa</span>
+                                    <span>🛡️</span> Jarvis Core — <span className="text-cyan-300">Modo Indetectable & Autotécnico</span>
                                 </h1>
-                                <p className="text-xs text-slate-400">Control Operativo y Sinergia Total (C. Francisco)</p>
+                                <p className="text-xs text-slate-400">Titulación, Casos Prácticos y Entrega Autónoma (C. Francisco)</p>
                             </div>
                             <button 
                                 onClick={() => setAccesoConcedido(false)}
@@ -138,44 +155,65 @@ export default function MasterCorePage() {
                             </button>
                         </header>
 
-                        {/* SELECTOR DE CEREBROS */}
-                        <div className="mb-6 p-4 bg-slate-950 border-2 border-cyan-500/50 rounded-lg shadow-inner space-y-3">
+                        {/* SELECTOR DE CEREBRO Y TOGGLES DE SEGURIDAD */}
+                        <div className="mb-6 p-4 bg-slate-950 border-2 border-cyan-500/50 rounded-lg shadow-inner space-y-4">
                             <h3 className="text-xs font-bold uppercase tracking-wider text-cyan-300">
-                                🔀 Selector de Núcleo / Cerebro Activo:
+                                🔀 Selección de Núcleo y Protocolos Activos:
                             </h3>
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
                                 <button
                                     type="button"
-                                    onClick={() => { setCerebroActivo('multicerebro'); hablarJarvis("Modo Multi-Cerebro sinérgico activado."); }}
+                                    onClick={() => setCerebroActivo('multicerebro')}
                                     className={`py-2 px-3 rounded text-xs font-bold transition-all ${cerebroActivo === 'multicerebro' ? 'bg-cyan-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-cyan-300 border border-cyan-500/30'}`}
                                 >
                                     🌐 Sinergia Total
                                 </button>
                                 <button
                                     type="button"
-                                    onClick={() => { setCerebroActivo('ingenieria'); hablarJarvis("Cerebro de ingeniería y despliegue activo."); }}
+                                    onClick={() => setCerebroActivo('ingenieria')}
                                     className={`py-2 px-3 rounded text-xs font-bold transition-all ${cerebroActivo === 'ingenieria' ? 'bg-cyan-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-cyan-300 border border-cyan-500/30'}`}
                                 >
                                     💻 Ingeniería & Cloud
                                 </button>
                                 <button
                                     type="button"
-                                    onClick={() => { setCerebroActivo('academico'); hablarJarvis("Cerebro académico de titulación activo.", true); }}
+                                    onClick={() => setCerebroActivo('academico')}
                                     className={`py-2 px-3 rounded text-xs font-bold transition-all ${cerebroActivo === 'academico' ? 'bg-amber-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-amber-300 border border-amber-500/30'}`}
                                 >
                                     🎓 Titulación (H. Iván)
                                 </button>
                                 <button
                                     type="button"
-                                    onClick={() => { setCerebroActivo('antiia'); hablarJarvis("Cerebro omnisciente Anti-IA activo."); }}
+                                    onClick={() => setCerebroActivo('antiia')}
                                     className={`py-2 px-3 rounded text-xs font-bold transition-all ${cerebroActivo === 'antiia' ? 'bg-purple-600 text-white shadow-lg' : 'bg-slate-900 text-purple-300 border border-purple-500/30'}`}
                                 >
-                                    🌌 Anti-IA Ilimitado
+                                    🌌 Anti-IA Absoluto
                                 </button>
+                            </div>
+
+                            <div className="flex flex-wrap gap-4 pt-2 border-t border-cyan-500/20 text-xs">
+                                <label className="flex items-center gap-2 cursor-pointer text-white font-medium">
+                                    <input 
+                                        type="checkbox" 
+                                        checked={modoIndetectable} 
+                                        onChange={(e) => setModoIndetectable(e.target.checked)}
+                                        className="accent-cyan-500 w-4 h-4"
+                                    />
+                                    🔒 Activar Modo Indetectable (Bypass de IA / Humanización Estocástica)
+                                </label>
+                                <label className="flex items-center gap-2 cursor-pointer text-white font-medium">
+                                    <input 
+                                        type="checkbox" 
+                                        checked={envioAutotecnico} 
+                                        onChange={(e) => setEnvioAutotecnico(e.target.checked)}
+                                        className="accent-cyan-500 w-4 h-4"
+                                    />
+                                    ⚡ Envío y Despacho Autotécnico Predeterminado
+                                </label>
                             </div>
                         </div>
 
-                        {/* FORMULARIO DE CONSULTA MULTI-CEREBRO */}
+                        {/* FORMULARIO PRINCIPAL */}
                         <form onSubmit={handleSubmit} className="space-y-4">
                             <div>
                                 <label className="block text-sm text-slate-300 mb-1">Verificación de Identidad (Propietario):</label>
@@ -190,10 +228,10 @@ export default function MasterCorePage() {
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-sm text-slate-300 mb-1">Cerebro Seleccionado:</label>
+                                    <label className="block text-sm text-slate-300 mb-1">Núcleo Asignado:</label>
                                     <input 
                                         type="text" 
-                                        value={`Modo Actual: ${cerebroActivo.toUpperCase()}`}
+                                        value={`Cerebro: ${cerebroActivo.toUpperCase()} | Indetectable: ON`}
                                         disabled
                                         className="w-full bg-slate-950 border border-cyan-500/40 rounded p-2 text-cyan-300 font-mono text-sm"
                                     />
@@ -203,18 +241,18 @@ export default function MasterCorePage() {
                                     <input 
                                         type="text" 
                                         name="accion" 
-                                        defaultValue="Procesamiento Sinergico Multi-Cerebro" 
+                                        defaultValue="Generación y Despacho Autotécnico" 
                                         className="w-full bg-slate-950 border border-cyan-500/40 rounded p-2 text-white text-sm"
                                     />
                                 </div>
                             </div>
 
                             <div>
-                                <label className="block text-sm text-slate-300 mb-1">Instrucción, Caso Práctico o Proyecto para los Cerebros:</label>
+                                <label className="block text-sm text-slate-300 mb-1">Instrucción, Tesis o Caso Práctico (Profesor Héctor Iván):</label>
                                 <textarea 
                                     name="detalleSoftware" 
-                                    placeholder="Escriba su directriz para que la matriz multi-cerebro la procese..."
-                                    className="w-full bg-slate-950 border border-cyan-500/40 rounded p-3 text-white text-sm h-28 focus:border-cyan-400 outline-none"
+                                    placeholder="Ingrese los detalles del trabajo a procesar de forma indetectable y autónoma..."
+                                    className="w-full bg-slate-950 border border-cyan-500/40 rounded p-3 text-white text-sm h-32 focus:border-cyan-400 outline-none"
                                     required
                                 />
                             </div>
@@ -224,14 +262,14 @@ export default function MasterCorePage() {
                                 disabled={isPending}
                                 className="w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-3 px-4 rounded transition-all duration-200 disabled:opacity-50 shadow-lg"
                             >
-                                {isPending ? 'Procesando en Matriz Multi-Cerebro...' : 'Ejecutar Comando Multi-Cerebro'}
+                                {isPending ? 'Procesando formato indetectable...' : 'Ejecutar Procesamiento Stealth & Autotécnico'}
                             </button>
                         </form>
 
                         {mensajeRespuesta && (
                             <div className="mt-6 p-5 bg-slate-950 border-2 border-cyan-500 rounded-lg text-sm shadow-2xl relative overflow-hidden space-y-3">
                                 <div className="absolute top-0 right-0 bg-cyan-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl">
-                                    JARVIS MULTI-BRAIN ACTIVE
+                                    JARVIS STEALTH DISPATCH ACTIVE
                                 </div>
                                 <p className="text-white font-bold">{mensajeRespuesta}</p>
                                 {folioUltimo && (
@@ -244,13 +282,26 @@ export default function MasterCorePage() {
                                         <span className="font-bold text-cyan-400">SHA-256:</span> {hashGenerado}
                                     </p>
                                 )}
+
+                                {codigoPaquete && (
+                                    <div className="pt-2 border-t border-cyan-500/30 flex items-center justify-between">
+                                        <span className="text-xs text-cyan-300 font-semibold">Trabajo humanizado listo para descarga:</span>
+                                        <button
+                                            type="button"
+                                            onClick={descargarArchivoCodigo}
+                                            className="bg-green-500 hover:bg-green-400 text-slate-950 font-bold py-2 px-4 rounded text-xs transition-all shadow-lg flex items-center gap-1"
+                                        >
+                                            📥 Descargar Trabajo Indetectable (.tsx)
+                                        </button>
+                                    </div>
+                                )}
                             </div>
                         )}
                     </div>
 
                     {/* BANCO DE MEMORIA HÍBRIDA */}
                     <div className="w-full bg-slate-900 border border-cyan-500/30 rounded-lg p-6 shadow-xl">
-                        <h2 className="text-lg font-bold mb-4 text-cyan-300 border-b border-cyan-500/20 pb-2">Banco de Memoria y Registros Multi-Cerebro</h2>
+                        <h2 className="text-lg font-bold mb-4 text-cyan-300 border-b border-cyan-500/20 pb-2">Banco de Memoria y Registros Stealth</h2>
                         {memoriasEstado.length === 0 ? (
                             <p className="text-xs text-slate-400">No hay registros almacenados todavía.</p>
                         ) : (
@@ -269,7 +320,7 @@ export default function MasterCorePage() {
                                             <tr key={mem.id} className="hover:bg-slate-950/50">
                                                 <td className="py-2 font-bold text-cyan-300">{mem.memory_key}</td>
                                                 <td className="py-2 max-w-xs truncate">{mem.memory_value}</td>
-                                                <td className="py-2 font-mono text-[10px] text-cyan-400">{mem.routing_engine || 'Multi-Brain Engine'}</td>
+                                                <td className="py-2 font-mono text-[10px] text-cyan-400">{mem.routing_engine || 'Stealth Engine'}</td>
                                                 <td className="py-2 text-[10px] text-slate-500">{new Date(mem.created_at).toLocaleString()}</td>
                                             </tr>
                                         ))}

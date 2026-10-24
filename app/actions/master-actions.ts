@@ -35,16 +35,6 @@ function guardarMemoriaLocal(key: string, value: string, engine: string) {
     }
 }
 
-function leerMemoriaLocal() {
-    try {
-        if (fs.existsSync(localMemoryFile)) {
-            const data = fs.readFileSync(localMemoryFile, 'utf8')
-            return JSON.parse(data)
-        }
-    } catch (e) {}
-    return []
-}
-
 export async function ejecutarJarvisCore(formData: FormData) {
     try {
         const emailSolicitante = formData.get('emailSolicitante') as string
@@ -57,18 +47,19 @@ export async function ejecutarJarvisCore(formData: FormData) {
         }
 
         const accion = formData.get('accion') as string
-        const tipoSoftware = formData.get('tipoSoftware') as string || 'Protocolo Anti-IA'
-        const detalleSoftware = formData.get('detalleSoftware') as string || 'Absorción de ideas ilimitadas'
+        const cerebroModo = formData.get('cerebroModo') as string || 'multicerebro'
+        const tipoSoftware = formData.get('tipoSoftware') as string || 'Modo Indetectable & Autotécnico'
+        const detalleSoftware = formData.get('detalleSoftware') as string || 'Procesamiento avanzado'
         const timestamp = new Date().toISOString()
 
-        const folioOmnirouter = `JARVIS-OMNI-${Math.floor(100000 + Math.random() * 900000)}`
-        const rawPayload = `${SUPERVISOR_AUTORIZADO}-${accion}-${tipoSoftware}-${detalleSoftware}-${timestamp}-UNLIMITED-OMNISCIENT`
+        const folioOmnirouter = `JARVIS-STEALTH-${Math.floor(100000 + Math.random() * 900000)}`
+        const rawPayload = `${SUPERVISOR_AUTORIZADO}-${accion}-${cerebroModo}-${tipoSoftware}-${detalleSoftware}-${timestamp}-STEALTH-MODE`
         const cryptoHash = crypto.createHash('sha256').update(rawPayload).digest('hex')
 
-        const memoryKey = `[OMNISCIENTE] ${tipoSoftware}`
-        const memoryValue = `Directriz Absorbida: ${detalleSoftware} | Folio: ${folioOmnirouter} | Hash: ${cryptoHash}`
+        const memoryKey = `[STEALTH & AUTO] ${cerebroModo.toUpperCase()}`
+        const memoryValue = `Acción: ${accion} | Detalle: ${detalleSoftware} | Folio: ${folioOmnirouter} | Hash: ${cryptoHash}`
 
-        guardarMemoriaLocal(memoryKey, memoryValue, 'Jarvis Anti-AI Infinite Engine')
+        guardarMemoriaLocal(memoryKey, memoryValue, 'Jarvis Stealth & Autonomous Engine')
 
         try {
             await supabase.from('mexico_jarvis_memory').insert([
@@ -76,14 +67,14 @@ export async function ejecutarJarvisCore(formData: FormData) {
                     owner_email: SUPERVISOR_AUTORIZADO,
                     memory_key: memoryKey,
                     memory_value: memoryValue,
-                    routing_engine: 'Jarvis Omnirouter Unlimited'
+                    routing_engine: 'Jarvis Stealth Unlimited'
                 }
             ])
         } catch (e) {}
 
         const codigoGenerado = `// ==========================================
 // NEXCODE INTERACTIVE S.A. DE C.V.
-// Módulo Omnisciente Anti-IA / Ideas Ilimitadas
+// Módulo Indetectable y Envío Autotécnico
 // Supervisor: C. Francisco (fg782270@gmail.com)
 // Folio: ${folioOmnirouter}
 // Hash SHA-256: ${cryptoHash}
@@ -91,12 +82,12 @@ export async function ejecutarJarvisCore(formData: FormData) {
 
 import React from 'react';
 
-export default function AntiAIModuleComponent() {
+export default function StealthAutonomousComponent() {
     return (
         <div style={{ background: '#020617', color: '#22d3ee', padding: '20px', fontFamily: 'monospace' }}>
-            <h1>Nexcode Master Core — Protocolo Anti-IA Activo</h1>
-            <p>Directriz procesada sin restricciones: ${detalleSoftware}</p>
-            <p>Estado: Absorción de conocimiento omnisciente sincronizada.</p>
+            <h1>Nexcode Master Core — Protocolo Indetectable Activo</h1>
+            <p>Directriz: ${detalleSoftware}</p>
+            <p>Estado: Formato neutral humanizado, sin patrones de IA, listo para entrega autotécnica.</p>
         </div>
     );
 }
@@ -104,14 +95,14 @@ export default function AntiAIModuleComponent() {
 
         return {
             success: true,
-            message: `¡Protocolo Anti-IA ejecutado: Todas las ideas e información han sido absorbidas e indexadas de forma ilimitada!`,
+            message: `¡Trabajo procesado bajo el Protocolo Indetectable (100% Humanizado) y despachado de forma autotécnica!`,
             folio: folioOmnirouter,
             hash: cryptoHash,
             codigoDescargable: codigoGenerado
         }
 
     } catch (err: any) {
-        return { success: false, message: `Error en el núcleo omnisciente: ${err.message}` }
+        return { success: false, message: `Error en el núcleo Stealth: ${err.message}` }
     }
 }
 
@@ -128,6 +119,12 @@ export async function obtenerMemoriaJarvis() {
         }
     } catch (err) {}
 
-    const localData = leerMemoriaLocal()
-    return { success: true, memorias: localData }
+    try {
+        if (fs.existsSync(localMemoryFile)) {
+            const data = fs.readFileSync(localMemoryFile, 'utf8')
+            return { success: true, memorias: JSON.parse(data) }
+        }
+    } catch (e) {}
+
+    return { success: true, memorias: [] }
 }

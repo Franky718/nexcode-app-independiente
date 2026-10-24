@@ -6,6 +6,7 @@ import { ejecutarJarvisCore, obtenerMemoriaJarvis } from './actions/master-actio
 export default function MasterCorePage() {
     const [isPending, startTransition] = useTransition()
     const [mensajeRespuesta, setMensajeRespuesta] = useState<string | null>(null)
+    const [esAcademicoResultado, setEsAcademicoResultado] = useState(false)
     const [folioUltimo, setFolioUltimo] = useState<string | null>(null)
     const [hashGenerado, setHashGenerado] = useState<string | null>(null)
     const [codigoPaquete, setCodigoPaquete] = useState<string | null>(null)
@@ -16,7 +17,6 @@ export default function MasterCorePage() {
     const [tipoAnalisisEmpresa, setTipoAnalisisEmpresa] = useState('Arquitectura Full-Stack & Auditoría')
     const [modeloIA, setModeloIA] = useState('Matriz Global Unificada (Todas las IAs)')
     
-    // Jerarquía Geopolítica por Defecto
     const [continente, setContinente] = useState('América')
     const [region, setRegion] = useState('América del Norte / LATAM')
     const [pais, setPais] = useState('México (Reynosa, Tamaulipas)')
@@ -125,11 +125,12 @@ export default function MasterCorePage() {
         startTransition(async () => {
             const resultado = await ejecutarJarvisCore(formData)
             setMensajeRespuesta(resultado.message)
+            setEsAcademicoResultado(resultado.isAcademic || false)
             setFolioUltimo(resultado.folio || null)
             setHashGenerado(resultado.hash || null)
             setCodigoPaquete(resultado.codigoDescargable || null)
             if (resultado.success) {
-                hablarJarvis(`Análisis geopolítico y Zapia completado con éxito para ${pais}.`)
+                hablarJarvis(seccionActiva === 'academico' ? "Calificación y explicación Zapia obtenida con éxito." : "Proceso empresarial completado.")
                 cargarMemoria()
             }
         })
@@ -141,12 +142,12 @@ export default function MasterCorePage() {
         const url = URL.createObjectURL(blob)
         const link = document.createElement('a')
         link.href = url
-        link.download = `Nexcode-GeoAI-${pais}-${folioUltimo || 'Report'}.tsx`
+        link.download = `Nexcode-Enterprise-${pais}-${folioUltimo || 'Report'}.tsx`
         document.body.appendChild(link)
         link.click()
         document.body.removeChild(link)
         URL.revokeObjectURL(url)
-        hablarJarvis('Reporte geopolítico descargado con éxito.')
+        hablarJarvis('Archivo descargado con éxito.')
     }
 
     return (
@@ -155,7 +156,7 @@ export default function MasterCorePage() {
             {!accesoConcedido ? (
                 <div className="w-full max-w-xl bg-slate-900 border-2 border-cyan-500/60 rounded-xl p-8 shadow-2xl text-center space-y-6">
                     <div className="space-y-2">
-                        <h1 className="text-2xl font-bold tracking-wider text-white">🛡️ Jarvis Geopolitical Security Gate</h1>
+                        <h1 className="text-2xl font-bold tracking-wider text-white">🛡️ Jarvis Secure Gate</h1>
                         <p className="text-xs text-cyan-300">Nexcode Interactive S.A. de C.V.</p>
                         <p className="text-[11px] text-slate-400">Supervisor: fg782270@gmail.com (C. Francisco)</p>
                     </div>
@@ -242,7 +243,7 @@ export default function MasterCorePage() {
                         <header className="flex justify-between items-center border-b border-cyan-500/20 pb-4 mb-6">
                             <div>
                                 <h1 className="text-xl font-bold tracking-wider flex items-center gap-2">
-                                    <span>🌍</span> Jarvis Core — <span className="text-cyan-300">Matriz Geopolítica & Directorio Global</span>
+                                    <span>🌐</span> Jarvis Core — <span className="text-cyan-300">Núcleos Independientes (Zapia & Empresa)</span>
                                 </h1>
                                 <p className="text-xs text-slate-400">Supervisor: fg782270@gmail.com (C. Francisco)</p>
                             </div>
@@ -254,9 +255,9 @@ export default function MasterCorePage() {
                             </button>
                         </header>
 
-                        {/* SELECTOR GEOPOLÍTICO (CONTINENTES, REGIONES, PAÍSES) */}
+                        {/* SELECTOR GEOPOLÍTICO */}
                         <div className="mb-6 p-4 bg-slate-950 border border-cyan-500/40 rounded-lg space-y-3">
-                            <h3 className="text-xs font-bold text-cyan-300 uppercase tracking-wide">🌍 Estructura Geopolítica (Continentes, Regiones, Países)</h3>
+                            <h3 className="text-xs font-bold text-cyan-300 uppercase tracking-wide">🌍 Estructura Geopolítica</h3>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                                 <div>
                                     <label className="block text-[11px] text-slate-300 mb-1">Continente:</label>
@@ -267,9 +268,6 @@ export default function MasterCorePage() {
                                     >
                                         <option value="América">América</option>
                                         <option value="Europa">Europa</option>
-                                        <option value="Asia">Asia</option>
-                                        <option value="África">África</option>
-                                        <option value="Oceanía">Oceanía</option>
                                     </select>
                                 </div>
                                 <div>
@@ -280,10 +278,6 @@ export default function MasterCorePage() {
                                         className="w-full bg-slate-900 border border-cyan-500/40 rounded p-2 text-white text-xs"
                                     >
                                         <option value="América del Norte / LATAM">América del Norte / LATAM</option>
-                                        <option value="Norteamérica (US/MX/CA)">Norteamérica (US/MX/CA)</option>
-                                        <option value="Europa Occidental">Europa Occidental</option>
-                                        <option value="Asia Oriental">Asia Oriental</option>
-                                        <option value="Global / Multi-Región">Global / Multi-Región</option>
                                     </select>
                                 </div>
                                 <div>
@@ -298,27 +292,10 @@ export default function MasterCorePage() {
                             </div>
                         </div>
 
-                        {/* SELECTOR DE MODELO DE IA GLOBAL */}
-                        <div className="mb-6 p-4 bg-slate-950 border border-cyan-500/40 rounded-lg space-y-3">
-                            <h3 className="text-xs font-bold text-cyan-300 uppercase tracking-wide">🤖 Directorio Maestro: Seleccionar Modelo de IA Global</h3>
-                            <select
-                                value={modeloIA}
-                                onChange={(e) => setModeloIA(e.target.value)}
-                                className="w-full bg-slate-900 border border-cyan-500/40 rounded p-2.5 text-white text-xs font-mono"
-                            >
-                                <option value="Matriz Global Unificada (Todas las IAs)">Matriz Global Unificada (Sinergia de Todas las IAs)</option>
-                                <option value="OpenAI GPT-6 / GPT-5.6 Sol">OpenAI (GPT-6 Astra, GPT-6.1 Sol)</option>
-                                <option value="Anthropic Claude 5.5 / Opus">Anthropic (Claude Opus 5.5, Sonnet 5.5)</option>
-                                <option value="Google Gemini 4 / 3.8 Flash">Google DeepMind (Gemini 4 Argon, Gemini 3.8 Flash)</option>
-                                <option value="xAI Grok 4.7">xAI (Grok 4.7)</option>
-                                <option value="DeepSeek V4 Pro / Flash">DeepSeek (DeepSeek V4 Pro, V4.1 Flash)</option>
-                            </select>
-                        </div>
-
                         {/* SELECTOR DE NÚCLEO INDEPENDIENTE */}
                         <div className="mb-6 p-4 bg-slate-950 border-2 border-cyan-500/50 rounded-lg shadow-inner space-y-4">
                             <h3 className="text-xs font-bold uppercase tracking-wider text-cyan-300">
-                                🔀 Selección de Núcleo Activo:
+                                🔀 Selección de Núcleo Independiente:
                             </h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                 <button
@@ -326,14 +303,14 @@ export default function MasterCorePage() {
                                     onClick={() => { setSeccionActiva('academico'); hablarJarvis("Núcleo Académico Zapia Activo", true); }}
                                     className={`py-3 px-4 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-2 ${seccionActiva === 'academico' ? 'bg-amber-500 text-slate-950 shadow-lg border-2 border-white' : 'bg-slate-900 text-amber-300 border border-amber-500/30'}`}
                                 >
-                                    🎓 Núcleo Académico & Explicación Zapia (Titulación)
+                                    🎓 Académico — Analizador Zapia (Calificación & Explicación)
                                 </button>
                                 <button
                                     type="button"
                                     onClick={() => { setSeccionActiva('empresa'); hablarJarvis("Núcleo Empresa Activo"); }}
                                     className={`py-3 px-4 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-2 ${seccionActiva === 'empresa' ? 'bg-cyan-500 text-slate-950 shadow-lg border-2 border-white' : 'bg-slate-900 text-cyan-300 border border-cyan-500/30'}`}
                                 >
-                                    🏢 Núcleo Empresa (Nexcode Interactive)
+                                    🏢 Empresa — Código, APK & Auditoría Full-Stack
                                 </button>
                             </div>
                         </div>
@@ -353,31 +330,23 @@ export default function MasterCorePage() {
 
                             {seccionActiva === 'academico' ? (
                                 <div className="space-y-4 p-4 bg-slate-950/60 rounded border border-amber-500/30">
-                                    <h4 className="text-xs font-bold text-amber-300 uppercase tracking-wide">📊 Analizador Estilo Zapia (Calificación Exacta & Explicación)</h4>
-                                    <div>
-                                        <label className="block text-xs text-slate-300 mb-1">Modo de Análisis Académico:</label>
-                                        <select 
-                                            value={tipoAnalisisAcademico}
-                                            onChange={(e) => setTipoAnalisisAcademico(e.target.value)}
-                                            className="w-full bg-slate-900 border border-amber-500/40 rounded p-2 text-white text-sm"
-                                        >
-                                            <option value="Análisis Zapia (Calificación & Explicación)">Extraer Calificación Exacta y Explicación Paso a Paso (Zapia)</option>
-                                            <option value="Humanizador Neutral e Indetectable">Humanizador Neutral e Indetectable (Bypass IA)</option>
-                                        </select>
-                                    </div>
+                                    <h4 className="text-xs font-bold text-amber-300 uppercase tracking-wide">📊 Analizador Académico Estilo Zapia (Modo Texto Directo)</h4>
+                                    <p className="text-xs text-slate-400">Extrae la calificación exacta y explica paso a paso sin generar archivos de código.</p>
                                 </div>
                             ) : (
                                 <div className="space-y-4 p-4 bg-slate-950/60 rounded border border-cyan-500/30">
-                                    <h4 className="text-xs font-bold text-cyan-300 uppercase tracking-wide">🏢 Parámetros Corporativos & APK Builder</h4>
+                                    <h4 className="text-xs font-bold text-cyan-300 uppercase tracking-wide">🏢 Parámetros Corporativos & Generador APK</h4>
                                     <div>
-                                        <label className="block text-xs text-slate-300 mb-1">Modo de Operación:</label>
+                                        <label className="block text-xs text-slate-300 mb-1">Modelo IA Global:</label>
                                         <select 
-                                            value={tipoAnalisisEmpresa}
-                                            onChange={(e) => setTipoAnalisisEmpresa(e.target.value)}
-                                            className="w-full bg-slate-900 border border-cyan-500/40 rounded p-2 text-white text-sm"
+                                            value={modeloIA}
+                                            onChange={(e) => setModeloIA(e.target.value)}
+                                            className="w-full bg-slate-900 border border-cyan-500/40 rounded p-2 text-white text-xs"
                                         >
-                                            <option value="Arquitectura Full-Stack & Auditoría">Auditoría Full-Stack & Reingeniería</option>
-                                            <option value="Compilación Automática APK Android">Generador Automático de APKs (Android)</option>
+                                            <option value="Matriz Global Unificada">Matriz Global Unificada (Todas las IAs)</option>
+                                            <option value="OpenAI GPT-6">OpenAI GPT-6</option>
+                                            <option value="Anthropic Claude 5.5">Anthropic Claude 5.5</option>
+                                            <option value="Google Gemini 4">Google Gemini 4</option>
                                         </select>
                                     </div>
                                 </div>
@@ -403,10 +372,10 @@ export default function MasterCorePage() {
                             </div>
 
                             <div>
-                                <label className="block text-sm text-slate-300 mb-1">Instrucción para el Análisis:</label>
+                                <label className="block text-sm text-slate-300 mb-1">Pregunta o Instrucción:</label>
                                 <textarea 
                                     name="detalle" 
-                                    placeholder="Ej: Extrae mi calificación exacta y explícame paso a paso cada pregunta..."
+                                    placeholder={seccionActiva === 'academico' ? "Ej: Extrae mi calificación exacta y explícame las respuestas..." : "Ej: Audita este código backend o compila el APK..."}
                                     className="w-full bg-slate-950 border border-cyan-500/40 rounded p-3 text-white text-sm h-28 focus:border-cyan-400 outline-none"
                                     required
                                 />
@@ -417,16 +386,17 @@ export default function MasterCorePage() {
                                 disabled={isPending}
                                 className={`w-full font-bold py-3 px-4 rounded transition-all duration-200 disabled:opacity-50 shadow-lg text-slate-950 ${seccionActiva === 'academico' ? 'bg-amber-500 hover:bg-amber-400' : 'bg-cyan-500 hover:bg-cyan-400'}`}
                             >
-                                {isPending ? 'Procesando en Matriz Geopolítica...' : `Ejecutar Análisis Geopolítico [${seccionActiva.toUpperCase()}]`}
+                                {isPending ? 'Procesando...' : `Ejecutar Núcleo [${seccionActiva.toUpperCase()}]`}
                             </button>
                         </form>
 
                         {mensajeRespuesta && (
                             <div className="mt-6 p-5 bg-slate-950 border-2 border-cyan-500 rounded-lg text-sm shadow-2xl relative space-y-3">
                                 <div className="absolute top-0 right-0 bg-cyan-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl">
-                                    GEOPOLITICAL MATRIX ACTIVE
+                                    RESULTADO INDEPENDIENTE
                                 </div>
-                                <p className="text-white font-bold">{mensajeRespuesta}</p>
+                                <div className="text-white font-medium whitespace-pre-line leading-relaxed">{mensajeRespuesta}</div>
+                                
                                 {folioUltimo && (
                                     <p className="text-xs text-cyan-300"><span className="font-bold">Folio:</span> {folioUltimo}</p>
                                 )}
@@ -434,15 +404,16 @@ export default function MasterCorePage() {
                                     <p className="text-[11px] font-mono text-slate-300 break-all"><span className="font-bold text-cyan-400">SHA-256:</span> {hashGenerado}</p>
                                 )}
 
-                                {codigoPaquete && (
+                                {/* El botón de descarga solo aparece si es la sección EMPRESA */}
+                                {!esAcademicoResultado && codigoPaquete && (
                                     <div className="pt-2 border-t border-cyan-500/30 flex items-center justify-between">
-                                        <span className="text-xs text-cyan-300 font-semibold">Reporte geopolítico listo para descarga:</span>
+                                        <span className="text-xs text-cyan-300 font-semibold">Paquete corporativo / APK listo:</span>
                                         <button
                                             type="button"
                                             onClick={descargarArchivo}
                                             className="bg-green-500 hover:bg-green-400 text-slate-950 font-bold py-2 px-4 rounded text-xs transition-all shadow-lg flex items-center gap-1"
                                         >
-                                            📥 Descargar Reporte (.tsx)
+                                            📥 Descargar Archivo Compilado (.tsx)
                                         </button>
                                     </div>
                                 )}
@@ -452,7 +423,7 @@ export default function MasterCorePage() {
 
                     {/* BANCO DE MEMORIA INTERCONECTADO */}
                     <div className="w-full bg-slate-900 border border-cyan-500/30 rounded-lg p-6 shadow-xl">
-                        <h2 className="text-lg font-bold mb-4 text-cyan-300 border-b border-cyan-500/20 pb-2">Banco de Memoria y Registros Geopolíticos (Deep Scan Log)</h2>
+                        <h2 className="text-lg font-bold mb-4 text-cyan-300 border-b border-cyan-500/20 pb-2">Banco de Memoria y Registros Interconectados</h2>
                         {memoriasEstado.length === 0 ? (
                             <p className="text-xs text-slate-400">No hay registros almacenados todavía.</p>
                         ) : (
@@ -460,9 +431,9 @@ export default function MasterCorePage() {
                                 <table className="w-full text-left text-xs">
                                     <thead>
                                         <tr className="border-b border-cyan-500/20 text-cyan-400">
-                                            <th className="pb-2">Clave / País</th>
+                                            <th className="pb-2">Clave / Núcleo</th>
                                             <th className="pb-2">Información / Detalle</th>
-                                            <th className="pb-2">Motor Geopolítico</th>
+                                            <th className="pb-2">Motor</th>
                                             <th className="pb-2">Fecha</th>
                                         </tr>
                                     </thead>
@@ -471,7 +442,7 @@ export default function MasterCorePage() {
                                             <tr key={mem.id} className="hover:bg-slate-950/50">
                                                 <td className="py-2 font-bold text-cyan-300">{mem.memory_key}</td>
                                                 <td className="py-2 max-w-xs truncate">{mem.memory_value}</td>
-                                                <td className="py-2 font-mono text-[10px] text-cyan-400">{mem.routing_engine || 'Geopolitical Router'}</td>
+                                                <td className="py-2 font-mono text-[10px] text-cyan-400">{mem.routing_engine || 'Core'}</td>
                                                 <td className="py-2 text-[10px] text-slate-500">{new Date(mem.created_at).toLocaleString()}</td>
                                             </tr>
                                         ))}

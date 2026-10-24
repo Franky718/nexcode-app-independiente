@@ -76,55 +76,58 @@ async function ejecutarJarvisCore(formData) {
                 message: '[ACCESO DENEGADO]: Jarvis IA está vinculado exclusivamente al C. Francisco.'
             };
         }
-        const seccion = formData.get('seccion') || 'Empresa';
-        const tipoAnalisis = formData.get('tipoAnalisis') || 'Análisis General';
-        const detalle = formData.get('detalle') || 'Sin detalles';
-        const archivoNombre = formData.get('archivoNombre') || 'Ninguno';
+        const seccion = formData.get('seccion') || 'academico';
+        const tipoAnalisis = formData.get('tipoAnalisis') || 'Análisis Zapia';
+        const continente = formData.get('continente') || 'América';
+        const region = formData.get('region') || 'América del Norte';
+        const pais = formData.get('pais') || 'México';
+        const detalle = formData.get('detalle') || 'Sin directriz';
+        const archivoNombre = formData.get('archivoNombre') || 'Ningún archivo';
+        const modeloIASeleccionado = formData.get('modeloIASeleccionado') || 'Matriz Global';
         const timestamp = new Date().toISOString();
-        const folioOmnirouter = `JARVIS-UNIFIED-${Math.floor(100000 + Math.random() * 900000)}`;
-        const rawPayload = `${SUPERVISOR_AUTORIZADO}-${seccion}-${tipoAnalisis}-${detalle}-${archivoNombre}-${timestamp}`;
+        const folioOmnirouter = `JARVIS-GEO-${Math.floor(100000 + Math.random() * 900000)}`;
+        const rawPayload = `${SUPERVISOR_AUTORIZADO}-${continente}-${region}-${pais}-${seccion}-${tipoAnalisis}-${modeloIASeleccionado}-${timestamp}`;
         const cryptoHash = __TURBOPACK__imported__module__$5b$externals$5d2f$crypto__$5b$external$5d$__$28$crypto$2c$__cjs$29$__["default"].createHash('sha256').update(rawPayload).digest('hex');
-        const memoryKey = `[${seccion.toUpperCase()}] ${tipoAnalisis}`;
-        const memoryValue = `Archivo: ${archivoNombre} | Detalle: ${detalle} | Folio: ${folioOmnirouter} | Hash: ${cryptoHash}`;
-        // Guardar en memoria híbrida local y Supabase unificada
-        guardarMemoriaLocal(memoryKey, memoryValue, `Jarvis Unified Engine (${seccion})`);
+        const memoryKey = `[GEO: ${pais} | ${region}] ${tipoAnalisis}`;
+        const memoryValue = `Continente: ${continente} | Región: ${region} | País: ${pais} | Archivo: ${archivoNombre} | Folio: ${folioOmnirouter} | Hash: ${cryptoHash}`;
+        guardarMemoriaLocal(memoryKey, memoryValue, `Jarvis Geopolitical Engine (${pais})`);
         try {
             await supabase.from('mexico_jarvis_memory').insert([
                 {
                     owner_email: SUPERVISOR_AUTORIZADO,
                     memory_key: memoryKey,
                     memory_value: memoryValue,
-                    routing_engine: `Jarvis Unified (${seccion})`
+                    routing_engine: `Geopolitical Router (${pais})`
                 }
             ]);
         } catch (e) {}
         const codigoGenerado = `// ==========================================
 // NEXCODE INTERACTIVE S.A. DE C.V.
-// Módulo Compilado y Generado Automáticamente
-// Núcleo: ${seccion} | Análisis: ${tipoAnalisis}
+// Matriz Geopolítica & Directorio Global de IAs
+// Ubicación: ${pais}, ${region}, ${continente}
 // Supervisor: C. Francisco (fg782270@gmail.com)
-// Archivo Adjunto: ${archivoNombre}
 // Folio Oficial: ${folioOmnirouter}
 // Hash SHA-256: ${cryptoHash}
 // ==========================================
 
 import React from 'react';
 
-export default function NexcodeAutoPackage() {
+export default function GeopoliticalMatrixPackage() {
     return (
         <div style={{ background: '#020617', color: '#22d3ee', padding: '20px', fontFamily: 'monospace' }}>
-            <h1>Nexcode Master Core — Paquete Autónomo</h1>
-            <p>Sección: ${seccion}</p>
-            <p>Tipo: ${tipoAnalisis}</p>
-            <p>Documento procesado: ${archivoNombre}</p>
-            <p>Estado: Compilado, Humanizado y Sincronizado en Banco de Memoria Interconectado.</p>
+            <h1>Nexcode Master Core — Matriz Geopolítica</h1>
+            <p>Continente: ${continente}</p>
+            <p>Región: ${region}</p>
+            <p>País: ${pais}</p>
+            <p>Modelo de IA: ${modeloIASeleccionado}</p>
+            <p>Estado: Procesado, estructurado por región y registrado con firma SHA-256.</p>
         </div>
     );
 }
 `;
         return {
             success: true,
-            message: `¡Proceso ejecutado con éxito en el Núcleo [${seccion.toUpperCase()}]! Documento e información indexados en el Banco de Memoria Interconectado.`,
+            message: `¡Análisis geopolítico y estilo Zapia completado con éxito para [${pais}, ${region}]! Calificación e información indexadas en el Banco de Memoria Interconectado.`,
             folio: folioOmnirouter,
             hash: cryptoHash,
             codigoDescargable: codigoGenerado
@@ -132,7 +135,7 @@ export default function NexcodeAutoPackage() {
     } catch (err) {
         return {
             success: false,
-            message: `Error en el núcleo unificado: ${err.message}`
+            message: `Error en el núcleo geopolítico: ${err.message}`
         };
     }
 }

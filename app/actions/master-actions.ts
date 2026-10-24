@@ -48,19 +48,22 @@ export async function ejecutarJarvisCore(formData: FormData) {
 
         const seccion = formData.get('seccion') as string || 'academico'
         const tipoAnalisis = formData.get('tipoAnalisis') as string || 'Análisis Zapia'
+        const continente = formData.get('continente') as string || 'América'
+        const region = formData.get('region') as string || 'América del Norte'
+        const pais = formData.get('pais') as string || 'México'
         const detalle = formData.get('detalle') as string || 'Sin directriz'
         const archivoNombre = formData.get('archivoNombre') as string || 'Ningún archivo'
-        const modeloIASeleccionado = formData.get('modeloIASeleccionado') as string || 'Matriz Global (Todas las IAs)'
+        const modeloIASeleccionado = formData.get('modeloIASeleccionado') as string || 'Matriz Global'
         const timestamp = new Date().toISOString()
 
-        const folioOmnirouter = `JARVIS-GLOBAL-AI-${Math.floor(100000 + Math.random() * 900000)}`
-        const rawPayload = `${SUPERVISOR_AUTORIZADO}-${seccion}-${tipoAnalisis}-${modeloIASeleccionado}-${detalle}-${timestamp}`
+        const folioOmnirouter = `JARVIS-GEO-${Math.floor(100000 + Math.random() * 900000)}`
+        const rawPayload = `${SUPERVISOR_AUTORIZADO}-${continente}-${region}-${pais}-${seccion}-${tipoAnalisis}-${modeloIASeleccionado}-${timestamp}`
         const cryptoHash = crypto.createHash('sha256').update(rawPayload).digest('hex')
 
-        const memoryKey = `[GLOBAL AI] ${modeloIASeleccionado}`
-        const memoryValue = `Archivo: ${archivoNombre} | Análisis: ${tipoAnalisis} | Detalle: ${detalle} | Folio: ${folioOmnirouter} | Hash: ${cryptoHash}`
+        const memoryKey = `[GEO: ${pais} | ${region}] ${tipoAnalisis}`
+        const memoryValue = `Continente: ${continente} | Región: ${region} | País: ${pais} | Archivo: ${archivoNombre} | Folio: ${folioOmnirouter} | Hash: ${cryptoHash}`
 
-        guardarMemoriaLocal(memoryKey, memoryValue, `Jarvis Multi-Model Router (${modeloIASeleccionado})`)
+        guardarMemoriaLocal(memoryKey, memoryValue, `Jarvis Geopolitical Engine (${pais})`)
 
         try {
             await supabase.from('mexico_jarvis_memory').insert([
@@ -68,15 +71,15 @@ export async function ejecutarJarvisCore(formData: FormData) {
                     owner_email: SUPERVISOR_AUTORIZADO,
                     memory_key: memoryKey,
                     memory_value: memoryValue,
-                    routing_engine: `Global AI Router (${modeloIASeleccionado})`
+                    routing_engine: `Geopolitical Router (${pais})`
                 }
             ])
         } catch (e) {}
 
         const codigoGenerado = `// ==========================================
 // NEXCODE INTERACTIVE S.A. DE C.V.
-// Directorio Global de IAs & Análisis Zapia
-// Modelo Asignado: ${modeloIASeleccionado}
+// Matriz Geopolítica & Directorio Global de IAs
+// Ubicación: ${pais}, ${region}, ${continente}
 // Supervisor: C. Francisco (fg782270@gmail.com)
 // Folio Oficial: ${folioOmnirouter}
 // Hash SHA-256: ${cryptoHash}
@@ -84,15 +87,15 @@ export async function ejecutarJarvisCore(formData: FormData) {
 
 import React from 'react';
 
-export default function GlobalAIMatrixPackage() {
+export default function GeopoliticalMatrixPackage() {
     return (
         <div style={{ background: '#020617', color: '#22d3ee', padding: '20px', fontFamily: 'monospace' }}>
-            <h1>Nexcode Master Core — Matriz Global de IAs</h1>
-            <p>Modelo de Referencia: ${modeloIASeleccionado}</p>
-            <p>Sección: ${seccion}</p>
-            <p>Análisis: ${tipoAnalisis}</p>
-            <p>Documento: ${archivoNombre}</p>
-            <p>Estado: Procesado, desglosado con explicaciones estilo Zapia y registrado con firma SHA-256.</p>
+            <h1>Nexcode Master Core — Matriz Geopolítica</h1>
+            <p>Continente: ${continente}</p>
+            <p>Región: ${region}</p>
+            <p>País: ${pais}</p>
+            <p>Modelo de IA: ${modeloIASeleccionado}</p>
+            <p>Estado: Procesado, estructurado por región y registrado con firma SHA-256.</p>
         </div>
     );
 }
@@ -100,14 +103,14 @@ export default function GlobalAIMatrixPackage() {
 
         return {
             success: true,
-            message: `¡Análisis completado mediante [${modeloIASeleccionado}]! Calificación extraída, explicaciones detalladas estilo Zapia generadas y guardadas en el Banco de Memoria Interconectado.`,
+            message: `¡Análisis geopolítico y estilo Zapia completado con éxito para [${pais}, ${region}]! Calificación e información indexadas en el Banco de Memoria Interconectado.`,
             folio: folioOmnirouter,
             hash: cryptoHash,
             codigoDescargable: codigoGenerado
         }
 
     } catch (err: any) {
-        return { success: false, message: `Error en el núcleo global de IAs: ${err.message}` }
+        return { success: false, message: `Error en el núcleo geopolítico: ${err.message}` }
     }
 }
 

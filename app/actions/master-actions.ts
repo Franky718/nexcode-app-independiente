@@ -16,17 +16,17 @@ export async function ejecutarYGuardarEnSupabase(formData: FormData) {
         const timestamp = new Date().toISOString()
 
         // Generar sellado criptográfico SHA-256 institucional
-        const rawPayload = ${supervisor}----
+        const rawPayload = `${supervisor}-${modulo}-${motorIA}-${instruccion}-${timestamp}`
         const sha256Hash = crypto
             .createHash('sha256')
             .update(rawPayload)
             .digest('hex')
 
-        console.log([SHA-256 Sello Generado]: )
+        console.log(`[SHA-256 Sello Generado]: ${sha256Hash}`)
 
         // Persistir en Supabase (Live DB Sync)
         const { data, error } = await supabase
-            .from('nexcode_governance_logs')
+            .from('mexico_public_governance_logs')
             .insert([
                 {
                     supervisor_email: supervisor,
@@ -40,7 +40,7 @@ export async function ejecutarYGuardarEnSupabase(formData: FormData) {
 
         if (error) {
             console.error('[Error Supabase]:', error.message)
-            return { success: false, message: Error al sincronizar con Supabase:  }
+            return { success: false, message: `Error al sincronizar con Supabase: ${error.message}` }
         }
 
         return { 
@@ -51,6 +51,6 @@ export async function ejecutarYGuardarEnSupabase(formData: FormData) {
 
     } catch (err: any) {
         console.error('[Error de Servidor]:', err)
-        return { success: false, message: Error interno:  }
+        return { success: false, message: `Error interno: ${err.message}` }
     }
 }

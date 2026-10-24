@@ -413,10 +413,6 @@
     display: none;
   }
 
-  .h-20 {
-    height: calc(var(--spacing) * 20);
-  }
-
   .h-28 {
     height: calc(var(--spacing) * 28);
   }
@@ -491,10 +487,6 @@
 
   .gap-3 {
     gap: calc(var(--spacing) * 3);
-  }
-
-  .gap-4 {
-    gap: calc(var(--spacing) * 4);
   }
 
   :where(.space-y-2 > :not(:last-child)) {
@@ -988,19 +980,11 @@
     }
   }
 
-  .focus\:border-amber-400:focus {
-    border-color: var(--color-amber-400);
-  }
-
   .focus\:border-cyan-400:focus {
     border-color: var(--color-cyan-400);
   }
 
   @media (min-width: 48rem) {
-    .md\:grid-cols-2 {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
     .md\:grid-cols-3 {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }

@@ -17,12 +17,12 @@ export default function MasterCorePage() {
     
     const [tipoAnalisisAcademico, setTipoAnalisisAcademico] = useState('Estructura Zapia AI: Seguridad Pública & Word')
     const [tipoAnalisisEmpresa, setTipoAnalisisEmpresa] = useState('Comercialización y Contratos de Software')
-    const [modeloIA, setModeloIA] = useState('Jarvis AI Autonomous Core (Commercial Engine)')
+    const [modeloIA, setModeloIA] = useState('Jarvis AI Autonomous Core (Voice & Commercial Engine)')
     
     const [detalleAcademico, setDetalleAcademico] = useState('Estructura metodológica de seguridad pública validada institucionalmente.')
     const [calificacionAcademica, setCalificacionAcademica] = useState('10 / 10 (Aprobado con Excelencia)')
     
-    // Procesador Académico (Intacto)
+    // Procesador Académico
     const [tituloDocumentoAcademico, setTituloDocumentoAcademico] = useState('Proyecto de Aplicación para Seguridad Pública')
     const [contenidoAcademico, setContenidoAcademico] = useState(
 `UNIVERSIDAD ABIERTA Y A DISTANCIA DE MÉXICO (UnADM)
@@ -36,9 +36,9 @@ CAPÍTULO 1. PLANTEAMIENTO DEL PROBLEMA Y MARCO METODOLÓGICO
 1.6 Objetivos de la investigación
 1.7 Hipótesis (Propuestas por comprobar)`)
 
-    // Documentos Comerciales de Venta de Software (NUEVO MÓDULO)
+    // Documentos Comerciales de Venta de Software
     const [tipoDocComercial, setTipoDocComercial] = useState<'carta' | 'juridico' | 'financiero'>('carta')
-    const [tituloComercial, setTituloComercial] = useState('Carta de Presentación y Resumen Ejecutivo - Sistema Finora / Sónica')
+    const [tituloComercial, setTituloComercial] = useState('Carta de Presentación y Resumen Ejecutivo - Software Institucional')
     const [contenidoComercial, setContenidoComercial] = useState(
 `[SECRETARÍA / CLIENTE INSTITUCIONAL]
 ASUNTO: Presentación de Solución Tecnológica y Propuesta de Valor
@@ -96,6 +96,36 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma avanzada de software esp
         window.speechSynthesis.speak(utterance)
     }
 
+    // Módulo de Reconocimiento de Voz Independiente
+    function escucharMic(setter: (val: string | ((prev: string) => string)) => void, nombreModulo: string) {
+        if (typeof window === 'undefined') return;
+        const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+            alert("Su navegador no soporta reconocimiento de voz nativo.");
+            return;
+        }
+        const recognition = new SpeechRecognition();
+        recognition.lang = 'es-MX';
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+        
+        recognition.onstart = () => { 
+            hablarJarvis(`Dictado activo para ${nombreModulo}, licenciado.`); 
+        };
+        
+        recognition.onresult = (event: any) => {
+            const textoTranscrito = event.results[0][0].transcript;
+            setter((prev: string) => prev + "\n" + textoTranscrito);
+            hablarJarvis("Dictado registrado y adjuntado al documento.");
+        };
+        
+        recognition.onerror = () => { 
+            hablarJarvis("No se pudo capturar el audio. Verifique su micrófono."); 
+        };
+        
+        recognition.start();
+    }
+
     async function iniciarAccesoFacial() {
         setModoAcceso('facial')
         setEstadoSeguridad('Verificando credenciales biométricas...')
@@ -137,7 +167,6 @@ Nexcode Interactive S.A. de C.V. presenta su plataforma avanzada de software esp
         }, 2000)
     }
 
-    // Selector inteligente de plantillas comerciales para venta de software
     function cambiarPlantillaComercial(tipo: 'carta' | 'juridico' | 'financiero') {
         setTipoDocComercial(tipo)
         if (tipo === 'carta') {
@@ -371,9 +400,14 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                                 <div className="space-y-4 p-5 bg-slate-950 rounded border-2 border-amber-500/60 animate-fadeIn shadow-inner">
                                     <div className="flex justify-between items-center border-b border-amber-500/30 pb-3">
                                         <h3 className="text-sm font-bold text-amber-300 uppercase tracking-wide">🎓 Procesador Académico — Zapia AI (Seguridad Pública)</h3>
-                                        <button type="button" onClick={descargarDocumentoWord} className="bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg">
-                                            📥 Descargar Word (.doc)
-                                        </button>
+                                        <div className="flex gap-2 items-center">
+                                            <button type="button" onClick={() => escucharMic(setContenidoAcademico, 'Módulo Académico')} className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow flex items-center gap-1">
+                                                🎤 Dictar por Voz
+                                            </button>
+                                            <button type="button" onClick={descargarDocumentoWord} className="bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg">
+                                                📥 Descargar Word (.doc)
+                                            </button>
+                                        </div>
                                     </div>
                                     <input type="text" value={tituloDocumentoAcademico} onChange={(e) => setTituloDocumentoAcademico(e.target.value)} className="w-full bg-slate-900 border border-amber-500/40 rounded p-2 text-white text-xs font-bold" required />
                                     <textarea value={contenidoAcademico} onChange={(e) => setContenidoAcademico(e.target.value)} rows={10} className="w-full bg-slate-900 border border-amber-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none" required />
@@ -385,9 +419,15 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                                 <div className="space-y-4 p-5 bg-slate-950 rounded border-2 border-cyan-500/60 animate-fadeIn shadow-inner">
                                     <div className="flex justify-between items-center border-b border-cyan-500/30 pb-3">
                                         <h3 className="text-sm font-bold text-cyan-300 uppercase tracking-wide">💼 Creador de Documentos para Venta de Software</h3>
-                                        <button type="button" onClick={descargarDocumentoWord} className="bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg">
-                                            📥 Descargar Dictamen / Carta (.doc)
-                                        </button>
+                                        <div className="flex gap-2 items-center">
+                                            {/* BOTÓN VISIBLE DE MICRÓFONO CON ICONO */}
+                                            <button type="button" onClick={() => escucharMic(setContenidoComercial, 'Módulo Comercial')} className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow-lg flex items-center gap-1 transition-all">
+                                                🎤 Dictar por Voz
+                                            </button>
+                                            <button type="button" onClick={descargarDocumentoWord} className="bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg">
+                                                📥 Descargar Dictamen / Carta (.doc)
+                                            </button>
+                                        </div>
                                     </div>
 
                                     {/* Selector de Plantillas Comerciales */}
@@ -421,7 +461,7 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                                     <div>
                                         <label className="block text-xs text-slate-300 mb-1">Matriz de IA:</label>
                                         <select value={modeloIA} onChange={(e) => setModeloIA(e.target.value)} className="w-full bg-slate-900 border border-cyan-500/40 rounded p-2 text-white text-xs">
-                                            <option value="Jarvis AI Autonomous Core (Commercial Engine)">Jarvis AI Autonomous Core</option>
+                                            <option value="Jarvis AI Autonomous Core (Voice & Commercial Engine)">Jarvis AI Autonomous Core</option>
                                             <option value="OpenAI GPT-6">OpenAI GPT-6</option>
                                         </select>
                                     </div>
@@ -463,6 +503,7 @@ Establecer los términos y condiciones legales para la comercialización, licenc
                                     <thead>
                                         <tr className="border-b border-cyan-500/20 text-cyan-400">
                                             <th className="pb-2">Expediente / Actividad</th>
+                                            <th className="pb-2">Detalle Analítico</th>
                                             <th className="pb-2">Detalle Analítico</th>
                                             <th className="pb-2">Subsistema</th>
                                             <th className="pb-2">Fecha y Hora</th>

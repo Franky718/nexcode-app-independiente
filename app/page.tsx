@@ -29,7 +29,6 @@ export default function MasterCorePage() {
     const [region, setRegion] = useState('América del Norte / LATAM')
     const [pais, setPais] = useState('México (Reynosa, Tamaulipas)')
 
-    // Bloqueo activo por defecto
     const [accesoConcedido, setAccesoConcedido] = useState(false)
     const [modoAcceso, setModoAcceso] = useState<'facial' | 'pin' | 'hardware'>('pin')
     const [pinIngresado, setPinIngresado] = useState('')
@@ -111,22 +110,19 @@ export default function MasterCorePage() {
         }, 2000)
     }
 
+    // Modificado para leer y mostrar íntegramente el contenido real del documento
     function manejarArchivoAcademico(e: React.ChangeEvent<HTMLInputElement>) {
         if (e.target.files && e.target.files[0]) {
             const file = e.target.files[0]
             setArchivoAcademico(file)
-            hablarJarvis(`Documento ${file.name} cargado correctamente.`)
+            hablarJarvis(`Documento ${file.name} cargado para lectura completa.`)
             
             const reader = new FileReader()
             reader.onload = (event) => {
                 const contenido = event.target?.result as string || ''
                 setTextoEditado(contenido)
             }
-            if (file.type.includes('text') || file.name.endsWith('.txt') || file.name.endsWith('.docx') || file.name.endsWith('.ts') || file.name.endsWith('.tsx')) {
-                reader.readAsText(file)
-            } else {
-                setTextoEditado(`[Documento Institucional: ${file.name}]\nTamaño: ${(file.size / 1024).toFixed(2)} KB\nEstado: Integrado en el gabinete académico.`)
-            }
+            reader.readAsText(file)
         }
     }
 
@@ -136,12 +132,12 @@ export default function MasterCorePage() {
         const url = URL.createObjectURL(blob)
         const link = document.createElement('a')
         link.href = url
-        link.download = archivoAcademico ? `Editado-${archivoAcademico.name}.txt` : 'Documento-Institucional-Editado.txt'
+        link.download = archivoAcademico ? `Editado-${archivoAcademico.name}` : 'Documento-Institucional-Editado.txt'
         document.body.appendChild(link)
         link.click()
         document.body.removeChild(link)
         URL.revokeObjectURL(url)
-        hablarJarvis('Documento editado descargado con éxito.')
+        hablarJarvis('Documento exportado con éxito.')
     }
 
     function escucharMic(setTextTarget: (val: string) => void, nombreModulo: string) {
@@ -249,7 +245,7 @@ export default function MasterCorePage() {
                         <header className="flex justify-between items-center border-b border-cyan-500/20 pb-4 mb-6">
                             <div>
                                 <h1 className="text-xl font-bold tracking-wider flex items-center gap-2">
-                                    <span>📚</span> Calificador Académico — <span className="text-cyan-300">Estilo Classroom (Bloqueo Seguro)</span>
+                                    <span>📚</span> Calificador Académico — <span className="text-cyan-300">Estilo Classroom (Lectura Íntegra)</span>
                                 </h1>
                                 <p className="text-xs text-slate-400">Investigador Titular: fg782270@gmail.com (C. Francisco)</p>
                             </div>
@@ -287,9 +283,9 @@ export default function MasterCorePage() {
                             {seccionActiva === 'academico' && subTabAcademico === 'calificar' && (
                                 <div className="space-y-4 p-4 bg-slate-950 rounded border border-amber-500/40 animate-fadeIn">
                                     <div className="p-3 bg-slate-900 border border-amber-500/30 rounded">
-                                        <label className="block text-xs font-bold text-amber-300 mb-1">📁 Cargar Archivo del Alumno / Tesis (PDF, Word, TXT):</label>
-                                        <input type="file" accept=".pdf,.doc,.docx,.txt" onChange={manejarArchivoAcademico} className="w-full text-xs text-slate-300 file:mr-2 file:py-1 file:px-3 file:rounded file:border-0 file:bg-amber-500 file:text-slate-950 font-semibold cursor-pointer" />
-                                        {archivoAcademico && <p className="text-[11px] text-green-400 mt-2 font-mono">✔ Documento activo: {archivoAcademico.name}</p>}
+                                        <label className="block text-xs font-bold text-amber-300 mb-1">📁 Cargar Archivo del Alumno / Tesis (PDF, Word, TXT, JSON):</label>
+                                        <input type="file" accept=".pdf,.doc,.docx,.txt,.json" onChange={manejarArchivoAcademico} className="w-full text-xs text-slate-300 file:mr-2 file:py-1 file:px-3 file:rounded file:border-0 file:bg-amber-500 file:text-slate-950 font-semibold cursor-pointer" />
+                                        {archivoAcademico && <p className="text-[11px] text-green-400 mt-2 font-mono">✔ Documento activo: {archivoAcademico.name} (Revise la pestaña "Visor y Editor" para ver el contenido completo)</p>}
                                     </div>
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -323,18 +319,18 @@ export default function MasterCorePage() {
                             {seccionActiva === 'academico' && subTabAcademico === 'editor' && (
                                 <div className="space-y-4 p-5 bg-slate-950 rounded border-2 border-amber-500/60 animate-fadeIn shadow-inner">
                                     <div className="flex justify-between items-center border-b border-amber-500/30 pb-3">
-                                        <h3 className="text-sm font-bold text-amber-300 uppercase tracking-wide">✏️ Editor y Visor de Documento en Vivo</h3>
+                                        <h3 className="text-sm font-bold text-amber-300 uppercase tracking-wide">✏️ Visor y Editor Íntegro del Documento</h3>
                                         <div className="flex gap-2 items-center">
                                             <span className="text-xs font-mono text-slate-400">{archivoAcademico ? archivoAcademico.name : 'Documento en blanco'}</span>
                                             <button type="button" onClick={descargarDocumentoEditado} className="bg-green-500 hover:bg-green-400 text-slate-950 font-bold py-1 px-3 rounded text-xs shadow">
-                                                📥 Descargar Editado (.txt)
+                                                📥 Descargar Documento Editado
                                             </button>
                                         </div>
                                     </div>
                                     <textarea 
                                         value={textoEditado} 
                                         onChange={(e) => setTextoEditado(e.target.value)}
-                                        placeholder="Comience a redactar o editar aquí el contenido del documento académico..." 
+                                        placeholder="El contenido completo del archivo cargado aparecerá aquí para su lectura y edición total..." 
                                         className="w-full h-80 bg-slate-900 border border-amber-500/40 rounded p-4 text-xs text-slate-100 font-mono outline-none focus:border-amber-400 leading-relaxed shadow-inner"
                                     />
                                 </div>

@@ -13,61 +13,69 @@ export default function MasterCorePage() {
     // Selector General de Módulos
     const [seccionActiva, setSeccionActiva] = useState<'hub_corporativo' | 'academico' | 'comercial' | 'ingenieria'>('hub_corporativo')
     
-    // Sub-estado de Motores Globales Activos (Claude + DeepSeek)
-    const [tipoDocClaude, setTipoDocClaude] = useState<'carta' | 'juridico' | 'financiero' | 'tecnico'>('carta')
-    const [motorGlobal, setMotorGlobal] = useState('Dual-Engine: Claude Cloud (Docs) & DeepSeek Open-Source (Audit)')
+    // Sub-estado de Skills Legales y Contables (Hub Corporativo)
+    const [tipoSkillDoc, setTipoSkillDoc] = useState<'presentacion' | 'juridico' | 'contable' | 'riesgos'>('presentacion')
+    const [modeloIA, setModeloIA] = useState('Claude Cloud/Work 3.5 (Legal & Accounting Enterprise Skills)')
     
-    // Plantilla Principal: SIFV-Reynosa & Documentación Institucional
-    const [tituloCorp, setTituloCorp] = useState('Carta de presentación y resumen ejecutivo - SIFV-REYNOSA')
+    // 1. Presentación Ejecutiva SIFV-Reynosa
+    const [tituloCorp, setTituloCorp] = useState('Presentación Ejecutiva — Plataforma SIFV-REYNOSA')
     const [contenidoCorp, setContenidoCorp] = useState(
 `NEXCODE INTERACTIVE, S.A. DE C.V. 
 Reynosa, Tamaulipas, a 24 de octubre de 2026
 
-Para: Secretaría de Seguridad Pública, Vialidad y Tránsito del Municipio de Reynosa, Tamaulipas
-Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
+PROPUESTA TÉCNICA, JURÍDICA Y ECONÓMICA: PLATAFORMA SIFV-REYNOSA
+Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Municipio de Reynosa, Tamaulipas.
 
-Distinguidas autoridades:
+1. RESUMEN EJECUTIVO Y ALCANCE INSTITUCIONAL
+Sistema integral modular para la gestión vial, trazabilidad de dictámenes y transparencia operativa bajo los más altos estándares tecnológicos de Nexcode.
 
-Presentamos la Plataforma SIFV-REYNOSA, desarrollada íntegramente bajo los más altos estándares de calidad global y con el respaldo del blindaje criptográfico Vault Omega.
+2. VALOR ESTRATÉGICO
+- Soberanía tecnológica y control absoluto sobre la infraestructura municipal.
+- Blindaje criptográfico Vault Omega y auditoría de accesos en tiempo real.`)
 
-1. RESUMEN EJECUTIVO Y ALCANCE
-Sistema modular optimizado para la gestión vial, auditoría en tiempo real y máxima transparencia institucional.
-
-2. CUMPLIMIENTO NORMATIVO Y FINANCIERO
-Desglose transparente de costos de implementación, facturación CFDI e IVA (16%) conforme a la legislación fiscal vigente en México.`)
-
-    // Contenido Académico (Zapia AI)
+    // 2. Proyecto Escolar (Zapia AI)
     const [tituloAcademico, setTituloAcademico] = useState('Proyecto de Aplicación para Seguridad Pública')
     const [contenidoAcademico, setContenidoAcademico] = useState(
 `UNIVERSIDAD ABIERTA Y A DISTANCIA DE MÉXICO (UnADM)
 LICENCIATURA EN DERECHO
 CAPÍTULO 1. PLANTEAMIENTO DEL PROBLEMA Y MARCO METODOLÓGICO`)
 
-    // Contenido Comercial
-    const [tituloComercial, setTituloComercial] = useState('Dictamen Jurídico y Financiero - Licenciamiento')
+    // 3. Skills Legales y Contables (Comercial / Jurídico / Fiscal)
+    const [tituloComercial, setTituloComercial] = useState('Dictamen Legal, Fiscal y de Viabilidad Financiera')
     const [contenidoComercial, setContenidoComercial] = useState(
-`NEXCODE INTERACTIVE S.A. DE C.V. — DICTAMEN DE CONTRATACIÓN`)
+`NEXCODE INTERACTIVE S.A. DE C.V. — DICTAMEN LEGAL Y CONTABLE INTEGRAL
 
-    // Contenido Ingeniería (Doble Motor DeepSeek + Claude)
-    const [tituloIngenieria, setTituloIngenieria] = useState('Dual-Engine Audit & Endpoint Core')
+1. ANÁLISIS DE VIGENCIA Y ESTÍMULOS FISCALES (IVA 8%)
+- Consideración crítica: El estímulo fiscal del IVA al 8% en la región fronteriza vence el 31 de diciembre de 2026.
+- Impacto proyectado: Ahorro verificado en costos de implementación para contratos ejecutados antes de la fecha límite.
+- Validez de la propuesta comercial: 30 días naturales a partir de su emisión institucional.
+
+2. MARCO JURÍDICO Y PROPIEDAD INTELECTUAL
+- Titularidad absoluta del código fuente y arquitectura a favor de Nexcode Interactive S.A. de C.V.
+- Cláusulas de confidencialidad, protección de datos personales y cumplimiento normativo municipal.
+
+3. VIABILIDAD FINANCIERA Y MÁRGENES DE UTILIDAD
+- Estructura de costos basada en Supabase, licencias y soporte 24/7.
+- Retorno de inversión (ROI) estimado a 6 meses con desglose transparente en factura CFDI.`)
+
+    // 4. Ingeniería (Auditoría de Endpoints)
+    const [tituloIngenieria, setTituloIngenieria] = useState('GOV-TECH Core Architecture & Endpoints')
     const [contenidoIngenieria, setCodigoIngenieria] = useState(
-`// NEXCODE DUAL-ENGINE ENTERPRISE ARCHITECTURE
-// Motor A (Claude): Estructura de Negocio y Documentación
-// Motor B (DeepSeek / Open-Source): Optimización de Endpoints y Seguridad
-
-class GlobalMultiAIEnterpriseCore {
+`// NEXCODE GOV-TECH & LEGAL-CONTABLE AUDIT CORE
+class SIFVEnterpriseArchitecture {
     constructor() {
-        this.status = "DUAL_ENGINE_ACTIVE";
-        this.security = "VAULT_OMEGA_ENCRYPTED";
+        this.jurisdiction = "Reynosa, Tamaulipas";
+        this.taxRule = "IVA_8_PERCENT_ACTIVE_UNTIL_DEC_2026";
+        this.security = "VAULT_OMEGA_SECURE";
     }
-    runSystemDiagnostics() {
-        return { audit: "PASSED", endpoints: "SECURE", owner: "fg782270@gmail.com" };
+    verifyLegalCompliance() {
+        return { status: "APPROVED", owner: "fg782270@gmail.com", audit: "PASSED" };
     }
 }
-export const coreInstance = new GlobalMultiAIEnterpriseCore();`)
+export const engine = new SIFVEnterpriseArchitecture();`)
 
     // Estado de Audio
-    const [estadoAudio, setEstadoAudio] = useState('Sistema de Audio en Reposo (Listo para Dictado Dual)')
+    const [estadoAudio, setEstadoAudio] = useState('Sistema de Audio en Reposo (Listo para Dictado Legal/Contable)')
     const [grabandoAudio, setGrabaAudio] = useState(false)
 
     // Contexto Geopolítico
@@ -111,6 +119,44 @@ export const coreInstance = new GlobalMultiAIEnterpriseCore();`)
         window.speechSynthesis.speak(utterance)
     }
 
+    // Selector de Skills Legales y Contables
+    function cambiarSkillDocumental(tipo: 'presentacion' | 'juridico' | 'contable' | 'riesgos') {
+        setTipoSkillDoc(tipo)
+        if (tipo === 'presentacion') {
+            setTituloCorp('Presentación Ejecutiva — Plataforma SIFV-REYNOSA')
+            setContenidoCorp(
+`NEXCODE INTERACTIVE, S.A. DE C.V. 
+Reynosa, Tamaulipas, a 24 de octubre de 2026
+
+PROPUESTA TÉCNICA, JURÍDICA Y ECONÓMICA: PLATAFORMA SIFV-REYNOSA
+Presentada a la Secretaría de Seguridad Pública, Vialidad y Tránsito del Municipio de Reynosa, Tamaulipas.
+
+1. RESUMEN EJECUTIVO Y ALCANCE INSTITUCIONAL
+Sistema integral modular para la gestión vial, trazabilidad de dictámenes y transparencia operativa bajo los más altos estándares tecnológicos de Nexcode.`)
+        } else if (tipo === 'juridico') {
+            setTituloCorp('Dictamen Jurídico y Cláusulas de Contratación')
+            setContenidoCorp(
+`NEXCODE INTERACTIVE S.A. DE C.V. — SKILL JURÍDICO OFICIAL
+1. Objeto del contrato de licenciamiento y soporte técnico institucional.
+2. Protección de derechos de autor y propiedad intelectual bajo Vault Omega.
+3. Rescisión, jurisdicción aplicable en Reynosa y solución de controversias.`)
+        } else if (tipo === 'contable') {
+            setTituloCorp('Dictamen Contable y Fiscal (Estímulo IVA 8% y Márgenes)')
+            setContenidoCorp(
+`NEXCODE INTERACTIVE S.A. DE C.V. — SKILL CONTABLE Y FISCAL
+1. Análisis de Impuestos: Aplicación del estímulo fiscal de IVA al 8% (Vigencia límite: 31 de diciembre de 2026).
+2. Estructura de Costos, Facturación CFDI y Retorno de Inversión (ROI).
+3. Márgenes de utilidad operativos y viabilidad presupuestal municipal.`)
+        } else if (tipo === 'riesgos') {
+            setTituloCorp('Matriz de Riesgos Legales y Mitigación Operativa')
+            setContenidoCorp(
+`NEXCODE INTERACTIVE S.A. DE C.V. — SKILL DE ANÁLISIS DE RIESGOS
+1. Identificación de factores críticos en la implementación de software gubernamental.
+2. Protocolos de contingencia y redundancia ante fallas de infraestructura.
+3. Evaluación de impacto y mitigación de riesgos operativos (Nivel controlado).`)
+        }
+    }
+
     // Dictado por voz
     function iniciarDictadoAudio(setter: (val: string | ((prev: string) => string)) => void, nombreModulo: string) {
         if (typeof window === 'undefined') return;
@@ -126,15 +172,15 @@ export const coreInstance = new GlobalMultiAIEnterpriseCore();`)
         
         recognition.onstart = () => {
             setGrabaAudio(true);
-            setEstadoAudio(`🔴 Doble Motor Activo grabando en [${nombreModulo}]...`);
-            hablarJarvis(`Dictado activo con motores global y local para ${nombreModulo}, C. Francisco.`);
+            setEstadoAudio(`🔴 Grabando dictamen legal/contable en [${nombreModulo}]...`);
+            hablarJarvis(`Dictado activo con skills legales y contables para ${nombreModulo}, C. Francisco.`);
         };
         
         recognition.onresult = (event: any) => {
             const textoTranscrito = event.results[0][0].transcript;
-            setter((prev: string) => prev + "\n\n[Dual-Engine Struct]: " + textoTranscrito);
-            setEstadoAudio(`✔ Audio procesado por doble motor con éxito.`);
-            hablarJarvis("Audio integrado en el documento.");
+            setter((prev: string) => prev + "\n\n[Legal & Accounting Skill Struct]: " + textoTranscrito);
+            setEstadoAudio(`✔ Audio legal/contable procesado y estructurado con éxito.`);
+            hablarJarvis("Información integrada en el documento oficial.");
             setGrabaAudio(false);
         };
         
@@ -189,38 +235,6 @@ export const coreInstance = new GlobalMultiAIEnterpriseCore();`)
         }, 2000)
     }
 
-    // Selector de Plantillas Claude Docs
-    function cambiarPlantillaClaude(tipo: 'carta' | 'juridico' | 'financiero' | 'tecnico') {
-        setTipoDocClaude(tipo)
-        if (tipo === 'carta') {
-            setTituloCorp('Carta de presentación y resumen ejecutivo - SIFV-REYNOSA')
-            setContenidoCorp(
-`NEXCODE INTERACTIVE, S.A. DE C.V. 
-Reynosa, Tamaulipas, a 24 de octubre de 2026
-
-Para: Secretaría de Seguridad Pública, Vialidad y Tránsito del Municipio de Reynosa, Tamaulipas
-Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA`)
-        } else if (tipo === 'juridico') {
-            setTituloCorp('Dictamen Jurídico - Contrato y Blindaje de Propiedad Intelectual')
-            setContenidoCorp(
-`NEXCODE INTERACTIVE S.A. DE C.V. — DICTAMEN JURÍDICO OFICIAL
-1. Objeto del Contrato de Licenciamiento e Implementación Tecnológica.
-2. Titularidad y Protección de Propiedad Intelectual bajo Vault Omega.`)
-        } else if (tipo === 'financiero') {
-            setTituloCorp('Dictamen Contable y Financiero - IVA, Precios y ROI')
-            setContenidoCorp(
-`NEXCODE INTERACTIVE S.A. DE C.V. — DICTAMEN FINANCIERO Y CONTABLE
-1. Desglose de Costos, Facturación CFDI e Impuesto al Valor Agregado (IVA 16%).
-2. Retorno de Inversión (ROI) estimado a corto plazo.`)
-        } else if (tipo === 'tecnico') {
-            setTituloCorp('Documentación Técnica y Auditoría de Endpoints (DeepSeek Engine)')
-            setContenidoCorp(
-`NEXCODE INTERACTIVE S.A. DE C.V. — EXPEDIENTE TÉCNICO Y AUDITORÍA DE ENDPOINTS
-1. Arquitectura Full-Stack, Supabase y Encriptación SHA-256.
-2. Reporte de Pruebas de Rendimiento y Despliegue Automatizado APK.`)
-        }
-    }
-
     // Exportador de Documento Word
     function descargarDocumentoActivo() {
         let titulo = tituloCorp
@@ -247,7 +261,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
         link.click()
         document.body.removeChild(link)
         URL.revokeObjectURL(url)
-        hablarJarvis('Documento formateado exportado en formato Word con éxito.')
+        hablarJarvis('Documento con skills legales y contables exportado en Word con éxito.')
     }
 
     function descargarBancoMemoriaJson() {
@@ -256,7 +270,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
         const url = URL.createObjectURL(blob)
         const link = document.createElement('a')
         link.href = url
-        link.download = `Nexcode-Expediente-Institucional.json`
+        link.download = `Nexcode-Expediente-Legal-Contable.json`
         document.body.appendChild(link)
         link.click()
         document.body.removeChild(link)
@@ -267,10 +281,10 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
     function formatearActividad(clave: string) {
         if (!clave) return 'Expediente Institucional'
         const lower = clave.toLowerCase()
-        if (lower.includes('corporativo')) return 'Hub Dual-Engine (Claude & DeepSeek)'
+        if (lower.includes('corporativo')) return 'Hub de Skills Legales y Contables'
         if (lower.includes('academico')) return 'Proyecto Escolar: Seguridad Pública'
-        if (lower.includes('comercial')) return 'Comercialización y Venta de Software'
-        if (lower.includes('ingenieria')) return 'Ingeniería y Auditoría de Endpoints'
+        if (lower.includes('comercial')) return 'Dictamen Jurídico y Financiero'
+        if (lower.includes('ingenieria')) return 'Ingeniería y Auditoría GOV-TECH'
         return 'Bitácora y Registro Institucional'
     }
 
@@ -278,8 +292,8 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
         event.preventDefault()
         const formData = new FormData(event.currentTarget)
         formData.append('seccion', seccionActiva)
-        formData.append('tipoAnalisis', 'Multicerebro Global (Claude Cloud & DeepSeek Audit Core)')
-        formData.append('modeloIASeleccionado', motorGlobal)
+        formData.append('tipoAnalisis', 'Hub con Skills Legales y Contables (Claude Engine)')
+        formData.append('modeloIASeleccionado', modeloIA)
         formData.append('continente', continente)
         formData.append('region', region)
         formData.append('pais', pais)
@@ -292,7 +306,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
             setFolioUltimo(resultado.folio || null)
             setHashGenerado(resultado.hash || null)
             if (resultado.success) {
-                hablarJarvis("Operación procesada con doble motor y auditada bajo Vault Omega.")
+                hablarJarvis("Documento con skills legales y contables registrado y auditado bajo Vault Omega.")
                 cargarMemoria()
             }
         })
@@ -348,7 +362,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                         <header className="flex justify-between items-center border-b border-cyan-500/20 pb-4 mb-6">
                             <div>
                                 <h1 className="text-xl font-bold tracking-wider flex items-center gap-2">
-                                    <span>🛡️</span> Jarvis Master Core — <span className="text-cyan-300">Dual-Engine Active (Claude & DeepSeek)</span>
+                                    <span>🛡️</span> Jarvis Master Core — <span className="text-cyan-300">Legal & Accounting Enterprise Skills</span>
                                 </h1>
                                 <p className="text-xs text-slate-400">Investigador Titular: fg782270@gmail.com (C. Francisco)</p>
                             </div>
@@ -361,7 +375,7 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                 <span className="text-sm">🎙️</span>
                                 <span className="text-xs font-bold text-cyan-300">{estadoAudio}</span>
                             </div>
-                            {grabandoAudio && <span className="animate-pulse text-xs bg-red-500 text-white px-2 py-0.5 rounded font-bold">DUAL-ENGINE RECORDING...</span>}
+                            {grabandoAudio && <span className="animate-pulse text-xs bg-red-500 text-white px-2 py-0.5 rounded font-bold">SKILLS RECORDING...</span>}
                         </div>
 
                         {/* SELECTOR GEOPOLÍTICO */}
@@ -390,16 +404,16 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                         {/* SELECTOR PRINCIPAL DE MÓDULOS */}
                         <div className="mb-6 p-4 bg-slate-950 border-2 border-cyan-500/50 rounded-lg grid grid-cols-2 md:grid-cols-4 gap-2">
                             <button type="button" onClick={() => setSeccionActiva('hub_corporativo')} className={`py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'hub_corporativo' ? 'bg-cyan-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-cyan-300'}`}>
-                                📂 Hub Dual (Claude/DeepSeek)
+                                📂 Hub Legal & Contable
                             </button>
                             <button type="button" onClick={() => setSeccionActiva('academico')} className={`py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'academico' ? 'bg-amber-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-amber-300'}`}>
                                 🎓 Proyecto Escolar
                             </button>
                             <button type="button" onClick={() => setSeccionActiva('comercial')} className={`py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'comercial' ? 'bg-blue-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-blue-300'}`}>
-                                🏢 Comercialización
+                                🏢 Dictamen Financiero
                             </button>
                             <button type="button" onClick={() => setSeccionActiva('ingenieria')} className={`py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'ingenieria' ? 'bg-purple-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-purple-300'}`}>
-                                ⚙️ Auditoría Endpoints
+                                ⚙️ GOV-TECH Core
                             </button>
                         </div>
 
@@ -409,14 +423,14 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                 <input type="email" name="emailSolicitante" defaultValue="fg782270@gmail.com" />
                             </div>
 
-                            {/* MÓDULO 1: HUB CORPORATIVO DUAL-ENGINE */}
+                            {/* MÓDULO 1: HUB DE SKILLS LEGALES Y CONTABLES */}
                             {seccionActiva === 'hub_corporativo' && (
                                 <div className="space-y-4 p-5 bg-slate-950 rounded border-2 border-cyan-500/60 animate-fadeIn shadow-inner">
                                     <div className="flex justify-between items-center border-b border-cyan-500/30 pb-3">
-                                        <h3 className="text-sm font-bold text-cyan-300 uppercase tracking-wide">📂 Hub Dual-Engine — Documentación & Auditoría</h3>
+                                        <h3 className="text-sm font-bold text-cyan-300 uppercase tracking-wide">📂 Hub Documental con Skills Legales y Fiscales</h3>
                                         <div className="flex gap-2 items-center">
-                                            <button type="button" onClick={() => iniciarDictadoAudio(setContenidoCorp, 'Hub Dual-Engine')} className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow flex items-center gap-1">
-                                                🎤 Dictar Voz (Dual)
+                                            <button type="button" onClick={() => iniciarDictadoAudio(setContenidoCorp, 'Skills Legales/Contables')} className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow flex items-center gap-1">
+                                                🎤 Dictar Voz (Skills)
                                             </button>
                                             <button type="button" onClick={descargarDocumentoActivo} className="bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg">
                                                 📥 Exportar Word (.doc)
@@ -424,10 +438,10 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                         </div>
                                     </div>
                                     <div className="grid grid-cols-2 md:grid-cols-4 gap-2 bg-slate-900 p-2 rounded border border-cyan-500/30">
-                                        <button type="button" onClick={() => cambiarPlantillaClaude('carta')} className={`py-1.5 px-2 rounded text-[11px] font-bold ${tipoDocClaude === 'carta' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`}>📄 Carta Presentación</button>
-                                        <button type="button" onClick={() => cambiarPlantillaClaude('juridico')} className={`py-1.5 px-2 rounded text-[11px] font-bold ${tipoDocClaude === 'juridico' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`}>⚖️ Dictamen Jurídico</button>
-                                        <button type="button" onClick={() => cambiarPlantillaClaude('financiero')} className={`py-1.5 px-2 rounded text-[11px] font-bold ${tipoDocClaude === 'financiero' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`}>💰 Dictamen Financiero</button>
-                                        <button type="button" onClick={() => cambiarPlantillaClaude('tecnico')} className={`py-1.5 px-2 rounded text-[11px] font-bold ${tipoDocClaude === 'tecnico' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`}>⚙️ Auditoría Endpoints</button>
+                                        <button type="button" onClick={() => cambiarSkillDocumental('presentacion')} className={`py-1.5 px-2 rounded text-[11px] font-bold ${tipoSkillDoc === 'presentacion' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`}>📊 Presentación</button>
+                                        <button type="button" onClick={() => cambiarSkillDocumental('juridico')} className={`py-1.5 px-2 rounded text-[11px] font-bold ${tipoSkillDoc === 'juridico' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`}>⚖️ Skill Jurídico</button>
+                                        <button type="button" onClick={() => cambiarSkillDocumental('contable')} className={`py-1.5 px-2 rounded text-[11px] font-bold ${tipoSkillDoc === 'contable' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`}>💰 Skill Contable (IVA 8%)</button>
+                                        <button type="button" onClick={() => cambiarSkillDocumental('riesgos')} className={`py-1.5 px-2 rounded text-[11px] font-bold ${tipoSkillDoc === 'riesgos' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`}>📊 Matriz de Riesgos</button>
                                     </div>
                                     <input type="text" value={tituloCorp} onChange={(e) => setTituloCorp(e.target.value)} className="w-full bg-slate-900 border border-cyan-500/40 rounded p-2 text-white text-xs font-bold" required />
                                     <textarea value={contenidoCorp} onChange={(e) => setContenidoCorp(e.target.value)} rows={14} className="w-full bg-slate-900 border border-cyan-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none leading-relaxed" required />
@@ -453,13 +467,13 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                 </div>
                             )}
 
-                            {/* MÓDULO 3: COMERCIALIZACIÓN */}
+                            {/* MÓDULO 3: COMERCIALIZACIÓN Y DICTAMEN FINANCIERO */}
                             {seccionActiva === 'comercial' && (
                                 <div className="space-y-4 p-5 bg-slate-950 rounded border-2 border-blue-500/60 animate-fadeIn shadow-inner">
                                     <div className="flex justify-between items-center border-b border-blue-500/30 pb-3">
-                                        <h3 className="text-sm font-bold text-blue-300 uppercase tracking-wide">🏢 Comercialización y Venta de Software</h3>
+                                        <h3 className="text-sm font-bold text-blue-300 uppercase tracking-wide">🏢 Dictamen Jurídico, Fiscal y Financiero</h3>
                                         <div className="flex gap-2 items-center">
-                                            <button type="button" onClick={() => iniciarDictadoAudio(setContenidoComercial, 'Comercialización')} className="bg-blue-500 hover:bg-blue-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow flex items-center gap-1">
+                                            <button type="button" onClick={() => iniciarDictadoAudio(setContenidoComercial, 'Dictamen Financiero')} className="bg-blue-500 hover:bg-blue-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow flex items-center gap-1">
                                                 🎤 Dictar Voz
                                             </button>
                                             <button type="button" onClick={descargarDocumentoActivo} className="bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg">
@@ -472,13 +486,13 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                                 </div>
                             )}
 
-                            {/* MÓDULO 4: INGENIERÍA Y AUDITORÍA DE ENDPOINTS */}
+                            {/* MÓDULO 4: INGENIERÍA GOV-TECH */}
                             {seccionActiva === 'ingenieria' && (
                                 <div className="space-y-4 p-5 bg-slate-950 rounded border-2 border-purple-500/60 animate-fadeIn shadow-inner">
                                     <div className="flex justify-between items-center border-b border-purple-500/30 pb-3">
-                                        <h3 className="text-sm font-bold text-purple-300 uppercase tracking-wide">⚙️ Auditoría de Endpoints & DeepSeek Core</h3>
+                                        <h3 className="text-sm font-bold text-purple-300 uppercase tracking-wide">⚙️ GOV-TECH Core & Compliance Architecture</h3>
                                         <div className="flex gap-2 items-center">
-                                            <button type="button" onClick={() => iniciarDictadoAudio(setCodigoIngenieria, 'Auditoría Endpoints')} className="bg-purple-500 hover:bg-purple-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow flex items-center gap-1">
+                                            <button type="button" onClick={() => iniciarDictadoAudio(setCodigoIngenieria, 'GOV-TECH Core')} className="bg-purple-500 hover:bg-purple-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow flex items-center gap-1">
                                                 🎤 Dictar Lógica
                                             </button>
                                             <button type="button" onClick={descargarDocumentoActivo} className="bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg">
@@ -492,13 +506,13 @@ Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
                             )}
 
                             <button type="submit" disabled={isPending} className="w-full bg-cyan-500 hover:bg-cyan-400 font-bold py-3 px-4 rounded text-slate-950 shadow-lg">
-                                {isPending ? 'Procesando con Doble Motor...' : `Registrar y Auditar en [${seccionActiva.toUpperCase()}]`}
+                                {isPending ? 'Procesando Skills Legales/Contables...' : `Registrar y Auditar en [${seccionActiva.toUpperCase()}]`}
                             </button>
                         </form>
 
                         {mensajeRespuesta && (
                             <div className="mt-6 p-5 bg-slate-950 border-2 border-cyan-500 rounded-lg text-sm shadow-2xl relative space-y-2">
-                                <div className="absolute top-0 right-0 bg-cyan-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl">ESTADO: DUAL-ENGINE AUDITED</div>
+                                <div className="absolute top-0 right-0 bg-cyan-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl">ESTADO: LEGAL & ACCOUNTING SKILLS AUDITED</div>
                                 <div className="text-white font-medium whitespace-pre-line leading-relaxed">{mensajeRespuesta}</div>
                                 {folioUltimo && <p className="text-xs text-cyan-300"><span className="font-bold">Folio:</span> {folioUltimo}</p>}
                             </div>

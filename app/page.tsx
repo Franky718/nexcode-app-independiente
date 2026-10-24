@@ -13,9 +13,9 @@ export default function MasterCorePage() {
     const [memoriasEstado, setMemoriasEstado] = useState<any[]>([])
     
     const [seccionActiva, setSeccionActiva] = useState<'academico' | 'empresa'>('academico')
-    const [tipoAnalisisAcademico, setTipoAnalisisAcademico] = useState('Análisis Zapia (Calificación & Explicación)')
-    const [tipoAnalisisEmpresa, setTipoAnalisisEmpresa] = useState('Arquitectura Full-Stack & Auditoría')
-    const [modeloIA, setModeloIA] = useState('Matriz Global Unificada (Todas las IAs)')
+    const [tipoAnalisisAcademico, setTipoAnalisisAcademico] = useState('Análisis Metodológico y Criterios de Evaluación')
+    const [tipoAnalisisEmpresa, setTipoAnalisisEmpresa] = useState('Gestión de Proyectos y Desarrollo de Software')
+    const [modeloIA, setModeloIA] = useState('Sistema Autónomo de Investigación Documental')
     
     const [detalleAcademico, setDetalleAcademico] = useState('')
     const [detalleEmpresa, setDetalleEmpresa] = useState('')
@@ -69,7 +69,7 @@ export default function MasterCorePage() {
         window.speechSynthesis.speak(utterance)
     }
 
-    function escucharMic(setTextTarget: (val: string) => void, nombreNucleo: string) {
+    function escucharMic(setTextTarget: (val: string) => void, nombreModulo: string) {
         if (typeof window === 'undefined') return;
         const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
         if (!SpeechRecognition) {
@@ -81,11 +81,11 @@ export default function MasterCorePage() {
         recognition.interimResults = false;
         recognition.maxAlternatives = 1;
 
-        recognition.onstart = () => { hablarJarvis(`Escuchando núcleo ${nombreNucleo}, señor.`); };
+        recognition.onstart = () => { hablarJarvis(`Dictado activo para ${nombreModulo}, licenciado.`); };
         recognition.onresult = (event: any) => {
             const textoTranscrito = event.results[0][0].transcript;
             setTextTarget(textoTranscrito);
-            hablarJarvis("Voz registrada con éxito.");
+            hablarJarvis("Dictado registrado correctamente.");
         };
         recognition.onerror = () => { hablarJarvis("No se pudo capturar el audio."); };
         recognition.start();
@@ -94,28 +94,28 @@ export default function MasterCorePage() {
     async function iniciarAccesoFacial() {
         setModoAcceso('facial')
         setCamaraActiva(true)
-        setEstadoSeguridad('Analizando biometría facial...')
-        hablarJarvis("Iniciando escaneo facial.")
+        setEstadoSeguridad('Verificando credenciales biométricas...')
+        hablarJarvis("Iniciando validación biométrica.")
         
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ video: true })
             if (videoRef.current) videoRef.current.srcObject = stream
             setTimeout(() => {
-                setEstadoSeguridad('✔ Identidad confirmada.')
-                hablarJarvis("Acceso concedido, C. Francisco.")
+                setEstadoSeguridad('✔ Identidad de Supervisor confirmada.')
+                hablarJarvis("Acceso autorizado, C. Francisco.")
                 setAccesoConcedido(true)
             }, 2500)
         } catch (err) {
-            setEstadoSeguridad('❌ Error de cámara. Use PIN Maestro.')
-            hablarJarvis("Use su PIN maestro.")
+            setEstadoSeguridad('❌ Error de cámara. Use su PIN Ejecutivo.')
+            hablarJarvis("Utilice su PIN ejecutivo de acceso.")
         }
     }
 
     function verificarPinMaestro(e: React.FormEvent) {
         e.preventDefault()
         if (pinIngresado === '7822' || pinIngresado === '1998' || pinIngresado === '2026') {
-            setEstadoSeguridad('✔ PIN verificado.')
-            hablarJarvis("PIN verificado con éxito.")
+            setEstadoSeguridad('✔ PIN Ejecutivo verificado.')
+            hablarJarvis("PIN verificado con éxito. Bienvenido, C. Francisco.")
             setAccesoConcedido(true)
         } else {
             alert("PIN incorrecto.")
@@ -125,11 +125,11 @@ export default function MasterCorePage() {
 
     async function verificarBiometriaHardware() {
         setModoAcceso('hardware')
-        setEstadoSeguridad('Validando dispositivo físico...')
-        hablarJarvis("Validando hardware de seguridad.")
+        setEstadoSeguridad('Validando dispositivo de seguridad físico...')
+        hablarJarvis("Validando hardware autorizado.")
         setTimeout(() => {
-            setEstadoSeguridad('✔ Dispositivo verificado.')
-            hablarJarvis("Acceso concedido.")
+            setEstadoSeguridad('✔ Dispositivo validado.')
+            hablarJarvis("Acceso autorizado.")
             setAccesoConcedido(true)
         }, 2000)
     }
@@ -160,10 +160,10 @@ export default function MasterCorePage() {
             setHashGenerado(resultado.hash || null)
             setCodigoPaquete(resultado.codigoDescargable || null)
             if (resultado.success) {
-                hablarJarvis("Operación corporativa y banco interconectado actualizados.")
+                hablarJarvis("Análisis documental procesado y archivado en el expediente.")
                 cargarMemoria()
             } else {
-                hablarJarvis("Acceso denegado por Blindaje Omega.")
+                hablarJarvis("Acceso denegado por protocolo de seguridad.")
             }
         })
     }
@@ -174,27 +174,29 @@ export default function MasterCorePage() {
         const url = URL.createObjectURL(blob)
         const link = document.createElement('a')
         link.href = url
-        link.download = `Nexcode-Enterprise-Package.tsx`
+        link.download = `Nexcode-Expediente-Tecnico.tsx`
         document.body.appendChild(link)
         link.click()
         document.body.removeChild(link)
         URL.revokeObjectURL(url)
-        hablarJarvis('Paquete corporativo descargado con éxito.')
+        hablarJarvis('Documento técnico descargado con éxito.')
     }
 
-    // Función de limpieza avanzada para nombres limpios en la tabla (Académico y Empresa)
-    function limpiarNombreClave(clave: string) {
-        if (!clave) return 'Registro General'
-        if (clave.includes('Zapia') || clave.includes('ACADEMICO')) {
-            return 'Reporte de Evaluación Académica (Zapia)'
+    function formatearActividad(clave: string) {
+        if (!clave) return 'Expediente Institucional'
+        const lower = clave.toLowerCase()
+        if (lower.includes('academico') || lower.includes('zapia') || lower.includes('evaluacion') || lower.includes('analisis')) {
+            return 'Dictamen Jurídico y Evaluación Metodológica'
         }
-        if (clave.includes('Empresa') || clave.includes('APK') || clave.includes('Auditoría') || clave.includes('PROPIETARIO')) {
-            if (clave.includes('APK') || clave.includes('Compilación')) {
-                return 'Compilación Automática de APK & Binarios'
-            }
-            return 'Auditoría y Despliegue Corporativo (Nexcode)'
+        if (lower.includes('empresa') || lower.includes('apk') || lower.includes('auditoria') || lower.includes('full-stack')) {
+            return 'Dictamen Técnico y Desarrollo Arquitectónico'
         }
-        return clave.replace(/\[.*?\]/g, '').trim() || 'Registro Oficial Interconectado'
+        return 'Investigación Documental y Bitácora'
+    }
+
+    function formatearMotor(motor: string) {
+        if (!motor) return 'Subsistema de Investigación Documental'
+        return 'Gabinete de Análisis Jurídico'
     }
 
     function descargarBancoMemoria() {
@@ -203,12 +205,12 @@ export default function MasterCorePage() {
         const url = URL.createObjectURL(blob)
         const link = document.createElement('a')
         link.href = url
-        link.download = `Nexcode-Banco-Memoria-Oficial.json`
+        link.download = `Expediente-Academico-Juridico.json`
         document.body.appendChild(link)
         link.click()
         document.body.removeChild(link)
         URL.revokeObjectURL(url)
-        hablarJarvis('Banco de memoria descargado con éxito.')
+        hablarJarvis('Expediente exportado correctamente.')
     }
 
     return (
@@ -217,9 +219,9 @@ export default function MasterCorePage() {
             {!accesoConcedido ? (
                 <div className="w-full max-w-xl bg-slate-900 border-2 border-cyan-500/60 rounded-xl p-8 shadow-2xl text-center space-y-6">
                     <div className="space-y-2">
-                        <h1 className="text-2xl font-bold tracking-wider text-white">🛡️ Jarvis Omega Vault Gate</h1>
+                        <h1 className="text-2xl font-bold tracking-wider text-white">⚖️ Plataforma de Investigación Jurídica y Académica</h1>
                         <p className="text-xs text-cyan-300">Nexcode Interactive S.A. de C.V.</p>
-                        <p className="text-[11px] text-slate-400">Supervisor: fg782270@gmail.com (C. Francisco)</p>
+                        <p className="text-[11px] text-slate-400">Investigador Titular: fg782270@gmail.com (C. Francisco)</p>
                     </div>
 
                     <div className="grid grid-cols-3 gap-2 bg-slate-950 p-2 rounded-lg border border-cyan-500/30">
@@ -228,21 +230,21 @@ export default function MasterCorePage() {
                             onClick={iniciarAccesoFacial}
                             className={`py-2 px-2 rounded text-xs font-bold transition-all ${modoAcceso === 'facial' ? 'bg-cyan-500 text-slate-950 shadow' : 'text-slate-300 hover:text-white'}`}
                         >
-                            📷 Rostro
+                            📷 Biometría
                         </button>
                         <button
                             type="button"
                             onClick={() => setModoAcceso('pin')}
                             className={`py-2 px-2 rounded text-xs font-bold transition-all ${modoAcceso === 'pin' ? 'bg-cyan-500 text-slate-950 shadow' : 'text-slate-300 hover:text-white'}`}
                         >
-                            🔑 PIN
+                            🔑 PIN Ejecutivo
                         </button>
                         <button
                             type="button"
                             onClick={verificarBiometriaHardware}
                             className={`py-2 px-2 rounded text-xs font-bold transition-all ${modoAcceso === 'hardware' ? 'bg-cyan-500 text-slate-950 shadow' : 'text-slate-300 hover:text-white'}`}
                         >
-                            👆 Huella
+                            👆 Llave Segura
                         </button>
                     </div>
 
@@ -256,7 +258,7 @@ export default function MasterCorePage() {
                                 onClick={iniciarAccesoFacial}
                                 className="w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-2.5 px-4 rounded-lg text-xs transition-all shadow"
                             >
-                                Escaneo Facial
+                                Verificar Identidad por Rostro
                             </button>
                         </div>
                     )}
@@ -264,7 +266,7 @@ export default function MasterCorePage() {
                     {modoAcceso === 'pin' && (
                         <form onSubmit={verificarPinMaestro} className="space-y-4 p-4 bg-slate-950 rounded-lg border border-cyan-500/30">
                             <div>
-                                <label className="block text-xs text-cyan-300 mb-2 font-bold">PIN Maestro:</label>
+                                <label className="block text-xs text-cyan-300 mb-2 font-bold">Ingrese PIN de Acceso:</label>
                                 <input 
                                     type="password" 
                                     maxLength={6}
@@ -279,7 +281,7 @@ export default function MasterCorePage() {
                                 type="submit"
                                 className="w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-2.5 px-4 rounded-lg text-xs transition-all shadow"
                             >
-                                Verificar PIN
+                                Acceder al Gabinete
                             </button>
                         </form>
                     )}
@@ -291,7 +293,7 @@ export default function MasterCorePage() {
                                 onClick={verificarBiometriaHardware}
                                 className="w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-3 px-4 rounded-lg text-xs transition-all shadow"
                             >
-                                Validar Hardware
+                                Validar Llave de Hardware
                             </button>
                         </div>
                     )}
@@ -304,21 +306,21 @@ export default function MasterCorePage() {
                         <header className="flex justify-between items-center border-b border-cyan-500/20 pb-4 mb-6">
                             <div>
                                 <h1 className="text-xl font-bold tracking-wider flex items-center gap-2">
-                                    <span>🔒</span> Jarvis Core — <span className="text-cyan-300">Núcleos Independientes & Registros Limpios</span>
+                                    <span>⚖️</span> Gabinete Académico y Jurídico — <span className="text-cyan-300">Sistema Autónomo de Investigación</span>
                                 </h1>
-                                <p className="text-xs text-slate-400">Supervisor: fg782270@gmail.com (C. Francisco)</p>
+                                <p className="text-xs text-slate-400">Investigador: fg782270@gmail.com (C. Francisco)</p>
                             </div>
                             <button 
                                 onClick={() => setAccesoConcedido(false)}
                                 className="text-xs bg-red-600 hover:bg-red-500 text-white px-3 py-1 rounded font-bold"
                             >
-                                🔒 Bloquear
+                                🔒 Bloquear Sesión
                             </button>
                         </header>
 
-                        {/* SELECTOR GEOPOLÍTICO */}
+                        {/* SELECTOR GEOPOLÍTICO Y JURÍDICO */}
                         <div className="mb-6 p-4 bg-slate-950 border border-cyan-500/40 rounded-lg space-y-3">
-                            <h3 className="text-xs font-bold text-cyan-300 uppercase tracking-wide">🌍 Estructura Geopolítica</h3>
+                            <h3 className="text-xs font-bold text-cyan-300 uppercase tracking-wide">🌍 Marco Geopolítico y Normativo</h3>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                                 <div>
                                     <label className="block text-[11px] text-slate-300 mb-1">Continente:</label>
@@ -332,7 +334,7 @@ export default function MasterCorePage() {
                                     </select>
                                 </div>
                                 <div>
-                                    <label className="block text-[11px] text-slate-300 mb-1">Región:</label>
+                                    <label className="block text-[11px] text-slate-300 mb-1">Región de Estudio:</label>
                                     <select
                                         value={region}
                                         onChange={(e) => setRegion(e.target.value)}
@@ -342,7 +344,7 @@ export default function MasterCorePage() {
                                     </select>
                                 </div>
                                 <div>
-                                    <label className="block text-[11px] text-slate-300 mb-1">País / Ubicación:</label>
+                                    <label className="block text-[11px] text-slate-300 mb-1">Jurisdicción:</label>
                                     <input
                                         type="text"
                                         value={pais}
@@ -353,25 +355,25 @@ export default function MasterCorePage() {
                             </div>
                         </div>
 
-                        {/* SELECTOR DE NÚCLEO INDEPENDIENTE */}
+                        {/* SELECTOR DE MÓDULO INDEPENDIENTE */}
                         <div className="mb-6 p-4 bg-slate-950 border-2 border-cyan-500/50 rounded-lg shadow-inner space-y-4">
                             <h3 className="text-xs font-bold uppercase tracking-wider text-cyan-300">
-                                🔀 Selección de Núcleo Independiente:
+                                🔀 Selección de Gabinete de Trabajo:
                             </h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                 <button
                                     type="button"
-                                    onClick={() => { setSeccionActiva('academico'); hablarJarvis("Núcleo Académico Zapia Activo", true); }}
+                                    onClick={() => { setSeccionActiva('academico'); hablarJarvis("Gabinete Académico y Jurídico Activo", true); }}
                                     className={`py-3 px-4 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-2 ${seccionActiva === 'academico' ? 'bg-amber-500 text-slate-950 shadow-lg border-2 border-white' : 'bg-slate-900 text-amber-300 border border-amber-500/30'}`}
                                 >
-                                    🎓 Académico — Analizador Zapia
+                                    🎓 Gabinete Académico — Análisis Jurídico & Metodológico
                                 </button>
                                 <button
                                     type="button"
-                                    onClick={() => { setSeccionActiva('empresa'); hablarJarvis("Núcleo Empresa Activo"); }}
+                                    onClick={() => { setSeccionActiva('empresa'); hablarJarvis("Gabinete Corporativo Activo"); }}
                                     className={`py-3 px-4 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-2 ${seccionActiva === 'empresa' ? 'bg-cyan-500 text-slate-950 shadow-lg border-2 border-white' : 'bg-slate-900 text-cyan-300 border border-cyan-500/30'}`}
                                 >
-                                    🏢 Empresa — Código, APK & Auditoría
+                                    🏢 Gabinete Corporativo — Nexcode & Desarrollo
                                 </button>
                             </div>
                         </div>
@@ -380,7 +382,7 @@ export default function MasterCorePage() {
                         <form onSubmit={handleSubmit} className="space-y-4">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-sm text-slate-300 mb-1">Verificación de Identidad (Propietario):</label>
+                                    <label className="block text-sm text-slate-300 mb-1">Identidad del Investigador:</label>
                                     <input 
                                         type="email" 
                                         name="emailSolicitante" 
@@ -390,12 +392,12 @@ export default function MasterCorePage() {
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-sm text-cyan-300 mb-1 font-bold">🔑 Llave Omega Vault Key:</label>
+                                    <label className="block text-sm text-cyan-300 mb-1 font-bold">🔑 Llave de Acceso Criptográfico:</label>
                                     <input 
                                         type="password" 
                                         value={omegaKeyInput}
                                         onChange={(e) => setOmegaKeyInput(e.target.value)}
-                                        placeholder="NEXCODE-OMEGA-7822-FRAN-1998" 
+                                        placeholder="Ingrese Llave Segura..." 
                                         className="w-full bg-slate-950 border-2 border-cyan-500 rounded p-2 text-white text-sm outline-none focus:border-cyan-300 font-mono"
                                         required
                                     />
@@ -405,41 +407,41 @@ export default function MasterCorePage() {
                             {seccionActiva === 'academico' && (
                                 <div className="space-y-4 p-4 bg-amber-950/20 rounded border border-amber-500/40 animate-fadeIn">
                                     <div className="flex justify-between items-center">
-                                        <h4 className="text-xs font-bold text-amber-300 uppercase tracking-wide">📊 Núcleo Académico — Analizador Estilo Zapia</h4>
+                                        <h4 className="text-xs font-bold text-amber-300 uppercase tracking-wide">📊 Gabinete Académico — Evaluación y Dictamen Metodológico</h4>
                                         <button
                                             type="button"
                                             onClick={() => escucharMic(setDetalleAcademico, 'Académico')}
                                             className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs flex items-center gap-1 shadow transition-all"
                                         >
-                                            🎤 Dictar por Voz
+                                            🎤 Dictar Directriz por Voz
                                         </button>
                                     </div>
 
                                     <div className="p-3 bg-slate-950 border border-amber-500/30 rounded">
-                                        <label className="block text-xs font-bold text-amber-300 mb-1">📁 Examen o Documento Académico (PDF, Word, TXT):</label>
+                                        <label className="block text-xs font-bold text-amber-300 mb-1">📁 Expediente o Cuestionario de Evaluación (PDF, Word, TXT):</label>
                                         <input 
                                             type="file" 
                                             accept=".pdf,.doc,.docx,.txt"
                                             onChange={(e) => {
                                                 if (e.target.files && e.target.files[0]) {
                                                     setArchivoAcademico(e.target.files[0])
-                                                    hablarJarvis(`Documento académico ${e.target.files[0].name} adjuntado.`)
+                                                    hablarJarvis(`Expediente ${e.target.files[0].name} adjuntado con éxito.`)
                                                 }
                                             }}
                                             className="w-full text-xs text-slate-300 file:mr-4 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-amber-500 file:text-slate-950 hover:file:bg-amber-400 cursor-pointer"
                                         />
                                         {archivoAcademico && (
-                                            <p className="text-[11px] text-green-400 mt-1 font-mono">✔ Adjunto: {archivoAcademico.name}</p>
+                                            <p className="text-[11px] text-green-400 mt-1 font-mono">✔ Documento integrado: {archivoAcademico.name}</p>
                                         )}
                                     </div>
 
                                     <div>
-                                        <label className="block text-xs text-slate-300 mb-1">Instrucción o Pregunta Académica:</label>
+                                        <label className="block text-xs text-slate-300 mb-1">Instrucción de Análisis Teórico y Jurídico:</label>
                                         <textarea 
                                             name="detalle" 
                                             value={detalleAcademico}
                                             onChange={(e) => setDetalleAcademico(e.target.value)}
-                                            placeholder="Ej: Extrae mi calificación exacta y explícame paso a paso..."
+                                            placeholder="Ej: Extraiga la calificación exacta y formule el desglose fundamentado paso a paso..."
                                             className="w-full bg-slate-950 border border-amber-500/40 rounded p-3 text-white text-sm h-28 focus:border-amber-400 outline-none"
                                             required
                                         />
@@ -450,32 +452,31 @@ export default function MasterCorePage() {
                             {seccionActiva === 'empresa' && (
                                 <div className="space-y-4 p-4 bg-cyan-950/20 rounded border border-cyan-500/40 animate-fadeIn">
                                     <div className="flex justify-between items-center">
-                                        <h4 className="text-xs font-bold text-cyan-300 uppercase tracking-wide">🏢 Núcleo Empresa — APK Builder & Auditoría</h4>
+                                        <h4 className="text-xs font-bold text-cyan-300 uppercase tracking-wide">🏢 Gabinete Corporativo — Nexcode & Desarrollo Tecnológico</h4>
                                         <button
                                             type="button"
                                             onClick={() => escucharMic(setDetalleEmpresa, 'Empresa')}
                                             className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs flex items-center gap-1 shadow transition-all"
                                         >
-                                            🎤 Dictar por Voz
+                                            🎤 Dictar Directriz por Voz
                                         </button>
                                     </div>
 
                                     <div>
-                                        <label className="block text-xs text-slate-300 mb-1">Modelo IA Global:</label>
+                                        <label className="block text-xs text-slate-300 mb-1">Modelo de Análisis Tecnológico:</label>
                                         <select 
                                             value={modeloIA}
                                             onChange={(e) => setModeloIA(e.target.value)}
                                             className="w-full bg-slate-900 border border-cyan-500/40 rounded p-2 text-white text-xs"
                                         >
-                                            <option value="Matriz Global Unificada">Matriz Global Unificada (Todas las IAs)</option>
-                                            <option value="OpenAI GPT-6">OpenAI GPT-6</option>
-                                            <option value="Anthropic Claude 5.5">Anthropic Claude 5.5</option>
-                                            <option value="Google Gemini 4">Google Gemini 4</option>
+                                            <option value="Sistema Autónomo de Investigación Documental">Sistema Autónomo de Investigación Documental</option>
+                                            <option value="Auditoría y Síntesis de Código Fuente">Auditoría y Síntesis de Código Fuente</option>
+                                            <option value="Metodología de Arquitectura Full-Stack">Metodología de Arquitectura Full-Stack</option>
                                         </select>
                                     </div>
 
                                     <div className="p-3 bg-slate-950 border border-cyan-500/30 rounded">
-                                        <label className="block text-xs font-bold text-cyan-300 mb-1">📁 Código o Proyecto Empresarial:</label>
+                                        <label className="block text-xs font-bold text-cyan-300 mb-1">📁 Repositorio o Documento de Ingeniería:</label>
                                         <input 
                                             type="file" 
                                             accept=".pdf,.doc,.docx,.txt,.ts,.tsx,.js"
@@ -488,17 +489,17 @@ export default function MasterCorePage() {
                                             className="w-full text-xs text-slate-300 file:mr-4 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-cyan-500 file:text-slate-950 hover:file:bg-cyan-400 cursor-pointer"
                                         />
                                         {archivoEmpresa && (
-                                            <p className="text-[11px] text-green-400 mt-1 font-mono">✔ Adjunto: {archivoEmpresa.name}</p>
+                                            <p className="text-[11px] text-green-400 mt-1 font-mono">✔ Archivo corporativo listo: {archivoEmpresa.name}</p>
                                         )}
                                     </div>
 
                                     <div>
-                                        <label className="block text-xs text-slate-300 mb-1">Instrucción Corporativa o de APK:</label>
+                                        <label className="block text-xs text-slate-300 mb-1">Instrucción Corporativa o de Compilación:</label>
                                         <textarea 
                                             name="detalle" 
                                             value={detalleEmpresa}
                                             onChange={(e) => setDetalleEmpresa(e.target.value)}
-                                            placeholder="Ej: Compila el APK automático para Android o audita el endpoint..."
+                                            placeholder="Ej: Genere el paquete de compilación o audite los componentes del sistema..."
                                             className="w-full bg-slate-950 border border-cyan-500/40 rounded p-3 text-white text-sm h-28 focus:border-cyan-400 outline-none"
                                             required
                                         />
@@ -511,33 +512,33 @@ export default function MasterCorePage() {
                                 disabled={isPending}
                                 className={`w-full font-bold py-3 px-4 rounded transition-all duration-200 disabled:opacity-50 shadow-lg text-slate-950 ${seccionActiva === 'academico' ? 'bg-amber-500 hover:bg-amber-400' : 'bg-cyan-500 hover:bg-cyan-400'}`}
                             >
-                                {isPending ? 'Validando Protocolo Omega...' : `Ejecutar Núcleo Protegido [${seccionActiva.toUpperCase()}]`}
+                                {isPending ? 'Procesando Dictamen Institucional...' : `Ejecutar Análisis en [${seccionActiva.toUpperCase()}]`}
                             </button>
                         </form>
 
                         {mensajeRespuesta && (
                             <div className="mt-6 p-5 bg-slate-950 border-2 border-cyan-500 rounded-lg text-sm shadow-2xl relative space-y-3">
                                 <div className="absolute top-0 right-0 bg-cyan-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl">
-                                    BLINDAJE OMEGA ACTIVO
+                                    ESTADO: VERIFICADO Y CERTIFICADO
                                 </div>
                                 <div className="text-white font-medium whitespace-pre-line leading-relaxed">{mensajeRespuesta}</div>
                                 
                                 {folioUltimo && (
-                                    <p className="text-xs text-cyan-300"><span className="font-bold">Folio:</span> {folioUltimo}</p>
+                                    <p className="text-xs text-cyan-300"><span className="font-bold">Folio de Expediente:</span> {folioUltimo}</p>
                                 )}
                                 {hashGenerado && (
-                                    <p className="text-[11px] font-mono text-slate-300 break-all"><span className="font-bold text-cyan-400">SHA-256:</span> {hashGenerado}</p>
+                                    <p className="text-[11px] font-mono text-slate-300 break-all"><span className="font-bold text-cyan-400">Firma de Integridad SHA-256:</span> {hashGenerado}</p>
                                 )}
 
                                 {!esAcademicoResultado && codigoPaquete && (
                                     <div className="pt-2 border-t border-cyan-500/30 flex items-center justify-between">
-                                        <span className="text-xs text-cyan-300 font-semibold">Paquete corporativo / APK listo:</span>
+                                        <span className="text-xs text-cyan-300 font-semibold">Paquete técnico compilado y listo:</span>
                                         <button
                                             type="button"
                                             onClick={descargarArchivo}
                                             className="bg-green-500 hover:bg-green-400 text-slate-950 font-bold py-2 px-4 rounded text-xs transition-all shadow-lg flex items-center gap-1"
                                         >
-                                            📥 Descargar Archivo Compilado (.tsx)
+                                            📥 Descargar Paquete (.tsx)
                                         </button>
                                     </div>
                                 )}
@@ -545,38 +546,38 @@ export default function MasterCorePage() {
                         )}
                     </div>
 
-                    {/* BANCO DE MEMORIA CON NOMBRES LIMPIOS Y BOTÓN DE DESCARGA */}
+                    {/* EXPEDIENTE Y REGISTROS INSTITUCIONALES */}
                     <div className="w-full bg-slate-900 border border-cyan-500/30 rounded-lg p-6 shadow-xl space-y-4">
                         <div className="flex justify-between items-center border-b border-cyan-500/20 pb-2">
-                            <h2 className="text-lg font-bold text-cyan-300">Banco de Memoria y Registros Oficiales</h2>
+                            <h2 className="text-lg font-bold text-cyan-300">Expediente y Registros Institucionales</h2>
                             <button
                                 type="button"
                                 onClick={descargarBancoMemoria}
                                 className="bg-green-500 hover:bg-green-400 text-slate-950 font-bold py-2 px-4 rounded text-xs transition-all shadow-lg flex items-center gap-1"
                             >
-                                📥 Descargar Banco de Memoria (.json)
+                                📥 Exportar Expediente (.json)
                             </button>
                         </div>
 
                         {memoriasEstado.length === 0 ? (
-                            <p className="text-xs text-slate-400">No hay registros almacenados todavía.</p>
+                            <p className="text-xs text-slate-400">No hay registros almacenados en el expediente todavía.</p>
                         ) : (
                             <div className="overflow-x-auto">
                                 <table className="w-full text-left text-xs">
                                     <thead>
                                         <tr className="border-b border-cyan-500/20 text-cyan-400">
-                                            <th className="pb-2">Registro / Actividad</th>
-                                            <th className="pb-2">Información / Detalle</th>
-                                            <th className="pb-2">Motor</th>
-                                            <th className="pb-2">Fecha</th>
+                                            <th className="pb-2">Expediente / Actividad</th>
+                                            <th className="pb-2">Detalle Analítico</th>
+                                            <th className="pb-2">Gabinete Responsable</th>
+                                            <th className="pb-2">Fecha y Hora</th>
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-slate-800 text-slate-300">
                                         {memoriasEstado.map((mem) => (
                                             <tr key={mem.id} className="hover:bg-slate-950/50">
-                                                <td className="py-2 font-bold text-cyan-300">{limpiarNombreClave(mem.memory_key)}</td>
+                                                <td className="py-2 font-bold text-cyan-300">{formatearActividad(mem.memory_key)}</td>
                                                 <td className="py-2 max-w-xs truncate">{mem.memory_value}</td>
-                                                <td className="py-2 font-mono text-[10px] text-cyan-400">{mem.routing_engine || 'Core'}</td>
+                                                <td className="py-2 font-mono text-[10px] text-cyan-400">{formatearMotor(mem.routing_engine)}</td>
                                                 <td className="py-2 text-[10px] text-slate-500">{new Date(mem.created_at).toLocaleString()}</td>
                                             </tr>
                                         ))}

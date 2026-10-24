@@ -1,0 +1,31 @@
+{
+    "name": "nexcode-master-template",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "build": "next build",
+        "dev": "next dev",
+        "start": "next start"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@supabase/ssr": "^0.12.7",
+        "@supabase/supabase-js": "^2.118.0",
+        "@tailwindcss/postcss": "^4.3.3",
+        "next": "^16.4.3",
+        "react": "^19.3.1",
+        "react-dom": "^19.3.1"
+    },
+    "devDependencies": {
+        "@types/node": "26.6.5",
+        "@types/react": "19.3.0",
+        "autoprefixer": "^10.6.1",
+        "postcss": "^8.5.31",
+        "tailwindcss": "^4.3.3",
+        "typescript": "7.0.2"
+    },
+    "type": "module"
+}

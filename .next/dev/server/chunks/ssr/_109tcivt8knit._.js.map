@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///C:/Nexcode-Holding/proyecto-prueba/app/layout.tsx"],"sourcesContent":["import \"./globals.css\"; export const metadata = { title: \"Nexcode Master Core\", description: \"Macaly Cloud Enterprise Standard\" }; export default function RootLayout({ children }: { children: React.ReactNode }) { return (<html lang=\"es\"><body className=\"bg-[#030712] text-slate-100 antialiased min-h-screen\">{children}</body></html>); }"],"names":["metadata","title","description","RootLayout","children","lang","className"],"mappings":";;;;;;;;;AAA+B,MAAMA,WAAW;IAAEC,OAAO;IAAuBC,aAAa;AAAmC;AAAkB,SAASC,WAAW,EAAEC,QAAQ,EAAiC;IAAI,qBAAQ,8OAAC;QAAKC,MAAK;kBAAK,cAAA,8OAAC;YAAKC,WAAU;sBAAwDF;;;;;;;;;;;AAA0B"}},
+    {"offset": {"line": 42, "column": 0}, "map": {"version":3,"sources":["file:///C:/Nexcode-Holding/proyecto-prueba/node_modules/next/src/server/route-modules/app-page/vendored/rsc/react-jsx-dev-runtime.ts"],"sourcesContent":["module.exports = (\n  require('../../module.compiled') as typeof import('../../module.compiled')\n).vendored['react-rsc']!.ReactJsxDevRuntime\n"],"names":["module","exports","require","vendored","ReactJsxDevRuntime"],"mappings":"AAAAA,OAAOC,OAAO,GACZC,QAAQ,4HACRC,QAAQ,CAAC,YAAY,CAAEC,kBAAkB","ignoreList":[0]}}]
+}

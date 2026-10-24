@@ -1,0 +1,3 @@
+{"timestamp":"00:00:03.907","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:00:09.042","source":"Server","level":"LOG","message":"  Turbopack has seen frequent file updates and is waiting for the filesystem to settle (0.5s elapsed so far; last modified: \"\\\\\\\\?\\\\C:\\\\Nexcode-Holding\\\\proyecto-prueba\\\\node_modules\\\\@supabase\\\\auth-js\\\\dist\\\\module\\\\lib\\\\web3\")."}
+{"timestamp":"00:00:11.457","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}

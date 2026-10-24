@@ -1,0 +1,1 @@
+import "./globals.css"; export const metadata = { title: "Nexcode Master Core", description: "Macaly Cloud Enterprise Standard" }; export default function RootLayout({ children }: { children: React.ReactNode }) { return (<html lang="es"><body className="bg-[#030712] text-slate-100 antialiased min-h-screen">{children}</body></html>); }

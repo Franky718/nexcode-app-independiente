@@ -10,31 +10,70 @@ export default function MasterCorePage() {
     const [hashGenerado, setHashGenerado] = useState<string | null>(null)
     const [memoriasEstado, setMemoriasEstado] = useState<any[]>([])
     
-    // Selector de Módulos Principales
-    const [seccionActiva, setSeccionActiva] = useState<'academico' | 'comercial' | 'ingenieria' | 'hub_corporativo'>('hub_corporativo')
+    // Selector General de Módulos Independientes
+    const [seccionActiva, setSeccionActiva] = useState<'hub_corporativo' | 'academico' | 'comercial' | 'ingenieria'>('hub_corporativo')
     
-    // Sub-estado para el Hub Documental Corporativo (Estilo Classroom / Evaluador)
+    // Sub-estados
     const [tipoDocCorporativo, setTipoDocCorporativo] = useState<'tecnico' | 'ejecutivo' | 'oficial'>('tecnico')
+    const [subTabIngenieria, setSubTabIngenieria] = useState<'finora' | 'sonica' | 'apk' | 'arquitectura'>('finora')
     
-    const [tipoAnalisisCorporativo, setTipoAnalisisCorporativo] = useState('Hub Documental Corporativo & Classroom')
-    const [modeloIA, setModeloIA] = useState('Jarvis AI Autonomous Core (Enterprise Vault)')
+    const [modeloIA, setModeloIA] = useState('Jarvis AI Autonomous Core (Universal Master Engine)')
     
-    // Contenidos específicos para la Empresa Nexcode
-    const [tituloCorp, setTituloCorp] = useState('Documentación Técnica y Arquitectura - Finora & Sónica')
+    // 1. Contenido Hub Documental Corporativo
+    const [tituloCorp, setTituloCorp] = useState('Documentación Técnica y Arquitectura - Nexcode')
     const [contenidoCorp, setContenidoCorp] = useState(
 `NEXCODE INTERACTIVE S.A. DE C.V. — EXPEDIENTE TÉCNICO OFICIAL
 INVESTIGADOR TITULAR: fg782270@gmail.com (C. Francisco)
 
 1. ARQUITECTURA DE SOFTWARE Y ENDPOINTS
 - Desarrollo Full-Stack modular, seguro e independiente.
-- Integración con bases de datos relacionales y Supabase bajo protocolo de cifrado Omega Vault.
-- Pipelines de despliegue automatizado para Google Play Store y entornos locales.
+- Integración con Supabase y bases de datos cifradas bajo Vault Omega.
+- Pipelines de despliegue automatizado para Google Play Store.
 
 2. ESPECIFICACIONES DE SEGURIDAD Y PRIVACIDAD
-- Autenticación multifactorial por biometría facial, PIN ejecutivo y llaves de hardware.
-- Aislamiento absoluto de módulos corporativos y académicos.`)
+- Autenticación multifactorial por biometría facial, PIN ejecutivo y llaves de hardware.`)
 
-    // Estado del Módulo de Audio Independiente
+    // 2. Contenido Proyecto Escolar (Zapia AI)
+    const [tituloAcademico, setTituloAcademico] = useState('Proyecto de Aplicación para Seguridad Pública')
+    const [contenidoAcademico, setContenidoAcademico] = useState(
+`UNIVERSIDAD ABIERTA Y A DISTANCIA DE MÉXICO (UnADM)
+LICENCIATURA EN DERECHO
+
+CAPÍTULO 1. PLANTEAMIENTO DEL PROBLEMA Y MARCO METODOLÓGICO
+1.1 Análisis de la problemática
+1.2 Planteamiento del problema de investigación
+1.3 Pregunta general de investigación
+1.4 Preguntas específicas
+1.5 Justificación
+1.6 Objetivos de la investigación
+1.7 Hipótesis (Propuestas por comprobar)`)
+
+    // 3. Contenido Comercial
+    const [tituloComercial, setTituloComercial] = useState('Carta de Presentación y Resumen Ejecutivo - Software')
+    const [contenidoComercial, setContenidoComercial] = useState(
+`[CLIENTE INSTITUCIONAL / SECRETARÍA]
+ASUNTO: Presentación de Solución Tecnológica y Propuesta Comercial
+
+RESUMEN EJECUTIVO:
+Nexcode Interactive S.A. de C.V. presenta su plataforma de software especializado para optimizar procesos y garantizar seguridad operativa.`)
+
+    // 4. Contenido Ingeniería de Software
+    const [tituloIngenieria, setTituloIngenieria] = useState('Nexcode-Software-Core-Architecture')
+    const [contenidoIngenieria, setCodigoIngenieria] = useState(
+`// NEXCODE SOFTWARE ENGINEERING CORE - FINORA & SÓNICA ARCHITECTURE
+class NexcodeSoftwareEngine {
+    constructor(moduleName, version) {
+        this.moduleName = moduleName;
+        this.version = version;
+        this.status = "SECURE_ACTIVE";
+    }
+    compileDeploymentPipeline() {
+        return { success: true, timestamp: new Date().toISOString(), encryption: "SHA-256" };
+    }
+}
+export const activeInstance = new NexcodeSoftwareEngine("Finora-Sónica-Core", "4.5.0");`)
+
+    // Estado de Audio
     const [estadoAudio, setEstadoAudio] = useState('Sistema de Audio en Reposo (Listo para Dictado)')
     const [grabandoAudio, setGrabaAudio] = useState(false)
 
@@ -79,7 +118,7 @@ INVESTIGADOR TITULAR: fg782270@gmail.com (C. Francisco)
         window.speechSynthesis.speak(utterance)
     }
 
-    // Subsistema de Dictado por Voz Autónomo
+    // Dictado de Audio Universal
     function iniciarDictadoAudio(setter: (val: string | ((prev: string) => string)) => void, nombreModulo: string) {
         if (typeof window === 'undefined') return;
         const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
@@ -94,15 +133,15 @@ INVESTIGADOR TITULAR: fg782270@gmail.com (C. Francisco)
         
         recognition.onstart = () => {
             setGrabaAudio(true);
-            setEstadoAudio(`🔴 Grabando audio corporativo en [${nombreModulo}]...`);
+            setEstadoAudio(`🔴 Grabando audio en [${nombreModulo}]...`);
             hablarJarvis(`Dictado activo para ${nombreModulo}, C. Francisco.`);
         };
         
         recognition.onresult = (event: any) => {
             const textoTranscrito = event.results[0][0].transcript;
-            setter((prev: string) => prev + "\n\n[Dictado Ejecutivo Omega]: " + textoTranscrito);
-            setEstadoAudio(`✔ Documento corporativo actualizado por voz.`);
-            hablarJarvis("Audio registrado en el expediente corporativo.");
+            setter((prev: string) => prev + "\n\n[Dictado Master]: " + textoTranscrito);
+            setEstadoAudio(`✔ Audio procesado y almacenado correctamente.`);
+            hablarJarvis("Audio registrado en el documento.");
             setGrabaAudio(false);
         };
         
@@ -157,64 +196,36 @@ INVESTIGADOR TITULAR: fg782270@gmail.com (C. Francisco)
         }, 2000)
     }
 
-    // Cambiar plantillas del Hub Corporativo
-    function seleccionarPlantillaCorp(tipo: 'tecnico' | 'ejecutivo' | 'oficial') {
-        setTipoDocCorporativo(tipo)
-        if (tipo === 'tecnico') {
-            setTituloCorp('Documentación Técnica y Arquitectura - Finora & Sónica')
-            setContenidoCorp(
-`NEXCODE INTERACTIVE S.A. DE C.V. — EXPEDIENTE TÉCNICO OFICIAL
-INVESTIGADOR TITULAR: fg782270@gmail.com (C. Francisco)
+    // Exportador Formateado Exclusivo para Documentos (Evita mezclar JSON)
+    function descargarDocumentoActivo() {
+        let titulo = tituloCorp
+        let contenido = contenidoCorp
 
-1. ARQUITECTURA DE SOFTWARE Y ENDPOINTS
-- Desarrollo Full-Stack modular, seguro e independiente.
-- Integración con bases de datos relacionales y Supabase bajo protocolo de cifrado Omega Vault.
-- Pipelines de despliegue automatizado para Google Play Store y entornos locales.
-
-2. ESPECIFICACIONES DE SEGURIDAD Y PRIVACIDAD
-- Autenticación multifactorial por biometría facial, PIN ejecutivo y llaves de hardware.
-- Aislamiento absoluto de módulos corporativos y académicos.`)
-        } else if (tipo === 'ejecutivo') {
-            setTituloCorp('Presentación Ejecutiva y Pitch Deck - Nexcode Enterprise')
-            setContenidoCorp(
-`NEXCODE INTERACTIVE — PRESENTACIÓN EJECUTIVA INSTITUCIONAL
-
-1. VISIÓN Y PROPUESTA DE VALOR
-- Soluciones de software de alta calidad y calibre empresarial adaptadas al mercado global y LATAM (Reynosa, Tamaulipas).
-- Innovación en plataformas financieras (Finora) y streaming de audio (Sónica).
-
-2. MODELO DE NEGOCIO Y ESCALABILIDAD
-- Licenciamiento modular B2B e institucional.
-- Cumplimiento normativo estricto y auditorías automáticas mediante inteligencia artificial autónoma (Jarvis AI).`)
-        } else if (tipo === 'oficial') {
-            setTituloCorp('Documentos Oficiales y Contratos de Empresa - Nexcode')
-            setContenidoCorp(
-`NEXCODE INTERACTIVE S.A. DE C.V. — REGISTRO DE DOCUMENTACIÓN OFICIAL
-
-1. MARCO LEGAL Y CORPORATIVO
-- Constitución, actas de asamblea y nombramientos directivos del Investigador Titular.
-- Contratos de prestación de servicios tecnológicos, acuerdos de confidencialidad (NDA) y licencias de software.
-
-2. CERTIFICACIÓN DE CALIDAD OMEGA
-- Todos los documentos oficiales cuentan con un hash criptográfico de validación institucional y registro automático en el expediente de memoria.`)
+        if (seccionActiva === 'academico') {
+            titulo = tituloAcademico
+            contenido = contenidoAcademico
+        } else if (seccionActiva === 'comercial') {
+            titulo = tituloComercial
+            contenido = contenidoComercial
+        } else if (seccionActiva === 'ingenieria') {
+            titulo = tituloIngenieria
+            contenido = contenidoIngenieria
         }
-    }
 
-    function descargarDocumentoWord() {
-        const textoCompleto = `${tituloCorp.toUpperCase()}\n\n${contenidoCorp}`
+        const textoCompleto = `${titulo.toUpperCase()}\n\n${contenido}`
         const blob = new Blob([textoCompleto], { type: 'application/msword;charset=utf-8' })
         const url = URL.createObjectURL(blob)
         const link = document.createElement('a')
         link.href = url
-        link.download = `${tituloCorp.replace(/\s+/g, '-')}.doc`
+        link.download = `${titulo.replace(/\s+/g, '-')}.doc`
         document.body.appendChild(link)
         link.click()
         document.body.removeChild(link)
         URL.revokeObjectURL(url)
-        hablarJarvis('Documento corporativo exportado en formato Word con éxito.')
+        hablarJarvis('Documento formateado exportado en formato Word con éxito.')
     }
 
-    function descargarBancoMemoria() {
+    function descargarBancoMemoriaJson() {
         const contenidoJson = JSON.stringify(memoriasEstado, null, 2)
         const blob = new Blob([contenidoJson], { type: 'application/json;charset=utf-8' })
         const url = URL.createObjectURL(blob)
@@ -225,15 +236,13 @@ INVESTIGADOR TITULAR: fg782270@gmail.com (C. Francisco)
         link.click()
         document.body.removeChild(link)
         URL.revokeObjectURL(url)
-        hablarJarvis('Expediente institucional exportado correctamente.')
+        hablarJarvis('Expediente JSON exportado correctamente.')
     }
 
     function formatearActividad(clave: string) {
         if (!clave) return 'Expediente Institucional'
         const lower = clave.toLowerCase()
-        if (lower.includes('corporativo') || lower.includes('tecnico') || lower.includes('ejecutivo') || lower.includes('oficial')) {
-            return 'Hub Documental Corporativo (Classroom)'
-        }
+        if (lower.includes('corporativo')) return 'Hub Documental Corporativo'
         if (lower.includes('academico')) return 'Proyecto Escolar: Seguridad Pública'
         if (lower.includes('comercial')) return 'Comercialización y Venta de Software'
         if (lower.includes('ingenieria')) return 'Ingeniería de Software & Calibre Nexcode'
@@ -244,13 +253,19 @@ INVESTIGADOR TITULAR: fg782270@gmail.com (C. Francisco)
         event.preventDefault()
         const formData = new FormData(event.currentTarget)
         formData.append('seccion', seccionActiva)
-        formData.append('tipoAnalisis', tipoAnalisisCorporativo)
+        
+        let nombreModuloActual = 'Hub Documental Corporativo'
+        if (seccionActiva === 'academico') nombreModuloActual = 'Proyecto Escolar (Zapia AI)'
+        if (seccionActiva === 'comercial') nombreModuloActual = 'Comercialización de Software'
+        if (seccionActiva === 'ingenieria') nombreModuloActual = 'Ingeniería de Software Nexcode'
+
+        formData.append('tipoAnalisis', nombreModuloActual)
         formData.append('modeloIASeleccionado', modeloIA)
         formData.append('continente', continente)
         formData.append('region', region)
         formData.append('pais', pais)
         formData.append('omegaKey', omegaKeyInput)
-        formData.append('archivoNombre', `${tituloCorp}.doc`)
+        formData.append('archivoNombre', `${seccionActiva === 'academico' ? tituloAcademico : seccionActiva === 'comercial' ? tituloComercial : seccionActiva === 'ingenieria' ? tituloIngenieria : tituloCorp}.doc`)
 
         startTransition(async () => {
             const resultado = await ejecutarJarvisCore(formData)
@@ -258,7 +273,7 @@ INVESTIGADOR TITULAR: fg782270@gmail.com (C. Francisco)
             setFolioUltimo(resultado.folio || null)
             setHashGenerado(resultado.hash || null)
             if (resultado.success) {
-                hablarJarvis("Documento corporativo auditado y registrado bajo Vault Omega.")
+                hablarJarvis("Operación registrada y auditada bajo Vault Omega.")
                 cargarMemoria()
             }
         })
@@ -314,20 +329,20 @@ INVESTIGADOR TITULAR: fg782270@gmail.com (C. Francisco)
                         <header className="flex justify-between items-center border-b border-cyan-500/20 pb-4 mb-6">
                             <div>
                                 <h1 className="text-xl font-bold tracking-wider flex items-center gap-2">
-                                    <span>🛡️</span> Jarvis Master Core — <span className="text-cyan-300">Hub Documental Corporativo</span>
+                                    <span>🛡️</span> Jarvis Master Core — <span className="text-cyan-300">Arquitectura Universal & Classroom</span>
                                 </h1>
                                 <p className="text-xs text-slate-400">Investigador Titular: fg782270@gmail.com (C. Francisco)</p>
                             </div>
                             <button onClick={() => setAccesoConcedido(false)} className="text-xs bg-red-600 hover:bg-red-500 text-white px-3 py-1 rounded font-bold">🔒 Bloquear Sesión</button>
                         </header>
 
-                        {/* PANEL DE ESTADO DE AUDIO */}
+                        {/* PANEL DE AUDIO */}
                         <div className="mb-4 p-3 bg-slate-950 border border-cyan-500/40 rounded-lg flex justify-between items-center">
                             <div className="flex items-center gap-2">
                                 <span className="text-sm">🎙️</span>
                                 <span className="text-xs font-bold text-cyan-300">{estadoAudio}</span>
                             </div>
-                            {grabandoAudio && <span className="animate-pulse text-xs bg-red-500 text-white px-2 py-0.5 rounded font-bold">GRABANDO AUDIO...</span>}
+                            {grabandoAudio && <span className="animate-pulse text-xs bg-red-500 text-white px-2 py-0.5 rounded font-bold">GRABANDO...</span>}
                         </div>
 
                         {/* SELECTOR GEOPOLÍTICO */}
@@ -353,19 +368,19 @@ INVESTIGADOR TITULAR: fg782270@gmail.com (C. Francisco)
                             </div>
                         </div>
 
-                        {/* SELECTOR GENERAL DE MÓDULOS */}
+                        {/* SELECTOR PRINCIPAL DE MÓDULOS */}
                         <div className="mb-6 p-4 bg-slate-950 border-2 border-cyan-500/50 rounded-lg grid grid-cols-2 md:grid-cols-4 gap-2">
                             <button type="button" onClick={() => setSeccionActiva('hub_corporativo')} className={`py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'hub_corporativo' ? 'bg-cyan-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-cyan-300'}`}>
-                                📂 Hub Documental Corporativo
+                                📂 Hub Corporativo
                             </button>
                             <button type="button" onClick={() => setSeccionActiva('academico')} className={`py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'academico' ? 'bg-amber-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-amber-300'}`}>
-                                🎓 Proyecto Escolar (Zapia AI)
+                                🎓 Proyecto Escolar
                             </button>
                             <button type="button" onClick={() => setSeccionActiva('comercial')} className={`py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'comercial' ? 'bg-blue-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-blue-300'}`}>
-                                🏢 Comercialización Software
+                                🏢 Comercialización
                             </button>
                             <button type="button" onClick={() => setSeccionActiva('ingenieria')} className={`py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'ingenieria' ? 'bg-purple-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-purple-300'}`}>
-                                ⚙️ Ingeniería & Calibre Nexcode
+                                ⚙️ Ingeniería Software
                             </button>
                         </div>
 
@@ -375,70 +390,95 @@ INVESTIGADOR TITULAR: fg782270@gmail.com (C. Francisco)
                                 <input type="email" name="emailSolicitante" defaultValue="fg782270@gmail.com" />
                             </div>
 
-                            {/* HUB DOCUMENTAL CORPORATIVO (ESTILO CLASSROOM / EVALUADOR DE EMPRESA) */}
+                            {/* MÓDULO 1: HUB CORPORATIVO */}
                             {seccionActiva === 'hub_corporativo' && (
                                 <div className="space-y-4 p-5 bg-slate-950 rounded border-2 border-cyan-500/60 animate-fadeIn shadow-inner">
                                     <div className="flex justify-between items-center border-b border-cyan-500/30 pb-3">
-                                        <h3 className="text-sm font-bold text-cyan-300 uppercase tracking-wide">📂 Hub Documental Corporativo (Estilo Classroom & Auditoría)</h3>
+                                        <h3 className="text-sm font-bold text-cyan-300 uppercase tracking-wide">📂 Hub Documental Corporativo (Classroom)</h3>
                                         <div className="flex gap-2 items-center">
-                                            <button type="button" onClick={() => iniciarDictadoAudio(setContenidoCorp, 'Hub Corporativo')} className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow-lg flex items-center gap-1">
-                                                🎤 Dictar Documento
+                                            <button type="button" onClick={() => iniciarDictadoAudio(setContenidoCorp, 'Hub Corporativo')} className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow flex items-center gap-1">
+                                                🎤 Dictar Voz
                                             </button>
-                                            <button type="button" onClick={descargarDocumentoWord} className="bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg">
-                                                📥 Exportar Word / PDF (.doc)
+                                            <button type="button" onClick={descargarDocumentoActivo} className="bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg">
+                                                📥 Exportar Word (.doc)
                                             </button>
                                         </div>
                                     </div>
-
-                                    {/* Sub-selector de documentos corporativos */}
                                     <div className="grid grid-cols-3 gap-2 bg-slate-900 p-2 rounded border border-cyan-500/30">
-                                        <button type="button" onClick={() => seleccionarPlantillaCorp('tecnico')} className={`py-2 px-2 rounded text-xs font-bold transition-all ${tipoDocCorporativo === 'tecnico' ? 'bg-cyan-500 text-slate-950 shadow' : 'text-slate-300 hover:text-white'}`}>
-                                            📄 Documentación Técnica
-                                        </button>
-                                        <button type="button" onClick={() => seleccionarPlantillaCorp('ejecutivo')} className={`py-2 px-2 rounded text-xs font-bold transition-all ${tipoDocCorporativo === 'ejecutivo' ? 'bg-cyan-500 text-slate-950 shadow' : 'text-slate-300 hover:text-white'}`}>
-                                            📊 Presentación Ejecutiva
-                                        </button>
-                                        <button type="button" onClick={() => seleccionarPlantillaCorp('oficial')} className={`py-2 px-2 rounded text-xs font-bold transition-all ${tipoDocCorporativo === 'oficial' ? 'bg-cyan-500 text-slate-950 shadow' : 'text-slate-300 hover:text-white'}`}>
-                                            📜 Documentos Oficiales
-                                        </button>
+                                        <button type="button" onClick={() => { setTipoDocCorporativo('tecnico'); setTituloCorp('Documentación Técnica y Arquitectura'); }} className={`py-1.5 px-2 rounded text-xs font-bold ${tipoDocCorporativo === 'tecnico' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`}>📄 Técnico</button>
+                                        <button type="button" onClick={() => { setTipoDocCorporativo('ejecutivo'); setTituloCorp('Presentación Ejecutiva y Pitch Deck'); }} className={`py-1.5 px-2 rounded text-xs font-bold ${tipoDocCorporativo === 'ejecutivo' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`}>📊 Ejecutivo</button>
+                                        <button type="button" onClick={() => { setTipoDocCorporativo('oficial'); setTituloCorp('Documentos Oficiales y Contratos'); }} className={`py-1.5 px-2 rounded text-xs font-bold ${tipoDocCorporativo === 'oficial' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`}>📜 Oficial</button>
                                     </div>
-
-                                    <div>
-                                        <label className="block text-xs font-bold text-cyan-300 mb-1">Título del Documento Corporativo:</label>
-                                        <input type="text" value={tituloCorp} onChange={(e) => setTituloCorp(e.target.value)} className="w-full bg-slate-900 border border-cyan-500/40 rounded p-2 text-white text-xs font-bold" required />
-                                    </div>
-                                    <div>
-                                        <label className="block text-xs font-bold text-cyan-300 mb-1">Editor General (Formato Institucional & Classroom):</label>
-                                        <textarea value={contenidoCorp} onChange={(e) => setContenidoCorp(e.target.value)} rows={12} className="w-full bg-slate-900 border border-cyan-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none leading-relaxed shadow-inner" required />
-                                    </div>
+                                    <input type="text" value={tituloCorp} onChange={(e) => setTituloCorp(e.target.value)} className="w-full bg-slate-900 border border-cyan-500/40 rounded p-2 text-white text-xs font-bold" required />
+                                    <textarea value={contenidoCorp} onChange={(e) => setContenidoCorp(e.target.value)} rows={12} className="w-full bg-slate-900 border border-cyan-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none leading-relaxed" required />
                                 </div>
                             )}
 
-                            {/* MÓDULOS ADICIONALES (MANTENIDOS ÍNTEGROS) */}
+                            {/* MÓDULO 2: PROYECTO ESCOLAR */}
                             {seccionActiva === 'academico' && (
-                                <div className="p-5 bg-slate-950 rounded border border-amber-500/40 text-xs space-y-3">
-                                    <h3 className="font-bold text-amber-300 uppercase">🎓 Proyecto Escolar (Zapia AI - Seguridad Pública)</h3>
-                                    <p className="text-slate-300">Módulo académico activo para investigación jurídica y redacción de tesis.</p>
-                                    <button type="button" onClick={() => descargarDocumentoWord()} className="bg-green-600 text-white px-3 py-1.5 rounded font-bold">Descargar Proyecto Escolar (.doc)</button>
+                                <div className="space-y-4 p-5 bg-slate-950 rounded border-2 border-amber-500/60 animate-fadeIn shadow-inner">
+                                    <div className="flex justify-between items-center border-b border-amber-500/30 pb-3">
+                                        <h3 className="text-sm font-bold text-amber-300 uppercase tracking-wide">🎓 Proyecto Escolar (Zapia AI - Seguridad Pública)</h3>
+                                        <div className="flex gap-2 items-center">
+                                            <button type="button" onClick={() => iniciarDictadoAudio(setContenidoAcademico, 'Proyecto Escolar')} className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow flex items-center gap-1">
+                                                🎤 Dictar Voz
+                                            </button>
+                                            <button type="button" onClick={descargarDocumentoActivo} className="bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg">
+                                                📥 Exportar Word (.doc)
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <input type="text" value={tituloAcademico} onChange={(e) => setTituloAcademico(e.target.value)} className="w-full bg-slate-900 border border-amber-500/40 rounded p-2 text-white text-xs font-bold" required />
+                                    <textarea value={contenidoAcademico} onChange={(e) => setContenidoAcademico(e.target.value)} rows={12} className="w-full bg-slate-900 border border-amber-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none leading-relaxed" required />
                                 </div>
                             )}
 
+                            {/* MÓDULO 3: COMERCIALIZACIÓN */}
                             {seccionActiva === 'comercial' && (
-                                <div className="p-5 bg-slate-950 rounded border border-blue-500/40 text-xs space-y-3">
-                                    <h3 className="font-bold text-blue-300 uppercase">🏢 Comercialización y Ventas de Software</h3>
-                                    <p className="text-slate-300">Gestión de dictámenes jurídicos, financieros y contratos comerciales.</p>
+                                <div className="space-y-4 p-5 bg-slate-950 rounded border-2 border-blue-500/60 animate-fadeIn shadow-inner">
+                                    <div className="flex justify-between items-center border-b border-blue-500/30 pb-3">
+                                        <h3 className="text-sm font-bold text-blue-300 uppercase tracking-wide">🏢 Comercialización y Venta de Software</h3>
+                                        <div className="flex gap-2 items-center">
+                                            <button type="button" onClick={() => iniciarDictadoAudio(setContenidoComercial, 'Comercialización')} className="bg-blue-500 hover:bg-blue-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow flex items-center gap-1">
+                                                🎤 Dictar Voz
+                                            </button>
+                                            <button type="button" onClick={descargarDocumentoActivo} className="bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg">
+                                                📥 Exportar Word (.doc)
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <input type="text" value={tituloComercial} onChange={(e) => setTituloComercial(e.target.value)} className="w-full bg-slate-900 border border-blue-500/40 rounded p-2 text-white text-xs font-bold" required />
+                                    <textarea value={contenidoComercial} onChange={(e) => setContenidoComercial(e.target.value)} rows={12} className="w-full bg-slate-900 border border-blue-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none leading-relaxed" required />
                                 </div>
                             )}
 
+                            {/* MÓDULO 4: INGENIERÍA DE SOFTWARE */}
                             {seccionActiva === 'ingenieria' && (
-                                <div className="p-5 bg-slate-950 rounded border border-purple-500/40 text-xs space-y-3">
-                                    <h3 className="font-bold text-purple-300 uppercase">⚙️ Ingeniería de Software (Finora / Sónica / APK Builder)</h3>
-                                    <p className="text-slate-300">Arquitectura de código fuente, endpoints y compilación.</p>
+                                <div className="space-y-4 p-5 bg-slate-950 rounded border-2 border-purple-500/60 animate-fadeIn shadow-inner">
+                                    <div className="flex justify-between items-center border-b border-purple-500/30 pb-3">
+                                        <h3 className="text-sm font-bold text-purple-300 uppercase tracking-wide">⚙️ Ingeniería de Software (Finora / Sónica / APK)</h3>
+                                        <div className="flex gap-2 items-center">
+                                            <button type="button" onClick={() => iniciarDictadoAudio(setCodigoIngenieria, 'Ingeniería Software')} className="bg-purple-500 hover:bg-purple-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow flex items-center gap-1">
+                                                🎤 Dictar Lógica
+                                            </button>
+                                            <button type="button" onClick={descargarDocumentoActivo} className="bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg">
+                                                📥 Exportar Código (.doc / .ts)
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div className="grid grid-cols-4 gap-2 bg-slate-900 p-2 rounded border border-purple-500/30">
+                                        <button type="button" onClick={() => { setSubTabIngenieria('finora'); setTituloIngenieria('Finora-Core-Architecture'); }} className={`py-1.5 px-1 rounded text-[11px] font-bold ${subTabIngenieria === 'finora' ? 'bg-purple-500 text-slate-950' : 'text-purple-300'}`}>Finora</button>
+                                        <button type="button" onClick={() => { setSubTabIngenieria('sonica'); setTituloIngenieria('Sonica-Streaming-Backend'); }} className={`py-1.5 px-1 rounded text-[11px] font-bold ${subTabIngenieria === 'sonica' ? 'bg-purple-500 text-slate-950' : 'text-purple-300'}`}>Sónica</button>
+                                        <button type="button" onClick={() => { setSubTabIngenieria('apk'); setTituloIngenieria('APK-Builder-Pipeline'); }} className={`py-1.5 px-1 rounded text-[11px] font-bold ${subTabIngenieria === 'apk' ? 'bg-purple-500 text-slate-950' : 'text-purple-300'}`}>APK</button>
+                                        <button type="button" onClick={() => { setSubTabIngenieria('arquitectura'); setTituloIngenieria('Vault-Omega-Security'); }} className={`py-1.5 px-1 rounded text-[11px] font-bold ${subTabIngenieria === 'arquitectura' ? 'bg-purple-500 text-slate-950' : 'text-purple-300'}`}>Vault</button>
+                                    </div>
+                                    <input type="text" value={tituloIngenieria} onChange={(e) => setTituloIngenieria(e.target.value)} className="w-full bg-slate-900 border border-purple-500/40 rounded p-2 text-white text-xs font-bold" required />
+                                    <textarea value={contenidoIngenieria} onChange={(e) => setCodigoIngenieria(e.target.value)} rows={12} className="w-full bg-slate-900 border border-purple-500/40 rounded p-4 text-xs text-purple-200 font-mono outline-none leading-relaxed" required />
                                 </div>
                             )}
 
                             <button type="submit" disabled={isPending} className="w-full bg-cyan-500 hover:bg-cyan-400 font-bold py-3 px-4 rounded text-slate-950 shadow-lg">
-                                {isPending ? 'Auditando con Vault Omega...' : `Registrar y Auditar en [${seccionActiva.toUpperCase()}]`}
+                                {isPending ? 'Auditando...' : `Registrar y Auditar en [${seccionActiva.toUpperCase()}]`}
                             </button>
                         </form>
 
@@ -451,12 +491,12 @@ INVESTIGADOR TITULAR: fg782270@gmail.com (C. Francisco)
                         )}
                     </div>
 
-                    {/* BANCO DE MEMORIA Y REGISTROS OFICIALES */}
+                    {/* BANCO DE MEMORIA Y REGISTROS OFICIALES CON BOTÓN SEPARADO DE JSON */}
                     <div className="w-full bg-slate-900 border border-cyan-500/30 rounded-lg p-6 shadow-xl space-y-4">
                         <div className="flex justify-between items-center border-b border-cyan-500/20 pb-2">
                             <h2 className="text-lg font-bold text-cyan-300">Expediente y Registros Institucionales</h2>
-                            <button type="button" onClick={descargarBancoMemoria} className="bg-green-500 hover:bg-green-400 text-slate-950 font-bold py-2 px-4 rounded text-xs transition-all shadow-lg flex items-center gap-1">
-                                📥 Exportar Expediente (.json)
+                            <button type="button" onClick={descargarBancoMemoriaJson} className="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold py-2 px-4 rounded text-xs transition-all shadow-lg flex items-center gap-1">
+                                📥 Exportar Expediente JSON (.json)
                             </button>
                         </div>
 

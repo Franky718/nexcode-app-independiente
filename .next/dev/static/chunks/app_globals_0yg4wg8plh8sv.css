@@ -474,10 +474,6 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .grid-cols-4 {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
   .flex-col {
     flex-direction: column;
   }
@@ -805,10 +801,6 @@
 
   .p-8 {
     padding: calc(var(--spacing) * 8);
-  }
-
-  .px-1 {
-    padding-inline: var(--spacing);
   }
 
   .px-2 {

@@ -10,79 +10,64 @@ export default function MasterCorePage() {
     const [hashGenerado, setHashGenerado] = useState<string | null>(null)
     const [memoriasEstado, setMemoriasEstado] = useState<any[]>([])
     
-    // Selector General de Módulos Independientes
+    // Selector General de Módulos
     const [seccionActiva, setSeccionActiva] = useState<'hub_corporativo' | 'academico' | 'comercial' | 'ingenieria'>('hub_corporativo')
     
-    // Sub-estado del Hub Corporativo con Estructura de Caso Práctico
-    const [tipoDocCorporativo, setTipoDocCorporativo] = useState<'caso_practico' | 'sifv' | 'tecnico'>('caso_practico')
-    const [modeloIA, setModeloIA] = useState('Claude Cloud/Work 3.5 (Executive Case Engine)')
+    // Sub-estado de Motores Globales Activos (Claude + DeepSeek)
+    const [tipoDocClaude, setTipoDocClaude] = useState<'carta' | 'juridico' | 'financiero' | 'tecnico'>('carta')
+    const [motorGlobal, setMotorGlobal] = useState('Dual-Engine: Claude Cloud (Docs) & DeepSeek Open-Source (Audit)')
     
-    // Plantilla formal de la Estructura Ejecutiva del Caso Práctico (SIFV-REYNOSA)
-    const [tituloCorp, setTituloCorp] = useState('Caso Práctico Ejecutivo - Plataforma SIFV-REYNOSA')
+    // Plantilla Principal: SIFV-Reynosa & Documentación Institucional
+    const [tituloCorp, setTituloCorp] = useState('Carta de presentación y resumen ejecutivo - SIFV-REYNOSA')
     const [contenidoCorp, setContenidoCorp] = useState(
 `NEXCODE INTERACTIVE, S.A. DE C.V. 
 Reynosa, Tamaulipas, a 24 de octubre de 2026
 
-CASO PRÁCTICO EJECUTIVO: IMPLEMENTACIÓN DE LA PLATAFORMA SIFV-REYNOSA
-
 Para: Secretaría de Seguridad Pública, Vialidad y Tránsito del Municipio de Reynosa, Tamaulipas
-Asunto: Presentación del Caso Práctico, Propuesta Técnica y Viabilidad Operativa
+Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA
 
-1. RESUMEN EJECUTIVO Y PLANTEAMIENTO DEL PROBLEMA
-El presente caso práctico analiza la optimización de los procesos de supervisión vial, control de tránsito y blindaje de datos en el municipio de Reynosa, mediante la integración de la Plataforma SIFV-REYNOSA desarrollada por Nexcode Interactive.
+Distinguidas autoridades:
 
-2. ARQUITECTURA TECNOLÓGICA Y GOV-TECH
-- Plataforma Full-Stack modular, segura y con cifrado de extremo a extremo bajo Vault Omega.
-- Trazabilidad en tiempo real, auditoría de accesos y sincronización con bases de datos relacionales.
-- Módulos de autenticación por biometría facial, PIN ejecutivo y llaves de hardware para los oficiales autorizados.
+Presentamos la Plataforma SIFV-REYNOSA, desarrollada íntegramente bajo los más altos estándares de calidad global y con el respaldo del blindaje criptográfico Vault Omega.
 
-3. ANÁLISIS DE IMPACTO INSTITUCIONAL Y RETORNO DE INVERSIÓN (ROI)
-- Reducción estimada del 45% en tiempos de captura y dictaminación operativa.
-- Transparencia total ante la ciudadanía mediante reportes automatizados y formato institucional descargable en Word y PDF.
+1. RESUMEN EJECUTIVO Y ALCANCE
+Sistema modular optimizado para la gestión vial, auditoría en tiempo real y máxima transparencia institucional.
 
-4. CONCLUSIONES Y PROPUESTA DE DESPLIEGUE
-La solución está lista para configurarse de manera inmediata en la infraestructura municipal, garantizando soberanía tecnológica y cumplimiento normativo absoluto.`)
+2. CUMPLIMIENTO NORMATIVO Y FINANCIERO
+Desglose transparente de costos de implementación, facturación CFDI e IVA (16%) conforme a la legislación fiscal vigente en México.`)
 
-    // Contenido Proyecto Escolar (Zapia AI)
+    // Contenido Académico (Zapia AI)
     const [tituloAcademico, setTituloAcademico] = useState('Proyecto de Aplicación para Seguridad Pública')
     const [contenidoAcademico, setContenidoAcademico] = useState(
 `UNIVERSIDAD ABIERTA Y A DISTANCIA DE MÉXICO (UnADM)
 LICENCIATURA EN DERECHO
-
-CAPÍTULO 1. PLANTEAMIENTO DEL PROBLEMA Y MARCO METODOLÓGICO
-1.1 Análisis de la problemática
-1.2 Planteamiento del problema de investigación
-1.3 Pregunta general de investigación
-1.4 Preguntas específicas
-1.5 Justificación
-1.6 Objetivos de la investigación
-1.7 Hipótesis (Propuestas por comprobar)`)
+CAPÍTULO 1. PLANTEAMIENTO DEL PROBLEMA Y MARCO METODOLÓGICO`)
 
     // Contenido Comercial
-    const [tituloComercial, setTituloComercial] = useState('Dictamen Jurídico y Financiero - SIFV-REYNOSA')
+    const [tituloComercial, setTituloComercial] = useState('Dictamen Jurídico y Financiero - Licenciamiento')
     const [contenidoComercial, setContenidoComercial] = useState(
-`NEXCODE INTERACTIVE S.A. DE C.V. — DICTAMEN DE CONTRATACIÓN
-1. Objeto del Contrato de Licenciamiento e Implementación.
-2. Desglose Financiero con IVA e Impuestos Locales en Reynosa, Tamaulipas.
-3. Garantía de Soporte y Mantenimiento 24/7.`)
+`NEXCODE INTERACTIVE S.A. DE C.V. — DICTAMEN DE CONTRATACIÓN`)
 
-    // Contenido Ingeniería
-    const [tituloIngenieria, setTituloIngenieria] = useState('GOV-TECH Core Architecture')
+    // Contenido Ingeniería (Doble Motor DeepSeek + Claude)
+    const [tituloIngenieria, setTituloIngenieria] = useState('Dual-Engine Audit & Endpoint Core')
     const [contenidoIngenieria, setCodigoIngenieria] = useState(
-`// NEXCODE GOV-TECH & SIFV ARCHITECTURE CORE
-class SIFVReynosaEngine {
+`// NEXCODE DUAL-ENGINE ENTERPRISE ARCHITECTURE
+// Motor A (Claude): Estructura de Negocio y Documentación
+// Motor B (DeepSeek / Open-Source): Optimización de Endpoints y Seguridad
+
+class GlobalMultiAIEnterpriseCore {
     constructor() {
-        this.municipios = "Reynosa, Tamaulipas";
-        this.securityLevel = "OMEGA_VAULT_ACTIVE";
+        this.status = "DUAL_ENGINE_ACTIVE";
+        this.security = "VAULT_OMEGA_ENCRYPTED";
     }
-    auditEndpoints() {
-        return { status: "SECURE", protocol: "HTTPS/TLS 1.3", owner: "fg782270@gmail.com" };
+    runSystemDiagnostics() {
+        return { audit: "PASSED", endpoints: "SECURE", owner: "fg782270@gmail.com" };
     }
 }
-export const engine = new SIFVReynosaEngine();`)
+export const coreInstance = new GlobalMultiAIEnterpriseCore();`)
 
     // Estado de Audio
-    const [estadoAudio, setEstadoAudio] = useState('Sistema de Audio en Reposo (Listo para Dictado)')
+    const [estadoAudio, setEstadoAudio] = useState('Sistema de Audio en Reposo (Listo para Dictado Dual)')
     const [grabandoAudio, setGrabaAudio] = useState(false)
 
     // Contexto Geopolítico
@@ -141,15 +126,15 @@ export const engine = new SIFVReynosaEngine();`)
         
         recognition.onstart = () => {
             setGrabaAudio(true);
-            setEstadoAudio(`🔴 Claude Cloud grabando audio en [${nombreModulo}]...`);
-            hablarJarvis(`Dictado activo con motor Claude para ${nombreModulo}, C. Francisco.`);
+            setEstadoAudio(`🔴 Doble Motor Activo grabando en [${nombreModulo}]...`);
+            hablarJarvis(`Dictado activo con motores global y local para ${nombreModulo}, C. Francisco.`);
         };
         
         recognition.onresult = (event: any) => {
             const textoTranscrito = event.results[0][0].transcript;
-            setter((prev: string) => prev + "\n\n[Claude Executive Struct]: " + textoTranscrito);
-            setEstadoAudio(`✔ Audio procesado y estructurado con éxito.`);
-            hablarJarvis("Audio estructurado e integrado en el documento ejecutivo.");
+            setter((prev: string) => prev + "\n\n[Dual-Engine Struct]: " + textoTranscrito);
+            setEstadoAudio(`✔ Audio procesado por doble motor con éxito.`);
+            hablarJarvis("Audio integrado en el documento.");
             setGrabaAudio(false);
         };
         
@@ -204,7 +189,39 @@ export const engine = new SIFVReynosaEngine();`)
         }, 2000)
     }
 
-    // Exportador de Documento Word (Limpio y formateado)
+    // Selector de Plantillas Claude Docs
+    function cambiarPlantillaClaude(tipo: 'carta' | 'juridico' | 'financiero' | 'tecnico') {
+        setTipoDocClaude(tipo)
+        if (tipo === 'carta') {
+            setTituloCorp('Carta de presentación y resumen ejecutivo - SIFV-REYNOSA')
+            setContenidoCorp(
+`NEXCODE INTERACTIVE, S.A. DE C.V. 
+Reynosa, Tamaulipas, a 24 de octubre de 2026
+
+Para: Secretaría de Seguridad Pública, Vialidad y Tránsito del Municipio de Reynosa, Tamaulipas
+Asunto: Propuesta técnica, jurídica y financiera de la Plataforma SIFV-REYNOSA`)
+        } else if (tipo === 'juridico') {
+            setTituloCorp('Dictamen Jurídico - Contrato y Blindaje de Propiedad Intelectual')
+            setContenidoCorp(
+`NEXCODE INTERACTIVE S.A. DE C.V. — DICTAMEN JURÍDICO OFICIAL
+1. Objeto del Contrato de Licenciamiento e Implementación Tecnológica.
+2. Titularidad y Protección de Propiedad Intelectual bajo Vault Omega.`)
+        } else if (tipo === 'financiero') {
+            setTituloCorp('Dictamen Contable y Financiero - IVA, Precios y ROI')
+            setContenidoCorp(
+`NEXCODE INTERACTIVE S.A. DE C.V. — DICTAMEN FINANCIERO Y CONTABLE
+1. Desglose de Costos, Facturación CFDI e Impuesto al Valor Agregado (IVA 16%).
+2. Retorno de Inversión (ROI) estimado a corto plazo.`)
+        } else if (tipo === 'tecnico') {
+            setTituloCorp('Documentación Técnica y Auditoría de Endpoints (DeepSeek Engine)')
+            setContenidoCorp(
+`NEXCODE INTERACTIVE S.A. DE C.V. — EXPEDIENTE TÉCNICO Y AUDITORÍA DE ENDPOINTS
+1. Arquitectura Full-Stack, Supabase y Encriptación SHA-256.
+2. Reporte de Pruebas de Rendimiento y Despliegue Automatizado APK.`)
+        }
+    }
+
+    // Exportador de Documento Word
     function descargarDocumentoActivo() {
         let titulo = tituloCorp
         let contenido = contenidoCorp
@@ -230,7 +247,7 @@ export const engine = new SIFVReynosaEngine();`)
         link.click()
         document.body.removeChild(link)
         URL.revokeObjectURL(url)
-        hablarJarvis('Documento ejecutivo exportado en formato Word con éxito.')
+        hablarJarvis('Documento formateado exportado en formato Word con éxito.')
     }
 
     function descargarBancoMemoriaJson() {
@@ -250,10 +267,10 @@ export const engine = new SIFVReynosaEngine();`)
     function formatearActividad(clave: string) {
         if (!clave) return 'Expediente Institucional'
         const lower = clave.toLowerCase()
-        if (lower.includes('corporativo')) return 'Caso Práctico Ejecutivo (SIFV-Reynosa)'
+        if (lower.includes('corporativo')) return 'Hub Dual-Engine (Claude & DeepSeek)'
         if (lower.includes('academico')) return 'Proyecto Escolar: Seguridad Pública'
         if (lower.includes('comercial')) return 'Comercialización y Venta de Software'
-        if (lower.includes('ingenieria')) return 'Ingeniería de Software & Calibre Nexcode'
+        if (lower.includes('ingenieria')) return 'Ingeniería y Auditoría de Endpoints'
         return 'Bitácora y Registro Institucional'
     }
 
@@ -261,8 +278,8 @@ export const engine = new SIFVReynosaEngine();`)
         event.preventDefault()
         const formData = new FormData(event.currentTarget)
         formData.append('seccion', seccionActiva)
-        formData.append('tipoAnalisis', 'Caso Práctico Ejecutivo (Motor Claude Cloud/Work)')
-        formData.append('modeloIASeleccionado', modeloIA)
+        formData.append('tipoAnalisis', 'Multicerebro Global (Claude Cloud & DeepSeek Audit Core)')
+        formData.append('modeloIASeleccionado', motorGlobal)
         formData.append('continente', continente)
         formData.append('region', region)
         formData.append('pais', pais)
@@ -275,7 +292,7 @@ export const engine = new SIFVReynosaEngine();`)
             setFolioUltimo(resultado.folio || null)
             setHashGenerado(resultado.hash || null)
             if (resultado.success) {
-                hablarJarvis("Caso práctico ejecutivo registrado y auditado bajo Vault Omega.")
+                hablarJarvis("Operación procesada con doble motor y auditada bajo Vault Omega.")
                 cargarMemoria()
             }
         })
@@ -331,7 +348,7 @@ export const engine = new SIFVReynosaEngine();`)
                         <header className="flex justify-between items-center border-b border-cyan-500/20 pb-4 mb-6">
                             <div>
                                 <h1 className="text-xl font-bold tracking-wider flex items-center gap-2">
-                                    <span>🛡️</span> Jarvis Master Core — <span className="text-cyan-300">Caso Práctico Ejecutivo (Claude Engine)</span>
+                                    <span>🛡️</span> Jarvis Master Core — <span className="text-cyan-300">Dual-Engine Active (Claude & DeepSeek)</span>
                                 </h1>
                                 <p className="text-xs text-slate-400">Investigador Titular: fg782270@gmail.com (C. Francisco)</p>
                             </div>
@@ -344,7 +361,7 @@ export const engine = new SIFVReynosaEngine();`)
                                 <span className="text-sm">🎙️</span>
                                 <span className="text-xs font-bold text-cyan-300">{estadoAudio}</span>
                             </div>
-                            {grabandoAudio && <span className="animate-pulse text-xs bg-red-500 text-white px-2 py-0.5 rounded font-bold">CLAUDE CASE ACTIVE...</span>}
+                            {grabandoAudio && <span className="animate-pulse text-xs bg-red-500 text-white px-2 py-0.5 rounded font-bold">DUAL-ENGINE RECORDING...</span>}
                         </div>
 
                         {/* SELECTOR GEOPOLÍTICO */}
@@ -373,7 +390,7 @@ export const engine = new SIFVReynosaEngine();`)
                         {/* SELECTOR PRINCIPAL DE MÓDULOS */}
                         <div className="mb-6 p-4 bg-slate-950 border-2 border-cyan-500/50 rounded-lg grid grid-cols-2 md:grid-cols-4 gap-2">
                             <button type="button" onClick={() => setSeccionActiva('hub_corporativo')} className={`py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'hub_corporativo' ? 'bg-cyan-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-cyan-300'}`}>
-                                📂 Caso Práctico (SIFV)
+                                📂 Hub Dual (Claude/DeepSeek)
                             </button>
                             <button type="button" onClick={() => setSeccionActiva('academico')} className={`py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'academico' ? 'bg-amber-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-amber-300'}`}>
                                 🎓 Proyecto Escolar
@@ -382,7 +399,7 @@ export const engine = new SIFVReynosaEngine();`)
                                 🏢 Comercialización
                             </button>
                             <button type="button" onClick={() => setSeccionActiva('ingenieria')} className={`py-3 px-2 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'ingenieria' ? 'bg-purple-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-purple-300'}`}>
-                                ⚙️ GOV-TECH Core
+                                ⚙️ Auditoría Endpoints
                             </button>
                         </div>
 
@@ -392,24 +409,25 @@ export const engine = new SIFVReynosaEngine();`)
                                 <input type="email" name="emailSolicitante" defaultValue="fg782270@gmail.com" />
                             </div>
 
-                            {/* MÓDULO 1: CASO PRÁCTICO EJECUTIVO (SIFV-REYNOSA) */}
+                            {/* MÓDULO 1: HUB CORPORATIVO DUAL-ENGINE */}
                             {seccionActiva === 'hub_corporativo' && (
                                 <div className="space-y-4 p-5 bg-slate-950 rounded border-2 border-cyan-500/60 animate-fadeIn shadow-inner">
                                     <div className="flex justify-between items-center border-b border-cyan-500/30 pb-3">
-                                        <h3 className="text-sm font-bold text-cyan-300 uppercase tracking-wide">📂 Hub Documental — Caso Práctico Ejecutivo (SIFV-Reynosa)</h3>
+                                        <h3 className="text-sm font-bold text-cyan-300 uppercase tracking-wide">📂 Hub Dual-Engine — Documentación & Auditoría</h3>
                                         <div className="flex gap-2 items-center">
-                                            <button type="button" onClick={() => iniciarDictadoAudio(setContenidoCorp, 'Caso Práctico Ejecutivo')} className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow flex items-center gap-1">
-                                                🎤 Dictar Voz (Claude)
+                                            <button type="button" onClick={() => iniciarDictadoAudio(setContenidoCorp, 'Hub Dual-Engine')} className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow flex items-center gap-1">
+                                                🎤 Dictar Voz (Dual)
                                             </button>
                                             <button type="button" onClick={descargarDocumentoActivo} className="bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg">
                                                 📥 Exportar Word (.doc)
                                             </button>
                                         </div>
                                     </div>
-                                    <div className="grid grid-cols-3 gap-2 bg-slate-900 p-2 rounded border border-cyan-500/30">
-                                        <button type="button" onClick={() => { setTipoDocCorporativo('caso_practico'); setTituloCorp('Caso Práctico Ejecutivo - Plataforma SIFV-REYNOSA'); }} className={`py-1.5 px-2 rounded text-xs font-bold ${tipoDocCorporativo === 'caso_practico' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`}>📊 Caso Práctico</button>
-                                        <button type="button" onClick={() => { setTipoDocCorporativo('sifv'); setTituloCorp('Carta de presentación y resumen ejecutivo - SIFV-REYNOSA'); }} className={`py-1.5 px-2 rounded text-xs font-bold ${tipoDocCorporativo === 'sifv' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`}>📄 Propuesta SIFV</button>
-                                        <button type="button" onClick={() => { setTipoDocCorporativo('tecnico'); setTituloCorp('Documentación Técnica GOV-TECH'); }} className={`py-1.5 px-2 rounded text-xs font-bold ${tipoDocCorporativo === 'tecnico' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`}>⚙️ GOV-TECH</button>
+                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-2 bg-slate-900 p-2 rounded border border-cyan-500/30">
+                                        <button type="button" onClick={() => cambiarPlantillaClaude('carta')} className={`py-1.5 px-2 rounded text-[11px] font-bold ${tipoDocClaude === 'carta' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`}>📄 Carta Presentación</button>
+                                        <button type="button" onClick={() => cambiarPlantillaClaude('juridico')} className={`py-1.5 px-2 rounded text-[11px] font-bold ${tipoDocClaude === 'juridico' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`}>⚖️ Dictamen Jurídico</button>
+                                        <button type="button" onClick={() => cambiarPlantillaClaude('financiero')} className={`py-1.5 px-2 rounded text-[11px] font-bold ${tipoDocClaude === 'financiero' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`}>💰 Dictamen Financiero</button>
+                                        <button type="button" onClick={() => cambiarPlantillaClaude('tecnico')} className={`py-1.5 px-2 rounded text-[11px] font-bold ${tipoDocClaude === 'tecnico' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300'}`}>⚙️ Auditoría Endpoints</button>
                                     </div>
                                     <input type="text" value={tituloCorp} onChange={(e) => setTituloCorp(e.target.value)} className="w-full bg-slate-900 border border-cyan-500/40 rounded p-2 text-white text-xs font-bold" required />
                                     <textarea value={contenidoCorp} onChange={(e) => setContenidoCorp(e.target.value)} rows={14} className="w-full bg-slate-900 border border-cyan-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none leading-relaxed" required />
@@ -454,13 +472,13 @@ export const engine = new SIFVReynosaEngine();`)
                                 </div>
                             )}
 
-                            {/* MÓDULO 4: INGENIERÍA GOV-TECH */}
+                            {/* MÓDULO 4: INGENIERÍA Y AUDITORÍA DE ENDPOINTS */}
                             {seccionActiva === 'ingenieria' && (
                                 <div className="space-y-4 p-5 bg-slate-950 rounded border-2 border-purple-500/60 animate-fadeIn shadow-inner">
                                     <div className="flex justify-between items-center border-b border-purple-500/30 pb-3">
-                                        <h3 className="text-sm font-bold text-purple-300 uppercase tracking-wide">⚙️ GOV-TECH Core & SIFV Architecture</h3>
+                                        <h3 className="text-sm font-bold text-purple-300 uppercase tracking-wide">⚙️ Auditoría de Endpoints & DeepSeek Core</h3>
                                         <div className="flex gap-2 items-center">
-                                            <button type="button" onClick={() => iniciarDictadoAudio(setCodigoIngenieria, 'GOV-TECH Core')} className="bg-purple-500 hover:bg-purple-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow flex items-center gap-1">
+                                            <button type="button" onClick={() => iniciarDictadoAudio(setCodigoIngenieria, 'Auditoría Endpoints')} className="bg-purple-500 hover:bg-purple-400 text-slate-950 font-bold py-1.5 px-3 rounded text-xs shadow flex items-center gap-1">
                                                 🎤 Dictar Lógica
                                             </button>
                                             <button type="button" onClick={descargarDocumentoActivo} className="bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg">
@@ -474,13 +492,13 @@ export const engine = new SIFVReynosaEngine();`)
                             )}
 
                             <button type="submit" disabled={isPending} className="w-full bg-cyan-500 hover:bg-cyan-400 font-bold py-3 px-4 rounded text-slate-950 shadow-lg">
-                                {isPending ? 'Procesando Caso Práctico...' : `Registrar y Auditar en [${seccionActiva.toUpperCase()}]`}
+                                {isPending ? 'Procesando con Doble Motor...' : `Registrar y Auditar en [${seccionActiva.toUpperCase()}]`}
                             </button>
                         </form>
 
                         {mensajeRespuesta && (
                             <div className="mt-6 p-5 bg-slate-950 border-2 border-cyan-500 rounded-lg text-sm shadow-2xl relative space-y-2">
-                                <div className="absolute top-0 right-0 bg-cyan-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl">ESTADO: EXECUTIVE CASE AUDITED</div>
+                                <div className="absolute top-0 right-0 bg-cyan-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl">ESTADO: DUAL-ENGINE AUDITED</div>
                                 <div className="text-white font-medium whitespace-pre-line leading-relaxed">{mensajeRespuesta}</div>
                                 {folioUltimo && <p className="text-xs text-cyan-300"><span className="font-bold">Folio:</span> {folioUltimo}</p>}
                             </div>

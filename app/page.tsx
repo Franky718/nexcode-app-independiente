@@ -17,7 +17,6 @@ export default function MasterCorePage() {
     const [tipoAnalisisEmpresa, setTipoAnalisisEmpresa] = useState('Arquitectura Full-Stack & Auditoría')
     const [modeloIA, setModeloIA] = useState('Matriz Global Unificada (Todas las IAs)')
     
-    // Textos independientes para cada núcleo y archivo
     const [detalleAcademico, setDetalleAcademico] = useState('')
     const [detalleEmpresa, setDetalleEmpresa] = useState('')
     const [archivoAcademico, setArchivoAcademico] = useState<File | null>(null)
@@ -32,6 +31,9 @@ export default function MasterCorePage() {
     const [pinIngresado, setPinIngresado] = useState('')
     const [estadoSeguridad, setEstadoSeguridad] = useState('Seleccione método de autenticación...')
     
+    // Campo secreto para la Llave Omega conocida solo por el usuario
+    const [omegaKeyInput, setOmegaKeyInput] = useState('')
+
     const [vozActiva, setVozActiva] = useState(true)
     const [camaraActiva, setCamaraActiva] = useState(false)
     const videoRef = useRef<HTMLVideoElement | null>(null)
@@ -69,8 +71,7 @@ export default function MasterCorePage() {
         window.speechSynthesis.speak(utterance)
     }
 
-    // Función de Micrófono Independiente (Speech-to-Text)
-    function escucharMic(setTextTarget: (val: string) => void, nombre Nucleo: string) {
+    function escucharMic(setTextTarget: (val: string) => void, nombreNucleo: string) {
         if (typeof window === 'undefined') return;
         const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
         if (!SpeechRecognition) {
@@ -82,20 +83,13 @@ export default function MasterCorePage() {
         recognition.interimResults = false;
         recognition.maxAlternatives = 1;
 
-        recognition.onstart = () => {
-            hablarJarvis(`Escuchando núcleo ${nombre Nucleo}, señor.`);
-        };
-
+        recognition.onstart = () => { hablarJarvis(`Escuchando núcleo ${nombreNucleo}, señor.`); };
         recognition.onresult = (event: any) => {
             const textoTranscrito = event.results[0][0].transcript;
             setTextTarget(textoTranscrito);
             hablarJarvis("Voz registrada con éxito.");
         };
-
-        recognition.onerror = () => {
-            hablarJarvis("No se pudo capturar el audio.");
-        };
-
+        recognition.onerror = () => { hablarJarvis("No se pudo capturar el audio."); };
         recognition.start();
     }
 
@@ -151,6 +145,7 @@ export default function MasterCorePage() {
         formData.append('continente', continente)
         formData.append('region', region)
         formData.append('pais', pais)
+        formData.append('omegaKey', omegaKeyInput) // Se envía la llave omega secreta
 
         const archivoActual = seccionActiva === 'academico' ? archivoAcademico : archivoEmpresa
         if (archivoActual) {
@@ -167,8 +162,10 @@ export default function MasterCorePage() {
             setHashGenerado(resultado.hash || null)
             setCodigoPaquete(resultado.codigoDescargable || null)
             if (resultado.success) {
-                hablarJarvis(seccionActiva === 'academico' ? "Análisis Zapia completado con éxito." : "Proceso empresarial completado.")
+                hablarJarvis("Operación protegida por Protocolo Omega ejecutada con éxito.")
                 cargarMemoria()
+            } else {
+                hablarJarvis("Acceso denegado por Blindaje Omega.")
             }
         })
     }
@@ -179,7 +176,7 @@ export default function MasterCorePage() {
         const url = URL.createObjectURL(blob)
         const link = document.createElement('a')
         link.href = url
-        link.download = `Nexcode-Enterprise-${pais}-${folioUltimo || 'Report'}.tsx`
+        link.download = `Nexcode-Omega-${pais}-${folioUltimo || 'Report'}.tsx`
         document.body.appendChild(link)
         link.click()
         document.body.removeChild(link)
@@ -193,7 +190,7 @@ export default function MasterCorePage() {
             {!accesoConcedido ? (
                 <div className="w-full max-w-xl bg-slate-900 border-2 border-cyan-500/60 rounded-xl p-8 shadow-2xl text-center space-y-6">
                     <div className="space-y-2">
-                        <h1 className="text-2xl font-bold tracking-wider text-white">🛡️ Jarvis Secure Gate</h1>
+                        <h1 className="text-2xl font-bold tracking-wider text-white">🛡️ Jarvis Omega Vault Gate</h1>
                         <p className="text-xs text-cyan-300">Nexcode Interactive S.A. de C.V.</p>
                         <p className="text-[11px] text-slate-400">Supervisor: fg782270@gmail.com (C. Francisco)</p>
                     </div>
@@ -280,7 +277,7 @@ export default function MasterCorePage() {
                         <header className="flex justify-between items-center border-b border-cyan-500/20 pb-4 mb-6">
                             <div>
                                 <h1 className="text-xl font-bold tracking-wider flex items-center gap-2">
-                                    <span>🌐</span> Jarvis Core — <span className="text-cyan-300">Núcleos Independientes con Micrófono</span>
+                                    <span>🔒</span> Jarvis Core — <span className="text-cyan-300">Blindaje Omega & Núcleos Protegidos</span>
                                 </h1>
                                 <p className="text-xs text-slate-400">Supervisor: fg782270@gmail.com (C. Francisco)</p>
                             </div>
@@ -354,18 +351,31 @@ export default function MasterCorePage() {
 
                         {/* FORMULARIO PRINCIPAL */}
                         <form onSubmit={handleSubmit} className="space-y-4">
-                            <div>
-                                <label className="block text-sm text-slate-300 mb-1">Verificación de Identidad (Propietario):</label>
-                                <input 
-                                    type="email" 
-                                    name="emailSolicitante" 
-                                    defaultValue="fg782270@gmail.com" 
-                                    className="w-full bg-slate-950 border border-cyan-500/40 rounded p-2 text-white text-sm"
-                                    required
-                                />
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-sm text-slate-300 mb-1">Verificación de Identidad (Propietario):</label>
+                                    <input 
+                                        type="email" 
+                                        name="emailSolicitante" 
+                                        defaultValue="fg782270@gmail.com" 
+                                        className="w-full bg-slate-950 border border-cyan-500/40 rounded p-2 text-white text-sm"
+                                        required
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm text-cyan-300 mb-1 font-bold">🔑 Llave Omega Vault Key (Blindaje Extra):</label>
+                                    <input 
+                                        type="password" 
+                                        value={omegaKeyInput}
+                                        onChange={(e) => setOmegaKeyInput(e.target.value)}
+                                        placeholder="Ingrese Llave Secreta Omega..." 
+                                        className="w-full bg-slate-950 border-2 border-cyan-500 rounded p-2 text-white text-sm outline-none focus:border-cyan-300 font-mono"
+                                        required
+                                    />
+                                </div>
                             </div>
 
-                            {/* NÚCLEO ACADÉMICO / ZAPIA (INDEPENDIENTE) */}
+                            {/* NÚCLEO ACADÉMICO / ZAPIA */}
                             {seccionActiva === 'academico' && (
                                 <div className="space-y-4 p-4 bg-amber-950/20 rounded border border-amber-500/40 animate-fadeIn">
                                     <div className="flex justify-between items-center">
@@ -379,7 +389,6 @@ export default function MasterCorePage() {
                                         </button>
                                     </div>
 
-                                    {/* Archivo Académico */}
                                     <div className="p-3 bg-slate-950 border border-amber-500/30 rounded">
                                         <label className="block text-xs font-bold text-amber-300 mb-1">📁 Examen o Documento Académico (PDF, Word, TXT):</label>
                                         <input 
@@ -412,7 +421,7 @@ export default function MasterCorePage() {
                                 </div>
                             )}
 
-                            {/* NÚCLEO EMPRESA / APK BUILDER (INDEPENDIENTE) */}
+                            {/* NÚCLEO EMPRESA */}
                             {seccionActiva === 'empresa' && (
                                 <div className="space-y-4 p-4 bg-cyan-950/20 rounded border border-cyan-500/40 animate-fadeIn">
                                     <div className="flex justify-between items-center">
@@ -440,7 +449,6 @@ export default function MasterCorePage() {
                                         </select>
                                     </div>
 
-                                    {/* Archivo Empresa */}
                                     <div className="p-3 bg-slate-950 border border-cyan-500/30 rounded">
                                         <label className="block text-xs font-bold text-cyan-300 mb-1">📁 Código o Proyecto Empresarial:</label>
                                         <input 
@@ -478,14 +486,14 @@ export default function MasterCorePage() {
                                 disabled={isPending}
                                 className={`w-full font-bold py-3 px-4 rounded transition-all duration-200 disabled:opacity-50 shadow-lg text-slate-950 ${seccionActiva === 'academico' ? 'bg-amber-500 hover:bg-amber-400' : 'bg-cyan-500 hover:bg-cyan-400'}`}
                             >
-                                {isPending ? 'Procesando...' : `Ejecutar Núcleo [${seccionActiva.toUpperCase()}]`}
+                                {isPending ? 'Validando Protocolo Omega...' : `Ejecutar Núcleo Protegido [${seccionActiva.toUpperCase()}]`}
                             </button>
                         </form>
 
                         {mensajeRespuesta && (
                             <div className="mt-6 p-5 bg-slate-950 border-2 border-cyan-500 rounded-lg text-sm shadow-2xl relative space-y-3">
                                 <div className="absolute top-0 right-0 bg-cyan-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl">
-                                    RESULTADO INDEPENDIENTE
+                                    BLINDAJE OMEGA ACTIVO
                                 </div>
                                 <div className="text-white font-medium whitespace-pre-line leading-relaxed">{mensajeRespuesta}</div>
                                 
@@ -502,7 +510,7 @@ export default function MasterCorePage() {
                                         <button
                                             type="button"
                                             onClick={descargarArchivo}
-                                            className="bg-green-500 hover:bg-green-400 text-slate-950 font-bold py-2 px-4 rounded text-xs transition-all shadow-lg flex items-center gap-1"
+                                            className="bg-green-550 hover:bg-green-400 text-slate-950 font-bold py-2 px-4 rounded text-xs transition-all shadow-lg flex items-center gap-1"
                                         >
                                             📥 Descargar Archivo Compilado (.tsx)
                                         </button>

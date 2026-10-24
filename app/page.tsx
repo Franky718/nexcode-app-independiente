@@ -160,7 +160,7 @@ export default function MasterCorePage() {
             setHashGenerado(resultado.hash || null)
             setCodigoPaquete(resultado.codigoDescargable || null)
             if (resultado.success) {
-                hablarJarvis("Operación protegida ejecutada con éxito.")
+                hablarJarvis("Operación corporativa y banco interconectado actualizados.")
                 cargarMemoria()
             } else {
                 hablarJarvis("Acceso denegado por Blindaje Omega.")
@@ -174,31 +174,29 @@ export default function MasterCorePage() {
         const url = URL.createObjectURL(blob)
         const link = document.createElement('a')
         link.href = url
-        link.download = `Nexcode-Reporte-${pais}.tsx`
+        link.download = `Nexcode-Enterprise-Package.tsx`
         document.body.appendChild(link)
         link.click()
         document.body.removeChild(link)
         URL.revokeObjectURL(url)
-        hablarJarvis('Archivo descargado con éxito.')
+        hablarJarvis('Paquete corporativo descargado con éxito.')
     }
 
-    // Función para limpiar las etiquetas técnicas de los registros visuales
+    // Función de limpieza avanzada para nombres limpios en la tabla (Académico y Empresa)
     function limpiarNombreClave(clave: string) {
         if (!clave) return 'Registro General'
-        // Si contiene etiquetas entre corchetes, las reemplazamos por un título limpio
-        if (clave.includes('Zapia') || clave.includes('BLINDAJE OMEGA')) {
+        if (clave.includes('Zapia') || clave.includes('ACADEMICO')) {
             return 'Reporte de Evaluación Académica (Zapia)'
         }
-        if (clave.includes('ACADEMICO')) {
-            return 'Validación de Tesis y Caso Práctico'
+        if (clave.includes('Empresa') || clave.includes('APK') || clave.includes('Auditoría') || clave.includes('PROPIETARIO')) {
+            if (clave.includes('APK') || clave.includes('Compilación')) {
+                return 'Compilación Automática de APK & Binarios'
+            }
+            return 'Auditoría y Despliegue Corporativo (Nexcode)'
         }
-        if (clave.includes('GEO') || clave.includes('Empresa')) {
-            return 'Auditoría y Despliegue Corporativo'
-        }
-        return clave.replace(/\[.*?\]/g, '').trim() || 'Registro Oficial Nexcode'
+        return clave.replace(/\[.*?\]/g, '').trim() || 'Registro Oficial Interconectado'
     }
 
-    // Función para descargar todo el Banco de Memoria limpio
     function descargarBancoMemoria() {
         const contenidoJson = JSON.stringify(memoriasEstado, null, 2)
         const blob = new Blob([contenidoJson], { type: 'application/json;charset=utf-8' })
@@ -306,7 +304,7 @@ export default function MasterCorePage() {
                         <header className="flex justify-between items-center border-b border-cyan-500/20 pb-4 mb-6">
                             <div>
                                 <h1 className="text-xl font-bold tracking-wider flex items-center gap-2">
-                                    <span>🔒</span> Jarvis Core — <span className="text-cyan-300">Blindaje Omega & Registros Limpios</span>
+                                    <span>🔒</span> Jarvis Core — <span className="text-cyan-300">Núcleos Independientes & Registros Limpios</span>
                                 </h1>
                                 <p className="text-xs text-slate-400">Supervisor: fg782270@gmail.com (C. Francisco)</p>
                             </div>
@@ -547,7 +545,7 @@ export default function MasterCorePage() {
                         )}
                     </div>
 
-                    {/* BANCO DE MEMORIA CON BOTÓN DE DESCARGA Y NOMBRES LIMPIOS */}
+                    {/* BANCO DE MEMORIA CON NOMBRES LIMPIOS Y BOTÓN DE DESCARGA */}
                     <div className="w-full bg-slate-900 border border-cyan-500/30 rounded-lg p-6 shadow-xl space-y-4">
                         <div className="flex justify-between items-center border-b border-cyan-500/20 pb-2">
                             <h2 className="text-lg font-bold text-cyan-300">Banco de Memoria y Registros Oficiales</h2>

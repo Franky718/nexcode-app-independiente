@@ -373,6 +373,10 @@
     right: 0;
   }
 
+  .mx-auto {
+    margin-inline: auto;
+  }
+
   .mt-6 {
     margin-top: calc(var(--spacing) * 6);
   }
@@ -417,8 +421,20 @@
     height: calc(var(--spacing) * 28);
   }
 
+  .h-36 {
+    height: calc(var(--spacing) * 36);
+  }
+
+  .h-full {
+    height: 100%;
+  }
+
   .min-h-screen {
     min-height: 100vh;
+  }
+
+  .w-48 {
+    width: calc(var(--spacing) * 48);
   }
 
   .w-full {
@@ -443,6 +459,10 @@
 
   .grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  .grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .flex-col {
@@ -516,6 +536,10 @@
   .truncate {
     text-overflow: ellipsis;
     white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .overflow-hidden {
     overflow: hidden;
   }
 
@@ -684,6 +708,10 @@
     background-color: var(--color-slate-950);
   }
 
+  .object-cover {
+    object-fit: cover;
+  }
+
   .p-2 {
     padding: calc(var(--spacing) * 2);
   }
@@ -706,6 +734,10 @@
 
   .p-8 {
     padding: calc(var(--spacing) * 8);
+  }
+
+  .px-2 {
+    padding-inline: calc(var(--spacing) * 2);
   }
 
   .px-3 {
@@ -949,6 +981,10 @@
       .hover\:bg-slate-950\/50:hover {
         background-color: color-mix(in oklab, var(--color-slate-950) 50%, transparent);
       }
+    }
+
+    .hover\:text-white:hover {
+      color: var(--color-white);
     }
   }
 

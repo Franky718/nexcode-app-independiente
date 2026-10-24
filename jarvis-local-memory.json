@@ -1,5 +1,45 @@
 [
   {
+    "id": 1792865543467,
+    "owner_email": "fg782270@gmail.com",
+    "memory_key": "[BLINDAJE OMEGA: México (Reynosa, Tamaulipas)] Instrucción Maestra: Procesamiento Word & Tesis",
+    "memory_value": "Calificación Extraída: 10/10 (Aprobado bajo Protocolo Omega) | Archivo: CORRECCION.doc | Folio: JARVIS-OMEGA-737729 | Hash: 017dbf6105e997db062c04db051eec51df7cad707d669422fe57aeee55aec05d",
+    "routing_engine": "Zapia Vault Engine (Omega Secured)",
+    "created_at": "2026-10-24T18:12:23.467Z"
+  },
+  {
+    "id": 1792865458863,
+    "owner_email": "fg782270@gmail.com",
+    "memory_key": "[BLINDAJE OMEGA: México (Reynosa, Tamaulipas)] Instrucción Maestra: Procesamiento Word & Tesis",
+    "memory_value": "Calificación Extraída: 10/10 (Aprobado bajo Protocolo Omega) | Archivo: CORRECCION.doc | Folio: JARVIS-OMEGA-878092 | Hash: 08fbababc2be9846973706c3a4c88bdf3b4441c65fd9827670b9ca9f25e95dae",
+    "routing_engine": "Zapia Vault Engine (Omega Secured)",
+    "created_at": "2026-10-24T18:10:58.863Z"
+  },
+  {
+    "id": 1792864088860,
+    "owner_email": "fg782270@gmail.com",
+    "memory_key": "[BLINDAJE OMEGA: México (Reynosa, Tamaulipas)] Instrucción Maestra: Procesamiento Word & Tesis",
+    "memory_value": "Calificación Extraída: 10/10 (Aprobado bajo Protocolo Omega) | Archivo: FDLG.doc | Folio: JARVIS-OMEGA-364468 | Hash: c5409b482b241b51c53a61ba87b1764545a284452db656ed70ef690976c07134",
+    "routing_engine": "Zapia Vault Engine (Omega Secured)",
+    "created_at": "2026-10-24T17:48:08.860Z"
+  },
+  {
+    "id": 1792864006553,
+    "owner_email": "fg782270@gmail.com",
+    "memory_key": "[BLINDAJE OMEGA: México (Reynosa, Tamaulipas)] Instrucción Maestra: Procesamiento Word & Tesis",
+    "memory_value": "Calificación Extraída: 10/10 (Aprobado bajo Protocolo Omega) | Archivo: FDLG.doc | Folio: JARVIS-OMEGA-337994 | Hash: d9e9daf93cc91df425830f3f41defc93e8916264cd783685da7ff2fdde4f1753",
+    "routing_engine": "Zapia Vault Engine (Omega Secured)",
+    "created_at": "2026-10-24T17:46:46.553Z"
+  },
+  {
+    "id": 1792863983997,
+    "owner_email": "fg782270@gmail.com",
+    "memory_key": "[BLINDAJE OMEGA: México (Reynosa, Tamaulipas)] Instrucción Maestra: Procesamiento Word & Tesis",
+    "memory_value": "Calificación Extraída: 10/10 (Aprobado bajo Protocolo Omega) | Archivo: FDLG.doc | Folio: JARVIS-OMEGA-306236 | Hash: 8ad70f719830f9b3d9436277b7398954b5526f9d9c1a972f8ac68e57962c1104",
+    "routing_engine": "Zapia Vault Engine (Omega Secured)",
+    "created_at": "2026-10-24T17:46:23.997Z"
+  },
+  {
     "id": 1792859257234,
     "owner_email": "fg782270@gmail.com",
     "memory_key": "[BLINDAJE OMEGA: México (Reynosa, Tamaulipas)] Revisión y Calificación Estilo Classroom",

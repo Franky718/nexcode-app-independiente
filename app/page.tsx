@@ -10,37 +10,56 @@ export default function MasterCorePage() {
     const [hashGenerado, setHashGenerado] = useState<string | null>(null)
     const [memoriasEstado, setMemoriasEstado] = useState<any[]>([])
     
-    // Configuración de Módulos Centrales bajo Instrucción Maestra
+    // Configuración de Módulos Centrales bajo Instrucción Maestra de Jarvis AI
     const [seccionActiva, setSeccionActiva] = useState<'academico' | 'empresa'>('academico')
     const [subTabAcademico, setSubTabAcademico] = useState<'editor' | 'calificar'>('editor')
     
-    const [tipoAnalisisAcademico, setTipoAnalisisAcademico] = useState('Instrucción Maestra: Procesamiento Word & Tesis')
+    const [tipoAnalisisAcademico, setTipoAnalisisAcademico] = useState('Estructura Zapia AI: Seguridad Pública & Word')
     const [tipoAnalisisEmpresa, setTipoAnalisisEmpresa] = useState('Matriz Global Unificada & APK Builder')
-    const [modeloIA, setModeloIA] = useState('Jarvis AI Autonomous Core')
+    const [modeloIA, setModeloIA] = useState('Jarvis AI Autonomous Core (Zapia Integrated)')
     
-    const [detalleAcademico, setDetalleAcademico] = useState('Evaluación metodológica completada bajo los estándares institucionales.')
+    const [detalleAcademico, setDetalleAcademico] = useState('Estructura metodológica de seguridad pública validada institucionalmente.')
     const [calificacionAcademica, setCalificacionAcademica] = useState('10 / 10 (Aprobado con Excelencia)')
     const [detalleEmpresa, setDetalleEmpresa] = useState('')
     
-    // Procesador de Textos Institucional (Estilo Word / Tesis)
-    const [tituloDocumento, setTituloDocumento] = useState('Proyecto de Investigación y Titulación')
+    // Procesador de Textos Institucional pre-cargado con la estructura de Zapia AI
+    const [tituloDocumento, setTituloDocumento] = useState('Proyecto de Aplicación para Seguridad Pública')
     const [contenidoDocumento, setContenidoDocumento] = useState(
 `UNIVERSIDAD ABIERTA Y A DISTANCIA DE MÉXICO (UnADM)
-FACULTAD DE CIENCIAS SOCIALES Y ADMINISTRATIVAS
 LICENCIATURA EN DERECHO
 
-TÍTULO DEL TRABAJO:
-Proyecto de Investigación y Análisis Jurídico Aplicado
+TÍTULO DEL PROYECTO:
+Proyecto de Aplicación para Seguridad Pública
 
-1. INTRODUCCIÓN Y MARCO TEÓRICO
-El presente trabajo de investigación se desarrolla bajo la instrucción maestra del sistema autónomo, cumpliendo con los estándares metodológicos internacionales.
+CAPÍTULO 1. PLANTEAMIENTO DEL PROBLEMA Y MARCO METODOLÓGICO
 
-2. DESARROLLO DEL CASO PRÁCTICO
-[Redacte o pegue aquí el contenido formal de su tesis, ensayo o análisis normativo, estructurado de forma limpia y profesional para su exportación a Word...]
+1.1 Análisis de la problemática
+[Describa detalladamente el contexto actual, los factores criminológicos, sociales o normativos que originan la problemática en materia de seguridad pública...]
 
-3. CONCLUSIONES Y FUENTES DE CONSULTA
-- Conclusiones formales de la investigación jurídica.
-- Referencias bibliográficas integradas de manera orgánica.`
+1.2 Planteamiento del problema de investigación
+[Formule el problema central de estudio, delimitando el objeto de análisis jurídico y operativo conforme a la normatividad aplicable...]
+
+1.3 Pregunta general de investigación
+[¿De qué manera... / Cuál es el impacto... / Cómo influye... redactada de forma clara y directa conforme al alcance del proyecto?]
+
+1.4 Preguntas específicas
+- ¿Cuáles son los factores determinantes que inciden en...?
+- ¿Qué marco normativo regula o limita la actuación de...?
+- ¿De qué forma se pueden optimizar los mecanismos de... ?
+
+1.5 Justificación
+[Argumente la relevancia teórica, práctica, social e institucional del proyecto, destacando su viabilidad y aportación al orden jurídico y de seguridad pública...]
+
+1.6 Objetivos de la investigación
+- Objetivo General: [Analizar, evaluar o proponer...]
+- Objetivos Específicos:
+  * Diagnosticar la situación actual de...
+  * Examinar las disposiciones normativas de...
+  * Diseñar la propuesta de solución o mejora...
+
+1.7 Hipótesis (Propuestas por comprobar)
+- Hipótesis General: [Enunciado provisional sujeto a demostración empírica y normativa, planteado como propuesta analítica, no como resultado inventado...]
+- Hipótesis Secundarias:`
     )
 
     // Contexto Geopolítico Institucional
@@ -136,7 +155,7 @@ El presente trabajo de investigación se desarrolla bajo la instrucción maestra
         link.click()
         document.body.removeChild(link)
         URL.revokeObjectURL(url)
-        hablarJarvis('Documento exportado en formato Word con éxito.')
+        hablarJarvis('Documento estructurado exportado en formato Word con éxito.')
     }
 
     function descargarBancoMemoria() {
@@ -157,7 +176,7 @@ El presente trabajo de investigación se desarrolla bajo la instrucción maestra
         if (!clave) return 'Expediente Institucional'
         const lower = clave.toLowerCase()
         if (lower.includes('academico') || lower.includes('zapia') || lower.includes('evaluacion') || lower.includes('word')) {
-            return 'Procesamiento Documental & Formato Word'
+            return 'Estructura Zapia AI & Formato Word'
         }
         if (lower.includes('empresa') || lower.includes('apk') || lower.includes('auditoria')) {
             return 'Auditoría y Desarrollo Corporativo'
@@ -183,7 +202,7 @@ El presente trabajo de investigación se desarrolla bajo la instrucción maestra
             setFolioUltimo(resultado.folio || null)
             setHashGenerado(resultado.hash || null)
             if (resultado.success) {
-                hablarJarvis("Operación registrada bajo instrucción maestra.")
+                hablarJarvis("Proyecto estructurado y registrado bajo instrucción maestra.")
                 cargarMemoria()
             }
         })
@@ -239,7 +258,7 @@ El presente trabajo de investigación se desarrolla bajo la instrucción maestra
                         <header className="flex justify-between items-center border-b border-cyan-500/20 pb-4 mb-6">
                             <div>
                                 <h1 className="text-xl font-bold tracking-wider flex items-center gap-2">
-                                    <span>🛡️</span> Jarvis Master Core — <span className="text-cyan-300">Instrucción Maestra Activa</span>
+                                    <span>🛡️</span> Jarvis Master Core — <span className="text-cyan-300">Zapia AI Structure Integration</span>
                                 </h1>
                                 <p className="text-xs text-slate-400">Investigador Titular: fg782270@gmail.com (C. Francisco)</p>
                             </div>
@@ -273,7 +292,7 @@ El presente trabajo de investigación se desarrolla bajo la instrucción maestra
                         {/* SELECTOR DE MÓDULO INDEPENDIENTE */}
                         <div className="mb-6 p-4 bg-slate-950 border-2 border-cyan-500/50 rounded-lg flex gap-3">
                             <button type="button" onClick={() => setSeccionActiva('academico')} className={`flex-1 py-3 px-4 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'academico' ? 'bg-amber-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-amber-300'}`}>
-                                🎓 Módulo Académico (Procesador Word & Classroom)
+                                🎓 Módulo Académico (Estructura Zapia AI & Word)
                             </button>
                             <button type="button" onClick={() => setSeccionActiva('empresa')} className={`flex-1 py-3 px-4 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'empresa' ? 'bg-cyan-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-cyan-300'}`}>
                                 🏢 Módulo Corporativo (APK Builder & Auditoría)
@@ -284,7 +303,7 @@ El presente trabajo de investigación se desarrolla bajo la instrucción maestra
                         {seccionActiva === 'academico' && (
                             <div className="flex gap-2 mb-4 border-b border-amber-500/30 pb-3">
                                 <button type="button" onClick={() => setSubTabAcademico('editor')} className={`py-1.5 px-4 rounded text-xs font-bold transition-all ${subTabAcademico === 'editor' ? 'bg-amber-500 text-slate-950' : 'bg-slate-950 text-amber-300 border border-amber-500/30'}`}>
-                                    📝 Procesador de Textos (Estilo Word)
+                                    📝 Procesador con Estructura Zapia AI (Word)
                                 </button>
                                 <button type="button" onClick={() => setSubTabAcademico('calificar')} className={`py-1.5 px-4 rounded text-xs font-bold transition-all ${subTabAcademico === 'calificar' ? 'bg-amber-500 text-slate-950' : 'bg-slate-950 text-amber-300 border border-amber-500/30'}`}>
                                     ✍️ Panel de Calificación y Retroalimentación
@@ -301,18 +320,18 @@ El presente trabajo de investigación se desarrolla bajo la instrucción maestra
                             {seccionActiva === 'academico' && subTabAcademico === 'editor' && (
                                 <div className="space-y-4 p-5 bg-slate-950 rounded border-2 border-amber-500/60 animate-fadeIn shadow-inner">
                                     <div className="flex justify-between items-center border-b border-amber-500/30 pb-3">
-                                        <h3 className="text-sm font-bold text-amber-300 uppercase tracking-wide">📄 Procesador de Documento Institucional (Formato Word)</h3>
+                                        <h3 className="text-sm font-bold text-amber-300 uppercase tracking-wide">📄 Procesador de Documento — Seguridad Pública (Zapia AI)</h3>
                                         <button type="button" onClick={descargarDocumentoWord} className="bg-green-600 hover:bg-green-500 text-white font-bold py-1.5 px-4 rounded text-xs shadow-lg flex items-center gap-1">
                                             📥 Descargar Archivo Word (.doc)
                                         </button>
                                     </div>
                                     <div>
-                                        <label className="block text-xs font-bold text-amber-300 mb-1">Título del Documento o Tesis:</label>
+                                        <label className="block text-xs font-bold text-amber-300 mb-1">Título del Proyecto:</label>
                                         <input type="text" value={tituloDocumento} onChange={(e) => setTituloDocumento(e.target.value)} className="w-full bg-slate-900 border border-amber-500/40 rounded p-2 text-white text-xs font-bold" required />
                                     </div>
                                     <div>
-                                        <label className="block text-xs font-bold text-amber-300 mb-1">Contenido del Documento (Procesador de Textos):</label>
-                                        <textarea value={contenidoDocumento} onChange={(e) => setContenidoDocumento(e.target.value)} rows={12} className="w-full bg-slate-900 border border-amber-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none focus:border-amber-400 leading-relaxed shadow-inner" required />
+                                        <label className="block text-xs font-bold text-amber-300 mb-1">Contenido Metodológico (Zapia AI Template):</label>
+                                        <textarea value={contenidoDocumento} onChange={(e) => setContenidoDocumento(e.target.value)} rows={14} className="w-full bg-slate-900 border border-amber-500/40 rounded p-4 text-xs text-slate-100 font-sans outline-none focus:border-amber-400 leading-relaxed shadow-inner" required />
                                     </div>
                                 </div>
                             )}

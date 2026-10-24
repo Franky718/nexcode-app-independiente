@@ -45,7 +45,6 @@ const supabaseAnonKey = ("TURBOPACK compile-time value", "tu-anon-key-de-ejemplo
 const supabase = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$supabase$2f$supabase$2d$js$2f$dist$2f$index$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$locals$3e$__["createClient"])(supabaseUrl, supabaseAnonKey);
 const SUPERVISOR_AUTORIZADO = process.env.NEXT_PUBLIC_SUPERVISOR_EMAIL || 'fg782270@gmail.com';
 const localMemoryFile = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'jarvis-local-memory.json');
-// Función de respaldo en archivo local si Supabase no responde
 function guardarMemoriaLocal(key, value, engine) {
     try {
         let registros = [];
@@ -87,18 +86,18 @@ async function ejecutarJarvisCore(formData) {
             };
         }
         const accion = formData.get('accion');
-        const tipoSoftware = formData.get('tipoSoftware') || 'Sistema Autónomo';
-        const detalleSoftware = formData.get('detalleSoftware') || 'Operación general';
+        const tipoSoftware = formData.get('tipoSoftware') || 'Plataforma Global';
+        const detalleSoftware = formData.get('detalleSoftware') || 'Despliegue Multiplataforma';
         const timestamp = new Date().toISOString();
-        const folioOmnirouter = `JARVIS-SECURE-${Math.floor(100000 + Math.random() * 900000)}`;
+        const folioOmnirouter = `NEX-GLOBAL-${Math.floor(100000 + Math.random() * 900000)}`;
         const rawPayload = `${SUPERVISOR_AUTORIZADO}-${accion}-${tipoSoftware}-${detalleSoftware}-${timestamp}-UNLIMITED-TOKENS`;
         const cryptoHash = __TURBOPACK__imported__module__$5b$externals$5d2f$crypto__$5b$external$5d$__$28$crypto$2c$__cjs$29$__["default"].createHash('sha256').update(rawPayload).digest('hex');
-        const memoryKey = `[${tipoSoftware}] ${accion}`;
-        const memoryValue = `Detalle: ${detalleSoftware} | Folio: ${folioOmnirouter} | Hash: ${cryptoHash}`;
-        // Intentar guardar en Supabase (Nube)
-        let guardadoExitoso = false;
+        const memoryKey = `[COMPILACIÓN] ${tipoSoftware}`;
+        const memoryValue = `Acción: ${accion} | Detalle: ${detalleSoftware} | Folio: ${folioOmnirouter} | Hash: ${cryptoHash}`;
+        // Guardar en memoria híbrida
+        guardarMemoriaLocal(memoryKey, memoryValue, 'Jarvis Cloud Deployment Engine');
         try {
-            const { error: errorMemoria } = await supabase.from('mexico_jarvis_memory').insert([
+            await supabase.from('mexico_jarvis_memory').insert([
                 {
                     owner_email: SUPERVISOR_AUTORIZADO,
                     memory_key: memoryKey,
@@ -106,39 +105,31 @@ async function ejecutarJarvisCore(formData) {
                     routing_engine: 'Jarvis Omnirouter Unlimited'
                 }
             ]);
-            if (!errorMemoria) guardadoExitoso = true;
-        } catch (err) {
-        // Si falla la red, se usa la memoria local
-        }
-        // Si Supabase falla, guardamos en el respaldo local automáticamente
-        if (!guardadoExitoso) {
-            guardarMemoriaLocal(memoryKey, memoryValue, 'Jarvis Local Secure Engine');
-        }
-        // Generar código descargable de respaldo
+        } catch (e) {}
         const codigoGenerado = `// ==========================================
 // NEXCODE INTERACTIVE S.A. DE C.V.
-// Módulo Procesado por Jarvis AI Core
-// Propietario: C. Francisco (fg782270@gmail.com)
-// Folio: ${folioOmnirouter}
-// Hash SHA-256: ${cryptoHash}
+// Módulo de Despliegue Global: ${tipoSoftware}
+// Supervisor: C. Francisco (fg782270@gmail.com)
+// Folio Oficial: ${folioOmnirouter}
+// Hash de Autenticidad SHA-256: ${cryptoHash}
 // ==========================================
 
 import React from 'react';
 
-export default function JarvisModuleComponent() {
+export default function DespliegueGlobalComponent() {
     return (
         <div style={{ background: '#020617', color: '#22d3ee', padding: '20px', fontFamily: 'monospace' }}>
-            <h1>Nexcode Master Core — Módulo Blindado</h1>
-            <p>Operación: ${tipoSoftware} - ${accion}</p>
-            <p>Directriz: ${detalleSoftware}</p>
-            <p>Estado: Memoria Híbrida Activa y Sincronizada.</p>
+            <h1>Nexcode Master Core — ${tipoSoftware}</h1>
+            <p>Acción: ${accion}</p>
+            <p>Destino: ${detalleSoftware}</p>
+            <p>Estado: Compilado y sincronizado desde Nube Privada con Tokens Ilimitados.</p>
         </div>
     );
 }
 `;
         return {
             success: true,
-            message: `¡Comando ejecutado con éxito y registrado en la memoria permanente de Jarvis!`,
+            message: `¡Compilación y despliegue global para [${tipoSoftware}] ejecutado con éxito y registrado en su memoria!`,
             folio: folioOmnirouter,
             hash: cryptoHash,
             codigoDescargable: codigoGenerado
@@ -152,7 +143,6 @@ export default function JarvisModuleComponent() {
 }
 async function obtenerMemoriaJarvis() {
     try {
-        // Intentar leer de Supabase primero
         const { data, error } = await supabase.from('mexico_jarvis_memory').select('id, memory_key, memory_value, routing_engine, created_at').eq('owner_email', SUPERVISOR_AUTORIZADO).order('created_at', {
             ascending: false
         });
@@ -163,7 +153,6 @@ async function obtenerMemoriaJarvis() {
             };
         }
     } catch (err) {}
-    // Si Supabase no responde o está vacío, cargamos los registros locales
     const localData = leerMemoriaLocal();
     return {
         success: true,

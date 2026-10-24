@@ -13,6 +13,8 @@ export default function MasterCorePage() {
     const [memoriasEstado, setMemoriasEstado] = useState<any[]>([])
     
     const [seccionActiva, setSeccionActiva] = useState<'academico' | 'empresa'>('academico')
+    const [subTabAcademico, setSubTabAcademico] = useState<'calificar' | 'vistaPrevia'>('calificar')
+    
     const [tipoAnalisisAcademico, setTipoAnalisisAcademico] = useState('Revisión y Calificación Estilo Classroom')
     const [tipoAnalisisEmpresa, setTipoAnalisisEmpresa] = useState('Arquitectura Full-Stack & Auditoría')
     const [modeloIA, setModeloIA] = useState('Sistema Autónomo de Investigación Documental')
@@ -20,6 +22,7 @@ export default function MasterCorePage() {
     const [detalleAcademico, setDetalleAcademico] = useState('')
     const [detalleEmpresa, setDetalleEmpresa] = useState('')
     const [archivoAcademico, setArchivoAcademico] = useState<File | null>(null)
+    const [contenidoTextoArchivo, setContenidoTextoArchivo] = useState<string>('')
     const [archivoEmpresa, setArchivoEmpresa] = useState<File | null>(null)
 
     const [continente, setContinente] = useState('América')
@@ -63,6 +66,25 @@ export default function MasterCorePage() {
                         || vocesDisponibles.find(v => v.lang.toLowerCase().includes('es'))
         if (mejorVoz) utterance.voice = mejorVoz
         window.speechSynthesis.speak(utterance)
+    }
+
+    function manejarArchivoAcademico(e: React.ChangeEvent<HTMLInputElement>) {
+        if (e.target.files && e.target.files[0]) {
+            const file = e.target.files[0]
+            setArchivoAcademico(file)
+            hablarJarvis(`Documento ${file.name} cargado correctamente.`)
+            
+            // Leer contenido si es texto o similar para la vista previa
+            const reader = new FileReader()
+            reader.onload = (event) => {
+                setContenidoTextoArchivo(event.target?.result as string || '[Archivo binario o PDF cargado en el sistema]')
+            }
+            if (file.type.includes('text') || file.name.endsWith('.txt') || file.name.endsWith('.docx')) {
+                reader.readAsText(file)
+            } else {
+                setContenidoTextoArchivo(`[Documento Binario / PDF Integrado: ${file.name}]\nTamaño: ${(file.size / 1024).toFixed(2)} KB\nEstado: Listo para análisis y revisión detallada sin metadatos en bruto.`)
+            }
+        }
     }
 
     function escucharMic(setTextTarget: (val: string) => void, nombreModulo: string) {
@@ -161,37 +183,6 @@ export default function MasterCorePage() {
         })
     }
 
-    function descargarArchivo() {
-        if (!codigoPaquete) return
-        const blob = new Blob([codigoPaquete], { type: 'text/plain;charset=utf-8' })
-        const url = URL.createObjectURL(blob)
-        const link = document.createElement('a')
-        link.href = url
-        link.download = `Nexcode-Expediente-Tecnico.tsx`
-        document.body.appendChild(link)
-        link.click()
-        document.body.removeChild(link)
-        URL.revokeObjectURL(url)
-        hablarJarvis('Documento técnico descargado con éxito.')
-    }
-
-    function formatearActividad(clave: string) {
-        if (!clave) return 'Expediente Institucional'
-        const lower = clave.toLowerCase()
-        if (lower.includes('academico') || lower.includes('zapia') || lower.includes('evaluacion') || lower.includes('classroom')) {
-            return 'Calificación y Revisión Académica (Estilo Classroom)'
-        }
-        if (lower.includes('empresa') || lower.includes('apk') || lower.includes('auditoria')) {
-            return 'Dictamen Técnico y Desarrollo Arquitectónico'
-        }
-        return 'Investigación Documental y Bitácora'
-    }
-
-    function formatearMotor(motor: string) {
-        if (!motor) return 'Subsistema de Investigación Documental'
-        return 'Gabinete de Análisis Jurídico'
-    }
-
     return (
         <div className="min-h-screen bg-slate-950 text-cyan-400 p-6 flex flex-col items-center justify-center">
             
@@ -236,7 +227,7 @@ export default function MasterCorePage() {
                         <header className="flex justify-between items-center border-b border-cyan-500/20 pb-4 mb-6">
                             <div>
                                 <h1 className="text-xl font-bold tracking-wider flex items-center gap-2">
-                                    <span>📚</span> Lector y Calificador Académico — <span className="text-cyan-300">Estilo Classroom</span>
+                                    <span>📚</span> Lector Académico — <span className="text-cyan-300">Estilo Classroom con Vista Previa</span>
                                 </h1>
                                 <p className="text-xs text-slate-400">Investigador: fg782270@gmail.com (C. Francisco)</p>
                             </div>
@@ -246,14 +237,26 @@ export default function MasterCorePage() {
                         {/* SELECTOR DE MÓDULO */}
                         <div className="mb-6 p-4 bg-slate-950 border-2 border-cyan-500/50 rounded-lg flex gap-3">
                             <button type="button" onClick={() => setSeccionActiva('academico')} className={`flex-1 py-3 px-4 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'academico' ? 'bg-amber-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-amber-300'}`}>
-                                🎓 Lector Académico & Calificación (Classroom)
+                                🎓 Módulo Académico & Lector
                             </button>
                             <button type="button" onClick={() => setSeccionActiva('empresa')} className={`flex-1 py-3 px-4 rounded-lg text-xs font-bold transition-all ${seccionActiva === 'empresa' ? 'bg-cyan-500 text-slate-950 shadow-lg' : 'bg-slate-900 text-cyan-300'}`}>
                                 🏢 Módulo Corporativo & APK
                             </button>
                         </div>
 
-                        {/* FORMULARIO PRINCIPAL - VISTA DE LECTOR CLASSROOM */}
+                        {/* SUB-PESTAÑAS EN MÓDULO ACADÉMICO: CALIFICAR VS VISTA PREVIA */}
+                        {seccionActiva === 'academico' && (
+                            <div className="flex gap-2 mb-4 border-b border-amber-500/30 pb-3">
+                                <button type="button" onClick={() => setSubTabAcademico('calificar')} className={`py-1.5 px-4 rounded text-xs font-bold transition-all ${subTabAcademico === 'calificar' ? 'bg-amber-500 text-slate-950' : 'bg-slate-950 text-amber-300 border border-amber-500/30'}`}>
+                                    ✍️ Panel de Calificación y Retroalimentación
+                                </button>
+                                <button type="button" onClick={() => setSubTabAcademico('vistaPrevia')} className={`py-1.5 px-4 rounded text-xs font-bold transition-all ${subTabAcademico === 'vistaPrevia' ? 'bg-amber-500 text-slate-950' : 'bg-slate-950 text-amber-300 border border-amber-500/30'}`}>
+                                    👁️ Pestaña de Vista Previa del Documento
+                                </button>
+                            </div>
+                        )}
+
+                        {/* FORMULARIO PRINCIPAL */}
                         <form onSubmit={handleSubmit} className="space-y-4">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
@@ -266,42 +269,59 @@ export default function MasterCorePage() {
                                 </div>
                             </div>
 
-                            {seccionActiva === 'academico' && (
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 bg-slate-950 rounded border border-amber-500/40">
-                                    {/* Panel Izquierdo: Visor de Documento */}
-                                    <div className="space-y-3">
-                                        <h4 className="text-xs font-bold text-amber-300 uppercase tracking-wide">📄 Visor del Trabajo del Alumno / Tesis</h4>
-                                        <div className="p-3 bg-slate-900 border border-amber-500/30 rounded">
-                                            <label className="block text-xs font-bold text-amber-300 mb-1">Cargar Archivo (PDF, Word, TXT):</label>
-                                            <input type="file" accept=".pdf,.doc,.docx,.txt" onChange={(e) => { if (e.target.files && e.target.files[0]) { setArchivoAcademico(e.target.files[0]); hablarJarvis("Documento cargado en el visor."); } }} className="w-full text-xs text-slate-300 file:mr-2 file:py-1 file:px-3 file:rounded file:border-0 file:bg-amber-500 file:text-slate-950 font-semibold cursor-pointer" />
-                                            {archivoAcademico && <p className="text-[11px] text-green-400 mt-2 font-mono">✔ Documento activo: {archivoAcademico.name}</p>}
-                                        </div>
-                                        <div className="h-40 bg-slate-900 border border-slate-700 rounded p-3 text-xs text-slate-300 overflow-y-auto">
-                                            <p className="text-slate-500 italic">[Vista previa del texto extraído del documento para lectura limpia sin código ni metadatos...]</p>
-                                            {archivoAcademico ? <p className="mt-2 text-cyan-300">Analizando estructura y coherencia del archivo: {archivoAcademico.name}</p> : <p className="mt-2">Adjunte un archivo para iniciar la lectura y revisión detallada.</p>}
-                                        </div>
+                            {seccionActiva === 'academico' && subTabAcademico === 'calificar' && (
+                                <div className="space-y-4 p-4 bg-slate-950 rounded border border-amber-500/40 animate-fadeIn">
+                                    <div className="p-3 bg-slate-900 border border-amber-500/30 rounded">
+                                        <label className="block text-xs font-bold text-amber-300 mb-1">📁 Cargar Archivo del Alumno / Tesis (PDF, Word, TXT):</label>
+                                        <input type="file" accept=".pdf,.doc,.docx,.txt" onChange={manejarArchivoAcademico} className="w-full text-xs text-slate-300 file:mr-2 file:py-1 file:px-3 file:rounded file:border-0 file:bg-amber-500 file:text-slate-950 font-semibold cursor-pointer" />
+                                        {archivoAcademico && <p className="text-[11px] text-green-400 mt-2 font-mono">✔ Documento activo: {archivoAcademico.name} (Seleccione la pestaña "Vista Previa del Documento" para revisarlo)</p>}
                                     </div>
 
-                                    {/* Panel Derecho: Calificación y Retroalimentación Estilo Classroom */}
-                                    <div className="space-y-3">
-                                        <div className="flex justify-between items-center">
-                                            <h4 className="text-xs font-bold text-amber-300 uppercase tracking-wide">✍️ Calificación & Retroalimentación</h4>
-                                            <button type="button" onClick={() => escucharMic(setDetalleAcademico, 'Classroom')} className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-1 px-2 rounded text-[11px]">🎤 Dictar Nota</button>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label className="block text-xs text-slate-300 mb-1">Calificación Asignada:</label>
+                                            <input type="text" placeholder="10 / 10 (Aprobado con Excelencia)" className="w-full bg-slate-900 border border-amber-500/40 rounded p-2 text-white text-xs" />
                                         </div>
                                         <div>
-                                            <label className="block text-xs text-slate-300 mb-1">Calificación Asignada (Ej: 10 / 10):</label>
-                                            <input type="text" placeholder="10 / 10 (Aprobado)" className="w-full bg-slate-900 border border-amber-500/40 rounded p-2 text-white text-xs" />
-                                        </div>
-                                        <div>
-                                            <label className="block text-xs text-slate-300 mb-1">Comentarios Privados y Corrección Metodológica:</label>
-                                            <textarea name="detalle" value={detalleAcademico} onChange={(e) => setDetalleAcademico(e.target.value)} placeholder="Redacte la retroalimentación formal, revisión de tesis o justificación de la calificación..." className="w-full bg-slate-900 border border-amber-500/40 rounded p-2 text-white text-xs h-24 outline-none" required />
+                                            <div className="flex justify-between items-center mb-1">
+                                                <label className="block text-xs text-slate-300">Retroalimentación Académica:</label>
+                                                <button type="button" onClick={() => escucharMic(setDetalleAcademico, 'Classroom')} className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-0.5 px-2 rounded text-[10px]">🎤 Dictar Nota</button>
+                                            </div>
+                                            <textarea name="detalle" value={detalleAcademico} onChange={(e) => setDetalleAcademico(e.target.value)} placeholder="Redacte los comentarios o observaciones metodológicas..." className="w-full bg-slate-900 border border-amber-500/40 rounded p-2 text-white text-xs h-20 outline-none" required />
                                         </div>
                                     </div>
                                 </div>
                             )}
 
+                            {seccionActiva === 'academico' && subTabAcademico === 'vistaPrevia' && (
+                                <div className="space-y-4 p-5 bg-slate-950 rounded border-2 border-amber-500/60 animate-fadeIn shadow-inner">
+                                    <div className="flex justify-between items-center border-b border-amber-500/30 pb-3">
+                                        <h3 className="text-sm font-bold text-amber-300 uppercase tracking-wide">👁️ Visor y Vista Previa del Documento Cargado</h3>
+                                        <span className="text-xs font-mono text-slate-400">{archivoAcademico ? archivoAcademico.name : 'Ningún archivo seleccionado'}</span>
+                                    </div>
+                                    <div className="w-full h-72 bg-slate-900 border border-slate-700 rounded p-4 text-xs text-slate-200 overflow-y-auto font-mono whitespace-pre-wrap leading-relaxed shadow-inner">
+                                        {archivoAcademico ? (
+                                            <div>
+                                                <p className="text-cyan-300 font-bold mb-2">=== REPORTE DE VISTA PREVIA INSTITUCIONAL ===</p>
+                                                <p><span className="text-amber-400">Archivo:</span> {archivoAcademico.name}</p>
+                                                <p><span className="text-amber-400">Tamaño:</span> {(archivoAcademico.size / 1024).toFixed(2)} KB</p>
+                                                <p><span className="text-amber-400">Tipo:</span> {archivoAcademico.type || 'Documento de Texto / Word / PDF'}</p>
+                                                <div className="mt-4 pt-4 border-t border-slate-800 text-slate-300">
+                                                    <p className="text-amber-300 font-bold mb-1">Contenido / Estructura Analizada:</p>
+                                                    {contenidoTextoArchivo}
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            <div className="text-center py-20 text-slate-500 italic">
+                                                No hay ningún documento cargado en este momento. Regrese a la pestaña "Panel de Calificación" para adjuntar un archivo y habilitar su vista previa.
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            )}
+
                             <button type="submit" disabled={isPending} className="w-full bg-amber-500 hover:bg-amber-400 font-bold py-3 px-4 rounded text-slate-950 shadow-lg">
-                                {isPending ? 'Guardando Calificación...' : 'Publicar Calificación y Enviar Retroalimentación (Classroom)'}
+                                {isPending ? 'Guardando...' : 'Publicar Calificación y Enviar Retroalimentación'}
                             </button>
                         </form>
 

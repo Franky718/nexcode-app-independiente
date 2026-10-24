@@ -1,43 +1,56 @@
-"use server";
-import crypto from "crypto";
-import { createClient } from "@supabase/supabase-js";
+﻿'use server'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://tu-proyecto.supabase.co";
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "tu-anon-key";
-const supabase = createClient(supabaseUrl, supabaseKey);
+import { createClient } from '@supabase/supabase-js'
+import crypto from 'crypto'
 
-export async function executeMasterAction(moduleName: string, provider: string, userInput: string, subsidiary: string) {
-    const timestamp = new Date().toISOString();
-    const supervisor = "fg782270@gmail.com";
-    
-    const aiResponse = `[Macaly Cloud Gateway - ${provider.toUpperCase()}] Procesamiento institucional completado para ${subsidiary} / ${moduleName}.`;
-    
-    const rawString = `${subsidiary}-${moduleName}-${provider}-${userInput}-${timestamp}-${supervisor}-NEXCODE-HOLDING`;
-    const blockchainHash = "sha256_" + crypto.createHash("sha256").update(rawString).digest("hex");
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
-    const auditRecord = {
-        subsidiary: subsidiary,
-        app_module: moduleName,
-        operation_type: "AI_GATEWAY_GOVERNANCE_EXECUTION",
-        payload_summary: userInput,
-        ai_response: aiResponse,
-        blockchain_hash: blockchainHash,
-        supervised_by: supervisor,
-        created_at: timestamp
-    };
-
+export async function ejecutarYGuardarEnSupabase(formData: FormData) {
     try {
-        const { error } = await supabase.from("ai_audit_logs").insert([auditRecord]);
-        if (error) {
-            console.warn("Aviso de persistencia Supabase (Modo Simulación Activo):", error.message);
-        }
-    } catch (err) {
-        console.log("Conexión de base de datos diferida para entorno local.");
-    }
+        const modulo = formData.get('modulo') as string
+        const motorIA = formData.get('motorIA') as string
+        const instruccion = formData.get('instruccion') as string
+        const supervisor = process.env.NEXT_PUBLIC_SUPERVISOR_EMAIL || 'fg782270@gmail.com'
+        const timestamp = new Date().toISOString()
 
-    return {
-        success: true,
-        message: `¡Registro sellado y guardado para ${subsidiary} bajo la supervisión de ${supervisor}!`,
-        data: auditRecord
-    };
+        // Generar sellado criptográfico SHA-256 institucional
+        const rawPayload = ${supervisor}----
+        const sha256Hash = crypto
+            .createHash('sha256')
+            .update(rawPayload)
+            .digest('hex')
+
+        console.log([SHA-256 Sello Generado]: )
+
+        // Persistir en Supabase (Live DB Sync)
+        const { data, error } = await supabase
+            .from('nexcode_governance_logs')
+            .insert([
+                {
+                    supervisor_email: supervisor,
+                    module_operation: modulo,
+                    ai_engine: motorIA,
+                    instruction_param: instruccion,
+                    crypto_hash: sha256Hash,
+                    created_at: timestamp
+                }
+            ])
+
+        if (error) {
+            console.error('[Error Supabase]:', error.message)
+            return { success: false, message: Error al sincronizar con Supabase:  }
+        }
+
+        return { 
+            success: true, 
+            message: '¡Ejecución exitosa, sellado SHA-256 completado y guardado en Supabase!',
+            hash: sha256Hash 
+        }
+
+    } catch (err: any) {
+        console.error('[Error de Servidor]:', err)
+        return { success: false, message: Error interno:  }
+    }
 }

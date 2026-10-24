@@ -76,50 +76,55 @@ async function ejecutarJarvisCore(formData) {
                 message: '[ACCESO DENEGADO]: Jarvis IA está vinculado exclusivamente al C. Francisco.'
             };
         }
-        const accion = formData.get('accion');
-        const cerebroModo = formData.get('cerebroModo') || 'multicerebro';
-        const tipoSoftware = formData.get('tipoSoftware') || 'Modo Indetectable & Autotécnico';
-        const detalleSoftware = formData.get('detalleSoftware') || 'Procesamiento avanzado';
+        const seccion = formData.get('seccion') || 'Empresa';
+        const tipoAnalisis = formData.get('tipoAnalisis') || 'Análisis General';
+        const detalle = formData.get('detalle') || 'Sin detalles';
+        const archivoNombre = formData.get('archivoNombre') || 'Ninguno';
         const timestamp = new Date().toISOString();
-        const folioOmnirouter = `JARVIS-STEALTH-${Math.floor(100000 + Math.random() * 900000)}`;
-        const rawPayload = `${SUPERVISOR_AUTORIZADO}-${accion}-${cerebroModo}-${tipoSoftware}-${detalleSoftware}-${timestamp}-STEALTH-MODE`;
+        const folioOmnirouter = `JARVIS-UNIFIED-${Math.floor(100000 + Math.random() * 900000)}`;
+        const rawPayload = `${SUPERVISOR_AUTORIZADO}-${seccion}-${tipoAnalisis}-${detalle}-${archivoNombre}-${timestamp}`;
         const cryptoHash = __TURBOPACK__imported__module__$5b$externals$5d2f$crypto__$5b$external$5d$__$28$crypto$2c$__cjs$29$__["default"].createHash('sha256').update(rawPayload).digest('hex');
-        const memoryKey = `[STEALTH & AUTO] ${cerebroModo.toUpperCase()}`;
-        const memoryValue = `Acción: ${accion} | Detalle: ${detalleSoftware} | Folio: ${folioOmnirouter} | Hash: ${cryptoHash}`;
-        guardarMemoriaLocal(memoryKey, memoryValue, 'Jarvis Stealth & Autonomous Engine');
+        const memoryKey = `[${seccion.toUpperCase()}] ${tipoAnalisis}`;
+        const memoryValue = `Archivo: ${archivoNombre} | Detalle: ${detalle} | Folio: ${folioOmnirouter} | Hash: ${cryptoHash}`;
+        // Guardar en memoria híbrida local y Supabase unificada
+        guardarMemoriaLocal(memoryKey, memoryValue, `Jarvis Unified Engine (${seccion})`);
         try {
             await supabase.from('mexico_jarvis_memory').insert([
                 {
                     owner_email: SUPERVISOR_AUTORIZADO,
                     memory_key: memoryKey,
                     memory_value: memoryValue,
-                    routing_engine: 'Jarvis Stealth Unlimited'
+                    routing_engine: `Jarvis Unified (${seccion})`
                 }
             ]);
         } catch (e) {}
         const codigoGenerado = `// ==========================================
 // NEXCODE INTERACTIVE S.A. DE C.V.
-// Módulo Indetectable y Envío Autotécnico
+// Módulo Compilado y Generado Automáticamente
+// Núcleo: ${seccion} | Análisis: ${tipoAnalisis}
 // Supervisor: C. Francisco (fg782270@gmail.com)
-// Folio: ${folioOmnirouter}
+// Archivo Adjunto: ${archivoNombre}
+// Folio Oficial: ${folioOmnirouter}
 // Hash SHA-256: ${cryptoHash}
 // ==========================================
 
 import React from 'react';
 
-export default function StealthAutonomousComponent() {
+export default function NexcodeAutoPackage() {
     return (
         <div style={{ background: '#020617', color: '#22d3ee', padding: '20px', fontFamily: 'monospace' }}>
-            <h1>Nexcode Master Core — Protocolo Indetectable Activo</h1>
-            <p>Directriz: ${detalleSoftware}</p>
-            <p>Estado: Formato neutral humanizado, sin patrones de IA, listo para entrega autotécnica.</p>
+            <h1>Nexcode Master Core — Paquete Autónomo</h1>
+            <p>Sección: ${seccion}</p>
+            <p>Tipo: ${tipoAnalisis}</p>
+            <p>Documento procesado: ${archivoNombre}</p>
+            <p>Estado: Compilado, Humanizado y Sincronizado en Banco de Memoria Interconectado.</p>
         </div>
     );
 }
 `;
         return {
             success: true,
-            message: `¡Trabajo procesado bajo el Protocolo Indetectable (100% Humanizado) y despachado de forma autotécnica!`,
+            message: `¡Proceso ejecutado con éxito en el Núcleo [${seccion.toUpperCase()}]! Documento e información indexados en el Banco de Memoria Interconectado.`,
             folio: folioOmnirouter,
             hash: cryptoHash,
             codigoDescargable: codigoGenerado
@@ -127,7 +132,7 @@ export default function StealthAutonomousComponent() {
     } catch (err) {
         return {
             success: false,
-            message: `Error en el núcleo Stealth: ${err.message}`
+            message: `Error en el núcleo unificado: ${err.message}`
         };
     }
 }

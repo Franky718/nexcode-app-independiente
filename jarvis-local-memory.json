@@ -1,5 +1,21 @@
 [
   {
+    "id": 1792853156119,
+    "owner_email": "fg782270@gmail.com",
+    "memory_key": "[ACADEMICO] Validación de Tesis & Caso Práctico",
+    "memory_value": "Archivo: proyecto_hasta_capitulo_2_referencias_revisadas (1).docx | Detalle: revisalo con el prompt del profesor y calificalo\r\ny dime la calificacion | Folio: JARVIS-UNIFIED-715444 | Hash: 06b79f40e454ce55838e78e3610a7068e4fa212e57e93513500fae2499007238",
+    "routing_engine": "Jarvis Unified Engine (academico)",
+    "created_at": "2026-10-24T14:45:56.119Z"
+  },
+  {
+    "id": 1792853090778,
+    "owner_email": "fg782270@gmail.com",
+    "memory_key": "[ACADEMICO] Validación de Tesis & Caso Práctico",
+    "memory_value": "Archivo: proyecto_hasta_capitulo_2_referencias_revisadas (1).docx | Detalle: revisalo con el prompt del profesor y calificalo\r\n | Folio: JARVIS-UNIFIED-395115 | Hash: 231cd619a2d3fe760d29e1f6b6c105cb58ff87f1a372c31142865fa8c8dd7e1d",
+    "routing_engine": "Jarvis Unified Engine (academico)",
+    "created_at": "2026-10-24T14:44:50.778Z"
+  },
+  {
     "id": 1792848836814,
     "owner_email": "fg782270@gmail.com",
     "memory_key": "[Open Source] Clonación y Mejora",

@@ -71,6 +71,7 @@
     --font-weight-bold: 700;
     --tracking-wide: .025em;
     --tracking-wider: .05em;
+    --tracking-widest: .1em;
     --radius-lg: .5rem;
     --radius-xl: .75rem;
     --default-transition-duration: .15s;
@@ -372,12 +373,20 @@
     margin-inline: auto;
   }
 
+  .mt-2 {
+    margin-top: calc(var(--spacing) * 2);
+  }
+
   .mt-6 {
     margin-top: calc(var(--spacing) * 6);
   }
 
   .mb-1 {
     margin-bottom: var(--spacing);
+  }
+
+  .mb-2 {
+    margin-bottom: calc(var(--spacing) * 2);
   }
 
   .mb-4 {
@@ -400,8 +409,8 @@
     display: grid;
   }
 
-  .h-24 {
-    height: calc(var(--spacing) * 24);
+  .h-28 {
+    height: calc(var(--spacing) * 28);
   }
 
   .h-36 {
@@ -436,8 +445,16 @@
     max-width: var(--container-xs);
   }
 
+  .cursor-pointer {
+    cursor: pointer;
+  }
+
   .grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  .grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .flex-col {
@@ -702,6 +719,10 @@
     padding: calc(var(--spacing) * 8);
   }
 
+  .px-2 {
+    padding-inline: calc(var(--spacing) * 2);
+  }
+
   .px-3 {
     padding-inline: calc(var(--spacing) * 3);
   }
@@ -716,6 +737,10 @@
 
   .py-2 {
     padding-block: calc(var(--spacing) * 2);
+  }
+
+  .py-2\.5 {
+    padding-block: calc(var(--spacing) * 2.5);
   }
 
   .py-3 {
@@ -804,6 +829,11 @@
     letter-spacing: var(--tracking-wider);
   }
 
+  .tracking-widest {
+    --tw-tracking: var(--tracking-widest);
+    letter-spacing: var(--tracking-widest);
+  }
+
   .break-all {
     word-break: break-all;
   }
@@ -818,6 +848,10 @@
 
   .text-cyan-400 {
     color: var(--color-cyan-400);
+  }
+
+  .text-green-400 {
+    color: var(--color-green-400);
   }
 
   .text-slate-100 {
@@ -851,6 +885,11 @@
   .antialiased {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  .shadow {
+    --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, #0000001a), 0 1px 2px -1px var(--tw-shadow-color, #0000001a);
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
 
   .shadow-2xl {
@@ -889,9 +928,52 @@
     outline-style: none;
   }
 
+  .file\:mr-4::file-selector-button {
+    margin-right: calc(var(--spacing) * 4);
+  }
+
+  .file\:rounded::file-selector-button {
+    border-radius: .25rem;
+  }
+
+  .file\:border-0::file-selector-button {
+    border-style: var(--tw-border-style);
+    border-width: 0;
+  }
+
+  .file\:bg-cyan-600::file-selector-button {
+    background-color: var(--color-cyan-600);
+  }
+
+  .file\:px-4::file-selector-button {
+    padding-inline: calc(var(--spacing) * 4);
+  }
+
+  .file\:py-2::file-selector-button {
+    padding-block: calc(var(--spacing) * 2);
+  }
+
+  .file\:text-xs::file-selector-button {
+    font-size: var(--text-xs);
+    line-height: var(--tw-leading, var(--text-xs--line-height));
+  }
+
+  .file\:font-semibold::file-selector-button {
+    --tw-font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .file\:text-slate-950::file-selector-button {
+    color: var(--color-slate-950);
+  }
+
   @media (hover: hover) {
     .hover\:bg-amber-400:hover {
       background-color: var(--color-amber-400);
+    }
+
+    .hover\:bg-cyan-400:hover {
+      background-color: var(--color-cyan-400);
     }
 
     .hover\:bg-cyan-500:hover {
@@ -915,10 +997,14 @@
         background-color: color-mix(in oklab, var(--color-slate-950) 50%, transparent);
       }
     }
-  }
 
-  .focus\:border-amber-400:focus {
-    border-color: var(--color-amber-400);
+    .hover\:text-white:hover {
+      color: var(--color-white);
+    }
+
+    .hover\:file\:bg-cyan-500:hover::file-selector-button {
+      background-color: var(--color-cyan-500);
+    }
   }
 
   .focus\:border-cyan-400:focus {
